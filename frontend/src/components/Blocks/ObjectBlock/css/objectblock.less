@@ -1,0 +1,50 @@
+#object-block{
+  img{
+    max-width: 100%;
+  }
+  .buttons{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    button{
+      border: 0px;
+      background-color: transparent;
+      // height: 50px;
+      // width: 40px;
+      svg, path{
+        height:2em !important;
+        width: 2em !important;
+      }
+    }
+    .paginator{
+      margin-top: auto;
+      margin-bottom: auto;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      p{
+        margin: 0%;
+      }
+    }
+  }
+  .rawdata{
+    margin-top: 100px;
+  }
+  .zoom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    /* or overflow: auto; depending on the desired behavior */
+    height: 100%;
+    /* or a fixed height if desired */
+  }
+}
+
+.contenttype-object{
+  #page-document.ui.container{
+    width: 1000px !important;
+  }
+}
