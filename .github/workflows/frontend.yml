@@ -109,9 +109,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            intkbv/rietveld-frontend
+            intkbv/centraalmuseum-frontend
           labels: |
-            org.label-schema.docker.cmd=docker run -d -p 3000:3000 intkbv/rietveld-frontend:latest
+            org.label-schema.docker.cmd=docker run -d -p 3000:3000 intkbv/centraalmuseum-frontend:latest
           flavor: latest=false
           tags: |
             type=ref,event=branch

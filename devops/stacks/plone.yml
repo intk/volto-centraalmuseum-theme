@@ -59,7 +59,7 @@ services:
 
   # mailserver:
   #   image: ghcr.io/docker-mailserver/docker-mailserver:latest
-  #   hostname: mail.new.rietveldschroderhuis.nl
+  #   hostname: mail.new.centraalmuseum.nl
   #   ports:
   #     - "25:25"
   #     - "465:465"
@@ -75,7 +75,7 @@ services:
   #     - NET_ADMIN
 
   frontend:
-    image: intkbv/rietveld-frontend:latest
+    image: intkbv/centraalmuseum-frontend:latest
     environment:
       RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
     depends_on:
@@ -103,7 +103,7 @@ services:
         - traefik.http.routers.frontend.middlewares=gzip
 
   backend:
-    image: intkbv/rietveld-backend:latest
+    image: intkbv/centraalmuseum-backend:latest
     environment:
       SITE: Plone
     volumes:

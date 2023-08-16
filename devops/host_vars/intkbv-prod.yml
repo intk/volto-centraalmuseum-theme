@@ -1,7 +1,7 @@
 ---
 ssh_port: 22
 hostname: "new"
-fqdn: "{{ hostname }}.rietveldschroderhuis.nl"
+fqdn: "{{ hostname }}.centraalmuseum.nl"
 swap_file_size_mb: "512"
 additional_ports:
   - 80

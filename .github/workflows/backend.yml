@@ -88,7 +88,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --disable-warnings src/rietveld/tests
+          pytest --disable-warnings src/centraalmuseum/tests
 
   release:
     runs-on: ubuntu-latest
@@ -107,9 +107,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            intkbv/rietveld-backend
+            intkbv/centraalmuseum-backend
           labels: |
-            org.label-schema.docker.cmd=docker run -d -p 8080:8080 intkbv/rietveld-backend:latest
+            org.label-schema.docker.cmd=docker run -d -p 8080:8080 intkbv/centraalmuseum-backend:latest
           flavor:
             latest=false
           tags: |
