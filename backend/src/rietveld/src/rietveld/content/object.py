@@ -21,7 +21,7 @@ class IObject(model.Schema):
         description="Insert an image that will be used in listing and teaser blocks.",
         required=False,
     )
-    preview_image_caption = schema.TextLine(
+    preview_caption = schema.TextLine(
         title="Preview image caption",
         description="",
         required=False,
