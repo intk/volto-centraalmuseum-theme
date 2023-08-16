@@ -1,8 +1,8 @@
 #object-block{
   img{
-    max-width: 100%;
+    max-width: 80%;
   }
-  .buttons{
+  .leftrightbuttons{
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -30,21 +30,26 @@
     }
   }
   .rawdata{
+    width: 60%;
     margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .zoom-container {
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: visible;
-    /* or overflow: auto; depending on the desired behavior */
     height: 100%;
-    /* or a fixed height if desired */
+  }
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 }
-
 .contenttype-object{
   #page-document.ui.container{
-    width: 1000px !important;
+    width: 100vw !important;
   }
 }

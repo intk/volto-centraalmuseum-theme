@@ -53,7 +53,7 @@ const ObjectBlockView = (props) => {
               return null;
             })}
           </ReactSwipe>
-          <div className="buttons">
+          <div className="leftrightbuttons">
             <button onClick={() => reactSwipeEl.prev()}>
               <BsArrowLeft
                 icon
@@ -73,7 +73,7 @@ const ObjectBlockView = (props) => {
               ></BsArrowRight>
             </button>
           </div>
-          <div>
+          <div className="buttons">
             <button onClick={zoomIn}>+</button>
             <button onClick={zoomOut}>-</button>
           </div>
