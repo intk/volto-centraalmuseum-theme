@@ -49,7 +49,6 @@ const ObjectBlockView = (props) => {
     const rawDataElement = document.getElementById('rawdata');
     if (dataExpand === false && rawDataElement) {
       rawDataElement.scrollIntoView({ behavior: 'smooth' });
-      console.log('etest');
     }
   };
 
