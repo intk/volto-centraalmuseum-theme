@@ -187,7 +187,7 @@ const ObjectBlockView = (props) => {
                 height="2em"
               />
             </a>
-            <button onClick={zoomIn} className="button">
+            <button onClick={zoomIn} className="button zoomplus">
               <SlMagnifierAdd
                 icon
                 className="MagnifierPlus"
@@ -195,7 +195,7 @@ const ObjectBlockView = (props) => {
                 height="2em"
               />
             </button>
-            <button onClick={zoomOut} className="button">
+            <button onClick={zoomOut} className="button zoomminus">
               <SlMagnifierRemove
                 icon
                 className="MagnifierPlus"

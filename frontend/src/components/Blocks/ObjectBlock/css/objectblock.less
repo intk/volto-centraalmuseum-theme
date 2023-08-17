@@ -1,7 +1,7 @@
 #object-block{
   padding-top: 10px;
   .buttons {
-    padding-top: 10px;
+    padding-top: 20px;
     .button{
         font-family: 'FranklinMed', Arial, sans-serif;
         margin: 0 5px;
@@ -21,8 +21,8 @@
         transition: all 100ms linear;
         margin-top: 0px;
         margin-bottom: 0px;
-        padding: 16.5px;
-        padding-bottom: 12.5px;
+        padding: 14.5px;
+        padding-bottom: 10.5px;
         line-height: 15px;
         background: white;
         color: #666666;
@@ -40,6 +40,13 @@
       }
       .button.expand{
         width: 200px;
+      }
+      .button.zoomminus{
+        margin-left: 0px;
+        margin-right: 23px;
+      }
+      .button.zoomplus{
+        margin-right: 0px;
       }
   }
   .buttons .button:hover{
@@ -120,12 +127,11 @@
   }
 
   .social-media-popup {
-    border-radius: 5%;
     display: flex;
     flex-direction: column;
     position: absolute;
     bottom: 62px;
-    right: -19px;
+    right: -20px;
     display: flex;
     justify-content: space-around;
     background-color: #000;
@@ -195,9 +201,7 @@
   cursor: -webkit-grab;
   cursor: grab;
 }
-.iiz__close{
-  display: none;
-}
+.iiz-close
 
 .iiz__img {
   max-width: 100%;
@@ -206,8 +210,8 @@
   pointer-events: none;
   visibility: visible;
   opacity: 1;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .iiz__img--hidden {
