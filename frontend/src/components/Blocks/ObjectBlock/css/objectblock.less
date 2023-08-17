@@ -117,16 +117,29 @@
   }
 
   .social-media-popup {
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    bottom: 52px;
-    right: -75px;
+    bottom: 62px;
+    right: -20px;
     display: flex;
     justify-content: space-around;
-    background-color: #fff;
+    background-color: #000;
     border: 1px solid #ccc;
-    width: 200px;
+    width: 90px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .popover-title{
+      height: 20px;
+      padding-bottom: 10px;
+      margin-top: 0px;
+      color: #ffffff;
+      font-family: 'FranklinDmCp', Arial, sans-serif;
+      letter-spacing: 0.0em;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 30px;
+    }
     a{
       border-bottom: none !important;
     }
@@ -134,6 +147,26 @@
       border-bottom: none !important;
       color: #f8f80c;
     }
+    .row{
+      max-width: 70px;
+    }
+    .row.facebook-row img{
+      height: 23px;
+    }
+  }
+  .social-media-popup::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+    /* Center the arrow and rotate it */
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+    /* This creates the arrow shape */
   }
 }
 .contenttype-object{
@@ -247,6 +280,7 @@
   bottom: 10px;
   right: 10px;
   pointer-events: none;
+  display: none;
 }
 
 .iiz__hint:before {
