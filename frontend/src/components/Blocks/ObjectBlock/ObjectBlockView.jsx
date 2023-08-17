@@ -25,29 +25,6 @@ const ObjectBlockView = (props) => {
 
   const [popupVisible, setPopupVisible] = useState(false);
 
-  const socialLinks = [
-    {
-      href: 'https://twitter.com/centraalmuseum?lang=en',
-      ariaLabel: 'Share on Twitter',
-      IconComponent: TiSocialTwitter,
-    },
-    {
-      href: 'https://www.facebook.com/centraalmuseum/',
-      ariaLabel: 'Share on Facebook',
-      IconComponent: TiSocialFacebook,
-    },
-    {
-      href: 'https://www.instagram.com/centraalmuseum/',
-      ariaLabel: 'Share on Instagram',
-      IconComponent: SiInstagram,
-    },
-    {
-      href: 'https://www.youtube.com/channel/UCc2cHNtGFZ5pzccEXemfL7g',
-      ariaLabel: 'Share on Youtube',
-      IconComponent: TiSocialYoutube,
-    },
-  ];
-
   const togglePopup = () => {
     setPopupVisible(!popupVisible);
   };
