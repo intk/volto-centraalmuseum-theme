@@ -5658,6 +5658,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"add@npm:2.0.6":
+  version: 2.0.6
+  resolution: "add@npm:2.0.6"
+  checksum: e2d23d40494565dfed4acd65e478570c444db5ac6c053551ed429c39ea0f2c99d83df63e7befec936df601827d2254d06a2fb6f7dcfd2022e810b25eab818b8c
+  languageName: node
+  linkType: hard
+
 "address@npm:1.1.2":
   version: 1.1.2
   resolution: "address@npm:1.1.2"
@@ -11811,6 +11818,7 @@ __metadata:
     "@storybook/addon-essentials": ^6.3.0
     "@storybook/addon-links": ^6.3.0
     "@storybook/react": ^6.3.0
+    add: 2.0.6
     eslint-plugin-prettier: 3.1.3
     jest-junit: 8.0.0
     mrs-developer: "*"
@@ -11818,6 +11826,7 @@ __metadata:
     prettier: 2.0.5
     razzle: 4.2.17
     react-icons: 4.10.1
+    react-inner-image-zoom: 3.0.2
     react-mailchimp-subscribe: 2.1.3
     react-swipe: 6.0.0
     stylelint: 14.0.1
@@ -11827,6 +11836,7 @@ __metadata:
     volto-form-block: 3.1.0
     volto-multilingual-widget: 3.0.0
     volto-social-settings: 3.0.0
+    yarn: 1.22.19
   languageName: unknown
   linkType: soft
 
@@ -19727,6 +19737,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-inner-image-zoom@npm:3.0.2":
+  version: 3.0.2
+  resolution: "react-inner-image-zoom@npm:3.0.2"
+  peerDependencies:
+    prop-types: ">=15.6.2"
+    react: ">=16.8.0"
+  checksum: a0d0f0d645d93e23bafe29486bc57b48327116294f999e37908220fee46c3d4d1d9cd14c88874049a56c32697694e2ab8d827d1a7dccfd9eb76e26914bdb2fea
+  languageName: node
+  linkType: hard
+
 "react-input-autosize@npm:^3.0.0":
   version: 3.0.0
   resolution: "react-input-autosize@npm:3.0.0"
@@ -25323,6 +25343,16 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
   checksum: b14afbb51e3251a204d81937c86a7e9d4bdbf9a2bcee38226c900d00f522969ab675703bee2a6f99f8e20103f608382936034e64d921b74df82b63c07c5e8f59
+  languageName: node
+  linkType: hard
+
+"yarn@npm:1.22.19":
+  version: 1.22.19
+  resolution: "yarn@npm:1.22.19"
+  bin:
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: b43d2cc5fee7e933beb12a8aee7dfceca9e9ef2dd17c5d04d15a12ab7bec5f5744ea34a07b86e013da7f291a18c4e1ad8f70e150f5ed2f4666e6723c7f0a8452
   languageName: node
   linkType: hard
 
