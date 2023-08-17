@@ -46,6 +46,11 @@ const ObjectBlockView = (props) => {
 
   const expandData = () => {
     setDataExpand(!dataExpand);
+    const rawDataElement = document.getElementById('rawdata');
+    if (dataExpand === false && rawDataElement) {
+      rawDataElement.scrollIntoView({ behavior: 'smooth' });
+      console.log('etest');
+    }
   };
 
   return (
@@ -58,7 +63,7 @@ const ObjectBlockView = (props) => {
               continuous: false,
               transitionEnd: (index) => {
                 setCurrentIndex(index);
-                setZoomLevel(1);
+                setZoomLevel(zoomLevel);
               },
             }}
             ref={(el) => (reactSwipeEl = el)}
@@ -68,6 +73,7 @@ const ObjectBlockView = (props) => {
                 return (
                   <div className="zoom-container">
                     <InnerImageZoom
+                      className="Imagecomponent"
                       key={zoomLevel}
                       src={`${item.url}/@@images/image`}
                       moveType="drag"
@@ -200,7 +206,10 @@ const ObjectBlockView = (props) => {
             </button>
           </div>
         </div>
-        <div className={`rawdata-section ${dataExpand ? 'expanded' : ''}`}>
+        <div
+          id="rawdata"
+          className={`rawdata-section ${dataExpand ? 'expanded' : ''}`}
+        >
           <p>{props.content?.rawdata}</p>
         </div>{' '}
       </div>
