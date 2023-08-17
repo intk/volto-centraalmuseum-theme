@@ -33,15 +33,21 @@ const ObjectBlockView = (props) => {
   };
 
   const zoomIn = () => {
-    if (zoomLevel < 4) {
-      setZoomLevel(zoomLevel + 0.2);
+    if (zoomLevel < 5) {
+      setZoomLevel(zoomLevel + 0.4);
+    } else {
+      setZoomLevel(5);
     }
+    console.log(zoomLevel);
   };
 
   const zoomOut = () => {
     if (zoomLevel > 1) {
-      setZoomLevel(zoomLevel - 0.2);
+      setZoomLevel(zoomLevel - 0.4);
+    } else {
+      setZoomLevel(1);
     }
+    console.log(zoomLevel);
   };
 
   const expandData = () => {
@@ -59,10 +65,9 @@ const ObjectBlockView = (props) => {
           <ReactSwipe
             className="carousel"
             swipeOptions={{
-              continuous: false,
+              continuous: true,
               transitionEnd: (index) => {
                 setCurrentIndex(index);
-                setZoomLevel(zoomLevel);
               },
             }}
             ref={(el) => (reactSwipeEl = el)}
@@ -77,6 +82,8 @@ const ObjectBlockView = (props) => {
                       src={`${item.url}/@@images/image`}
                       moveType="drag"
                       zoomScale={zoomLevel}
+                      initial-scale={zoomLevel}
+                      maximum-scale="5"
                     />
                   </div>
                 );
@@ -85,7 +92,12 @@ const ObjectBlockView = (props) => {
             })}
           </ReactSwipe>
           <div className="leftrightbuttons">
-            <button onClick={() => reactSwipeEl.prev()}>
+            <button
+              onClick={() => {
+                reactSwipeEl.prev();
+                zoomOut();
+              }}
+            >
               <BsArrowLeft
                 icon
                 className="leftarrow"
@@ -95,7 +107,12 @@ const ObjectBlockView = (props) => {
             <span className="paginator">
               <p>{`${currentIndex + 1}/${props.content?.items_total}`}</p>
             </span>{' '}
-            <button onClick={() => reactSwipeEl.next()}>
+            <button
+              onClick={() => {
+                reactSwipeEl.next();
+                zoomOut();
+              }}
+            >
               <BsArrowRight
                 icon
                 className="rightarrow"
