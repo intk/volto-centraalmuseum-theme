@@ -5,12 +5,12 @@ import ReactSwipe from 'react-swipe';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { SlMagnifierAdd, SlMagnifierRemove } from 'react-icons/sl';
 import { GoShare, GoDownload } from 'react-icons/go';
-import {
-  TiSocialTwitter,
-  TiSocialFacebook,
-  TiSocialYoutube,
-} from 'react-icons/ti';
-import { SiInstagram } from 'react-icons/si';
+// import {
+//   TiSocialTwitter,
+//   TiSocialFacebook,
+//   TiSocialYoutube,
+// } from 'react-icons/ti';
+// import { SiInstagram } from 'react-icons/si';
 import InnerImageZoom from 'react-inner-image-zoom';
 import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
@@ -100,8 +100,8 @@ const ObjectBlockView = (props) => {
             </button>
           </div>
           <div className="buttons">
-            <button className="button" onClick={expandData}>
-              + Objectgegevens
+            <button className="button expand" onClick={expandData}>
+              {dataExpand === true ? '− Objectgegevens' : '+ Objectgegevens'}
             </button>
             <button
               className="button share"
@@ -173,6 +173,7 @@ const ObjectBlockView = (props) => {
               href={downloadLink}
               role="button"
               aria-label="download button"
+              download
             >
               <GoDownload
                 icon
