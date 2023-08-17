@@ -11,11 +11,12 @@ import {
   TiSocialYoutube,
 } from 'react-icons/ti';
 import { SiInstagram } from 'react-icons/si';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 const ObjectBlockView = (props) => {
   let reactSwipeEl;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(1.5);
   const [dataExpand, setDataExpand] = useState(false);
   const currentImageUrl = props.content?.items[currentIndex]?.url;
   const downloadLink = `${currentImageUrl}/@@images/image`;
@@ -48,9 +49,12 @@ const ObjectBlockView = (props) => {
   const togglePopup = () => {
     setPopupVisible(!popupVisible);
   };
+  const closePopup = () => {
+    setPopupVisible(false);
+  };
 
   const zoomIn = () => {
-    if (zoomLevel < 2) {
+    if (zoomLevel < 4) {
       setZoomLevel(zoomLevel + 0.2);
     }
   };
@@ -84,11 +88,11 @@ const ObjectBlockView = (props) => {
               if (item['@type'] === 'Image') {
                 return (
                   <div className="zoom-container">
-                    <img
+                    <InnerImageZoom
+                      key={zoomLevel}
                       src={`${item.url}/@@images/image`}
-                      loading="lazy"
-                      alt="test"
-                      style={{ transform: `scale(${zoomLevel})` }}
+                      moveType="drag"
+                      zoomScale={zoomLevel}
                     />
                   </div>
                 );
@@ -120,7 +124,11 @@ const ObjectBlockView = (props) => {
             <button className="button" onClick={expandData}>
               + Objectgegevens
             </button>
-            <button className="button share" onClick={togglePopup}>
+            <button
+              className="button share"
+              onClick={togglePopup}
+              onMouseLeave={closePopup}
+            >
               <GoShare
                 icon
                 className="Sharebutton"
