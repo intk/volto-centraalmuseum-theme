@@ -162,7 +162,6 @@
     "@plone/volto": "16.21.3",
     "add": "2.0.6",
     "react-icons": "4.10.1",
-    "react-inner-image-zoom": "3.0.2",
     "react-mailchimp-subscribe": "2.1.3",
     "react-swipe": "6.0.0",
     "volto-form-block": "3.1.0",
