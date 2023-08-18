@@ -18,7 +18,7 @@ const FullscreenPortal = ({ children }) => {
 };
 
 FullscreenPortal.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
 };
 
 export default FullscreenPortal;

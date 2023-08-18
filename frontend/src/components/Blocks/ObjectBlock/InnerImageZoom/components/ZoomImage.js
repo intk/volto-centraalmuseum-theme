@@ -1,7 +1,19 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const ZoomImage = ({ src, fadeDuration, top, left, isZoomed, onLoad, onDragStart, onDragEnd, onClose, onFadeOut }) => {
+const ZoomImage = ({
+  src,
+  fadeDuration,
+  top,
+  left,
+  isZoomed,
+  onLoad,
+  onDragStart,
+  onDragEnd,
+  onClose,
+  onFadeOut,
+}) => {
   return (
     <Fragment>
       <img
@@ -9,7 +21,7 @@ const ZoomImage = ({ src, fadeDuration, top, left, isZoomed, onLoad, onDragStart
         style={{
           top: top,
           left: left,
-          transition: `opacity ${fadeDuration}ms linear, visibility ${fadeDuration}ms linear`
+          transition: `opacity ${fadeDuration}ms linear, visibility ${fadeDuration}ms linear`,
         }}
         src={src}
         onLoad={onLoad}
@@ -19,14 +31,16 @@ const ZoomImage = ({ src, fadeDuration, top, left, isZoomed, onLoad, onDragStart
         onMouseUp={onDragEnd}
         onTransitionEnd={onFadeOut}
         draggable="false"
-        alt=""
+        alt="Zoomimagejs"
       />
 
       {onClose && (
         <button
-          className={`iiz__btn iiz__close ${isZoomed ? 'iiz__close--visible' : ''}`}
+          className={`iiz__btn iiz__close ${
+            isZoomed ? 'iiz__close--visible' : ''
+          }`}
           style={{
-            transition: `opacity ${fadeDuration}ms linear, visibility ${fadeDuration}ms linear`
+            transition: `opacity ${fadeDuration}ms linear, visibility ${fadeDuration}ms linear`,
           }}
           onClick={onClose}
           aria-label="Zoom Out"
@@ -46,7 +60,7 @@ ZoomImage.propTypes = {
   onDragStart: PropTypes.func,
   onDragEnd: PropTypes.func,
   onClose: PropTypes.func,
-  onFadeOut: PropTypes.func
+  onFadeOut: PropTypes.func,
 };
 
 export default ZoomImage;
