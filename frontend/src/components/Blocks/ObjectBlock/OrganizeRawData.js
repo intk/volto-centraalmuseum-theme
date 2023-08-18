@@ -6,7 +6,6 @@ function XMLInfoComponent({ xmlString }) {
 
   const HandleClick = () => {
     setDescriptionOpen(!descriptionOpen);
-    console.log(descriptionOpen);
   };
 
   useEffect(() => {
@@ -17,6 +16,10 @@ function XMLInfoComponent({ xmlString }) {
       const labels = xmlDoc.querySelectorAll('record > Label');
       return labels.length ? labels[0].textContent : null;
     };
+
+    const motifs = xmlDoc.querySelectorAll('content\\.motif\\.general > term');
+    const motifList = [...motifs].map((motif) => motif.textContent);
+    const motifString = motifList.join(', ');
 
     setData({
       description: getDescription(),
@@ -33,6 +36,17 @@ function XMLInfoComponent({ xmlString }) {
       } ${
         xmlDoc.querySelector('acquisition\\.date')?.textContent || ''
       }`.trim(),
+      opsschriften: `${
+        xmlDoc.querySelector('inscription\\.type')?.textContent || ''
+      } ${xmlDoc.querySelector('inscription\\.position')?.textContent || ''} (${
+        xmlDoc.querySelector('inscription\\.method')?.textContent || ''
+      }): ${
+        xmlDoc.querySelector('inscription\\.content')?.textContent || ''
+      } (${
+        xmlDoc.querySelector('inscription\\.notes')?.textContent || ''
+      }) `.trim(),
+      motifs: motifString,
+      opmerkingen: xmlDoc.querySelector('record > notes')?.textContent,
     });
   }, [xmlString]);
 
@@ -43,7 +57,7 @@ function XMLInfoComponent({ xmlString }) {
           <p id="description" className={`data-description ${descriptionOpen}`}>
             {data.description}
           </p>
-          <button className='expand-button' onClick={HandleClick}>
+          <button className="expand-button" onClick={HandleClick}>
             {' '}
             {descriptionOpen ? 'Toon minder -' : 'Toon minder +'}
           </button>
@@ -108,6 +122,36 @@ function XMLInfoComponent({ xmlString }) {
               </td>
               <td className="columntwo">
                 <p>{data.verwerving}</p>
+              </td>
+            </tr>
+          )}
+          {data.opsschriften && (
+            <tr>
+              <td className="columnone">
+                <p>Opsschriften / Merken</p>
+              </td>
+              <td className="columntwo">
+                <p>{data.opsschriften}</p>
+              </td>
+            </tr>
+          )}
+          {data.motifs && (
+            <tr>
+              <td className="columnone">
+                <p>Motief</p>
+              </td>
+              <td className="columntwo">
+                <p>{data.motifs}</p>
+              </td>
+            </tr>
+          )}
+          {data.opmerkingen && (
+            <tr>
+              <td className="columnone">
+                <p>Opmerkingen</p>
+              </td>
+              <td className="columntwo">
+                <p>{data.opmerkingen}</p>
               </td>
             </tr>
           )}

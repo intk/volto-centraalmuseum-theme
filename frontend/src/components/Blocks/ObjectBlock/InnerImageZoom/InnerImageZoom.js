@@ -89,9 +89,9 @@ const InnerImageZoom = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     if (zoomed === true) {
-      console.log('test handle');
       handleClick();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [zoomed]);
 
   useImperativeHandle(ref, () => ({
