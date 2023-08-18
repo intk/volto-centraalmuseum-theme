@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { injectIntl } from 'react-intl';
 import './css/objectblock.less';
 import ReactSwipe from 'react-swipe';
@@ -11,7 +11,7 @@ import { GoShare, GoDownload } from 'react-icons/go';
 //   TiSocialYoutube,
 // } from 'react-icons/ti';
 // import { SiInstagram } from 'react-icons/si';
-import InnerImageZoom from 'react-inner-image-zoom';
+import InnerImageZoom from './InnerImageZoom';
 import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
 
@@ -22,6 +22,7 @@ const ObjectBlockView = (props) => {
   const [dataExpand, setDataExpand] = useState(false);
   const currentImageUrl = props.content?.items[currentIndex]?.url;
   const downloadLink = `${currentImageUrl}/@@images/image`;
+  const innerImageZoomRef = useRef(null);
 
   const [popupVisible, setPopupVisible] = useState(false);
 
@@ -32,22 +33,21 @@ const ObjectBlockView = (props) => {
     setPopupVisible(false);
   };
 
-  const zoomIn = () => {
-    if (zoomLevel < 5) {
-      setZoomLevel(zoomLevel + 0.4);
-    } else {
-      setZoomLevel(5);
-    }
-    console.log(zoomLevel);
+  const zoomIns = () => {
+    // if (zoomLevel < 2) {
+    //   setZoomLevel(zoomLevel + 0.2);
+    // } else {
+    //   setZoomLevel(2);
+    // }
+    innerImageZoomRef.current.zoomIn();
   };
 
   const zoomOut = () => {
-    if (zoomLevel > 1) {
-      setZoomLevel(zoomLevel - 0.4);
+    if (zoomLevel > 0.2) {
+      setZoomLevel(zoomLevel - 0.2);
     } else {
-      setZoomLevel(1);
+      setZoomLevel(0.2);
     }
-    console.log(zoomLevel);
   };
 
   const expandData = () => {
@@ -77,13 +77,12 @@ const ObjectBlockView = (props) => {
                 return (
                   <div className="zoom-container">
                     <InnerImageZoom
+                      ref={innerImageZoomRef}
                       className="Imagecomponent"
                       key={zoomLevel}
                       src={`${item.url}/@@images/image`}
                       moveType="drag"
                       zoomScale={zoomLevel}
-                      initial-scale={zoomLevel}
-                      maximum-scale="5"
                     />
                   </div>
                 );
@@ -95,7 +94,6 @@ const ObjectBlockView = (props) => {
             <button
               onClick={() => {
                 reactSwipeEl.prev();
-                zoomOut();
               }}
             >
               <BsArrowLeft
@@ -110,7 +108,6 @@ const ObjectBlockView = (props) => {
             <button
               onClick={() => {
                 reactSwipeEl.next();
-                zoomOut();
               }}
             >
               <BsArrowRight
@@ -204,7 +201,7 @@ const ObjectBlockView = (props) => {
                 height="2em"
               />
             </a>
-            <button onClick={zoomIn} className="button zoomplus">
+            <button onClick={zoomIns} className="button zoomplus">
               <SlMagnifierAdd
                 icon
                 className="MagnifierPlus"
