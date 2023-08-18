@@ -32,8 +32,6 @@ function XMLInfoComponent({ xmlString }) {
       return `${type} ${value} ${unit}`;
     });
 
-    const structuredDimensions = dimensionList.join('\n');
-
     setData({
       description: getDescription(),
       title: xmlDoc.querySelector('record > Title > title')?.textContent,
@@ -60,7 +58,7 @@ function XMLInfoComponent({ xmlString }) {
       }) `.trim(),
       motifs: motifString,
       opmerkingen: xmlDoc.querySelector('record > notes')?.textContent,
-      afmetingen: structuredDimensions,
+      afmetingen: dimensionList,
     });
   }, [xmlString]);
 
@@ -145,7 +143,12 @@ function XMLInfoComponent({ xmlString }) {
                 <p>Afmetingen</p>
               </td>
               <td className="columntwo">
-                <p>{data.afmetingen}</p>
+                <p>
+                  {' '}
+                  {data.afmetingen.map((dim, index) => (
+                    <p key={index}>{dim}</p>
+                  ))}
+                </p>
               </td>
             </tr>
           )}
