@@ -21,6 +21,19 @@ function XMLInfoComponent({ xmlString }) {
     const motifList = [...motifs].map((motif) => motif.textContent);
     const motifString = motifList.join(', ');
 
+    const dimensions = xmlDoc.querySelectorAll('Dimension');
+
+    const dimensionList = [...dimensions].map((dimension) => {
+      const type = dimension.querySelector('dimension\\.type > term')
+        ?.textContent;
+      const unit = dimension.querySelector('dimension\\.unit > term')
+        ?.textContent;
+      const value = dimension.querySelector('dimension\\.value')?.textContent;
+      return `${type} ${value} ${unit}`;
+    });
+
+    const structuredDimensions = dimensionList.join('\n');
+
     setData({
       description: getDescription(),
       title: xmlDoc.querySelector('record > Title > title')?.textContent,
@@ -47,6 +60,7 @@ function XMLInfoComponent({ xmlString }) {
       }) `.trim(),
       motifs: motifString,
       opmerkingen: xmlDoc.querySelector('record > notes')?.textContent,
+      afmetingen: structuredDimensions,
     });
   }, [xmlString]);
 
@@ -122,6 +136,16 @@ function XMLInfoComponent({ xmlString }) {
               </td>
               <td className="columntwo">
                 <p>{data.verwerving}</p>
+              </td>
+            </tr>
+          )}
+          {data.afmetingen && (
+            <tr>
+              <td className="columnone">
+                <p>Afmetingen</p>
+              </td>
+              <td className="columntwo">
+                <p>{data.afmetingen}</p>
               </td>
             </tr>
           )}
