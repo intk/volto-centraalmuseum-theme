@@ -34,6 +34,7 @@ const InnerImageZoom = React.forwardRef((props, ref) => {
     className,
     afterZoomIn,
     afterZoomOut,
+    zoomed,
   } = props;
 
   const img = useRef(null);
@@ -85,6 +86,13 @@ const InnerImageZoom = React.forwardRef((props, ref) => {
       imgProps.current.onLoadCallback = zoomIn.bind(this, x, y);
     }
   };
+
+  useEffect(() => {
+    if (zoomed === true) {
+      console.log('test handle');
+      handleClick();
+    }
+  }, [zoomed]);
 
   useImperativeHandle(ref, () => ({
     zoomIn: () => {

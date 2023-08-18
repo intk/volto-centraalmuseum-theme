@@ -14,6 +14,7 @@ import { GoShare, GoDownload } from 'react-icons/go';
 import InnerImageZoom from './InnerImageZoom';
 import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
+import XMLInfoComponent from './OrganizeRawData';
 
 const ObjectBlockView = (props) => {
   let reactSwipeEl;
@@ -23,6 +24,7 @@ const ObjectBlockView = (props) => {
   const currentImageUrl = props.content?.items[currentIndex]?.url;
   const downloadLink = `${currentImageUrl}/@@images/image`;
   const innerImageZoomRef = useRef(null);
+  const [zoomed, setZoomed] = useState(false);
 
   const [popupVisible, setPopupVisible] = useState(false);
 
@@ -39,7 +41,7 @@ const ObjectBlockView = (props) => {
     // } else {
     //   setZoomLevel(2);
     // }
-    innerImageZoomRef.current.zoomIn();
+    setZoomed(true);
   };
 
   const zoomOut = () => {
@@ -83,6 +85,7 @@ const ObjectBlockView = (props) => {
                       src={`${item.url}/@@images/image`}
                       moveType="drag"
                       zoomScale={zoomLevel}
+                      zoomed={zoomed}
                     />
                   </div>
                 );
@@ -223,8 +226,8 @@ const ObjectBlockView = (props) => {
           id="rawdata"
           className={`rawdata-section ${dataExpand ? 'expanded' : ''}`}
         >
-          <p>{props.content?.rawdata}</p>
-        </div>{' '}
+          <XMLInfoComponent xmlString={props.content?.rawdata} />
+        </div>
       </div>
     </div>
   );
