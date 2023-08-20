@@ -5,13 +5,7 @@ import ReactSwipe from 'react-swipe';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { SlMagnifierAdd, SlMagnifierRemove } from 'react-icons/sl';
 import { GoShare, GoDownload } from 'react-icons/go';
-// import {
-//   TiSocialTwitter,
-//   TiSocialFacebook,
-//   TiSocialYoutube,
-// } from 'react-icons/ti';
-// import { SiInstagram } from 'react-icons/si';
-import InnerImageZoom from './InnerImageZoom';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
 import XMLInfoComponent from './OrganizeRawData';
@@ -19,37 +13,18 @@ import XMLInfoComponent from './OrganizeRawData';
 const ObjectBlockView = (props) => {
   let reactSwipeEl;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [zoomLevel, setZoomLevel] = useState(1.5);
   const [dataExpand, setDataExpand] = useState(false);
   const currentImageUrl = props.content?.items[currentIndex]?.url;
   const downloadLink = `${currentImageUrl}/@@images/image`;
-  const innerImageZoomRef = useRef(null);
-  const [zoomed, setZoomed] = useState(false);
 
   const [popupVisible, setPopupVisible] = useState(false);
+  const zoomUtilsRefs = useRef([]);
 
   const togglePopup = () => {
     setPopupVisible(!popupVisible);
   };
   const closePopup = () => {
     setPopupVisible(false);
-  };
-
-  const zoomIns = () => {
-    // if (zoomLevel < 2) {
-    //   setZoomLevel(zoomLevel + 0.2);
-    // } else {
-    //   setZoomLevel(2);
-    // }
-    setZoomed(true);
-  };
-
-  const zoomOut = () => {
-    if (zoomLevel > 0.2) {
-      setZoomLevel(zoomLevel - 0.2);
-    } else {
-      setZoomLevel(0.2);
-    }
   };
 
   const expandData = () => {
@@ -59,6 +34,108 @@ const ObjectBlockView = (props) => {
       rawDataElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
+    <>
+      <button className="button expand" onClick={expandData}>
+        {dataExpand === true ? '− Objectgegevens' : '+ Objectgegevens'}
+      </button>
+      <button
+        className="button share"
+        onClick={togglePopup}
+        onMouseLeave={closePopup}
+      >
+        <GoShare
+          icon
+          className="Sharebutton"
+          aria-label="share button"
+          height="2em"
+        />
+        {popupVisible && (
+          <div className="social-media-popup" role="tooltip" id="popover825468">
+            <h3 className="popover-title">Delen</h3>
+            <div className="popover-content">
+              <div className="row facebook-row">
+                <a
+                  onclick="return !window.open(this.href, 'Facebook', 'width=500,height=500')"
+                  className="share-btn-social"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst"
+                >
+                  <img
+                    className="share-button"
+                    alt="Delen op Facebook"
+                    src={fbbutton}
+                  />
+                </a>
+              </div>
+
+              <div className="row twitter-row">
+                <a
+                  onclick="return !window.open(this.href, 'Twitter', 'width=500,height=500')"
+                  className="share-btn-social"
+                  href="http://twitter.com/share?text=De koppelaarster&amp;url=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst"
+                >
+                  <img
+                    className="share-button"
+                    alt="Delen op Twitter"
+                    src={twbutton}
+                  />
+                </a>
+              </div>
+
+              <div className="row pinterest-row">
+                <a
+                  id="pinterest-btn"
+                  href="http://www.pinterest.com/pin/create/button/?url=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst&amp;media=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst/slideshow/10786_10-tif/@@images/image/large"
+                  data-pin-do="buttonPin"
+                  data-pin-config="none"
+                >
+                  <img
+                    alt="Delen op Pinterest"
+                    src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"
+                    href="http://www.pinterest.com/pin/create/button/?url=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </button>
+      <a
+        className="button"
+        href={downloadLink}
+        role="button"
+        aria-label="download button"
+        download
+      >
+        <GoDownload
+          icon
+          className="Downloadbutton"
+          aria-label="download button"
+          height="2em"
+        />
+      </a>
+      <button
+        className="button zoomplus"
+        onClick={() => zoomUtilsRefs.current[currentIndex]?.zoomIn()}
+      >
+        <SlMagnifierAdd
+          icon
+          className="MagnifierPlus"
+          aria-label="magnifier plus"
+          height="2em"
+        />
+      </button>
+
+      <button className="button zoomminus" onClick={() => zoomOut()}>
+        <SlMagnifierRemove
+          icon
+          className="MagnifierPlus"
+          aria-label="magnifier plus"
+          height="2em"
+        />
+      </button>
+    </>
+  );
 
   return (
     <div id="object-block">
@@ -78,15 +155,23 @@ const ObjectBlockView = (props) => {
               if (item['@type'] === 'Image') {
                 return (
                   <div className="zoom-container">
-                    <InnerImageZoom
-                      ref={innerImageZoomRef}
-                      className="Imagecomponent"
-                      key={zoomLevel}
-                      src={`${item.url}/@@images/image`}
-                      moveType="drag"
-                      zoomScale={zoomLevel}
-                      zoomed={zoomed}
-                    />
+                    <TransformWrapper initialScale={1} key={index}>
+                      {(utils) => {
+                        zoomUtilsRefs.current[index] = utils;
+
+                        return (
+                          <React.Fragment>
+                            <TransformComponent>
+                              <img
+                                src={`${item.url}/@@images/image`}
+                                id="imgExample"
+                                alt="test"
+                              />
+                            </TransformComponent>
+                          </React.Fragment>
+                        );
+                      }}
+                    </TransformWrapper>
                   </div>
                 );
               }
@@ -122,104 +207,7 @@ const ObjectBlockView = (props) => {
             </button>
           </div>
           <div className="buttons">
-            <button className="button expand" onClick={expandData}>
-              {dataExpand === true ? '− Objectgegevens' : '+ Objectgegevens'}
-            </button>
-            <button
-              className="button share"
-              onClick={togglePopup}
-              onMouseLeave={closePopup}
-            >
-              <GoShare
-                icon
-                className="Sharebutton"
-                aria-label="share button"
-                height="2em"
-              />
-              {popupVisible && (
-                <div
-                  className="social-media-popup"
-                  role="tooltip"
-                  id="popover825468"
-                >
-                  <h3 className="popover-title">Delen</h3>
-                  <div className="popover-content">
-                    <div className="row facebook-row">
-                      <a
-                        onclick="return !window.open(this.href, 'Facebook', 'width=500,height=500')"
-                        className="share-btn-social"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst"
-                      >
-                        <img
-                          className="share-button"
-                          alt="Delen op Facebook"
-                          src={fbbutton}
-                        />
-                      </a>
-                    </div>
-
-                    <div className="row twitter-row">
-                      <a
-                        onclick="return !window.open(this.href, 'Twitter', 'width=500,height=500')"
-                        className="share-btn-social"
-                        href="http://twitter.com/share?text=De koppelaarster&amp;url=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst"
-                      >
-                        <img
-                          className="share-button"
-                          alt="Delen op Twitter"
-                          src={twbutton}
-                        />
-                      </a>
-                    </div>
-
-                    <div className="row pinterest-row">
-                      <a
-                        id="pinterest-btn"
-                        href="http://www.pinterest.com/pin/create/button/?url=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst&amp;media=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst/slideshow/10786_10-tif/@@images/image/large"
-                        data-pin-do="buttonPin"
-                        data-pin-config="none"
-                      >
-                        <img
-                          alt="Delen op Pinterest"
-                          src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_gray_20.png"
-                          href="http://www.pinterest.com/pin/create/button/?url=https://www.centraalmuseum.nl/nl/collectie/10786-de-koppelaarster-gerard-van-honthorst"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </button>
-            <a
-              className="button"
-              href={downloadLink}
-              role="button"
-              aria-label="download button"
-              download
-            >
-              <GoDownload
-                icon
-                className="Downloadbutton"
-                aria-label="download button"
-                height="2em"
-              />
-            </a>
-            <button onClick={zoomIns} className="button zoomplus">
-              <SlMagnifierAdd
-                icon
-                className="MagnifierPlus"
-                aria-label="magnifier plus"
-                height="2em"
-              />
-            </button>
-            <button onClick={zoomOut} className="button zoomminus">
-              <SlMagnifierRemove
-                icon
-                className="MagnifierPlus"
-                aria-label="magnifier plus"
-                height="2em"
-              />
-            </button>
+            <Controls {...zoomUtilsRefs.current[currentIndex]} />
           </div>
         </div>
         <div

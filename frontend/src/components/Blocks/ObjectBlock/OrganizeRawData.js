@@ -107,6 +107,8 @@ function XMLInfoComponent({ xmlString }) {
 
     setData({
       description: getDescription(),
+      display: xmlDoc.querySelector('record > current_location\\.name')
+        ?.textContent,
       title: xmlDoc.querySelector('record > Title > title')?.textContent,
       datering: xmlDoc.querySelector('production\\.date\\.start')?.textContent,
       materialTechnique: xmlDoc.querySelector('techniek\\.vrije\\.tekst')
@@ -152,12 +154,26 @@ function XMLInfoComponent({ xmlString }) {
           </p>
           <button className="expand-button" onClick={HandleClick}>
             {' '}
-            {descriptionOpen ? 'Toon minder -' : 'Toon minder +'}
+            {descriptionOpen ? 'Toon minder -' : 'Toon alles +'}
           </button>
         </div>
       )}
       <table>
         <tbody>
+          {data.display && (
+            <tr>
+              <td className="columnone">
+                <p></p>
+              </td>
+              <td className="columntwo">
+                <p>
+                  {data.display === 'centralmuseum'
+                    ? 'Nu te zien'
+                    : 'Dit object is nu niet in het museum te zien'}
+                </p>
+              </td>
+            </tr>
+          )}
           {data.title && (
             <tr>
               <td className="columnone">
@@ -171,7 +187,7 @@ function XMLInfoComponent({ xmlString }) {
           {data.creator && (
             <tr>
               <td className="columnone">
-                <p>Creator</p>
+                <p>Vervaardiger</p>
               </td>
               <td className="columntwo">
                 <p>
@@ -267,7 +283,11 @@ function XMLInfoComponent({ xmlString }) {
                 <p>Opsschriften / Merken</p>
               </td>
               <td className="columntwo">
-                <p>{data.opsschriften}</p>
+                <ul>
+                  <li>
+                    <p>{data.opsschriften}</p>
+                  </li>
+                </ul>
               </td>
             </tr>
           )}
@@ -327,7 +347,7 @@ function XMLInfoComponent({ xmlString }) {
                                   setShowAllDocumentation(!showAllDocumentation)
                                 }
                               >
-                                Toon minder +
+                                Toon alles +
                               </button>
                             )}
                           </p>
@@ -374,7 +394,7 @@ function XMLInfoComponent({ xmlString }) {
                                   setShowAllExhibition(!showAllExhibition)
                                 }
                               >
-                                Toon minder +
+                                Toon alles +
                               </button>
                             )}
                           </p>
@@ -388,7 +408,7 @@ function XMLInfoComponent({ xmlString }) {
           {data.PIDworkLink && (
             <tr>
               <td className="columnone">
-                <p>PIDworkLink</p>
+                <p>Duurzame url</p>
               </td>
               <td className="columntwo">
                 <p>
