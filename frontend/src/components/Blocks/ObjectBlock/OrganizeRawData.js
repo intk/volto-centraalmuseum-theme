@@ -297,37 +297,43 @@ function XMLInfoComponent({ xmlString }) {
                 <p>Documentatie</p>
               </td>
               <td className="columntwo">
-                {showAllDocumentation
-                  ? data.documentation.map((doc, index) => (
-                      <p key={index}>
-                        {doc}
-                        {index === 2 && data.documentation.length > 3 && (
-                          <button
-                            className="expand-button"
-                            onClick={() =>
-                              setShowAllDocumentation(!showAllDocumentation)
-                            }
-                          >
-                            Toon minder -
-                          </button>
-                        )}
-                      </p>
-                    ))
-                  : data.documentation.slice(0, 3).map((doc, index) => (
-                      <p key={index}>
-                        {doc}
-                        {index === 2 && (
-                          <button
-                            className="expand-button"
-                            onClick={() =>
-                              setShowAllDocumentation(!showAllDocumentation)
-                            }
-                          >
-                            Toon minder +
-                          </button>
-                        )}
-                      </p>
-                    ))}
+                <ul>
+                  {showAllDocumentation
+                    ? data.documentation.map((doc, index) => (
+                        <li>
+                          <p key={index}>
+                            {doc}
+                            {index === 2 && data.documentation.length > 3 && (
+                              <button
+                                className="expand-data-button"
+                                onClick={() =>
+                                  setShowAllDocumentation(!showAllDocumentation)
+                                }
+                              >
+                                Toon minder -
+                              </button>
+                            )}
+                          </p>
+                        </li>
+                      ))
+                    : data.documentation.slice(0, 3).map((doc, index) => (
+                        <li>
+                          <p key={index}>
+                            {doc}
+                            {index === 2 && (
+                              <button
+                                className="expand-data-button"
+                                onClick={() =>
+                                  setShowAllDocumentation(!showAllDocumentation)
+                                }
+                              >
+                                Toon minder +
+                              </button>
+                            )}
+                          </p>
+                        </li>
+                      ))}
+                </ul>
               </td>
             </tr>
           )}
@@ -338,37 +344,43 @@ function XMLInfoComponent({ xmlString }) {
                 <p>Tentoonstellingen</p>
               </td>
               <td className="columntwo">
-                {showAllExhibition
-                  ? data.exhibition.map((exh, index) => (
-                      <p key={index}>
-                        {exh}
-                        {index === 2 && data.exhibition.length > 3 && (
-                          <button
-                            className="expand-button"
-                            onClick={() =>
-                              setShowAllExhibition(!showAllExhibition)
-                            }
-                          >
-                            Toon minder -
-                          </button>
-                        )}
-                      </p>
-                    ))
-                  : data.exhibition.slice(0, 3).map((exh, index) => (
-                      <p key={index}>
-                        {exh}
-                        {index === 2 && (
-                          <button
-                            className="expand-button"
-                            onClick={() =>
-                              setShowAllExhibition(!showAllExhibition)
-                            }
-                          >
-                            Toon minder +
-                          </button>
-                        )}
-                      </p>
-                    ))}
+                <ul>
+                  {showAllExhibition
+                    ? data.exhibition.map((exh, index) => (
+                        <li>
+                          <p key={index}>
+                            {exh}
+                            {index === 2 && data.exhibition.length > 3 && (
+                              <button
+                                className="expand-data-button"
+                                onClick={() =>
+                                  setShowAllExhibition(!showAllExhibition)
+                                }
+                              >
+                                Toon minder -
+                              </button>
+                            )}
+                          </p>
+                        </li>
+                      ))
+                    : data.exhibition.slice(0, 3).map((exh, index) => (
+                        <li>
+                          <p key={index}>
+                            {exh}
+                            {index === 2 && (
+                              <button
+                                className="expand-data-button"
+                                onClick={() =>
+                                  setShowAllExhibition(!showAllExhibition)
+                                }
+                              >
+                                Toon minder +
+                              </button>
+                            )}
+                          </p>
+                        </li>
+                      ))}
+                </ul>
               </td>
             </tr>
           )}
