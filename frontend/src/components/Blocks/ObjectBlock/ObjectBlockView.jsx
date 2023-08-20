@@ -158,7 +158,6 @@ const ObjectBlockView = (props) => {
                     <TransformWrapper initialScale={1} key={index}>
                       {(utils) => {
                         zoomUtilsRefs.current[index] = utils;
-
                         return (
                           <React.Fragment>
                             <TransformComponent>
