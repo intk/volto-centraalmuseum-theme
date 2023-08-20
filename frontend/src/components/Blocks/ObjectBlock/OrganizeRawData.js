@@ -121,7 +121,9 @@ function XMLInfoComponent({ xmlString }) {
       verwerving: `${
         xmlDoc.querySelector('acquisition\\.method')?.textContent || ''
       } ${
-        xmlDoc.querySelector('acquisition\\.date')?.textContent || ''
+        xmlDoc
+          .querySelector('acquisition\\.date')
+          ?.textContent.substring(0, 4) || ''
       }`.trim(),
       opsschriften: `${
         xmlDoc.querySelector('inscription\\.type')?.textContent || ''
