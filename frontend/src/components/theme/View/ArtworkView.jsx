@@ -128,6 +128,11 @@ const messages = defineMessages({
 export default function ArtworkView(props) {
   const intl = useIntl();
   const { content } = props;
+  const [descriptionOpen, setDescriptionOpen] = useState(false);
+
+  const HandleClick = () => {
+    setDescriptionOpen(!descriptionOpen);
+  };
 
   // eslint-disable-next-line no-unused-vars
   let reactSwipeEl;
@@ -359,6 +364,20 @@ export default function ArtworkView(props) {
             id="rawdata"
             className={`rawdata-section ${dataExpand ? 'expanded' : ''}`}
           >
+            {content.description && (
+              <div className="description-wrapper">
+                <p
+                  id="description"
+                  className={`data-description ${descriptionOpen}`}
+                >
+                  {content.description}
+                </p>
+                <button className="expand-button" onClick={HandleClick}>
+                  {' '}
+                  {descriptionOpen ? 'Toon minder -' : 'Toon alles +'}
+                </button>
+              </div>
+            )}
             <table>
               <tbody>
                 {
