@@ -146,10 +146,6 @@ export default function ArtworkView(props) {
     setPopupVisible(false);
   };
 
-  // const authors = content.authors.map((auth) => auth.title).join(', ');
-  // const linkAuthors = content.authors || contextLinks?.authors;
-  const linkAuthors = content.authors;
-
   const expandData = () => {
     setDataExpand(!dataExpand);
     const sliderElement = document.getElementById('swipe-slider');
@@ -164,13 +160,6 @@ export default function ArtworkView(props) {
       window.scrollTo({ top: topPosition, behavior: 'smooth' });
     }
   };
-
-  const materials = content.ObjMaterialTxt?.split(',');
-  const techniques = content.ObjTechniqueTxt?.split(',');
-  const materialsArray = materials?.map((material, index) => material.trim());
-  const techniquesArray = techniques?.map((technique, index) =>
-    technique.trim(),
-  );
 
   // Buttons for the image and text
   const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
