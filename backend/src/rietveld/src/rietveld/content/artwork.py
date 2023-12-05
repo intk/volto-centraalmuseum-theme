@@ -1,7 +1,10 @@
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope.interface import implementer
-from zope.schema import Text, TextLine, List
+from zope.schema import List
+from zope.schema import Text
+from zope.schema import TextLine
+
 
 class IArtwork(model.Schema):
     """Schema for Artwork content type."""
