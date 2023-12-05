@@ -82,13 +82,20 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    PIDworkLink = TextLine(
+    category = List(
+        title="Category",
+        value_type=TextLine(),
+        required=False,
+    )
+
+    PIDworkLink = Text(
         title="PID Work Link",
         required=False,
     )
 
-    creator = TextLine(
+    creator = List(
         title="Creator",
+        value_type=TextLine(),
         required=False,
     )
 

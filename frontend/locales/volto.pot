@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2023-08-13T19:16:43.253Z\n"
+"POT-Creation-Date: 2023-12-05T15:53:33.719Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -94,6 +94,21 @@ msgstr ""
 msgid "Ticket"
 msgstr ""
 
+#: components/theme/View/ArtworkView
+# defaultMessage: Verwerving
+msgid "acquisition"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Vervaardiger
+msgid "artist"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Geassocieerd onderwerp
+msgid "category"
+msgstr ""
+
 #: components/Blocks/ImageAndTextBlock/templates
 #: components/Blocks/Quoteblock/templates
 #: components/Blocks/SlidingTextBlock/templates
@@ -110,6 +125,86 @@ msgstr ""
 msgid "columns"
 msgstr ""
 
+#: components/theme/View/ArtworkView
+# defaultMessage: Credit line
+msgid "credit"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Datering
+msgid "date"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Fysieke beschrijving
+msgid "description"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Objectgegevens
+msgid "details"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Afmetingen
+msgid "dimension"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Afmetingen
+msgid "dimensions"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Documentatie
+msgid "documentation"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Tentoonstellingen
+msgid "exhibitions"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Opschriften / merken
+msgid "inscriptions"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Inventarisnummer
+msgid "inventoryNumber"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Materialen
+msgid "material"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Materiaal / Techniek
+msgid "materialTechnique"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Dit object is nu niet in het museum te zien
+msgid "notonview"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Nu te zien
+msgid "nowonview"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Objectnaam
+msgid "objectName"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Objectnummer
+msgid "objectNumber"
+msgstr ""
+
 #: components/Blocks/SiteData/schema
 # defaultMessage: Plan your visit
 msgid "planYourVisit"
@@ -118,6 +213,21 @@ msgstr ""
 #: components/Blocks/SiteData/schema
 # defaultMessage: Plan your visit link
 msgid "planYourVisitLink"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Vragen?
+msgid "question"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Ziet u een fout? Of heeft u extra informatie over dit object? 
+msgid "questionText"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Opmerkingen
+msgid "remarks"
 msgstr ""
 
 #: components/Blocks/SiteData/schema
@@ -153,4 +263,19 @@ msgstr ""
 #: components/Blocks/SiteData/schema
 # defaultMessage: Third row
 msgid "secLine3"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Delen
+msgid "share"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Techniek
+msgid "technique"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Titel
+msgid "title"
 msgstr ""
