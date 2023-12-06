@@ -11,7 +11,10 @@ import { Container } from 'semantic-ui-react';
 // import { injectIntl } from 'react-intl';
 import './css/artworkview.less';
 import ReactSwipe from 'react-swipe';
-import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+// import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+// import { GoArrowRight } from 'react-icons/go';
+import { HiOutlineArrowLongRight } from 'react-icons/hi2';
+import { HiOutlineArrowLongLeft } from 'react-icons/hi2';
 import { SlMagnifierAdd, SlMagnifierRemove } from 'react-icons/sl';
 import { GoShare } from 'react-icons/go';
 import { GoDownload } from 'react-icons/go';
@@ -343,11 +346,11 @@ export default function ArtworkView(props) {
                     reactSwipeEl.prev();
                   }}
                 >
-                  <BsArrowLeft
+                  <HiOutlineArrowLongLeft
                     icon
                     className="leftarrow"
                     aria-label="left arrow"
-                  ></BsArrowLeft>
+                  />
                 </button>
                 <span className="paginator">
                   <p>{`${currentIndex + 1}/${props.content?.items_total}`}</p>
@@ -357,12 +360,11 @@ export default function ArtworkView(props) {
                     reactSwipeEl.next();
                   }}
                 >
-                  <BsArrowRight
+                  <HiOutlineArrowLongRight
                     icon
                     className="rightarrow"
                     aria-label="right arrow"
-                    height="2em"
-                  ></BsArrowRight>
+                  />
                 </button>
               </div>
             )}
