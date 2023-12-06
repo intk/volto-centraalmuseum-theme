@@ -129,18 +129,13 @@ msgid "columns"
 msgstr ""
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Credit line
+# defaultMessage: Opmerkingen
 msgid "credit"
 msgstr ""
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Datering
 msgid "date"
-msgstr ""
-
-#: components/theme/View/ArtworkView
-# defaultMessage: Fysieke beschrijving
-msgid "description"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -196,6 +191,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Nu te zien
 msgid "nowonview"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Fysieke beschrijving
+msgid "objectExplanation"
 msgstr ""
 
 #: components/theme/View/ArtworkView
