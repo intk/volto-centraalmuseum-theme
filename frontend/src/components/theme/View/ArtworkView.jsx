@@ -589,7 +589,7 @@ export default function ArtworkView(props) {
                                   {index === 2 &&
                                     content.documentation.length > 3 && (
                                       <button
-                                        className="expand-data-button"
+                                        className={`expand-data-button ${showAllDocumentation}`}
                                         onClick={() =>
                                           setShowAllDocumentation(
                                             !showAllDocumentation,
