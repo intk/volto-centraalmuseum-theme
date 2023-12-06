@@ -445,23 +445,25 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        <a
+                        {/* <a
                           href={`/search?SearchableText=${content.materialTechnique}`}
                         >
                           {content.materialTechnique}
-                        </a>
-                        {/* {content.materialTechnique.map((technique, index) => (
-                          <span>
-                            <a
-                              href={`/search?SearchableText=${content.technique}`}
-                            >
-                              {technique}
+                        </a> */}
+                        {content.materialTechnique.map((technique, index) => (
+                          <>
+                            <span>
+                              <a href={`/search?SearchableText=${technique}`}>
+                                {technique}
+                              </a>
+                            </span>
+                            <span>
                               {index !== content.materialTechnique.length - 1
                                 ? ', '
                                 : ''}
-                            </a>
-                          </span>
-                        ))} */}
+                            </span>
+                          </>
+                        ))}
                       </p>
                     </td>
                   </tr>
@@ -483,13 +485,17 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        {/* {content.objectName.map((material, index) => (
+                        {content.objectName.map((material, index) => (
                           <span>
-                            <a href={`${intl.locale}/`}>{material}</a>
-                            {index !== materials.length - 1 ? ', ' : ''}
+                            <a href={`/search?SearchableText=${material}`}>
+                              {material}
+                            </a>
+                            {index !== content.objectName.length - 1
+                              ? ', '
+                              : ''}
                           </span>
-                        ))} */}
-                        {content.objectName}
+                        ))}
+                        {/* {content.objectName} */}
                       </p>
                     </td>
                   </tr>
@@ -523,9 +529,11 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <ul>
-                        <li>
-                          <p>{content.inscriptions}</p>
-                        </li>
+                        {content.inscriptions.map((inscription) => (
+                          <li>
+                            <p>{inscription} </p>
+                          </li>
+                        ))}
                       </ul>
                     </td>
                   </tr>
@@ -539,14 +547,10 @@ export default function ArtworkView(props) {
                       <p>
                         {content.category.map((subject, index) => (
                           <span>
-                            <a
-                              href={`/search?SearchableText=${content.subject}`}
-                            >
+                            <a href={`/search?SearchableText=${subject}`}>
                               {subject}
-                              {index !== content.subjects.length - 1
-                                ? ', '
-                                : ''}
                             </a>
+                            {index !== content.subjects.length - 1 ? ', ' : ''}
                           </span>
                         ))}
                       </p>

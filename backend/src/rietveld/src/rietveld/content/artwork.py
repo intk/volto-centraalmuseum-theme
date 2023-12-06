@@ -34,8 +34,9 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    materialTechnique = TextLine(
+    materialTechnique = List(
         title="Material Technique",
+        value_type=TextLine(),
         required=False,
     )
 
@@ -44,8 +45,9 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    objectName = TextLine(
+    objectName = List(
         title="Object Name",
+        value_type=TextLine(),
         required=False,
     )
 
@@ -54,8 +56,9 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    inscriptions = Text(
+    inscriptions = List(
         title="Inscriptions",
+        value_type=TextLine(),
         required=False,
     )
 
