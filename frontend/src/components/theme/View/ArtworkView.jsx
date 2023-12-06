@@ -171,15 +171,6 @@ export default function ArtworkView(props) {
       window.scrollTo({ top: topPosition, behavior: 'smooth' });
     }
   };
-  // const expandData = () => {
-  //   setDataExpand(!dataExpand);
-  //   const rawDataElement = document.getElementById('rawdata');
-  //   if (dataExpand === false && rawDataElement) {
-  //     setTimeout(function () {
-  //       window.scrollTo({ top: 5500, left: 0, behavior: 'smooth' });
-  //     }, 1000);
-  //   }
-  // };
 
   // Buttons for the image and text
   const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
