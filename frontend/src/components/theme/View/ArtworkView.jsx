@@ -14,7 +14,7 @@ import ReactSwipe from 'react-swipe';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { SlMagnifierAdd, SlMagnifierRemove } from 'react-icons/sl';
 import { GoShare } from 'react-icons/go';
-// import { GoDownload } from 'react-icons/go';
+import { GoDownload } from 'react-icons/go';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
@@ -54,13 +54,13 @@ const messages = defineMessages({
     id: 'dimension',
     defaultMessage: 'Afmetingen',
   },
-  description: {
-    id: 'description',
+  objectExplanation: {
+    id: 'objectExplanation',
     defaultMessage: 'Fysieke beschrijving',
   },
   credit: {
     id: 'credit',
-    defaultMessage: 'Credit line',
+    defaultMessage: 'Opmerkingen',
   },
   objectNumber: {
     id: 'objectNumber',
@@ -129,17 +129,18 @@ export default function ArtworkView(props) {
   const intl = useIntl();
   const { content } = props;
   const [descriptionOpen, setDescriptionOpen] = useState(false);
+  const [showAllDocumentation, setShowAllDocumentation] = useState(false);
+  const [showAllExhibition, setShowAllExhibition] = useState(false);
 
   const HandleClick = () => {
     setDescriptionOpen(!descriptionOpen);
   };
 
-  // eslint-disable-next-line no-unused-vars
   let reactSwipeEl;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dataExpand, setDataExpand] = useState(false);
-  // const currentImageUrl = props.content?.items[currentIndex]?.url;
-  // const downloadLink = `${currentImageUrl}/@@images/image`;
+  const currentImageUrl = props.content?.items[currentIndex]?.url;
+  const downloadLink = `${currentImageUrl}/@@images/image`;
 
   const [popupVisible, setPopupVisible] = useState(false);
   const zoomUtilsRefs = useRef([]);
@@ -158,7 +159,7 @@ export default function ArtworkView(props) {
     const viewportHeight = window.innerHeight;
 
     if (dataExpand === false && sliderElement) {
-      const topPosition = rawDataElement.offsetTop - viewportHeight / 7;
+      const topPosition = rawDataElement.offsetTop + 1000;
       window.scrollTo({ top: topPosition, behavior: 'smooth' });
     } else if (dataExpand === true && rawDataElement) {
       const topPosition = sliderElement.offsetTop - viewportHeight / 4;
@@ -242,7 +243,7 @@ export default function ArtworkView(props) {
           </div>
         )}
       </button>
-      {/* <a
+      <a
         className="button"
         href={downloadLink}
         role="button"
@@ -255,7 +256,7 @@ export default function ArtworkView(props) {
           aria-label="download button"
           height="2em"
         />
-      </a> */}
+      </a>
       <button
         className="button zoomplus"
         onClick={() => zoomUtilsRefs.current[currentIndex]?.zoomIn()}
@@ -364,13 +365,13 @@ export default function ArtworkView(props) {
             id="rawdata"
             className={`rawdata-section ${dataExpand ? 'expanded' : ''}`}
           >
-            {content.description && (
+            {content.objectExplanation && (
               <div className="description-wrapper">
                 <p
                   id="description"
                   className={`data-description ${descriptionOpen}`}
                 >
-                  {content.description}
+                  {content.objectExplanation}
                 </p>
                 <button className="expand-button" onClick={HandleClick}>
                   {' '}
@@ -394,18 +395,6 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 }
-                {content.creator && (
-                  <tr>
-                    <td className="columnone">
-                      <p>{intl.formatMessage(messages.documentation)}</p>
-                    </td>
-                    <td className="columntwo">
-                      {content.creator.map((artist) => (
-                        <p>{artist}</p>
-                      ))}
-                    </td>
-                  </tr>
-                )}
                 {content.title && (
                   <tr>
                     <td className="columnone">
@@ -413,6 +402,19 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>{content.title}</p>
+                    </td>
+                  </tr>
+                )}
+
+                {content.creator && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.artist)}</p>
+                    </td>
+                    <td className="columntwo">
+                      {content.creator.map((artist) => (
+                        <p>{artist}</p>
+                      ))}
                     </td>
                   </tr>
                 )}
@@ -439,6 +441,18 @@ export default function ArtworkView(props) {
                         >
                           {content.materialTechnique}
                         </a>
+                        {/* {content.materialTechnique.map((technique, index) => (
+                          <span>
+                            <a
+                              href={`/search?SearchableText=${content.technique}`}
+                            >
+                              {technique}
+                              {index !== content.materialTechnique.length - 1
+                                ? ', '
+                                : ''}
+                            </a>
+                          </span>
+                        ))} */}
                       </p>
                     </td>
                   </tr>
@@ -499,9 +513,11 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.inscriptions)}</p>
                     </td>
                     <td className="columntwo">
-                      <p>
-                        <li>{content.inscriptions}</li>
-                      </p>
+                      <ul>
+                        <li>
+                          <p>{content.inscriptions}</p>
+                        </li>
+                      </ul>
                     </td>
                   </tr>
                 )}
@@ -511,12 +527,20 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.category)}</p>
                     </td>
                     <td className="columntwo">
-                      {content.category.map((subject, index) => (
-                        <span>
-                          {subject}
-                          {index !== content.subjects.length - 1 ? ', ' : ''}
-                        </span>
-                      ))}
+                      <p>
+                        {content.category.map((subject, index) => (
+                          <span>
+                            <a
+                              href={`/search?SearchableText=${content.subject}`}
+                            >
+                              {subject}
+                              {index !== content.subjects.length - 1
+                                ? ', '
+                                : ''}
+                            </a>
+                          </span>
+                        ))}
+                      </p>
                     </td>
                   </tr>
                 )}
@@ -536,11 +560,55 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.documentation)}</p>
                     </td>
                     <td className="columntwo">
-                      {content.documentation.map((document) => (
+                      {/* {content.documentation.map((document) => (
                         <p>
                           <li>{document}</li>
                         </p>
-                      ))}
+                      ))} */}
+                      <ul>
+                        {showAllDocumentation
+                          ? content.documentation.map((doc, index) => (
+                              <li>
+                                <p key={index}>
+                                  {doc}
+                                  {index === 2 &&
+                                    content.documentation.length > 3 && (
+                                      <button
+                                        className="expand-data-button"
+                                        onClick={() =>
+                                          setShowAllDocumentation(
+                                            !showAllDocumentation,
+                                          )
+                                        }
+                                      >
+                                        Toon minder -
+                                      </button>
+                                    )}
+                                </p>
+                              </li>
+                            ))
+                          : content.documentation
+                              .slice(0, 3)
+                              .map((doc, index) => (
+                                <li>
+                                  <p key={index}>
+                                    {doc}
+                                    {index === 2 && (
+                                      <button
+                                        className="expand-data-button"
+                                        onClick={() =>
+                                          setShowAllDocumentation(
+                                            !showAllDocumentation,
+                                          )
+                                        }
+                                      >
+                                        Toon alles +
+                                      </button>
+                                    )}
+                                  </p>
+                                </li>
+                              ))}
+                      </ul>
                     </td>
                   </tr>
                 )}
@@ -550,11 +618,55 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.exhibitions)}</p>
                     </td>
                     <td className="columntwo">
-                      {content.exhibitions.map((exhibition) => (
+                      {/* {content.exhibitions.map((exhibition) => (
                         <p>
                           <li>{exhibition}</li>
                         </p>
-                      ))}
+                      ))} */}
+                      <ul>
+                        {showAllExhibition
+                          ? content.exhibitions.map((exhibition, index) => (
+                              <li>
+                                <p key={index}>
+                                  {exhibition}
+                                  {index === 2 &&
+                                    content.exhibitions.length > 3 && (
+                                      <button
+                                        className="expand-data-button"
+                                        onClick={() =>
+                                          setShowAllExhibition(
+                                            !showAllExhibition,
+                                          )
+                                        }
+                                      >
+                                        Toon minder -
+                                      </button>
+                                    )}
+                                </p>
+                              </li>
+                            ))
+                          : content.exhibitions
+                              .slice(0, 3)
+                              .map((exhibition, index) => (
+                                <li>
+                                  <p key={index}>
+                                    {exhibition}
+                                    {index === 2 && (
+                                      <button
+                                        className="expand-data-button"
+                                        onClick={() =>
+                                          setShowAllExhibition(
+                                            !showAllExhibition,
+                                          )
+                                        }
+                                      >
+                                        Toon alles +
+                                      </button>
+                                    )}
+                                  </p>
+                                </li>
+                              ))}
+                      </ul>
                     </td>
                   </tr>
                 )}
@@ -569,11 +681,13 @@ export default function ArtworkView(props) {
                           Als u naar dit object wilt verwijzen gebruik dan de
                           duurzame URL:
                         </p>
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: content.PIDworkLink,
-                          }}
-                        />
+                        <a href={content.PIDworkLink}>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: content.PIDworkLink,
+                            }}
+                          />
+                        </a>
                       </p>
                     </td>
                   </tr>

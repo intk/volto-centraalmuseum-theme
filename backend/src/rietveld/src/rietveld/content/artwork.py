@@ -6,6 +6,7 @@ from zope.schema import Text
 from zope.schema import TextLine
 
 
+
 class IArtwork(model.Schema):
     """Schema for Artwork content type."""
 
@@ -16,6 +17,11 @@ class IArtwork(model.Schema):
 
     description = Text(
         title="Description",
+        required=False,
+    )
+
+    objectExplanation = Text(
+        title="Explanation",
         required=False,
     )
 
