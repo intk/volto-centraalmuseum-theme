@@ -18,8 +18,9 @@ import { GoDownload } from 'react-icons/go';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
+// import downloadbutton from './assets/download.svg';
 import { defineMessages, useIntl } from 'react-intl';
-// import { SeeMore } from '../../index';
+// import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 const messages = defineMessages({
   artist: {
@@ -261,6 +262,7 @@ export default function ArtworkView(props) {
           aria-label="download button"
           height="2em"
         />
+        {/* <Icon name={downloadbutton} size="18px" />{' '} */}
       </a>
       <button
         className="button zoomplus"
@@ -334,34 +336,36 @@ export default function ArtworkView(props) {
                 return null;
               })}
             </ReactSwipe>
-            <div className="leftrightbuttons">
-              <button
-                onClick={() => {
-                  reactSwipeEl.prev();
-                }}
-              >
-                <BsArrowLeft
-                  icon
-                  className="leftarrow"
-                  aria-label="left arrow"
-                ></BsArrowLeft>
-              </button>
-              <span className="paginator">
-                <p>{`${currentIndex + 1}/${props.content?.items_total}`}</p>
-              </span>{' '}
-              <button
-                onClick={() => {
-                  reactSwipeEl.next();
-                }}
-              >
-                <BsArrowRight
-                  icon
-                  className="rightarrow"
-                  aria-label="right arrow"
-                  height="2em"
-                ></BsArrowRight>
-              </button>
-            </div>
+            {props.content?.items_total > 1 && (
+              <div className="leftrightbuttons">
+                <button
+                  onClick={() => {
+                    reactSwipeEl.prev();
+                  }}
+                >
+                  <BsArrowLeft
+                    icon
+                    className="leftarrow"
+                    aria-label="left arrow"
+                  ></BsArrowLeft>
+                </button>
+                <span className="paginator">
+                  <p>{`${currentIndex + 1}/${props.content?.items_total}`}</p>
+                </span>{' '}
+                <button
+                  onClick={() => {
+                    reactSwipeEl.next();
+                  }}
+                >
+                  <BsArrowRight
+                    icon
+                    className="rightarrow"
+                    aria-label="right arrow"
+                    height="2em"
+                  ></BsArrowRight>
+                </button>
+              </div>
+            )}
             <div className="buttons">
               <Controls {...zoomUtilsRefs.current[currentIndex]} />
             </div>
@@ -715,7 +719,6 @@ export default function ArtworkView(props) {
               </tbody>
             </table>
           </div>
-          {/* <SeeMore {...props} /> */}
         </div>
       </Container>
     </div>
