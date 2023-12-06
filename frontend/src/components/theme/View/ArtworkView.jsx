@@ -159,13 +159,27 @@ export default function ArtworkView(props) {
     const viewportHeight = window.innerHeight;
 
     if (dataExpand === false && sliderElement) {
-      const topPosition = rawDataElement.offsetTop + 1000;
-      window.scrollTo({ top: topPosition, behavior: 'smooth' });
+      const topPosition = rawDataElement.offsetTop - 124;
+      setTimeout(function () {
+        window.scrollTo({
+          top: topPosition,
+          behavior: 'smooth',
+        });
+      }, 100);
     } else if (dataExpand === true && rawDataElement) {
       const topPosition = sliderElement.offsetTop - viewportHeight / 4;
       window.scrollTo({ top: topPosition, behavior: 'smooth' });
     }
   };
+  // const expandData = () => {
+  //   setDataExpand(!dataExpand);
+  //   const rawDataElement = document.getElementById('rawdata');
+  //   if (dataExpand === false && rawDataElement) {
+  //     setTimeout(function () {
+  //       window.scrollTo({ top: 5500, left: 0, behavior: 'smooth' });
+  //     }, 1000);
+  //   }
+  // };
 
   // Buttons for the image and text
   const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
@@ -614,7 +628,7 @@ export default function ArtworkView(props) {
                 )}
                 {content.exhibitions && (
                   <tr>
-                    <td className="columnone">
+                    <td className="columnone" id="intoview">
                       <p>{intl.formatMessage(messages.exhibitions)}</p>
                     </td>
                     <td className="columntwo">
