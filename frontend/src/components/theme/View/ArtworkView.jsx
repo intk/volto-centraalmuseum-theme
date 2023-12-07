@@ -424,7 +424,7 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.artist)}</p>
                     </td>
                     <td className="columntwo">
-                      {content.creator.map((artist) => (
+                      {content?.creator?.map((artist) => (
                         <p>{artist}</p>
                       ))}
                     </td>
@@ -453,7 +453,7 @@ export default function ArtworkView(props) {
                         >
                           {content.materialTechnique}
                         </a> */}
-                        {content.materialTechnique.map((technique, index) => (
+                        {content?.materialTechnique?.map((technique, index) => (
                           <>
                             <span>
                               <a href={`/search?SearchableText=${technique}`}>
@@ -488,7 +488,7 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        {content.objectName.map((material, index) => (
+                        {content?.objectName?.map((material, index) => (
                           <span>
                             <a href={`/search?SearchableText=${material}`}>
                               {material}
@@ -519,7 +519,7 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.dimensions)}</p>
                     </td>
                     <td className="columntwo">
-                      {content.dimensions.map((dimension) => (
+                      {content?.dimensions?.map((dimension) => (
                         <p> {dimension} </p>
                       ))}
                     </td>
@@ -532,7 +532,7 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <ul>
-                        {content.inscriptions.map((inscription) => (
+                        {content?.inscriptions?.map((inscription) => (
                           <li>
                             <p>{inscription} </p>
                           </li>
@@ -548,7 +548,7 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        {content.category.map((subject, index) => (
+                        {content?.category?.map((subject, index) => (
                           <span>
                             <a href={`/search?SearchableText=${subject}`}>
                               {subject}
@@ -583,7 +583,7 @@ export default function ArtworkView(props) {
                       ))} */}
                       <ul>
                         {showAllDocumentation
-                          ? content.documentation.map((doc, index) => (
+                          ? content?.documentation?.map((doc, index) => (
                               <li>
                                 <p key={index}>
                                   {doc}
@@ -604,8 +604,8 @@ export default function ArtworkView(props) {
                               </li>
                             ))
                           : content.documentation
-                              .slice(0, 3)
-                              .map((doc, index) => (
+                              ?.slice(0, 3)
+                              ?.map((doc, index) => (
                                 <li>
                                   <p key={index}>
                                     {doc}
@@ -641,7 +641,7 @@ export default function ArtworkView(props) {
                       ))} */}
                       <ul>
                         {showAllExhibition
-                          ? content.exhibitions.map((exhibition, index) => (
+                          ? content?.exhibitions?.map((exhibition, index) => (
                               <li>
                                 <p key={index}>
                                   {exhibition}
@@ -662,8 +662,8 @@ export default function ArtworkView(props) {
                               </li>
                             ))
                           : content.exhibitions
-                              .slice(0, 3)
-                              .map((exhibition, index) => (
+                              ?.slice(0, 3)
+                              ?.map((exhibition, index) => (
                                 <li>
                                   <p key={index}>
                                     {exhibition}
