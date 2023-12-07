@@ -245,9 +245,15 @@
       line-height: 36px;
     }
 
+    .columnone p {
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+    }
     .columntwo p {
       @media (max-width: 768px) {
         font-size: 16px;
+        margin-top: -2px;
       }
     }
 
@@ -415,8 +421,8 @@
 // RAWData
 #rawdata {
   width: auto;
-  padding-right: 34px;
-  padding-left: 34px;
+  padding-right: 35px;
+  padding-left: 35px;
   @media (min-width: 768px) {
     width: 750px;
   }
@@ -451,7 +457,7 @@
   }
 
   .description-wrapper {
-    margin-bottom: 73px;
+    margin-bottom: 74px;
     padding-left: 4px;
     padding-right: 4px;
      @media (min-width: 992px) {
@@ -473,6 +479,9 @@
     font-size: 19.68px;
     font-weight: 100;
     text-decoration: underline;
+    @media (max-width: 768px){
+      font-size: 18.8px;
+    }
   }
 
   .expand-data-button {
