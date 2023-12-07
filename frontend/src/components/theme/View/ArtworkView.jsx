@@ -378,12 +378,13 @@ export default function ArtworkView(props) {
           >
             {content.objectExplanation && (
               <div className="description-wrapper">
-                <p
+                <div
                   id="description"
                   className={`data-description ${descriptionOpen}`}
-                >
-                  {content.objectExplanation}
-                </p>
+                  dangerouslySetInnerHTML={{
+                    __html: content.objectExplanation.data,
+                  }}
+                />
                 <button className="expand-button" onClick={HandleClick}>
                   {' '}
                   {descriptionOpen ? 'Toon minder -' : 'Toon alles +'}

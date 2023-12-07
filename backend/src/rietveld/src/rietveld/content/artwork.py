@@ -4,7 +4,7 @@ from zope.interface import implementer
 from zope.schema import List
 from zope.schema import Text
 from zope.schema import TextLine
-
+from plone.app.textfield import RichText
 
 class IArtwork(model.Schema):
     """Schema for Artwork content type."""
@@ -19,7 +19,7 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    objectExplanation = Text(
+    objectExplanation = RichText(
         title="Explanation",
         required=False,
     )
