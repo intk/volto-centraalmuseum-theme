@@ -9,6 +9,7 @@ from plone.api import relation
 from plone.app.multilingual.api import get_translation_manager
 from plone.app.multilingual.api import translate
 from plone.app.multilingual.interfaces import ITranslationManager
+from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityContent
 from plone.folder.interfaces import IExplicitOrdering
 from plone.namedfile.file import NamedBlobImage
@@ -116,7 +117,8 @@ class AdminFixes(BrowserView):
             print("Title not found")
 
         # log_to_file(title)
-        # log_to_file(description_element)
+        log_to_file(description_element)
+        print(description_element)
 
         info = {"nl": {}, "en": {}}
         intl = {"nl": {}, "en": {}}
@@ -124,8 +126,16 @@ class AdminFixes(BrowserView):
         info["nl"]["title"] = title
         info["en"]["title"] = title
 
-        info["nl"]["objectExplanation"] = description_element
-        info["en"]["objectExplanation"] = description_element
+        info["nl"]["objectExplanation"] = RichTextValue(
+            raw=description_element,
+            mimeType="text/html",
+            outputMimeType="text/x-html-safe",
+        )
+        info["en"]["objectExplanation"] = RichTextValue(
+            raw=description_element,
+            mimeType="text/html",
+            outputMimeType="text/x-html-safe",
+        )
 
         info["nl"]["priref"] = priref
         info["en"]["priref"] = priref
@@ -664,10 +674,10 @@ def import_images(container, object_id, headers):
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:
