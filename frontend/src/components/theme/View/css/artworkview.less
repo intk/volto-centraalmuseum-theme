@@ -17,7 +17,7 @@
   .react-swipe-container {
     // padding-bottom: 55px;
     @media screen and (max-width: 768px) {
-      padding-bottom: 100px;
+      padding-bottom: 50px;
     }
   }
 
@@ -92,7 +92,9 @@
   padding-bottom: 80px;
 
   .buttons {
-    padding-top: 17px;
+    @media (min-width: 992px){
+      padding-top: 17px;
+    }
 
     .button {
       display: block;
@@ -141,8 +143,12 @@
 
     .button.expand {
       width: 200px;
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 5px;
+      padding-right: 5px;
+      @media (min-width: 992px){
+        padding-left: 15px;
+        padding-right: 15px;
+      }
     }
 
     .button.zoomminus {
@@ -167,9 +173,21 @@
   }
 
   .react-transform-component > img {
-    max-width: 80vw;
-    padding-bottom: 20px !important;
-    padding-top: 16px;
+    // max-width: 80vw;
+    padding-top: 50px;
+    padding-right: calc(12% + 5px) !important;
+    padding-left: calc(12% + 5px) !important;
+
+    @media screen and (min-width: 768px) {
+          padding-right: 0px;
+          padding-left: 0px;
+    }
+
+    @media screen and (min-width: 992px){
+      max-width: 80vw;
+      padding-bottom: 20px !important;
+      padding-top: 16px;
+    }
   }
 
   .leftrightbuttons {
@@ -210,12 +228,14 @@
   .rawdata-section {
     overflow: hidden;
     max-height: 0;
-    margin-top: 79px;
     margin-right: auto;
     margin-left: auto;
     opacity: 0;
     transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
-
+    margin-top: 70px;
+    @media (min-width: 992px){
+      margin-top: 79px;
+    }
     p {
       color: #9d9d9d;
       font-family: 'FranklinBook', Arial, sans-serif;
@@ -223,6 +243,12 @@
       font-weight: 500;
       letter-spacing: 0em;
       line-height: 36px;
+    }
+
+    .columntwo p {
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
     }
 
     a {
@@ -262,6 +288,9 @@
         font-size: 19.007px !important;
         letter-spacing: 0em !important;
         line-height: 37px;
+        @media (max-width: 768px) {
+          font-size: 16px !important;
+        }
       }
     }
 
@@ -386,8 +415,8 @@
 // RAWData
 #rawdata {
   width: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 34px;
+  padding-left: 34px;
   @media (min-width: 768px) {
     width: 750px;
   }
@@ -411,14 +440,24 @@
   table {
     width: 100%;
 
+    @media (min-width: 992px) and (max-width: 1200px){
+      padding-left: 36px;
+      padding-right: 36px;
+    }
+
     td p {
       margin: 0;
     }
   }
 
   .description-wrapper {
-    margin-bottom: 50px;
-    @media (min-width: 992px) {
+    margin-bottom: 73px;
+    padding-left: 4px;
+    padding-right: 4px;
+     @media (min-width: 992px) {
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-bottom: 50px;
       width: 720px;
       margin: 0 auto 39px;
     }
@@ -506,9 +545,19 @@
     transition: opacity 0.6s;
   }
 
+  table tr {
+    @media (max-width: 768px){
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 27px;
+    }
+  }
+
   .columnone {
-    width: 33.3%;
-    padding: 13px 15px 0px 5px;
+    @media (min-width: 768px) {
+      width: 33.3%;
+      padding: 13px 15px 0px 5px;
+    }
     vertical-align: top;
 
     p {
@@ -518,8 +567,10 @@
   }
 
   .columntwo {
-    width: 66.6%;
-    padding: 13px 0px 0px 10.5px;
+    @media (min-width: 768px) {
+      width: 66.6%;
+      padding: 13px 0px 0px 10.5px;
+    }
 
     p {
       color: #9d9d9d;
