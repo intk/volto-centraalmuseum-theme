@@ -10,4 +10,9 @@
   <!-- Metadata
   <column value="industry" />
 -->
+  <index meta_type="FieldIndex"
+         name="priref"
+  >
+    <indexed_attr value="priref" />
+  </index>
 </object>

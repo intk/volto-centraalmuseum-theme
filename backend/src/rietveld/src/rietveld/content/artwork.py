@@ -15,6 +15,8 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    priref = TextLine(title="Priref", required=False)
+
     description = Text(
         title="Description",
         required=False,

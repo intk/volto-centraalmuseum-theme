@@ -12,4 +12,12 @@
       type="plone"
       />
 
+  <browser:page
+      name="admin_fixes"
+      for="*"
+      class=".admin.AdminFixes"
+      permission="cmf.ManagePortal"
+      />
+
+
 </configure>
