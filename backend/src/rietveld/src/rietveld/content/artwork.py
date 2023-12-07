@@ -32,6 +32,11 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    physicaldescription = TextLine(
+        title="Physical Description",
+        required=False,
+    )
+
     dating = TextLine(
         title="Dating",
         required=False,
@@ -54,6 +59,18 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    associatedPeriods = List(
+        title="Associated Periods",
+        value_type=TextLine(),
+        required=False,
+    )
+
+    associatedPeople = List(
+        title="Associated People",
+        value_type=TextLine(),
+        required=False,
+    )
+
     acquisition = TextLine(
         title="Acquisition",
         required=False,
@@ -65,13 +82,15 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    motifs = Text(
+    motifs = List(
         title="Motifs",
+        value_type=TextLine(),
         required=False,
     )
 
-    remarks = Text(
+    remarks = List(
         title="Remarks",
+        value_type=TextLine(),
         required=False,
     )
 
@@ -104,9 +123,8 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    creator = List(
+    creator = RichText(
         title="Creator",
-        value_type=TextLine(),
         required=False,
     )
 

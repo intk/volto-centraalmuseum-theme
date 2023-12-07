@@ -106,19 +106,69 @@ class AdminFixes(BrowserView):
 
         # Find the title element
         title_element = tree.find(".//record/Title/title")
-        description_element = tree.find(".//record/Label/label.text").text
+        description_element = tree.find(".//record/Label/label.text")
         priref = tree.find(".//record").attrib["priref"]
-        log_to_file(priref)
+        objectnumber = tree.find(".//Object/object.object_number")
+        objectnames = tree.findall(".//Object_name/object_name/term")
+        object_name_values = [
+            name.text for name in objectnames if name.text is not None
+        ]
+
+        physical_description = tree.find(".//physical_description").text
+
+        associated_periods = tree.findall(
+            ".//Associated_period/association.period/term"
+        )
+        associated_periods_values = [
+            name.text for name in associated_periods if name.text is not None
+        ]
+
+        associated_people = tree.findall(".//Associated_person/association.person/name")
+        associated_people_values = [
+            name.text for name in associated_people if name.text is not None
+        ]
+
+        # If there are no namespaces, or you have already handled them, your XPath would be as follows:
+        production_date_start = tree.find(".//production.date.start").text
+        production_date_start_prec = tree.find(".//production.date.start.prec").text
+        production_date_end = tree.find(".//production.date.end").text
+        production_date_end_prec = tree.find(".//production.date.end.prec").text
+        production_date_notes = tree.find(".//production.date.notes").text
+
+        # techniek.vrije.tekst
+        technique = tree.findall(".//techniek.vrije.tekst")
+        technique_values = [name.text for name in technique if name.text is not None]
+
+        remarks = tree.findall(".//notes")
+        remarks_values = [name.text for name in remarks if name.text is not None]
+
+        motifs = tree.findall(".//content.motif.general/term")
+        motif_values = [name.text for name in motifs if name.text is not None]
+
+        PIDworkLink_element = tree.find(".//PIDwork/PID_work_URI")
+        PIDworkLink = (
+            PIDworkLink_element.text if PIDworkLink_element is not None else ""
+        )
+
+        PIDworkURL_element = tree.find(".//PIDwork/PID_work_URL")
+        PIDworkURL = PIDworkURL_element.text if PIDworkURL_element is not None else ""
+
+        # Then you can format the date string as needed.
+        date = f"{production_date_start_prec or ''} {production_date_start or ''} - {production_date_end_prec or ''} {production_date_end or ''} ({production_date_notes or ''})".strip()
+
+        acquisition_date = tree.find(".//record/acquisition.date").text
+        acquisition_date_precision = tree.find(
+            ".//record/acquisition.date.precision"
+        ).text
+        acquisition_term = tree.find(".//record/acquisition.method/term").text
+        acquisition_notes = tree.find(".//record/acquisition.notes").text
+        acquisition = f"{acquisition_term} {acquisition_date_precision} {acquisition_date} ({acquisition_notes})"
 
         if title_element is not None:
             title = title_element.text
             print("Title: ", title)
         else:
             print("Title not found")
-
-        # log_to_file(title)
-        log_to_file(description_element)
-        print(description_element)
 
         info = {"nl": {}, "en": {}}
         intl = {"nl": {}, "en": {}}
@@ -127,12 +177,12 @@ class AdminFixes(BrowserView):
         info["en"]["title"] = title
 
         info["nl"]["objectExplanation"] = RichTextValue(
-            raw=description_element,
+            raw=description_element.text,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
         info["en"]["objectExplanation"] = RichTextValue(
-            raw=description_element,
+            raw=description_element.text,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
@@ -140,13 +190,102 @@ class AdminFixes(BrowserView):
         info["nl"]["priref"] = priref
         info["en"]["priref"] = priref
 
-        title_url = (
-            re.sub(r"[^a-zA-Z0-9 ]", "", title)
-            .strip()
-            .replace("  ", " ")
-            .replace(" ", "-")
-            .lower()
+        info["nl"]["inventoryNumber"] = objectnumber.text
+        info["en"]["inventoryNumber"] = objectnumber.text
+
+        info["nl"]["objectName"] = object_name_values
+        info["en"]["objectName"] = object_name_values
+
+        info["nl"]["dating"] = date
+        info["en"]["dating"] = date
+
+        # Add to the frontend
+        info["nl"]["physicaldescription"] = physical_description
+        info["en"]["physicaldescription"] = physical_description
+
+        # # Add to the frontend
+        info["nl"]["associatedPeriods"] = associated_periods_values
+        info["en"]["associatedPeriods"] = associated_periods_values
+
+        # # Add to the frontend
+        info["nl"]["associatedPeople"] = associated_people_values
+        info["en"]["associatedPeople"] = associated_people_values
+
+        info["nl"]["motifs"] = motif_values
+        info["en"]["motifs"] = motif_values
+
+        # Change the type to list in the frontend
+        info["nl"]["remarks"] = remarks_values
+        info["en"]["remarks"] = remarks_values
+
+        info["nl"]["PIDworkLink"] = PIDworkLink
+        info["en"]["PIDworkLink"] = PIDworkLink
+
+        info["nl"]["materialTechnique"] = technique_values
+        info["en"]["materialTechnique"] = technique_values
+
+        info["nl"]["acquisition"] = acquisition
+        info["en"]["acquisition"] = acquisition
+
+        # Creating Artists
+        creators = tree.findall(".//Production")
+
+        creator_info = []
+        base_url_creator = "/nl/maker/"
+        base_url_role = "/nl/@@search?creator_role="
+
+        for production in creators:
+            creator = production.find(".//creator")
+            role = production.findtext(".//creator.role/term")
+            qualifier = production.findtext(".//creator.qualifier")
+
+            name = creator.findtext(".//name")
+            # Handle the name order
+            if "," in name:
+                last_name, first_name = name.split(", ")
+                name = f"{first_name} {last_name}"
+
+            birth_date = creator.findtext(".//birth.date.start", "").split("-")[0]
+            death_date = creator.findtext(".//death.date.start", "").split("-")[0]
+            birth_place = creator.findtext(".//birth.place", "")
+            death_place = creator.findtext(".//death.place", "")
+
+            # Creating dynamic links
+            name_link = f'<a href="{base_url_creator}{name.replace(" ", "-").lower()}">{name}</a>'
+            role_link = (
+                f'<a href="{base_url_role}{role.replace(" ", "-").lower()}">{role}</a>'
+            )
+
+            formatted_name = f"{qualifier} {name_link}" if qualifier else name_link
+
+            # Formatting the lifespan
+            lifespan = ""
+            if birth_date or death_date:
+                lifespan = f" ({birth_place} {birth_date} - {death_date} {death_place})".strip()
+
+            # Constructing the final string
+            creator_str = f"{formatted_name} ({role_link}){lifespan}".strip()
+
+            creator_info.append(creator_str)
+
+        # Join the creator info into a single HTML string
+        creator_info_html = (
+            "<ul>" + "".join(f"<li>{info}</li>" for info in creator_info) + "</ul>"
         )
+
+        # Convert to RichText
+        creators_richtext = RichTextValue(
+            raw=creator_info_html,
+            mimeType="text/html",
+            outputMimeType="text/x-html-safe",
+        )
+
+        info["nl"]["creator"] = creators_richtext
+        info["en"]["creator"] = creators_richtext
+
+        log_to_file(creator_info)
+
+        title_url = PIDworkURL.split("/")[-1]
 
         brains = catalog.searchResults(priref=priref, portal_type="artwork")
         if len(brains) == 1:
@@ -567,20 +706,18 @@ def create_and_setup_object(title, container, info, intl, object_type, obj_id, p
     using the provided info and intl dictionaries.
     """
     log_to_file(f"Creating the object with title = '{title}' and id = '{priref}'")
-    raw_obj_id = f"{info['nl']['priref']}-{obj_id}"
-    sanitized_id = re.sub(r"[^a-zA-Z0-9-]", "", raw_obj_id)
 
     try:
         # First try to create the object with the sanitized ID
         obj = api.content.create(
             type=object_type,
-            id=sanitized_id,
+            id=obj_id,
             title=title,
             container=container,
         )
     except Exception as e:
         log_to_file(
-            f"Error with ID '{sanitized_id}'. Trying without specifying ID. Error: {e}"
+            f"Error with ID '{obj_id}'. Trying without specifying ID. Error: {e}"
         )
         # If there's an error, try creating the object without specifying the ID
         try:
@@ -792,3 +929,25 @@ def xml_to_image(xml_content):
     else:
         print("No attachment element with a name attribute found.")
     return None, None
+
+
+def format_production_dates(start_prec, start, end_prec, end, notes):
+    # Apply the precision indicators to the start and end dates if availableprire
+    log_to_file(start_prec)
+    log_to_file(start)
+    log_to_file(end_prec)
+    log_to_file(end)
+    log_to_file(notes)
+    start_str = f"{start_prec} " if start_prec else ""
+    start_str += start if start else ""
+    end_str = f"{end_prec} " if end_prec else ""
+    end_str += end if end else ""
+
+    # Construct the date range string with checks for None
+    date_range = f"{start_str} - {end_str}" if start and end else ""
+
+    # Append the notes if they exist and are not None
+    if notes:
+        date_range += f" ({notes})" if date_range else notes
+    log_to_file(date_range)
+    return date_range

@@ -424,9 +424,16 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.artist)}</p>
                     </td>
                     <td className="columntwo">
-                      {content?.creator?.map((artist) => (
+                      {/* {content?.creator?.map((artist) => (
                         <p>{artist}</p>
-                      ))}
+                      ))} */}{' '}
+                      <div
+                        id="creator"
+                        className={`data-description ${descriptionOpen}`}
+                        dangerouslySetInnerHTML={{
+                          __html: content.creator.data,
+                        }}
+                      />
                     </td>
                   </tr>
                 )}
