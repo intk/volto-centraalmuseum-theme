@@ -1,5 +1,6 @@
-from rietveld.content.artwork import IArtwork
 from plone.indexer.decorator import indexer
+from rietveld.content.artwork import IArtwork
+
 
 @indexer(IArtwork)
 def object_remarks(obj):
