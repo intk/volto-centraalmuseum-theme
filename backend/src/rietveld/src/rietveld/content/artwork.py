@@ -1,3 +1,4 @@
+from plone.app.dexterity.textindexer.directives import searchable
 from plone.app.textfield import RichText
 from plone.dexterity.content import Container
 from plone.supermodel import model
@@ -139,7 +140,7 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-
-@implementer(IArtwork)
-class Artwork(Container):
-    """Artwork instance class"""
+    searchable(
+        remarks,
+        priref,
+    )
