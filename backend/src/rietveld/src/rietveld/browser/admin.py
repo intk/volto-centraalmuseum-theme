@@ -49,6 +49,33 @@ class AdminFixes(BrowserView):
 
         return getattr(self, op)()
 
+    def trim_white_spaces(self, text):
+        if text is not None and text != "":
+            if text == "\nNLG":
+                return "NLG"
+
+            if text == "\nEUR":
+                return "EUR"
+
+            # Removed the check for unicode type as Python 3 strings are Unicode by default
+
+            if text == "\n€":
+                return "EUR"
+
+            if text[0] == "\n":
+                text = text[1:]
+
+            if len(text) > 0:
+                if text[0] == " ":
+                    text = text[1:]
+                if len(text) > 0 and text[-1] == " ":
+                    text = text[:-1]
+                return text
+            else:
+                return ""
+        else:
+            return ""
+
     def translate(self, obj, fields):
         language = "en"
 
@@ -313,8 +340,6 @@ class AdminFixes(BrowserView):
             description = inscription.findtext(".//inscription.description")
             notes = inscription.findtext(".//inscription.notes")
 
-
-
             # Extract text from RTF content
             text_content = (
                 re.sub(r"{\\.*?}", "", content) if content else ""
@@ -392,6 +417,65 @@ class AdminFixes(BrowserView):
         # Assigning the sorted information to the 'info' dictionary
         info["nl"]["documentation"] = sorted_documentation_info
         info["en"]["documentation"] = sorted_documentation_info
+
+        # Creating Exhibitions
+        exhibitions = []
+        if len(tree.findall(".//Exhibition")) > 0:
+            for parts_ref in tree.findall(".//Exhibition"):
+
+                exhibition = parts_ref.find("./exhibition")
+
+                if exhibition != None:
+                    new_exhibition = {
+                        "name": "",
+                        "date": "",
+                        "to": "",
+                        "organiser": "",
+                        "venue": "",
+                        "place": "",
+                        "notes": "",
+                        "catObject": "",
+                    }
+
+                if exhibition.find("./title") is not None:
+                    new_exhibition["name"] = exhibition.find("./title").text
+
+                venue = exhibition.find(
+                    ".//venue"
+                )  # Adjusted XPath for nested venue details
+                if venue is not None:
+                    if venue.find("./venue") is not None:
+                        new_exhibition["venue"] = venue.find("./venue").text
+
+                    if venue.find("./venue.date.start") is not None:
+                        new_exhibition["date"] = venue.find("./venue.date.start").text
+
+                    if venue.find("./venue.date.end") is not None:
+                        new_exhibition["to"] = venue.find("./venue.date.end").text
+
+                    if venue.find("./venue.place") is not None:
+                        new_exhibition["place"] = venue.find("./venue.place").text
+
+                    # Creating a list to hold non-empty exhibition details
+                    exhibition_details = []
+
+                    # for key in ['name', 'venue', 'place', 'date', 'to', 'organiser', 'notes', 'catObject']:
+                    for key in ["name", "venue", "place", "date"]:
+                        if new_exhibition[key]:
+                            # For date fields, we're only interested in the year part
+                            if key in ["date", "to"]:
+                                exhibition_details.append(
+                                    new_exhibition[key].split("-")[0]
+                                )
+                            else:
+                                exhibition_details.append(new_exhibition[key])
+
+                    # Joining the non-empty details with commas
+                    exhibition_str = ", ".join(exhibition_details)
+                    exhibitions.append(exhibition_str)
+        log_to_file(f"{exhibitions}")
+        info["nl"]["exhibitions"] = exhibitions
+        info["en"]["exhibitions"] = exhibitions
 
         # Creating Inscriptions
         inscriptions = tree.findall(".//Inscription")
