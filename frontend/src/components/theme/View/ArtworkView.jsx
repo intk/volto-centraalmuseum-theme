@@ -571,7 +571,9 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.credit)}</p>
                     </td>
                     <td className="columntwo">
-                      <p>{content.remarks}</p>
+                      {content?.remarks?.map((remark) => (
+                        <p>{remark}</p>
+                      ))}
                     </td>
                   </tr>
                 )}
