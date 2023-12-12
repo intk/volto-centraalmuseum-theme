@@ -46,18 +46,6 @@ const messages = defineMessages({
     id: 'date',
     defaultMessage: 'Datering',
   },
-  material: {
-    id: 'material',
-    defaultMessage: 'Materialen',
-  },
-  technique: {
-    id: 'technique',
-    defaultMessage: 'Techniek',
-  },
-  dimension: {
-    id: 'dimension',
-    defaultMessage: 'Afmetingen',
-  },
   objectExplanation: {
     id: 'objectExplanation',
     defaultMessage: 'Fysieke beschrijving',
@@ -142,6 +130,18 @@ const messages = defineMessages({
   motifs: {
     id: 'motifs',
     defaultMessage: 'Motief',
+  },
+  duurzameurl: {
+    id: 'duurzameurl',
+    defaultMessage: 'Duurzame url',
+  },
+  showmore: {
+    id: 'showmore',
+    defaultMessage: 'Toon alles',
+  },
+  showless: {
+    id: 'showless',
+    defaultMessage: 'Toon minder',
   },
 });
 
@@ -403,7 +403,9 @@ export default function ArtworkView(props) {
                 />
                 <button className="expand-button" onClick={HandleClick}>
                   {' '}
-                  {descriptionOpen ? 'Toon minder -' : 'Toon alles +'}
+                  {descriptionOpen
+                    ? `${intl.formatMessage(messages.showless)} -`
+                    : `${intl.formatMessage(messages.showmore)} +`}
                 </button>
               </div>
             )}
@@ -686,7 +688,9 @@ export default function ArtworkView(props) {
                                           )
                                         }
                                       >
-                                        Toon minder -
+                                        {`${intl.formatMessage(
+                                          messages.showless,
+                                        )} -`}
                                       </button>
                                     )}
                                 </p>
@@ -708,7 +712,10 @@ export default function ArtworkView(props) {
                                             )
                                           }
                                         >
-                                          Toon alles +
+                                          {/* Toon alles + */}
+                                          {`${intl.formatMessage(
+                                            messages.showmore,
+                                          )} +`}
                                         </button>
                                       )}
                                   </p>
@@ -745,7 +752,9 @@ export default function ArtworkView(props) {
                                           )
                                         }
                                       >
-                                        Toon minder -
+                                        {`${intl.formatMessage(
+                                          messages.showless,
+                                        )} -`}
                                       </button>
                                     )}
                                 </p>
@@ -767,7 +776,9 @@ export default function ArtworkView(props) {
                                             )
                                           }
                                         >
-                                          Toon alles +
+                                          {`${intl.formatMessage(
+                                            messages.showmore,
+                                          )} +`}
                                         </button>
                                       )}
                                   </p>
@@ -780,7 +791,7 @@ export default function ArtworkView(props) {
                 {content.PIDworkLink && (
                   <tr>
                     <td className="columnone">
-                      <p>Duurzame url</p>
+                      <p>{intl.formatMessage(messages.duurzameurl)}</p>
                     </td>
                     <td className="columntwo">
                       <p>
