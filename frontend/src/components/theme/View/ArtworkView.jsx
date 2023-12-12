@@ -554,16 +554,14 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.category)}</p>
                     </td>
                     <td className="columntwo">
-                      <p>
-                        {content?.category?.map((subject, index) => (
-                          <span>
-                            <a href={`/search?SearchableText=${subject}`}>
-                              {subject}
-                            </a>
-                            {index !== content.subjects.length - 1 ? ', ' : ''}
-                          </span>
-                        ))}
-                      </p>
+                      {content?.category?.map((subject, index) => (
+                        <p>
+                          <a href={`/search?SearchableText=${subject}`}>
+                            {subject}
+                          </a>
+                          {/* {index !== content.subjects.length - 1 ? ', ' : ''} */}
+                        </p>
+                      ))}
                     </td>
                   </tr>
                 )}
