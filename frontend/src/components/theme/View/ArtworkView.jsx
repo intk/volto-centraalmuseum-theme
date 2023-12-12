@@ -131,6 +131,18 @@ const messages = defineMessages({
     id: 'physicaldescription',
     defaultMessage: 'Fysieke beschrijving',
   },
+  associatedPeriods: {
+    id: 'associatedPeriods',
+    defaultMessage: 'Geassocieerde periode',
+  },
+  associatedPeople: {
+    id: 'associatedPeople',
+    defaultMessage: 'Geassocieerde persoon',
+  },
+  motifs: {
+    id: 'motifs',
+    defaultMessage: 'Motief',
+  },
 });
 
 export default function ArtworkView(props) {
@@ -552,7 +564,6 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {console.log(content)}
                 {content.physicaldescription && (
                   <tr>
                     <td className="columnone">
@@ -577,6 +588,62 @@ export default function ArtworkView(props) {
                           {/* {index !== content.subjects.length - 1 ? ', ' : ''} */}
                         </p>
                       ))}
+                    </td>
+                  </tr>
+                )}
+                {content.associatedPeriods && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.associatedPeriods)}</p>
+                    </td>
+                    <td className="columntwo">
+                      <p>
+                        {content?.associatedPeriods?.map((period, index) => (
+                          <span>
+                            <a href={`/search?SearchableText=${period}`}>
+                              {period}
+                            </a>
+                            {index !== content.associatedPeriods.length - 1
+                              ? ', '
+                              : ''}
+                          </span>
+                        ))}
+                      </p>
+                    </td>
+                  </tr>
+                )}
+                {content.associatedPeople && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.associatedPeople)}</p>
+                    </td>
+                    <td className="columntwo">
+                      {content?.associatedPeople?.map((person, index) => (
+                        <p>
+                          <a href={`/search?SearchableText=${person}`}>
+                            {person}
+                          </a>
+                        </p>
+                      ))}
+                    </td>
+                  </tr>
+                )}
+                {content.motifs && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.motifs)}</p>
+                    </td>
+                    <td className="columntwo">
+                      <p>
+                        {content?.motifs?.map((motif, index) => (
+                          <span>
+                            <a href={`/search?SearchableText=${motif}`}>
+                              {motif}
+                            </a>
+                            {index !== content.motifs.length - 1 ? ', ' : ''}
+                          </span>
+                        ))}
+                      </p>
                     </td>
                   </tr>
                 )}
