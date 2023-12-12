@@ -477,6 +477,7 @@ class AdminFixes(BrowserView):
         info["nl"]["exhibitions"] = exhibitions
         info["en"]["exhibitions"] = exhibitions
 
+        #Creating associated subjects
         associated_subject_strings = []
 
         # Iterate over each Associated_subject element in the XML
@@ -515,6 +516,10 @@ class AdminFixes(BrowserView):
             # Append the formatted string to the associated_subject_strings list
             if subject_str:  # Only append if the string is not empty
                 associated_subject_strings.append(subject_str)
+
+        # Assigning to info dictionary
+        info["nl"]["category"] = associated_subject_strings
+        info["en"]["category"] = associated_subject_strings
 
         # incscriptions
         inscriptions_list = []
@@ -566,9 +571,7 @@ class AdminFixes(BrowserView):
         info["nl"]["inscriptions"] = inscriptions_list
         info["en"]["inscriptions"] = inscriptions_list
 
-        # Assigning to info dictionary
-        info["nl"]["category"] = associated_subject_strings
-        info["en"]["category"] = associated_subject_strings
+
 
         # Creating Inscriptions
         inscriptions = tree.findall(".//Inscription")
