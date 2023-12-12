@@ -616,18 +616,19 @@ export default function ArtworkView(props) {
                                 <li>
                                   <p key={index}>
                                     {doc}
-                                    {index === 2 && (
-                                      <button
-                                        className="expand-data-button"
-                                        onClick={() =>
-                                          setShowAllDocumentation(
-                                            !showAllDocumentation,
-                                          )
-                                        }
-                                      >
-                                        Toon alles +
-                                      </button>
-                                    )}
+                                    {index === 2 &&
+                                      content.documentation.length > 3 && (
+                                        <button
+                                          className="expand-data-button"
+                                          onClick={() =>
+                                            setShowAllDocumentation(
+                                              !showAllDocumentation,
+                                            )
+                                          }
+                                        >
+                                          Toon alles +
+                                        </button>
+                                      )}
                                   </p>
                                 </li>
                               ))}
@@ -674,18 +675,19 @@ export default function ArtworkView(props) {
                                 <li>
                                   <p key={index}>
                                     {exhibition}
-                                    {index === 2 && (
-                                      <button
-                                        className="expand-data-button"
-                                        onClick={() =>
-                                          setShowAllExhibition(
-                                            !showAllExhibition,
-                                          )
-                                        }
-                                      >
-                                        Toon alles +
-                                      </button>
-                                    )}
+                                    {index === 2 &&
+                                      content.exhibitions.length > 3 && (
+                                        <button
+                                          className="expand-data-button"
+                                          onClick={() =>
+                                            setShowAllExhibition(
+                                              !showAllExhibition,
+                                            )
+                                          }
+                                        >
+                                          Toon alles +
+                                        </button>
+                                      )}
                                   </p>
                                 </li>
                               ))}
