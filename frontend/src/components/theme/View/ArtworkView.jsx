@@ -127,6 +127,10 @@ const messages = defineMessages({
     id: 'exhibitions',
     defaultMessage: 'Tentoonstellingen',
   },
+  physicaldescription: {
+    id: 'physicaldescription',
+    defaultMessage: 'Fysieke beschrijving',
+  },
 });
 
 export default function ArtworkView(props) {
@@ -545,6 +549,17 @@ export default function ArtworkView(props) {
                           </li>
                         ))}
                       </ul>
+                    </td>
+                  </tr>
+                )}
+                {console.log(content)}
+                {content.physicaldescription && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.physicaldescription)}</p>
+                    </td>
+                    <td>
+                      <p>{content.physicaldescription}</p>
                     </td>
                   </tr>
                 )}
