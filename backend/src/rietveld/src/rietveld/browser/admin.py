@@ -477,7 +477,7 @@ class AdminFixes(BrowserView):
         info["nl"]["exhibitions"] = exhibitions
         info["en"]["exhibitions"] = exhibitions
 
-        #Creating associated subjects
+        # Creating associated subjects
         associated_subject_strings = []
 
         # Iterate over each Associated_subject element in the XML
@@ -571,14 +571,13 @@ class AdminFixes(BrowserView):
         info["nl"]["inscriptions"] = inscriptions_list
         info["en"]["inscriptions"] = inscriptions_list
 
-
-        #Creating Associated Periods
+        # Creating Associated Periods
         associated_periods = []
 
         # Iterate over each Associated_period element in the XML
-        for period in tree.findall('.//Associated_period'):
+        for period in tree.findall(".//Associated_period"):
             # Extract the term from association.period
-            term = period.find('.//association.period/term')
+            term = period.find(".//association.period/term")
             period_term = term.text if term is not None else ""
 
             # Append the term to the associated_periods list if it's not empty
@@ -591,13 +590,13 @@ class AdminFixes(BrowserView):
         info["nl"]["associatedPeriods"] = associated_periods
         info["en"]["associatedPeriods"] = associated_periods
 
-        #Creating Associated People
+        # Creating Associated People
         associated_people = []
 
         # Iterate over each Associated_person element in the XML
-        for person in tree.findall('.//Associated_person'):
+        for person in tree.findall(".//Associated_person"):
             # Extract the name from association.person
-            name = person.find('.//association.person/name')
+            name = person.find(".//association.person/name")
             person_name = name.text if name is not None else ""
 
             # Append the name to the associated_people list if it's not empty
@@ -608,10 +607,10 @@ class AdminFixes(BrowserView):
         info["nl"]["associatedPeople"] = associated_people
         info["en"]["associatedPeople"] = associated_people
 
-        #Creating Motif
+        # Creating Motif
         motifs = []
         # Iterate over each content.motif.general element in the XML
-        for motif in tree.findall('.//content.motif.general/term'):
+        for motif in tree.findall(".//content.motif.general/term"):
             # Append the name to the associated_people list if it's not empty
             motif_name = motif.text if motif is not None else ""
             if motif_name:
