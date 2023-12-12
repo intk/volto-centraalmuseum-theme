@@ -477,6 +477,99 @@ class AdminFixes(BrowserView):
         info["nl"]["exhibitions"] = exhibitions
         info["en"]["exhibitions"] = exhibitions
 
+        associated_subject_strings = []
+
+        # Iterate over each Associated_subject element in the XML
+        for asubject in tree.findall(".//Associated_subject"):
+            # Extract the term from association.subject
+            subject_term = asubject.find(".//association.subject/term")
+            subject = subject_term.text if subject_term is not None else ""
+
+            # Extract the term from association.subject.association
+            association_term = asubject.find(".//association.subject.association/term")
+            association = (
+                association_term.text
+                if association_term is not None and association_term.text
+                else ""
+            )
+
+            # Extract the start date from association.subject.date.start
+            start_date = asubject.find(".//association.subject.date.start")
+            start_date_text = (
+                start_date.text if start_date is not None and start_date.text else ""
+            )
+
+            # Extract the notes from association.subject.note
+            note = asubject.find(".//association.subject.note")
+            note_text = note.text if note is not None and note.text else ""
+
+            # Format the string with the subject, association, start date, and notes
+            subject_str = subject
+            if association:
+                subject_str += f" ({association})"
+            if start_date_text:
+                subject_str += f" {start_date_text}"
+            if note_text:
+                subject_str += f" {note_text}"
+
+            # Append the formatted string to the associated_subject_strings list
+            if subject_str:  # Only append if the string is not empty
+                associated_subject_strings.append(subject_str)
+
+        # incscriptions
+        inscriptions_list = []
+
+        # Iterate over each Inscription element in the XML
+        for inscription in tree.findall(".//Inscription"):
+            # Extract various parts of the inscription
+            type_term = inscription.find(".//inscription.type/term")
+            inscription_type = type_term.text if type_term is not None else ""
+
+            position = inscription.find(".//inscription.position")
+            inscription_position = (
+                position.text if position is not None and position.text else ""
+            )
+
+            method = inscription.find(".//inscription.method")
+            inscription_method = (
+                method.text if method is not None and method.text else ""
+            )
+
+            content = inscription.find(".//inscription.content")
+            inscription_content = (
+                content.text if content is not None and content.text else ""
+            )
+
+            description = inscription.find(".//inscription.description")
+            inscription_description = (
+                description.text if description is not None and description.text else ""
+            )
+
+            notes = inscription.find(".//inscription.notes")
+            inscription_notes = notes.text if notes is not None and notes.text else ""
+
+            # Format the string
+            inscription_str = f"{inscription_type} {inscription_position}"
+            if inscription_method:
+                inscription_str += f" ({inscription_method})"
+            inscription_str += f": {inscription_content} {inscription_description}"
+            if inscription_notes:
+                inscription_str += f" ({inscription_notes})"
+
+            # Append the formatted string to the inscriptions list
+            if (
+                inscription_str.strip()
+            ):  # Only append if the string is not just whitespace
+                inscriptions_list.append(inscription_str.strip())
+
+        # Assigning to info dictionary
+        info["nl"]["inscriptions"] = inscriptions_list
+        info["en"]["inscriptions"] = inscriptions_list
+
+        # Assigning to info dictionary
+        info["nl"]["category"] = associated_subject_strings
+        info["en"]["category"] = associated_subject_strings
+
         # Creating Inscriptions
         inscriptions = tree.findall(".//Inscription")
 
