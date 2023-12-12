@@ -572,6 +572,55 @@ class AdminFixes(BrowserView):
         info["en"]["inscriptions"] = inscriptions_list
 
 
+        #Creating Associated Periods
+        associated_periods = []
+
+        # Iterate over each Associated_period element in the XML
+        for period in tree.findall('.//Associated_period'):
+            # Extract the term from association.period
+            term = period.find('.//association.period/term')
+            period_term = term.text if term is not None else ""
+
+            # Append the term to the associated_periods list if it's not empty
+            if period_term:
+                associated_periods.append(period_term)
+
+        # Join all the periods with a comma to create a single string
+
+        # Assigning to info dictionary
+        info["nl"]["associatedPeriods"] = associated_periods
+        info["en"]["associatedPeriods"] = associated_periods
+
+        #Creating Associated People
+        associated_people = []
+
+        # Iterate over each Associated_person element in the XML
+        for person in tree.findall('.//Associated_person'):
+            # Extract the name from association.person
+            name = person.find('.//association.person/name')
+            person_name = name.text if name is not None else ""
+
+            # Append the name to the associated_people list if it's not empty
+            if person_name:
+                associated_people.append(person_name)
+
+        # Assigning to info dictionary
+        info["nl"]["associatedPeople"] = associated_people
+        info["en"]["associatedPeople"] = associated_people
+
+        #Creating Motif
+        motifs = []
+        # Iterate over each content.motif.general element in the XML
+        for motif in tree.findall('.//content.motif.general/term'):
+            # Append the name to the associated_people list if it's not empty
+            motif_name = motif.text if motif is not None else ""
+            if motif_name:
+                motifs.append(motif_name)
+        log_to_file(f"{motifs}")
+
+        # Assigning to info dictionary
+        info["nl"]["motifs"] = motifs
+        info["en"]["motifs"] = motifs
 
         # Creating Inscriptions
         inscriptions = tree.findall(".//Inscription")
