@@ -128,8 +128,6 @@ class AdminFixes(BrowserView):
             name.text for name in associated_people if name.text is not None
         ]
 
-
-
         # If there are no namespaces, or you have already handled them, your XPath would be as follows:
         production_date_start = tree.find(".//production.date.start").text
         production_date_start_prec = tree.find(".//production.date.start.prec").text
@@ -285,7 +283,6 @@ class AdminFixes(BrowserView):
         info["nl"]["creator"] = creators_richtext
         info["en"]["creator"] = creators_richtext
 
-
         # Creating Dimensions
         dimensions = tree.findall(".//Dimension")
 
@@ -319,9 +316,12 @@ class AdminFixes(BrowserView):
 
 
             # Extract text from RTF content
-            text_content = re.sub(r"{\\.*?}", "", content) if content else ""  # Remove RTF tags
-            text_content = re.sub(r"\\[a-z]+\d* ?", "", text_content).replace("}", "")  # Remove RTF control words
-
+            text_content = (
+                re.sub(r"{\\.*?}", "", content) if content else ""
+            )  # Remove RTF tags
+            text_content = re.sub(r"\\[a-z]+\d* ?", "", text_content).replace(
+                "}", ""
+            )  # Remove RTF control words
 
             inscription_str = f"{type} {position} {' (' + method + ')' if method else ''}: {text_content} {description} {' (' + notes + ')' if notes else ''}".strip()
             inscription_info.append(inscription_str)
@@ -329,31 +329,45 @@ class AdminFixes(BrowserView):
         info["nl"]["inscriptions"] = inscription_info
         info["en"]["inscriptions"] = inscription_info
 
-
         documentations = tree.findall(".//Documentation")
 
         documentation_info = []
         for documentation in documentations:
             # Extracting data
             title = documentation.findtext(".//Title/title")
-            statement_of_responsibility = documentation.findtext(".//statement_of_responsibility")
+            statement_of_responsibility = documentation.findtext(
+                ".//statement_of_responsibility"
+            )
             source_title_lead_word = documentation.findtext(".//source.title.lead_word")
             source_title = documentation.findtext(".//source.title")
             source_volume = documentation.findtext(".//source.volume")
             source_issue = documentation.findtext(".//source.issue")
             source_month = documentation.findtext(".//source.month")
-            source_publication_years = documentation.findtext(".//source.publication_years")
+            source_publication_years = documentation.findtext(
+                ".//source.publication_years"
+            )
             source_pagination = documentation.findtext(".//source.pagination")
-            place_of_publication = documentation.findtext(".//Publisher/place_of_publication")
-            year_of_publication = documentation.findtext(".//Publisher/year_of_publication")
+            place_of_publication = documentation.findtext(
+                ".//Publisher/place_of_publication"
+            )
+            year_of_publication = documentation.findtext(
+                ".//Publisher/year_of_publication"
+            )
             page_reference = documentation.findtext("./documentation.page_reference")
 
             # Building source details
             source = f"{source_title_lead_word} {source_title}".strip()
             publication_date = f"{source_month} {source_publication_years}".strip()
-            source_details_list = [source, source_volume, source_issue, publication_date]
-            filtered_details = [item for item in source_details_list if item and item.strip()]
-            source_details = ', '.join(filtered_details)
+            source_details_list = [
+                source,
+                source_volume,
+                source_issue,
+                publication_date,
+            ]
+            filtered_details = [
+                item for item in source_details_list if item and item.strip()
+            ]
+            source_details = ", ".join(filtered_details)
             source_details = f"({source_details})" if filtered_details else ""
 
             # Building the documentation string
@@ -362,10 +376,14 @@ class AdminFixes(BrowserView):
                 statement_of_responsibility,
                 source_details,
                 source_pagination,
-                f"({place_of_publication}, {year_of_publication})" if place_of_publication and year_of_publication else place_of_publication or year_of_publication,
-                page_reference
+                f"({place_of_publication}, {year_of_publication})"
+                if place_of_publication and year_of_publication
+                else place_of_publication or year_of_publication,
+                page_reference,
             ]
-            documentation_str = ', '.join(filter(None, documentation_components)).strip()
+            documentation_str = ", ".join(
+                filter(None, documentation_components)
+            ).strip()
             documentation_info.append(documentation_str)
 
         # Sorting the documentation information
@@ -388,16 +406,18 @@ class AdminFixes(BrowserView):
             notes = inscription.findtext(".//inscription.notes")
 
             # Extract text from RTF content
-            text_content = re.sub(r"{\\.*?}", "", content) if content else ""  # Remove RTF tags
-            text_content = re.sub(r"\\[a-z]+\d* ?", "", text_content).replace("}", "")  # Remove RTF control words
-
+            text_content = (
+                re.sub(r"{\\.*?}", "", content) if content else ""
+            )  # Remove RTF tags
+            text_content = re.sub(r"\\[a-z]+\d* ?", "", text_content).replace(
+                "}", ""
+            )  # Remove RTF control words
 
             inscription_str = f"{type} {position} {' (' + method + ')' if method else ''}: {text_content} {description} {' (' + notes + ')' if notes else ''}".strip()
             inscription_info.append(inscription_str)
 
         info["nl"]["inscriptions"] = inscription_info
         info["en"]["inscriptions"] = inscription_info
-
 
         title_stripped = (
             re.sub(r"[^a-zA-Z0-9 ]", "", title)
@@ -409,8 +429,8 @@ class AdminFixes(BrowserView):
         object_number_stripped = (
             re.sub(r"[^a-zA-Z0-9_/ ]", "", objectnumber.text)
             .strip()
-            .replace("_", '-')
-            .replace("/", '-')
+            .replace("_", "-")
+            .replace("/", "-")
             .replace("  ", " ")
             .replace(" ", "-")
             .lower()
@@ -972,6 +992,7 @@ def load_env_file(env_file_path):
         for line in f:
             name, value = line.strip().split("=", 1)
             os.environ[name] = value
+
 
 def import_authors(self, record, use_archive=True):
     container = get_base_folder(self.context, "author")
