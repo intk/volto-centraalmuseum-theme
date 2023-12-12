@@ -15,19 +15,7 @@
   >
     <indexed_attr value="priref" />
   </index>
-
-  <index meta_type="ZCTextIndex"
-         name="remarks"
-  >
-    <indexed_attr value="remarks" />
-    <extra name="index_type"
-           value="Okapi BM25 Rank"
-    />
-    <extra name="lexicon_id"
-           value="plone_lexicon"
-    />
-  </index>
-
+  <!-- 
   <index meta_type="ZCTextIndex"
          name="object_remarks"
   >
@@ -38,5 +26,5 @@
     <extra name="lexicon_id"
            value="plone_lexicon"
     />
-  </index>
+  </index> -->
 </object>
