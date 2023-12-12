@@ -95,17 +95,27 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Verwerving
 msgid "acquisition"
-msgstr ""
+msgstr "Acquisition"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Vervaardiger
 msgid "artist"
-msgstr ""
+msgstr "Artist"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Geassocieerde persoon
+msgid "associatedPeople"
+msgstr "Who"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Geassocieerde periode
+msgid "associatedPeriods"
+msgstr "When"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Geassocieerd onderwerp
 msgid "category"
-msgstr ""
+msgstr "What"
 
 #: components/Blocks/ImageAndTextBlock/templates
 #: components/Blocks/Quoteblock/templates
@@ -126,57 +136,57 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Opmerkingen
 msgid "credit"
-msgstr ""
+msgstr "Remarks"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Datering
 msgid "date"
-msgstr ""
+msgstr "Dating"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Objectgegevens
 msgid "details"
-msgstr ""
-
-#: components/theme/View/ArtworkView
-# defaultMessage: Afmetingen
-msgid "dimension"
-msgstr ""
+msgstr "Object details"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Afmetingen
 msgid "dimensions"
-msgstr ""
+msgstr "Dimensions"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Documentatie
 msgid "documentation"
-msgstr ""
+msgstr "Documentation"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Duurzame url
+msgid "duurzameurl"
+msgstr "Persistent url"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Tentoonstellingen
 msgid "exhibitions"
-msgstr ""
+msgstr "Exhibitions"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Opschriften / merken
 msgid "inscriptions"
-msgstr ""
+msgstr "Inscriptions and markings"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Inventarisnummer
 msgid "inventoryNumber"
-msgstr ""
-
-#: components/theme/View/ArtworkView
-# defaultMessage: Materialen
-msgid "material"
-msgstr ""
+msgstr "Object number"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Materiaal / Techniek
 msgid "materialTechnique"
-msgstr ""
+msgstr "Material and technique"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Motief
+msgid "motifs"
+msgstr "More of the same motive"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Dit object is nu niet in het museum te zien
@@ -191,17 +201,22 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Fysieke beschrijving
 msgid "objectExplanation"
-msgstr ""
+msgstr "Physical description"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Objectnaam
 msgid "objectName"
-msgstr ""
+msgstr "Object type"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Objectnummer
 msgid "objectNumber"
-msgstr ""
+msgstr "Object number"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Fysieke beschrijving
+msgid "physicaldescription"
+msgstr "Physical description"
 
 #: components/Blocks/SiteData/schema
 # defaultMessage: Plan your visit
@@ -269,11 +284,16 @@ msgid "share"
 msgstr ""
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Techniek
-msgid "technique"
-msgstr ""
+# defaultMessage: Toon minder
+msgid "showless"
+msgstr "Show less"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Toon alles
+msgid "showmore"
+msgstr "Show more"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Titel
 msgid "title"
-msgstr ""
+msgstr "Title"

@@ -113,6 +113,16 @@ msgid "artist"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+# defaultMessage: Geassocieerde persoon
+msgid "associatedPeople"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Geassocieerde periode
+msgid "associatedPeriods"
+msgstr ""
+
+#: components/theme/View/ArtworkView
 # defaultMessage: Geassocieerd onderwerp
 msgid "category"
 msgstr ""
@@ -150,17 +160,17 @@ msgstr ""
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Afmetingen
-msgid "dimension"
-msgstr ""
-
-#: components/theme/View/ArtworkView
-# defaultMessage: Afmetingen
 msgid "dimensions"
 msgstr ""
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Documentatie
 msgid "documentation"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Duurzame url
+msgid "duurzameurl"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -179,13 +189,13 @@ msgid "inventoryNumber"
 msgstr ""
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Materialen
-msgid "material"
+# defaultMessage: Materiaal / Techniek
+msgid "materialTechnique"
 msgstr ""
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Materiaal / Techniek
-msgid "materialTechnique"
+# defaultMessage: Motief
+msgid "motifs"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -211,6 +221,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Objectnummer
 msgid "objectNumber"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Fysieke beschrijving
+msgid "physicaldescription"
 msgstr ""
 
 #: components/Blocks/SiteData/schema
@@ -279,8 +294,13 @@ msgid "share"
 msgstr ""
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Techniek
-msgid "technique"
+# defaultMessage: Toon minder
+msgid "showless"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Toon alles
+msgid "showmore"
 msgstr ""
 
 #: components/theme/View/ArtworkView
