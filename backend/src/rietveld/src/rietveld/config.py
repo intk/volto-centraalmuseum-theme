@@ -13,5 +13,4 @@ IMPORT_LOCATIONS = {
     "author_en": "en/maker",
 }
 
-IMAGE_BASE_URL = 'https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx'
-
+IMAGE_BASE_URL = "https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx"

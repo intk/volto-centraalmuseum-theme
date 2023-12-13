@@ -665,8 +665,8 @@ class AdminFixes(BrowserView):
         )
         title_url = f"{object_number_stripped}-{title_stripped}"
 
-        #images
-        images = tree.findall('.//Reproduction/reproduction.reference/reference_number')
+        # images
+        images = tree.findall(".//Reproduction/reproduction.reference/reference_number")
         log_to_file(f"images = {images}")
 
         brains = catalog.searchResults(priref=priref, portal_type="artwork")
@@ -1139,17 +1139,16 @@ def import_images(container, images):
 
     HEADERS = {
         "Accept": "image/jpeg,image/png,image/*",
-        "User-Agent": "Mozilla/5.0 (Plone Image Importer)"
+        "User-Agent": "Mozilla/5.0 (Plone Image Importer)",
     }
     log_to_file(f" these are the images {images}")
 
-
     # Delete the existing images inside the container
-    for obj in api.content.find(context=container, portal_type='Image'):
+    for obj in api.content.find(context=container, portal_type="Image"):
         api.content.delete(obj=obj.getObject())
 
     for image in images:
-        primaryDisplay = image.get('PrimaryDisplay')
+        primaryDisplay = image.get("PrimaryDisplay")
         retries = 0
         success = False
 
@@ -1190,10 +1189,11 @@ def import_images(container, images):
                     log_to_file(f"Failed to create {image['text']} image: {e}")
 
         if not success:
-            log_to_file(f"Skipped image {image['text']} due to repeated fetch failures.")
+            log_to_file(
+                f"Skipped image {image['text']} due to repeated fetch failures."
+            )
 
     return f"Images {images} created successfully"
-
 
 
 def log_to_file(message):
