@@ -115,8 +115,9 @@ class AdminFixes(BrowserView):
         return trans
 
     def import_objects(self):
+        object_priref = self.request.form.get('object_priref', 40923)
         headers = "User-Agent: Mozilla/5.0"
-        api_url = "http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database=collect&search=priref=40923"
+        api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database=collect&search=priref={object_priref}"
 
         response = requests.post(api_url)
         response.raise_for_status()
@@ -133,15 +134,15 @@ class AdminFixes(BrowserView):
 
         # Find the title element
         title_element = tree.find(".//record/Title/title")
-        description_element = tree.find(".//record/Label/label.text")
+        description_element = tree.findtext(".//record/Label/label.text")
         priref = tree.find(".//record").attrib["priref"]
-        objectnumber = tree.find(".//Object/object.object_number")
+        objectnumber = tree.findtext(".//Object/object.object_number")
         objectnames = tree.findall(".//Object_name/object_name/term")
         object_name_values = [
             name.text for name in objectnames if name.text is not None
         ]
 
-        physical_description = tree.find(".//physical_description").text
+        physical_description = tree.findtext(".//physical_description")
 
         associated_periods = tree.findall(
             ".//Associated_period/association.period/term"
@@ -156,11 +157,11 @@ class AdminFixes(BrowserView):
         ]
 
         # If there are no namespaces, or you have already handled them, your XPath would be as follows:
-        production_date_start = tree.find(".//production.date.start").text
-        production_date_start_prec = tree.find(".//production.date.start.prec").text
-        production_date_end = tree.find(".//production.date.end").text
-        production_date_end_prec = tree.find(".//production.date.end.prec").text
-        production_date_notes = tree.find(".//production.date.notes").text
+        production_date_start = tree.findtext(".//production.date.start")
+        production_date_start_prec = tree.findtext(".//production.date.start.prec")
+        production_date_end = tree.findtext(".//production.date.end")
+        production_date_end_prec = tree.findtext(".//production.date.end.prec")
+        production_date_notes = tree.findtext(".//production.date.notes")
 
         # techniek.vrije.tekst
         technique = tree.findall(".//techniek.vrije.tekst")
@@ -183,12 +184,12 @@ class AdminFixes(BrowserView):
         # Then you can format the date string as needed.
         date = f"{production_date_start_prec or ''} {production_date_start or ''} - {production_date_end_prec or ''} {production_date_end or ''} ({production_date_notes or ''})".strip()
 
-        acquisition_date = tree.find(".//record/acquisition.date").text
-        acquisition_date_precision = tree.find(
+        acquisition_date = tree.findtext(".//record/acquisition.date")
+        acquisition_date_precision = tree.findtext(
             ".//record/acquisition.date.precision"
-        ).text
-        acquisition_term = tree.find(".//record/acquisition.method/term").text
-        acquisition_notes = tree.find(".//record/acquisition.notes").text
+        )
+        acquisition_term = tree.findtext(".//record/acquisition.method/term")
+        acquisition_notes = tree.find(".//record/acquisition.notes")
         acquisition = f"{acquisition_term} {acquisition_date_precision} {acquisition_date} ({acquisition_notes})"
 
         if title_element is not None:
@@ -204,12 +205,12 @@ class AdminFixes(BrowserView):
         info["en"]["title"] = title
 
         info["nl"]["objectExplanation"] = RichTextValue(
-            raw=description_element.text,
+            raw=description_element,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
         info["en"]["objectExplanation"] = RichTextValue(
-            raw=description_element.text,
+            raw=description_element,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
@@ -217,8 +218,8 @@ class AdminFixes(BrowserView):
         info["nl"]["priref"] = priref
         info["en"]["priref"] = priref
 
-        info["nl"]["inventoryNumber"] = objectnumber.text
-        info["en"]["inventoryNumber"] = objectnumber.text
+        info["nl"]["inventoryNumber"] = objectnumber
+        info["en"]["inventoryNumber"] = objectnumber
 
         info["nl"]["objectName"] = object_name_values
         info["en"]["objectName"] = object_name_values
@@ -655,7 +656,7 @@ class AdminFixes(BrowserView):
             .lower()
         )
         object_number_stripped = (
-            re.sub(r"[^a-zA-Z0-9_/ ]", "", objectnumber.text)
+            re.sub(r"[^a-zA-Z0-9_/ ]", "", objectnumber)
             .strip()
             .replace("_", "-")
             .replace("/", "-")
