@@ -665,6 +665,10 @@ class AdminFixes(BrowserView):
         )
         title_url = f"{object_number_stripped}-{title_stripped}"
 
+        #images
+        images = tree.findall('.//Reproduction/reproduction.reference/reference_number')
+        log_to_file(f"images = {images}")
+
         brains = catalog.searchResults(priref=priref, portal_type="artwork")
         if len(brains) == 1:
             lang = brains[0].getObject().language
@@ -684,7 +688,7 @@ class AdminFixes(BrowserView):
                     manager.register_translation("en", brains[0].getObject())
 
                 # adding images
-                # import_images(container=obj, object_id=info["en"]["Id"], headers=headers)
+                import_images(container=obj, images=images)
                 obj.hasImage = True
                 obj.reindexObject()
 
@@ -704,7 +708,7 @@ class AdminFixes(BrowserView):
                     manager.register_translation("nl", brains[0].getObject())
 
                 # adding images
-                # import_images(container=obj_en, object_id=info["en"]["Id"], headers=headers)
+                import_images(container=obj_en, images=images)
                 obj_en.hasImage = True
 
                 obj_en.reindexObject()
@@ -760,7 +764,7 @@ class AdminFixes(BrowserView):
                 # log_to_file(f"Object is updated: {priref} id and {title} title")
 
                 # adding images
-                # import_images(container=obj, object_id=info["en"]["Id"], headers=headers)
+                import_images(container=obj, images=images)
                 obj.hasImage = True
 
                 # Reindex the updated object
@@ -779,7 +783,7 @@ class AdminFixes(BrowserView):
 
             # adding images
 
-            # import_images(container=obj, priref=info["en"]["priref"], headers=headers)
+            import_images(container=obj, images=images)
             # obj.hasImage = True
 
             obj_en = self.translate(obj, info["en"])
@@ -969,7 +973,7 @@ def import_one_record(self, record, container, container_en, catalog, headers):
                 manager.register_translation("en", brains[0].getObject())
 
             # adding images
-            import_images(container=obj, object_id=info["en"]["Id"], headers=headers)
+            # import_images(container=obj, images=images)
             obj.hasImage = True
             obj.reindexObject()
 
@@ -1129,70 +1133,74 @@ def create_and_setup_object(title, container, info, intl, object_type, obj_id, p
     return obj
 
 
-def import_images(container, object_id, headers):
-    # Extract the API authentication from the headers (if available)
-    API_USERNAME = os.environ.get("API_USERNAME")
-    API_PASSWORD = os.environ.get("API_PASSWORD")
+def import_images(container, images):
+    MAX_RETRIES = 2
+    DELAY_SECONDS = 1
 
-    credentials = f"{API_USERNAME}:{API_PASSWORD}".encode()
-    encoded_credentials = base64.b64encode(credentials).decode("utf-8")
-    headers = {
-        "Content-Type": "application/xml",
-        "Authorization": f"Basic {encoded_credentials}",
+    HEADERS = {
+        "Accept": "image/jpeg,image/png,image/*",
+        "User-Agent": "Mozilla/5.0 (Plone Image Importer)"
     }
+    log_to_file(f" these are the images {images}")
+
 
     # Delete the existing images inside the container
-    for obj in api.content.find(context=container, portal_type="Image"):
+    for obj in api.content.find(context=container, portal_type='Image'):
         api.content.delete(obj=obj.getObject())
 
-    retries = 0
-    success = False
+    for image in images:
+        primaryDisplay = image.get('PrimaryDisplay')
+        retries = 0
+        success = False
 
-    print(object_id)
+        # Tries MAX_RETRIES times and then raise exception
+        while retries < MAX_RETRIES:
+            try:
+                image_url = f"{IMAGE_BASE_URL}?database=collect&command=getcontent&server=images&value={image.text}&imageformat=jpg"
+                with requests.get(url=image_url, stream=True, headers=HEADERS) as req:
+                    req.raise_for_status()
+                    data = req.content
 
-    try:
-        image_url = f"https://de1.zetcom-group.de/MpWeb-mpMaastrichtBonnefanten/ria-ws/application/module/Object/{object_id}/attachment"
+                    log_to_file(f"{image.text} image is created")
 
-        with requests.get(url=image_url, headers=headers) as req:
-            req.raise_for_status()
-            xml_response = req.text
+                    imagefield = NamedBlobImage(
+                        data=data,
+                        contentType="image/jpeg",  # Update if different
+                        filename=image.text,
+                    )
+                    new_image = api.content.create(
+                        type="Image",
+                        title=image.text,
+                        image=imagefield,
+                        container=container,
+                    )
 
-            # Extract and decode the image data
-            image_data, file_name = xml_to_image(xml_response)
+                    # if primaryDisplay == '1':
+                    #     ordering = IExplicitOrdering(container)
+                    #     ordering.moveObjectsToTop([new_image.getId()])
 
-            if image_data and file_name:
-                # Create a new image content in Plone directly with the image data
-                imagefield = NamedBlobImage(
-                    data=image_data,
-                    contentType="image/jpeg",  # Update if different
-                    filename=file_name,
-                )
-                api.content.create(
-                    type="Image",
-                    title=file_name,
-                    image=imagefield,
-                    container=container,
-                )
-                container.preview_image = imagefield
+                    success = True
+                    break
 
-                success = True
-            else:
-                print("Failed to extract image data.")
+            except requests.RequestException as e:
+                retries += 1
+                if retries < MAX_RETRIES:
+                    time.sleep(DELAY_SECONDS)
+                else:
+                    log_to_file(f"Failed to create {image['text']} image: {e}")
 
-    except requests.RequestException as e:
-        log_to_file(f"failed to download {object_id} image")
+        if not success:
+            log_to_file(f"Skipped image {image['text']} due to repeated fetch failures.")
 
-    if not success:
-        log_to_file(f"Skipped image {object_id} due to repeated fetch failures.")
+    return f"Images {images} created successfully"
 
-    return f"Image {object_id} created successfully"
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:

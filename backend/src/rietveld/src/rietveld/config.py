@@ -13,4 +13,5 @@ IMPORT_LOCATIONS = {
     "author_en": "en/maker",
 }
 
-IMAGE_BASE_URL = "https://de1.zetcom-group.de/MpWeb-mpMaastrichtBonnefanten"
+IMAGE_BASE_URL = 'https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx'
+
