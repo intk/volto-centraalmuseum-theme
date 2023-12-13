@@ -288,17 +288,22 @@ class AdminFixes(BrowserView):
 
             # Formatting the lifespan
             lifespan = ""
-            if birth_date or death_date:
+            if birth_date and death_date:
                 lifespan = f" ({birth_place} {birth_date} - {death_date} {death_place})".strip()
+            elif birth_date:
+                lifespan = f" ({birth_place} {birth_date})".strip()
+            elif death_date:
+                lifespan = f" ({death_date} {death_place})".strip()
+
 
             # Constructing the final string
-            creator_str = f"{formatted_name} ({role_link}){lifespan}".strip()
+            creator_str = f"{formatted_name} ({role_link}) {lifespan}"
 
             creator_info.append(creator_str)
 
         # Join the creator info into a single HTML string
         creator_info_html = (
-            "<ul>" + "".join(f"<li>{info}</li>" for info in creator_info) + "</ul>"
+            "<div>" + "".join(f"<p>{info}</p>" for info in creator_info) + "</div>"
         )
 
         # Convert to RichText
