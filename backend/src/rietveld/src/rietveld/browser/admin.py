@@ -281,6 +281,7 @@ class AdminFixes(BrowserView):
                 death_date = creator.findtext(".//death.date.end", "").split("-")[0]
             birth_place = creator.findtext(".//birth.place", "")
             death_place = creator.findtext(".//death.place", "")
+            url = creator.findtext(".//Internet_address/url")
 
             # Creating dynamic links
             name_link = f'<a href="{base_url_creator}{name.replace(" ", "-").lower()}">{name}</a>'
@@ -482,7 +483,6 @@ class AdminFixes(BrowserView):
                     # Joining the non-empty details with commas
                     exhibition_str = ", ".join(exhibition_details)
                     exhibitions.append(exhibition_str)
-        log_to_file(f"{exhibitions}")
         info["nl"]["exhibitions"] = exhibitions
         info["en"]["exhibitions"] = exhibitions
 
@@ -624,7 +624,6 @@ class AdminFixes(BrowserView):
             motif_name = motif.text if motif is not None else ""
             if motif_name:
                 motifs.append(motif_name)
-        log_to_file(f"{motifs}")
 
         # Assigning to info dictionary
         info["nl"]["motifs"] = motifs
@@ -676,7 +675,6 @@ class AdminFixes(BrowserView):
 
         # images
         images = tree.findall(".//Reproduction/reproduction.reference/reference_number")
-        log_to_file(f"images = {images}")
 
         brains = catalog.searchResults(priref=priref, portal_type="artwork")
         if len(brains) == 1:
@@ -814,7 +812,7 @@ class AdminFixes(BrowserView):
 
 def import_one_record(self, record, container, container_en, catalog, headers):
     global counter
-    log_to_file(f"{counter}. object")
+    # log_to_file(f"{counter}. object")
 
     importedAuthors = import_authors(self, record)
     if importedAuthors:
@@ -1150,7 +1148,6 @@ def import_images(container, images):
         "Accept": "image/jpeg,image/png,image/*",
         "User-Agent": "Mozilla/5.0 (Plone Image Importer)",
     }
-    log_to_file(f" these are the images {images}")
 
     # Delete the existing images inside the container
     for obj in api.content.find(context=container, portal_type="Image"):
