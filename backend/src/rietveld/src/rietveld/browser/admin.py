@@ -274,7 +274,11 @@ class AdminFixes(BrowserView):
                 name = f"{first_name} {last_name}"
 
             birth_date = creator.findtext(".//birth.date.start", "").split("-")[0]
+            if birth_date == "":
+                birth_date = creator.findtext(".//birth.date.end", "").split("-")[0]
             death_date = creator.findtext(".//death.date.start", "").split("-")[0]
+            if death_date == "":
+                death_date = creator.findtext(".//death.date.end", "").split("-")[0]
             birth_place = creator.findtext(".//birth.place", "")
             death_place = creator.findtext(".//death.place", "")
 
