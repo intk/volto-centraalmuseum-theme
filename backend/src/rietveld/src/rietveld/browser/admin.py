@@ -115,7 +115,7 @@ class AdminFixes(BrowserView):
         return trans
 
     def import_objects(self):
-        object_priref = self.request.form.get('object_priref', 40923)
+        object_priref = self.request.form.get("object_priref", 40923)
         headers = "User-Agent: Mozilla/5.0"
         api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database=collect&search=priref={object_priref}"
 
