@@ -1198,10 +1198,10 @@ def import_images(container, images):
 
 
 def log_to_file(message):
-    # log_file_path = "/app/logs/collectionLogs.txt"
-    log_file_path = (
-        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    )
+    log_file_path = "/app/logs/collectionLogs.txt"
+    # log_file_path = (
+    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    # )
 
     # Attempt to create the file if it doesn't exist
     try:
