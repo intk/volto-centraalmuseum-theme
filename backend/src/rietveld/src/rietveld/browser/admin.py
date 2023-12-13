@@ -295,7 +295,6 @@ class AdminFixes(BrowserView):
             elif death_date:
                 lifespan = f" ({death_date} {death_place})".strip()
 
-
             # Constructing the final string
             creator_str = f"{formatted_name} ({role_link}) {lifespan}"
 
