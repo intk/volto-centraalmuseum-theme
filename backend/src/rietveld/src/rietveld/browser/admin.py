@@ -284,10 +284,12 @@ class AdminFixes(BrowserView):
             url = creator.findtext(".//Internet_address/url")
 
             # Creating dynamic links
-            name_link = f'<a href="{base_url_creator}{name.replace(" ", "-").lower()}">{name}</a>'
-            role_link = (
-                f'<a href="{base_url_role}{role.replace(" ", "-").lower()}">{role}</a>'
-            )
+            # name_link = f'<a href="{base_url_creator}{name.replace(" ", "-").lower()}">{name}</a>'
+            # role_link = (
+            #     f'<a href="{base_url_role}{role.replace(" ", "-").lower()}">{role}</a>'
+            # )
+            name_link = f"<span>{name}</span>"
+            role_link = f"<span>{role}</span>"
 
             formatted_name = f"{qualifier} {name_link}" if qualifier else name_link
 
