@@ -279,6 +279,8 @@ class AdminFixes(BrowserView):
             death_date = creator.findtext(".//death.date.start", "").split("-")[0]
             if death_date == "":
                 death_date = creator.findtext(".//death.date.end", "").split("-")[0]
+            birth_date_precision = creator.findtext(".//birth.date.precision")
+            death_date_precision = creator.findtext(".//death.date.precision")
             birth_place = creator.findtext(".//birth.place", "")
             death_place = creator.findtext(".//death.place", "")
             url = creator.findtext(".//Internet_address/url")
@@ -295,6 +297,10 @@ class AdminFixes(BrowserView):
 
             # Formatting the lifespan
             lifespan = ""
+            if birth_date_precision:
+                birth_date = f"{birth_date} {birth_date_precision}".strip()
+            if death_date_precision:
+                death_date = f"{death_date} {death_date_precision}".strip()
             if birth_date and death_date:
                 lifespan = f" ({birth_place} {birth_date} - {death_date} {death_place})".strip()
             elif birth_date:
@@ -1205,10 +1211,10 @@ def import_images(container, images):
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:
