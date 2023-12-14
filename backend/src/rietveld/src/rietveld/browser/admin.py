@@ -189,7 +189,7 @@ class AdminFixes(BrowserView):
             ".//record/acquisition.date.precision"
         )
         acquisition_term = tree.findtext(".//record/acquisition.method/term")
-        acquisition_notes = tree.find(".//record/acquisition.notes")
+        acquisition_notes = tree.findtext(".//record/acquisition.notes")
         acquisition = f"{acquisition_term} {acquisition_date_precision} {acquisition_date} ({acquisition_notes})"
 
         if title_element is not None:
