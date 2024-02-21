@@ -134,7 +134,18 @@ class AdminFixes(BrowserView):
 
         # Find the title element
         title_element = tree.find(".//record/Title/title")
-        description_element = tree.findtext(".//record/Label/label.text")
+
+        labels = tree.findall(".//record/Label")
+        description_element_nl = None
+        description_element_en = None
+
+        for label in labels:
+            label_type = label.findtext("label.type")
+            if label_type == "Publiekstekst NL":
+                description_element_nl = label.findtext("label.text")
+            elif label_type == "Publiekstekst ENG":
+                description_element_en = label.findtext("label.text")
+
         priref = tree.find(".//record").attrib["priref"]
         objectnumber = tree.findtext(".//Object/object.object_number")
         objectnames = tree.findall(".//Object_name/object_name/term")
@@ -205,12 +216,12 @@ class AdminFixes(BrowserView):
         info["en"]["title"] = title
 
         info["nl"]["objectExplanation"] = RichTextValue(
-            raw=description_element,
+            raw=description_element_nl,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
         info["en"]["objectExplanation"] = RichTextValue(
-            raw=description_element,
+            raw=description_element_en,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
