@@ -243,7 +243,10 @@
       font-size: 19.68px;
       font-weight: 500;
       letter-spacing: 0em;
-      line-height: 36px;
+      line-height: 34px;
+      @media screen and (min-width: 768px) {
+        line-height: 36px;
+      }
     }
 
     .columnone p {
@@ -459,7 +462,7 @@
     }
 
     .description-wrapper {
-      margin-bottom: 74px;
+      margin-bottom: 73px;
       padding-left: 4px;
       padding-right: 4px;
       @media (min-width: 992px) {
@@ -517,11 +520,14 @@
       transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
       p{
         font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif;
-        font-size: 1.230em;;
+        font-size: 1.180em;;
         line-height: 36px;
         color: #404040;
         margin-top: 11px;
         margin-bottom: 35px;
+        @media screen and (min-width: 768px){
+          font-size: 1.230em;
+        }
       }
     }
 
@@ -561,7 +567,7 @@
       @media (max-width: 768px){
         display: flex;
         flex-direction: column;
-        margin-bottom: 27px;
+        margin-bottom: 30px !important;
       }
     }
 
@@ -591,7 +597,10 @@
 
       p {
         color: #9d9d9d;
-        letter-spacing: -0.1968px;
+        letter-spacing: -0.1568px;
+        @media screen and (min-width: 768px) {
+          letter-spacing: -0.1968px;
+        }
       }
     }
     #slickcarousel-controls{

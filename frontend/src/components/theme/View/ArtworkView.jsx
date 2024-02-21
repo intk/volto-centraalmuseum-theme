@@ -571,7 +571,7 @@ export default function ArtworkView(props) {
                     <td className="columnone">
                       <p>{intl.formatMessage(messages.physicaldescription)}</p>
                     </td>
-                    <td>
+                    <td className="columntwo">
                       <p>{content.physicaldescription}</p>
                     </td>
                   </tr>
