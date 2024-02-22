@@ -160,9 +160,7 @@ class AdminFixes(BrowserView):
         except ValueError:
             current_location = current_location_text
 
-        object_on_display = True if tree.findtext(".//gepubliceerd") == 'x' else False
-
-
+        object_on_display = True if tree.findtext(".//gepubliceerd") == "x" else False
 
         physical_description = tree.findtext(".//physical_description")
 

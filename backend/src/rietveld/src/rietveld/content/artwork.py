@@ -3,10 +3,10 @@ from plone.app.textfield import RichText
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope.interface import implementer
+from zope.schema import Bool
 from zope.schema import List
 from zope.schema import Text
 from zope.schema import TextLine
-from zope.schema import Bool
 
 
 class IArtwork(model.Schema):
@@ -29,9 +29,7 @@ class IArtwork(model.Schema):
         required=False,
     )
 
-    ObjOnDisplay = Bool(
-        title="Object On Display", required=False, default=False
-    )
+    ObjOnDisplay = Bool(title="Object On Display", required=False, default=False)
 
     displayLocation = TextLine(
         title="Display Location",
