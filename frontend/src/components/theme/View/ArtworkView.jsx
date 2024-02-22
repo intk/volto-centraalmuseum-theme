@@ -392,7 +392,7 @@ export default function ArtworkView(props) {
             id="rawdata"
             className={`rawdata-section ${dataExpand ? 'expanded' : ''}`}
           >
-            {content.objectExplanation && (
+            {content.objectExplanation.data && (
               <div className="description-wrapper">
                 <div
                   id="description"
