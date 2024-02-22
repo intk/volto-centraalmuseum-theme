@@ -202,8 +202,30 @@ class AdminFixes(BrowserView):
         PIDworkURL_element = tree.find(".//PIDwork/PID_work_URL")
         PIDworkURL = PIDworkURL_element.text if PIDworkURL_element is not None else ""
 
-        # Then you can format the date string as needed.
-        date = f"{production_date_start_prec or ''} {production_date_start or ''} - {production_date_end_prec or ''} {production_date_end or ''} ({production_date_notes or ''})".strip()
+        # Initialize parts of the date string
+        date_parts = []
+
+        # Add start date parts if they exist
+        if production_date_start_prec or production_date_start:
+            start_date = f"{production_date_start_prec or ''} {production_date_start or ''}".strip()
+            date_parts.append(start_date)
+
+        # Determine if end date parts should be added
+        if production_date_end_prec or production_date_end:
+            end_date = (
+                f"{production_date_end_prec or ''} {production_date_end or ''}".strip()
+            )
+            # Only add "-" if there's a start part and an end part
+            if date_parts:
+                date_parts.append("-")
+            date_parts.append(end_date)
+
+        # Conditionally add production_date_notes if it's not empty
+        if production_date_notes:
+            date_parts.append(f"({production_date_notes})")
+
+        # Join the parts and strip to remove any leading/trailing whitespace
+        date = " ".join(date_parts).strip()
 
         acquisition_date = tree.findtext(".//record/acquisition.date")
         acquisition_date_precision = tree.findtext(
