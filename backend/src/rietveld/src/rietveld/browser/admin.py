@@ -148,7 +148,7 @@ class AdminFixes(BrowserView):
                 description_element_en = label.findtext("label.text")
 
         priref = tree.find(".//record").attrib["priref"]
-        objectnumber = tree.findtext(".//Object/object.object_number")
+        objectnumber = tree.findtext(".//record/object_number")
         objectnames = tree.findall(".//Object_name/object_name/term")
         object_name_values = [
             name.text for name in objectnames if name.text is not None
