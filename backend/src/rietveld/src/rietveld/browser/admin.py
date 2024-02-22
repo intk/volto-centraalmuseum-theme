@@ -392,14 +392,16 @@ class AdminFixes(BrowserView):
             statement_of_responsibility = documentation.findtext(
                 ".//statement_of_responsibility"
             )
-            source_title_lead_word = documentation.findtext(".//source.title.lead_word") or ""
+            source_title_lead_word = (
+                documentation.findtext(".//source.title.lead_word") or ""
+            )
             source_title = documentation.findtext(".//source.title") or ""
             source_volume = documentation.findtext(".//source.volume") or ""
             source_issue = documentation.findtext(".//source.issue") or ""
             source_month = documentation.findtext(".//source.month") or ""
-            source_publication_years = documentation.findtext(
-                ".//source.publication_years"
-            ) or ""
+            source_publication_years = (
+                documentation.findtext(".//source.publication_years") or ""
+            )
             source_pagination = documentation.findtext(".//source.pagination")
             place_of_publication = documentation.findtext(
                 ".//Publisher/place_of_publication"
