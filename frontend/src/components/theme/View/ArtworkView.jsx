@@ -401,12 +401,14 @@ export default function ArtworkView(props) {
                     __html: content.objectExplanation.data,
                   }}
                 />
-                <button className="expand-button" onClick={HandleClick}>
-                  {' '}
-                  {descriptionOpen
-                    ? `${intl.formatMessage(messages.showless)} -`
-                    : `${intl.formatMessage(messages.showmore)} +`}
-                </button>
+                {content.objectExplanation.data && (
+                  <button className="expand-button" onClick={HandleClick}>
+                    {' '}
+                    {descriptionOpen
+                      ? `${intl.formatMessage(messages.showless)} -`
+                      : `${intl.formatMessage(messages.showmore)} +`}
+                  </button>
+                )}
               </div>
             )}
             <table>
