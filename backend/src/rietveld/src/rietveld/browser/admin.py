@@ -116,8 +116,9 @@ class AdminFixes(BrowserView):
 
     def import_objects(self):
         object_priref = self.request.form.get("object_priref", 40923)
+        collection_type = self.request.form.get("collection_type", "collect")
         headers = "User-Agent: Mozilla/5.0"
-        api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database=collect&search=priref={object_priref}"
+        api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={object_priref}"
 
         response = requests.post(api_url)
         response.raise_for_status()
@@ -187,7 +188,7 @@ class AdminFixes(BrowserView):
         technique = tree.findall(".//techniek.vrije.tekst")
         technique_values = [name.text for name in technique if name.text is not None]
 
-        remarks = tree.findall(".//notes")
+        remarks = tree.findall(".//record/notes")
         remarks_values = [name.text for name in remarks if name.text is not None]
 
         motifs = tree.findall(".//content.motif.general/term")
