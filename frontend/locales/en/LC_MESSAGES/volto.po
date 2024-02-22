@@ -191,12 +191,12 @@ msgstr "More of the same motive"
 #: components/theme/View/ArtworkView
 # defaultMessage: Dit object is nu niet in het museum te zien
 msgid "notonview"
-msgstr ""
+msgstr "This object is now not on display in the museum"
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Nu te zien
+# defaultMessage: Nu in het museum
 msgid "nowonview"
-msgstr ""
+msgstr "Now in the museum"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Fysieke beschrijving

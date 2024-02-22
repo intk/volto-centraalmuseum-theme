@@ -152,6 +152,17 @@ class AdminFixes(BrowserView):
         object_name_values = [
             name.text for name in objectnames if name.text is not None
         ]
+        current_location_text = tree.findtext(".//current_location.name")
+        try:
+            current_location_number = float(current_location_text)
+            current_location_int = int(current_location_number)
+            current_location = str(current_location_int)
+        except ValueError:
+            current_location = current_location_text
+
+        object_on_display = True if tree.findtext(".//gepubliceerd") == 'x' else False
+
+
 
         physical_description = tree.findtext(".//physical_description")
 
@@ -265,6 +276,12 @@ class AdminFixes(BrowserView):
 
         info["nl"]["acquisition"] = acquisition
         info["en"]["acquisition"] = acquisition
+
+        info["nl"]["ObjOnDisplay"] = object_on_display
+        info["en"]["ObjOnDisplay"] = object_on_display
+
+        info["nl"]["displayLocation"] = current_location
+        info["en"]["displayLocation"] = current_location
 
         # Creating Artists
         creators = tree.findall(".//Production")

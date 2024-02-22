@@ -77,7 +77,7 @@ const messages = defineMessages({
   },
   nowonview: {
     id: 'nowonview',
-    defaultMessage: 'Nu te zien',
+    defaultMessage: 'Nu in het museum',
   },
   notonview: {
     id: 'notonview',
@@ -419,7 +419,11 @@ export default function ArtworkView(props) {
                     <td className="columntwo">
                       <p>
                         {content.ObjOnDisplay === true
-                          ? intl.formatMessage(messages.nowonview)
+                          ? `${intl.formatMessage(messages.nowonview)} ${
+                              content.displayLocation
+                                ? `in EXPO ${content.displayLocation}`
+                                : ''
+                            }`
                           : intl.formatMessage(messages.notonview)}
                       </p>
                     </td>

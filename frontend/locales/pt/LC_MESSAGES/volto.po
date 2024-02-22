@@ -202,7 +202,7 @@ msgid "notonview"
 msgstr ""
 
 #: components/theme/View/ArtworkView
-# defaultMessage: Nu te zien
+# defaultMessage: Nu in het museum
 msgid "nowonview"
 msgstr ""
 

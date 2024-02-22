@@ -6,6 +6,7 @@ from zope.interface import implementer
 from zope.schema import List
 from zope.schema import Text
 from zope.schema import TextLine
+from zope.schema import Bool
 
 
 class IArtwork(model.Schema):
@@ -26,6 +27,10 @@ class IArtwork(model.Schema):
     objectExplanation = RichText(
         title="Explanation",
         required=False,
+    )
+
+    ObjOnDisplay = Bool(
+        title="Object On Display", required=False, default=False
     )
 
     displayLocation = TextLine(
