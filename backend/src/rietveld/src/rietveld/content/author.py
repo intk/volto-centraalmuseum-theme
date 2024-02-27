@@ -31,7 +31,6 @@ class IAuthor(model.Schema):
         "authorBirthPlace",
         "authorName",
         "authorURL",
-
     )
 
     searchable("authorID", "authorName")
