@@ -23,6 +23,7 @@ import fbbutton from './assets/soc_fb_wBG.svg';
 import twbutton from './assets/share_button_twitter.svg';
 // import downloadbutton from './assets/download.svg';
 import { defineMessages, useIntl } from 'react-intl';
+import { SeeMore } from '../../index';
 // import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 const messages = defineMessages({
@@ -401,14 +402,12 @@ export default function ArtworkView(props) {
                     __html: content.objectExplanation.data,
                   }}
                 />
-                {content.objectExplanation.data && (
-                  <button className="expand-button" onClick={HandleClick}>
-                    {' '}
-                    {descriptionOpen
-                      ? `${intl.formatMessage(messages.showless)} -`
-                      : `${intl.formatMessage(messages.showmore)} +`}
-                  </button>
-                )}
+                <button className="expand-button" onClick={HandleClick}>
+                  {' '}
+                  {descriptionOpen
+                    ? `${intl.formatMessage(messages.showless)} -`
+                    : `${intl.formatMessage(messages.showmore)} +`}
+                </button>
               </div>
             )}
             <table>
@@ -834,6 +833,7 @@ export default function ArtworkView(props) {
               </tbody>
             </table>
           </div>
+          <SeeMore {...props} />
         </div>
       </Container>
     </div>

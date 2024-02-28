@@ -1,13 +1,15 @@
 // @import '../../../../../theme/globals/site.variables';
 
 .view-viewview.contenttype-artwork {
-  .content-area{
+  .content-area {
     // margin-top: 0% !important;
     // padding-top: 0% !important;
   }
+
   .portal-top {
     height: 0px !important;
   }
+
   .header-wrapper.contentpage {
     position: absolute;
   }
@@ -40,7 +42,8 @@
       // padding-top: 20vw !important;
     }
   }
-    .zoom-container {
+
+  .zoom-container {
     display: flex;
     overflow: hidden;
     height: calc(80vh - 13px) !important;
@@ -53,38 +56,40 @@
       height: 56vh !important;
     }
   }
-    .react-transform-wrapper,
-    .react-transform-component,
-    .react-transform-component img {
-      // max-height: calc(80vh - 50px) !important;
-      max-height: 80vh !important;
-      @media screen and (max-width: 768px) {
-        max-height: 55vh !important;
-      }
-    }
 
-    .react-transform-wrapper {
-      width: 100% !important;
+  .react-transform-wrapper,
+  .react-transform-component,
+  .react-transform-component img {
+    // max-height: calc(80vh - 50px) !important;
+    max-height: 80vh !important;
+    @media screen and (max-width: 768px) {
+      max-height: 55vh !important;
     }
-    .react-transform-wrapper{
-      width: 100% !important;
-      // height: 80vh !important;
-      @media screen and (max-width: 768px) {
-          height: 55vh !important;
-        }
+  }
 
-      .react-transform-component{
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-      }
+  .react-transform-wrapper {
+    width: 100% !important;
+  }
+
+  .react-transform-wrapper {
+    width: 100% !important;
+    // height: 80vh !important;
+    @media screen and (max-width: 768px) {
+      height: 55vh !important;
     }
 
     .react-transform-component {
-      width: auto !important;
-      height: 100% !important;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
     }
+  }
+
+  .react-transform-component {
+    width: auto !important;
+    height: 100% !important;
+  }
 }
 
 #object-block {
@@ -92,7 +97,7 @@
   padding-bottom: 80px;
 
   .buttons {
-    @media (min-width: 992px){
+    @media (min-width: 992px) {
       padding-top: 17px;
     }
 
@@ -133,8 +138,8 @@
 
     .button.share {
       position: relative;
-      padding-left: 16px !important;
       padding-right: 16px !important;
+      padding-left: 16px !important;
     }
 
     .share-button {
@@ -143,27 +148,27 @@
 
     .button.expand {
       width: 170px;
-      padding-left: 5px;
       padding-right: 5px;
-      @media (min-width: 992px){
+      padding-left: 5px;
+      @media (min-width: 992px) {
         width: 200px;
-        padding-left: 15px;
         padding-right: 15px;
+        padding-left: 15px;
       }
     }
 
     .button.zoomminus {
-      margin-right: 16px;
-      margin-left: 0px;
       padding-right: 15.5px !important;
       padding-left: 15.5px !important;
+      margin-right: 16px;
+      margin-left: 0px;
     }
 
     .button.zoomplus {
-      margin-right: 0px;
-      border-right: 0px !important;
       padding-right: 15.5px !important;
       padding-left: 15.5px !important;
+      border-right: 0px !important;
+      margin-right: 0px;
     }
   }
 
@@ -180,14 +185,14 @@
     padding-left: calc(12% + 5px) !important;
 
     @media screen and (min-width: 768px) {
-          padding-right: 0px;
-          padding-left: 0px;
+      padding-right: 0px;
+      padding-left: 0px;
     }
 
-    @media screen and (min-width: 992px){
+    @media screen and (min-width: 992px) {
+      padding-top: 16px;
       // max-width: 80vw;
       padding-bottom: 20px !important;
-      padding-top: 16px;
     }
   }
 
@@ -197,12 +202,13 @@
     justify-content: center;
     padding-top: 0px;
     padding-bottom: 12px;
-    text-align: center;
     margin-top: -2px;
+    text-align: center;
 
     button {
       border: 0px;
       background-color: transparent;
+
       svg {
         width: 45px !important;
         height: 26px !important;
@@ -229,15 +235,16 @@
   .rawdata-section {
     overflow: hidden;
     max-height: 0;
+    margin-top: 70px;
     margin-right: auto;
     margin-left: auto;
     opacity: 0;
     transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
-    margin-top: 70px;
-    @media (min-width: 992px){
+    @media (min-width: 992px) {
       // margin-top: 79px;
       margin-top: 60px;
     }
+
     p {
       color: #9d9d9d;
       font-family: 'FranklinBook', Arial, sans-serif;
@@ -255,10 +262,11 @@
         font-size: 20px;
       }
     }
+
     .columntwo p {
       @media (max-width: 768px) {
-        font-size: 16px;
         margin-top: -2px;
+        font-size: 16px;
       }
     }
 
@@ -278,23 +286,25 @@
       padding-left: 17px;
       margin-top: 0px;
       margin-bottom: 10px;
-      button{
-        margin-top: 16px;
-        margin-left: -17px;
+
+      button {
         padding-bottom: 1px;
+        margin-top: 16px;
         margin-bottom: -5px;
+        margin-left: -17px;
         font-size: 19.3px !important;
       }
     }
 
-    p:has(li){
-      padding-bottom:  4px;
+    p:has(li) {
+      padding-bottom: 4px;
     }
 
     li {
-      padding-left: 0px;
       padding-bottom: 0px;
+      padding-left: 0px;
       line-height: 36.5px;
+
       p {
         font-size: 19.007px !important;
         letter-spacing: 0em !important;
@@ -306,8 +316,8 @@
     }
 
     li::marker {
-      color: #9d9d9d;
       margin-right: 5px !important;
+      color: #9d9d9d;
     }
   }
 
@@ -374,9 +384,9 @@
     }
 
     .row.facebook-row img {
-    //   height: 23px;
-        height: 33px;
-        max-height: 35px !important;
+      //   height: 23px;
+      height: 33px;
+      max-height: 35px !important;
     }
   }
 
@@ -424,7 +434,7 @@
 }
 
 // RAWData
-.view-viewview.contenttype-artwork{
+.view-viewview.contenttype-artwork {
   #rawdata {
     width: auto;
     padding-right: 34.5px;
@@ -452,9 +462,9 @@
     table {
       width: 100%;
 
-      @media (min-width: 992px) and (max-width: 1200px){
-        padding-left: 36px;
+      @media (min-width: 992px) and (max-width: 1200px) {
         padding-right: 36px;
+        padding-left: 36px;
       }
 
       td p {
@@ -463,15 +473,15 @@
     }
 
     .description-wrapper {
-      margin-bottom: 73px;
-      padding-left: 4px;
       padding-right: 4px;
+      padding-left: 4px;
+      margin-bottom: 73px;
       @media (min-width: 992px) {
-        padding-left: 0px;
-        padding-right: 0px;
-        margin-bottom: 50px;
         width: 720px;
+        padding-right: 0px;
+        padding-left: 0px;
         margin: 19px auto 39px;
+        margin-bottom: 50px;
       }
     }
 
@@ -485,7 +495,7 @@
       font-size: 19.68px;
       font-weight: 100;
       text-decoration: underline;
-      @media (max-width: 768px){
+      @media (max-width: 768px) {
         font-size: 18.8px;
       }
     }
@@ -503,7 +513,8 @@
       font-weight: 100;
       text-decoration: underline;
     }
-    .expand-data-button.true{
+
+    .expand-data-button.true {
       margin-bottom: 5px !important;
     }
 
@@ -519,15 +530,16 @@
       font-size: 16px;
       line-height: 22.8px;
       transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
-      p{
-        font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif;
-        font-size: 1.180em;;
-        line-height: 36px;
-        color: #404040;
+
+      p {
         margin-top: 11px;
         margin-bottom: 35px;
-        @media screen and (min-width: 768px){
-          font-size: 1.230em;
+        color: #404040;
+        font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 1.18em;
+        line-height: 36px;
+        @media screen and (min-width: 768px) {
+          font-size: 1.23em;
         }
       }
     }
@@ -541,6 +553,7 @@
       position: relative;
       max-height: 1000px;
       margin-bottom: 15px;
+
       p + p {
         margin-top: 65px;
         margin-bottom: 47px;
@@ -565,7 +578,7 @@
     }
 
     table tr {
-      @media (max-width: 768px){
+      @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
         margin-bottom: 30px !important;
@@ -586,8 +599,8 @@
     }
 
     .columntwo {
-      @media (max-width: 768px){
-        p+p {
+      @media (max-width: 768px) {
+        p + p {
           padding-top: 2px;
         }
       }
@@ -604,11 +617,13 @@
         }
       }
     }
-    #slickcarousel-controls{
-      padding-bottom: 8px;
+
+    #slickcarousel-controls {
       padding-top: 22px;
+      padding-bottom: 8px;
     }
   }
+
   .react-transform-wrapper {
     width: 100% !important;
     height: 80vh !important;
@@ -624,11 +639,10 @@
   }
 }
 
-
-.view-editview.contenttype-artwork{
-  #page-edit{
-    .ui.raised.segments{
-      max-width: ~"min(70vw, 1000px)";
+.view-editview.contenttype-artwork {
+  #page-edit {
+    .ui.raised.segments {
+      max-width: ~'min(70vw, 1000px)';
     }
   }
 }
