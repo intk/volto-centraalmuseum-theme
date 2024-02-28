@@ -755,7 +755,9 @@ class AdminFixes(BrowserView):
 
                 if authors != "null":
                     for author in authors:
-                        relation.create(source=obj, target=author, relationship="authors")
+                        relation.create(
+                            source=obj, target=author, relationship="authors"
+                        )
 
                 manager = ITranslationManager(obj)
                 if not manager.has_translation("en"):
@@ -866,7 +868,9 @@ class AdminFixes(BrowserView):
                 for author in authors:
                     relation.create(source=obj, target=author, relationship="authors")
                 for author_en in authors_en:
-                    relation.create(source=obj_en, target=author_en, relationship="authors")
+                    relation.create(
+                        source=obj_en, target=author_en, relationship="authors"
+                    )
 
         return "all done"
 
@@ -1310,60 +1314,90 @@ def import_authors(self, record):
     authors = []
     authors_en = []
 
-    for production in record.findall('.//Production'):
-        for creator in production.findall('creator'):
-            priref = creator.find('priref').text if creator.find('priref') is not None else None
+    for production in record.findall(".//Production"):
+        for creator in production.findall("creator"):
+            priref = (
+                creator.find("priref").text
+                if creator.find("priref") is not None
+                else None
+            )
             if not priref:
                 continue  # Skip if no priref is found
 
             log_to_file(f"Processing creator with priref: {priref}")
 
             # Check for existing authors by priref for both NL and EN versions
-            found_nl = content.find(portal_type="author", authorID=priref, Language="nl")
-            found_en = content.find(portal_type="author", authorID=priref, Language="en")
-            log_to_file(f"Found NL authors: {len(found_nl)}, Found EN authors: {len(found_en)}")
+            found_nl = content.find(
+                portal_type="author", authorID=priref, Language="nl"
+            )
+            found_en = content.find(
+                portal_type="author", authorID=priref, Language="en"
+            )
+            log_to_file(
+                f"Found NL authors: {len(found_nl)}, Found EN authors: {len(found_en)}"
+            )
 
             log_to_file(f"found_nl: {found_nl}")
             log_to_file(f"found_en: {found_en}")
 
             # Extracting author information
             author_info = {
-                'title': creator.find('name').text if creator.find('name') is not None else "Unknown",
-                'authorName': creator.find('name').text if creator.find('name') is not None else "Unknown",
-                'authorID': priref,
-                'authorBirthDate': creator.find('birth.date.start').text if creator.find('birth.date.start') is not None else "",
-                'authorDeathDate': creator.find('death.date.start').text if creator.find('death.date.start') is not None else "",
-                'authorBirthPlace': creator.find('birth.place').text if creator.find('birth.place') is not None else "",
-                'authorDeathPlace': creator.find('death.place').text if creator.find('death.place') is not None else "",
-                'authorURL': creator.find('.//Internet_address/url').text if creator.find('.//Internet_address/url') is not None else "",
+                "title": creator.find("name").text
+                if creator.find("name") is not None
+                else "Unknown",
+                "authorName": creator.find("name").text
+                if creator.find("name") is not None
+                else "Unknown",
+                "authorID": priref,
+                "authorBirthDate": creator.find("birth.date.start").text
+                if creator.find("birth.date.start") is not None
+                else "",
+                "authorDeathDate": creator.find("death.date.start").text
+                if creator.find("death.date.start") is not None
+                else "",
+                "authorBirthPlace": creator.find("birth.place").text
+                if creator.find("birth.place") is not None
+                else "",
+                "authorDeathPlace": creator.find("death.place").text
+                if creator.find("death.place") is not None
+                else "",
+                "authorURL": creator.find(".//Internet_address/url").text
+                if creator.find(".//Internet_address/url") is not None
+                else "",
             }
             log_to_file(f"{author_info} :: author info")
 
             # Create or append NL author
             if not found_nl:
-                log_to_file('not found nl')
-                author_nl = content.create(container=container, type="author", **author_info)
+                log_to_file("not found nl")
+                author_nl = content.create(
+                    container=container, type="author", **author_info
+                )
                 authors.append(author_nl)
                 content.transition(obj=author_nl, transition="publish")
             else:
-                log_to_file('found nl')
+                log_to_file("found nl")
                 authors.extend([brain.getObject() for brain in found_nl])
 
             # Create or append EN author
             if not found_en:
-                log_to_file('not found en')
-                author_info['container'] = container_en  # Update container for EN version
+                log_to_file("not found en")
+                author_info[
+                    "container"
+                ] = container_en  # Update container for EN version
                 author_en = content.create(type="author", **author_info)
                 authors_en.append(author_en)
                 content.transition(obj=author_en, transition="publish")
 
                 # Link translations if applicable
-                if not found_nl:  # Only link if NL version was also created in this iteration
+                if (
+                    not found_nl
+                ):  # Only link if NL version was also created in this iteration
                     manager = ITranslationManager(author_nl)
                     if not manager.has_translation("en"):
                         manager.register_translation("en", author_en)
             else:
-                log_to_file('found en')
+                log_to_file("found en")
                 authors_en.extend([brain.getObject() for brain in found_en])
 
     return authors, authors_en
