@@ -283,6 +283,12 @@ msgstr ""
 msgid "secLine3"
 msgstr ""
 
+#: components/theme/SeeMore/SeeMore
+#: components/theme/SeeMore/SeeMoreAuthor
+# defaultMessage: Kijk verder
+msgid "seemore"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Delen
 msgid "share"
