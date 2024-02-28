@@ -15,7 +15,7 @@
   >
     <indexed_attr value="priref" />
   </index>
-  <!-- 
+  <!--
   <index meta_type="ZCTextIndex"
          name="object_remarks"
   >
@@ -27,6 +27,18 @@
            value="plone_lexicon"
     />
   </index> -->
+  <index meta_type="ZCTextIndex"
+         name="artwork_author"
+  >
+    <indexed_attr value="artwork_author" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
+  </index>
+
   <index meta_type="FieldIndex"
          name="authorID"
   >

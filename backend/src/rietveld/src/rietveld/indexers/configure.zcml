@@ -5,4 +5,9 @@
       name="object_remarks"
       /> -->
 
+  <adapter
+      factory=".indexes.artwork_author"
+      name="artwork_author"
+      />
+
 </configure>
