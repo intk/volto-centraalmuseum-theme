@@ -10,7 +10,7 @@ IMPORT_LOCATIONS = {
     # "author": "nl/collectie-onderzoek/kunstenaars",
     # "author_en": "en/collection-research/artists"
     "author": "nl/maker",
-    "author_en": "en/maker",
+    "author_en": "en/creator",
 }
 
 IMAGE_BASE_URL = "https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx"
