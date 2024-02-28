@@ -133,6 +133,14 @@ class AdminFixes(BrowserView):
         # Parse the XML response
         tree = etree.fromstring(api_answer_bytes)
 
+        importedAuthors = import_authors(self, record=tree)
+        log_to_file(importedAuthors)
+        if importedAuthors:
+            authors, authors_en = importedAuthors
+        else:
+            authors = "null"
+            authors_en = "null"
+
         # Find the title element
         title_element = tree.find(".//record/Title/title")
 
@@ -237,9 +245,9 @@ class AdminFixes(BrowserView):
 
         if title_element is not None:
             title = title_element.text
-            print("Title: ", title)
+            log_to_file(f"Title: {title}")
         else:
-            print("Title not found")
+            log_to_file("Title not found")
 
         info = {"nl": {}, "en": {}}
         intl = {"nl": {}, "en": {}}
@@ -745,9 +753,9 @@ class AdminFixes(BrowserView):
                 )  # Dutch version
                 # log_to_file(f"{ObjectNumber} Dutch version of object is created")
 
-                # if authors != "null":
-                #     for author in authors:
-                #         relation.create(source=obj, target=author, relationship="authors")
+                if authors != "null":
+                    for author in authors:
+                        relation.create(source=obj, target=author, relationship="authors")
 
                 manager = ITranslationManager(obj)
                 if not manager.has_translation("en"):
@@ -763,11 +771,11 @@ class AdminFixes(BrowserView):
                     title, container_en, info, intl, "artwork", title_url, priref
                 )  # English version
                 # log_to_file(f"{ObjectNumber} English version of object is created")
-                # if authors_en != "null":
-                #     for author in authors_en:
-                #         relation.create(
-                #             source=obj_en, target=author, relationship="authors"
-                #         )
+                if authors_en != "null":
+                    for author in authors_en:
+                        relation.create(
+                            source=obj_en, target=author, relationship="authors"
+                        )
 
                 manager = ITranslationManager(obj_en)
                 if not manager.has_translation("nl"):
@@ -807,25 +815,25 @@ class AdminFixes(BrowserView):
                     if v:
                         setattr(obj, k, json.dumps(v))
 
-                # if lang == "nl":
-                #     if authors != "null":
-                #         for author in authors:
-                #             relation.delete(
-                #                 source=obj, target=author, relationship="authors"
-                #             )
-                #             relation.create(
-                #                 source=obj, target=author, relationship="authors"
-                #             )
+                if lang == "nl":
+                    if authors != "null":
+                        for author in authors:
+                            relation.delete(
+                                source=obj, target=author, relationship="authors"
+                            )
+                            relation.create(
+                                source=obj, target=author, relationship="authors"
+                            )
 
-                # else:
-                #     if authors != "null":
-                #         for author_en in authors_en:
-                #             relation.delete(
-                #                 source=obj, target=author_en, relationship="authors"
-                #             )
-                #             relation.create(
-                #                 source=obj, target=author_en, relationship="authors"
-                #             )
+                else:
+                    if authors != "null":
+                        for author_en in authors_en:
+                            relation.delete(
+                                source=obj, target=author_en, relationship="authors"
+                            )
+                            relation.create(
+                                source=obj, target=author_en, relationship="authors"
+                            )
 
                 # log_to_file(f"Object is updated: {priref} id and {title} title")
 
@@ -854,11 +862,11 @@ class AdminFixes(BrowserView):
 
             obj_en = self.translate(obj, info["en"])
 
-            # if authors != "null":
-            #     for author in authors:
-            #         relation.create(source=obj, target=author, relationship="authors")
-            #     for author_en in authors_en:
-            #         relation.create(source=obj_en, target=author_en, relationship="authors")
+            if authors != "null":
+                for author in authors:
+                    relation.create(source=obj, target=author, relationship="authors")
+                for author_en in authors_en:
+                    relation.create(source=obj_en, target=author_en, relationship="authors")
 
         return "all done"
 
@@ -1216,6 +1224,7 @@ def import_images(container, images):
         primaryDisplay = image.get("PrimaryDisplay")
         retries = 0
         success = False
+        log_to_file("image in images line 1227")
 
         # Tries MAX_RETRIES times and then raise exception
         while retries < MAX_RETRIES:
@@ -1295,63 +1304,69 @@ def load_env_file(env_file_path):
             os.environ[name] = value
 
 
-def import_authors(self, record, use_archive=True):
+def import_authors(self, record):
     container = get_base_folder(self.context, "author")
     container_en = get_base_folder(self.context, "author_en")
     authors = []
     authors_en = []
 
-    if "ObjPersonRef" in record and "Items" in record["ObjPersonRef"]:
-        # Loop through each author in the record
-        for item in record["ObjPersonRef"]["Items"]:
-            if "ReferencedId" in item:
-                authorID = item["ReferencedId"]
+    for production in record.findall('.//Production'):
+        for creator in production.findall('creator'):
+            priref = creator.find('priref').text if creator.find('priref') is not None else None
+            if not priref:
+                continue  # Skip if no priref is found
 
-                found = content.find(
-                    portal_type="author",
-                    authorID=authorID,
-                    Language="nl",
-                )
-                found_en = content.find(
-                    portal_type="author",
-                    authorID=authorID,
-                    Language="en",
-                )
-                if found:
-                    for brain in found:
-                        authors.append(brain.getObject())
+            log_to_file(f"Processing creator with priref: {priref}")
 
-                    for brain in found_en:
-                        authors_en.append(brain.getObject())
-                    continue  # If found, skip creating a new author
+            # Check for existing authors by priref for both NL and EN versions
+            found_nl = content.find(portal_type="author", authorID=priref, Language="nl")
+            found_en = content.find(portal_type="author", authorID=priref, Language="en")
+            log_to_file(f"Found NL authors: {len(found_nl)}, Found EN authors: {len(found_en)}")
 
-                authorName = item["LinkLabelTxt"]
+            log_to_file(f"found_nl: {found_nl}")
+            log_to_file(f"found_en: {found_en}")
 
-                author = content.create(
-                    type="author",
-                    container=container,
-                    title=authorName,
-                    authorID=authorID,
-                )
-                author_en = content.create(
-                    type="author",
-                    container=container_en,
-                    title=authorName,
-                    authorID=authorID,
-                )  # English version
+            # Extracting author information
+            author_info = {
+                'title': creator.find('name').text if creator.find('name') is not None else "Unknown",
+                'authorName': creator.find('name').text if creator.find('name') is not None else "Unknown",
+                'authorID': priref,
+                'authorBirthDate': creator.find('birth.date.start').text if creator.find('birth.date.start') is not None else "",
+                'authorDeathDate': creator.find('death.date.start').text if creator.find('death.date.start') is not None else "",
+                'authorBirthPlace': creator.find('birth.place').text if creator.find('birth.place') is not None else "",
+                'authorDeathPlace': creator.find('death.place').text if creator.find('death.place') is not None else "",
+                'authorURL': creator.find('.//Internet_address/url').text if creator.find('.//Internet_address/url') is not None else "",
+            }
+            log_to_file(f"{author_info} :: author info")
 
-                manager = ITranslationManager(author)
-                if not manager.has_translation("en"):
-                    manager.register_translation("en", author_en)
+            # Create or append NL author
+            if not found_nl:
+                log_to_file('not found nl')
+                author_nl = content.create(container=container, type="author", **author_info)
+                authors.append(author_nl)
+                content.transition(obj=author_nl, transition="publish")
+            else:
+                log_to_file('found nl')
+                authors.extend([brain.getObject() for brain in found_nl])
 
-                authors.append(author)
+            # Create or append EN author
+            if not found_en:
+                log_to_file('not found en')
+                author_info['container'] = container_en  # Update container for EN version
+                author_en = content.create(type="author", **author_info)
                 authors_en.append(author_en)
-                content.transition(obj=author, transition="publish")
                 content.transition(obj=author_en, transition="publish")
 
-                log_to_file(f"Creating author {author.getId()}")
+                # Link translations if applicable
+                if not found_nl:  # Only link if NL version was also created in this iteration
+                    manager = ITranslationManager(author_nl)
+                    if not manager.has_translation("en"):
+                        manager.register_translation("en", author_en)
+            else:
+                log_to_file('found en')
+                authors_en.extend([brain.getObject() for brain in found_en])
 
-    return [authors, authors_en]
+    return authors, authors_en
 
 
 def xml_to_image(xml_content):

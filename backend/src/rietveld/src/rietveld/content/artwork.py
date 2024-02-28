@@ -1,7 +1,11 @@
 from plone.app.dexterity.textindexer.directives import searchable
 from plone.app.textfield import RichText
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.autoform import directives as form_directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
+from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
 from zope.interface import implementer
 from zope.schema import Bool
 from zope.schema import List
@@ -130,6 +134,24 @@ class IArtwork(model.Schema):
     creator = RichText(
         title="Creator",
         required=False,
+    )
+
+    authors = RelationList(
+        title="Authors",
+        default=[],
+        value_type=RelationChoice(
+            title="Author", vocabulary="plone.app.vocabularies.Catalog"
+        ),
+        required=False,
+    )
+    form_directives.widget(
+        "authors",
+        RelatedItemsFieldWidget,
+        pattern_options={
+            "selectableTypes": [
+                "author",
+            ],
+        },
     )
 
     creatorDetails = Text(
