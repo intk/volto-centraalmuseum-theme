@@ -88,7 +88,9 @@ const Search = (props) => {
                       {authors_text && (
                         <span className="item-description">{authors_text}</span>
                       )}
-                      {authors_text && item.dating && <span>, </span>}
+                      {authors_text && item.dating && (
+                        <span className="item-description">, </span>
+                      )}
                       {item.dating && (
                         <span className="item-description">
                           {String(item.dating.split('(')[0])}
