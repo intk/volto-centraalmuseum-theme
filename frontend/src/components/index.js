@@ -8,3 +8,9 @@
  *   Footer,
  * };
  */
+
+import SeeMore from './theme/SeeMore/SeeMore';
+import ArtworkPreview from './theme/ArtworkPreview/ArtworkPreview';
+import SeeMoreAuthor from './theme/SeeMore/SeeMoreAuthor';
+
+export { SeeMore, ArtworkPreview, SeeMoreAuthor };
