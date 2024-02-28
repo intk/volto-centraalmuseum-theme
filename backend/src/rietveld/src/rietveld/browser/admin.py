@@ -146,7 +146,6 @@ class AdminFixes(BrowserView):
 
         # record_text = tree.findtext(".//record")
 
-
         labels = tree.findall(".//record/Label")
         description_element_nl = None
         description_element_en = None
@@ -1329,7 +1328,6 @@ def import_authors(self, record):
             if not priref:
                 continue  # Skip if no priref is found
 
-
             # Check for existing authors by priref for both NL and EN versions
             found_nl = content.find(
                 portal_type="author", authorID=priref, Language="nl"
@@ -1337,7 +1335,6 @@ def import_authors(self, record):
             found_en = content.find(
                 portal_type="author", authorID=priref, Language="en"
             )
-
 
             if creator.find("name") is not None:
                 name_parts = creator.find("name").text.split(",")
