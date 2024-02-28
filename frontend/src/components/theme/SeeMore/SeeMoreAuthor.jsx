@@ -47,7 +47,7 @@ const Search = (props) => {
       portal_type: 'artwork',
       artwork_author: authorQueryString,
       path: currentPath,
-      metadata_fields: ['ObjDateFromTxt'],
+      metadata_fields: ['dating'],
     };
     searchContent('', options);
   };
@@ -88,10 +88,10 @@ const Search = (props) => {
                       {authors_text && (
                         <span className="item-description">{authors_text}</span>
                       )}
-                      {authors_text && item.ObjDateFromTxt && <span>, </span>}
-                      {item.ObjDateFromTxt && (
+                      {authors_text && item.dating && <span>, </span>}
+                      {item.dating && (
                         <span className="item-description">
-                          {item.ObjDateFromTxt}
+                          {String(item.dating.split('(')[0])}
                         </span>
                       )}
                     </p>
