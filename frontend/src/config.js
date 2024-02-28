@@ -19,6 +19,7 @@ import { getContent } from '@plone/volto/actions';
 import installFooter from './footer';
 import installBlocks from './components/Blocks';
 import ArtworkView from './components/theme/View/ArtworkView';
+import AuthorView from './components/theme/View/AuthorView';
 
 export default function applyConfig(config) {
   const DEFAULT_LANG = 'nl';
@@ -62,6 +63,10 @@ export default function applyConfig(config) {
   config.views.layoutViewsNamesMapping = {
     ...config.views.layoutViewsNamesMapping,
     artwork_view: 'Artwork',
+  };
+  config.views.contentTypesViews = {
+    ...config.views.contentTypesViews,
+    author: AuthorView,
   };
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
