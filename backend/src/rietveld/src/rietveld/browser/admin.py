@@ -144,6 +144,9 @@ class AdminFixes(BrowserView):
         # Find the title element
         title_element = tree.find(".//record/Title/title")
 
+        # record_text = tree.findtext(".//record")
+
+
         labels = tree.findall(".//record/Label")
         description_element_nl = None
         description_element_en = None
@@ -254,6 +257,9 @@ class AdminFixes(BrowserView):
 
         info["nl"]["title"] = title
         info["en"]["title"] = title
+
+        # info["nl"]["rawdata"] = record_text
+        # info["en"]["rawdata"] = record_text
 
         info["nl"]["objectExplanation"] = RichTextValue(
             raw=description_element_nl,
@@ -1228,7 +1234,6 @@ def import_images(container, images):
         primaryDisplay = image.get("PrimaryDisplay")
         retries = 0
         success = False
-        log_to_file("image in images line 1227")
 
         # Tries MAX_RETRIES times and then raise exception
         while retries < MAX_RETRIES:
@@ -1324,7 +1329,6 @@ def import_authors(self, record):
             if not priref:
                 continue  # Skip if no priref is found
 
-            log_to_file(f"Processing creator with priref: {priref}")
 
             # Check for existing authors by priref for both NL and EN versions
             found_nl = content.find(
@@ -1333,18 +1337,18 @@ def import_authors(self, record):
             found_en = content.find(
                 portal_type="author", authorID=priref, Language="en"
             )
-            log_to_file(
-                f"Found NL authors: {len(found_nl)}, Found EN authors: {len(found_en)}"
-            )
 
-            log_to_file(f"found_nl: {found_nl}")
-            log_to_file(f"found_en: {found_en}")
 
-            # Extracting author information
+            if creator.find("name") is not None:
+                name_parts = creator.find("name").text.split(",")
+                formatted_name = " ".join(name_parts[::-1])  # This reverses the order
+                log_to_file(f"normal name: {name_parts}")
+                log_to_file(f"formatted name: {formatted_name}")
+            else:
+                formatted_name = "Unknown"
+
             author_info = {
-                "title": creator.find("name").text
-                if creator.find("name") is not None
-                else "Unknown",
+                "title": formatted_name,
                 "authorName": creator.find("name").text
                 if creator.find("name") is not None
                 else "Unknown",
@@ -1365,23 +1369,19 @@ def import_authors(self, record):
                 if creator.find(".//Internet_address/url") is not None
                 else "",
             }
-            log_to_file(f"{author_info} :: author info")
 
             # Create or append NL author
             if not found_nl:
-                log_to_file("not found nl")
                 author_nl = content.create(
                     container=container, type="author", **author_info
                 )
                 authors.append(author_nl)
                 content.transition(obj=author_nl, transition="publish")
             else:
-                log_to_file("found nl")
                 authors.extend([brain.getObject() for brain in found_nl])
 
             # Create or append EN author
             if not found_en:
-                log_to_file("not found en")
                 author_info[
                     "container"
                 ] = container_en  # Update container for EN version
@@ -1397,7 +1397,6 @@ def import_authors(self, record):
                     if not manager.has_translation("en"):
                         manager.register_translation("en", author_en)
             else:
-                log_to_file("found en")
                 authors_en.extend([brain.getObject() for brain in found_en])
 
     return authors, authors_en
