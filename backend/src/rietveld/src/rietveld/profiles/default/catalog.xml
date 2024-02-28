@@ -27,4 +27,9 @@
            value="plone_lexicon"
     />
   </index> -->
+  <index meta_type="FieldIndex"
+         name="authorID"
+  >
+    <indexed_attr value="authorID" />
+  </index>
 </object>
