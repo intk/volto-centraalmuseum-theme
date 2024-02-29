@@ -9,6 +9,7 @@ from plone.api import relation
 from plone.app.multilingual.api import get_translation_manager
 from plone.app.multilingual.api import translate
 from plone.app.multilingual.interfaces import ITranslationManager
+from plone.app.textfield.interfaces import IRichText
 from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.utils import iterSchemata
@@ -18,6 +19,7 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
 from rietveld.config import IMAGE_BASE_URL
 from rietveld.config import IMPORT_LOCATIONS
+from rietveld.content.artwork import IArtwork
 from xml.dom import minidom
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
@@ -30,7 +32,6 @@ from zope.intid.interfaces import IIntIds
 from zope.schema import getFields
 from zope.schema import getFieldsInOrder
 from zope.schema.interfaces import IList
-from zope.schema.interfaces import IRichText
 from zope.schema.interfaces import IText
 from zope.schema.interfaces import ITextLine
 
@@ -805,7 +806,7 @@ class AdminFixes(BrowserView):
             for brain in brains:
                 # Object exists, so we fetch it and update it
                 obj = brain.getObject()
-                reset_fields(obj)
+                reset_artwork_fields(obj)
 
                 # First clear all of the fields
                 schema = obj.getTypeInfo().lookupSchema()
@@ -822,10 +823,11 @@ class AdminFixes(BrowserView):
                 # Update the object's fields with new data
                 lang = obj.language
                 for k, v in info[lang].items():
-                    setattr(obj, k, v)
-
+                    if v:
+                        setattr(obj, k, v)
                 for k, v in intl[lang].items():
-                    setattr(obj, k, json.dumps(v))
+                    if v:
+                        setattr(obj, k, json.dumps(v))
 
                 if lang == "nl":
                     if authors != "null":
@@ -889,285 +891,6 @@ class AdminFixes(BrowserView):
         top_limit = self.request.form.get("top_limit", "0")
         for offset in range(int(start_value), int(top_limit), 1000):
             self.import_objects(top_limit=offset)
-
-
-def import_one_record(self, record, container, container_en, catalog, headers):
-    global counter
-    # log_to_file(f"{counter}. object")
-
-    importedAuthors = import_authors(self, record)
-    if importedAuthors:
-        authors, authors_en = importedAuthors
-    else:
-        authors = "null"
-        authors_en = "null"
-
-    record_text = json.dumps(record)
-    info = {"nl": {}, "en": {}}
-    intl = {"nl": {}, "en": {}}
-
-    title = record["ObjTitleTxt"]
-    title_url = (
-        re.sub(r"[^a-zA-Z0-9 ]", "", title)
-        .strip()
-        .replace("  ", " ")
-        .replace(" ", "-")
-        .lower()
-    )
-
-    info["nl"]["title"] = title
-    info["en"]["title"] = title
-
-    info["nl"]["rawdata"] = record_text
-    info["en"]["rawdata"] = record_text
-
-    # ObjAcquisitionMethodTxt
-    if (
-        "ObjAcquisitionMethodTxt" in record
-        and record["ObjAcquisitionMethodTxt"] is not None
-        and "LabelTxt_en" in record["ObjAcquisitionMethodTxt"]
-    ):
-        info["en"]["ObjAcquisitionMethodTxt"] = record["ObjAcquisitionMethodTxt"][
-            "LabelTxt_en"
-        ]
-
-    # ObjOnDisplay
-    if "ObjOnDisplay" in record:
-        info["nl"]["ObjOnDisplay"] = record["ObjOnDisplay"]
-        info["en"]["ObjOnDisplay"] = record["ObjOnDisplay"]
-
-    # ObjAcquisitionDateTxt
-    if "ObjAcquisitionDateTxt" in record:
-        info["nl"]["ObjAcquisitionDateTxt"] = record["ObjAcquisitionDateTxt"]
-        info["en"]["ObjAcquisitionDateTxt"] = record["ObjAcquisitionDateTxt"]
-
-    info["en"]["authorText"] = []
-    info["nl"]["authorText"] = []
-
-    info["nl"]["Id"] = record["Id"]
-    info["en"]["Id"] = record["Id"]
-
-    if "ObjCollectionGrp" in record:
-        collection_grp_values = [
-            grp["CollectionVoc"]["LabelTxt_en"]
-            for grp in record["ObjCollectionGrp"]
-            if grp.get("CollectionVoc") and "LabelTxt_en" in grp["CollectionVoc"]
-        ]
-        info["nl"]["ObjCollectionGrp"] = " | ".join(
-            collection_grp_values
-        )  # Using '|' as a delimiter
-        info["en"]["ObjCollectionGrp"] = " | ".join(collection_grp_values)
-
-    fields_to_extract = {
-        "Id": "priref",
-        "ObjObjectNumberTxt": "ObjObjectNumberTxt",
-        "ObjTitleTxt": "ObjTitleTxt",
-        "ObjDimensionTxt": "ObjDimensionTxt",
-        "ObjMaterialTxt": "ObjMaterialTxt",
-        "ObjTitleTxt": "ObjTitleTxt",
-        "ObjPhysicalDescriptionTxt": "ObjPhysicalDescriptionTxt",
-        "ObjCreditlineTxt": "ObjCreditlineTxt",
-        "ObjTechniqueTxt": "ObjTechniqueTxt",
-        "ObjCurrentLocationTxt": "ObjCurrentLocationTxt",
-        "ObjCategoryTxt": "ObjCategoryTxt",
-        "ObjObjectTypeTxt": "ObjObjectTypeTxt",
-        "ObjDateFromTxt": "ObjDateFromTxt",
-        "ObjDateToTxt": "ObjDateToTxt",
-        "ObjDateNotesTxt": "ObjDateNotesTxt",
-        "ObjHistoricLocationTxt": "ObjHistoricLocationTxt",
-    }
-
-    if "ObjPersonRef" in record and "Items" in record["ObjPersonRef"]:
-        roles_dict = {}
-        roles_dict_en = {}
-        birth_dict = {}
-        death_dict = {}
-
-        for item in record["ObjPersonRef"]["Items"]:
-            if (
-                item.get("LinkLabelTxt")
-                and item.get("RoleTxt")
-                and "LabelTxt_nl" in item["RoleTxt"]
-            ):
-
-                info["en"]["PerBirthDateTxt"] = item["PerBirthDateTxt"]
-                info["en"]["PerDeathDateTxt"] = item["PerDeathDateTxt"]
-
-                authorName = item["LinkLabelTxt"]
-                authorBirth = item["PerBirthDateTxt"]
-                authorDeath = item["PerDeathDateTxt"]
-                authorRole = item["RoleTxt"]["LabelTxt_nl"]
-                authorRole_en = item["RoleTxt"].get("LabelTxt_en", "")
-                roles_dict[authorName] = authorRole
-                roles_dict_en[authorName] = authorRole_en
-                birth_dict[authorName] = authorBirth
-                death_dict[authorName] = authorDeath
-
-                info["en"]["authorText"].append(authorName)
-                info["nl"]["authorText"].append(authorName)
-
-            else:
-                roles_dict = None
-                roles_dict_en = None
-                break  # Exit the loop early if a required key is missing
-
-        info["en"]["ObjPersonRole"] = roles_dict
-        info["nl"]["ObjPersonRole"] = roles_dict_en
-        info["en"]["PerBirthDateTxt"] = birth_dict
-        info["nl"]["PerBirthDateTxt"] = birth_dict
-        info["en"]["PerDeathDateTxt"] = death_dict
-        info["nl"]["PerDeathDateTxt"] = death_dict
-
-    for xml_field, info_field in fields_to_extract.items():
-        value = record[xml_field]
-        info["nl"][info_field] = value if value else ""
-        info["en"][info_field] = value if value else ""
-
-    extra_large_uri = None
-    thumbnails = record.get("Thumbnails", [])
-
-    # if (
-    #     thumbnails
-    #     and isinstance(thumbnails, list)
-    #     and "Sizes" in thumbnails[0]
-    #     and "ExtraLargeUri" in thumbnails[0]["Sizes"]
-    # ):
-    #     info["nl"]["images"] = record["Thumbnails"][0]["Sizes"]["ExtraLargeUri"]
-    #     info["en"]["images"] = record["Thumbnails"][0]["Sizes"]["ExtraLargeUri"]
-    #     print(info["nl"]["images"])
-    # else:
-    #     info["en"]["images"] = "null"
-
-    # Find the existing object
-    priref = info["nl"]["priref"]
-
-    # Check if only one language version of the object with ObjectNumber exists
-    brains = catalog.searchResults(priref=priref, portal_type="artwork")
-    if len(brains) == 1:
-        lang = brains[0].getObject().language
-        missing_lang = "en" if lang == "nl" else "nl"
-        if missing_lang == "nl":
-            obj = create_and_setup_object(
-                title, container, info, intl, "artwork", title_url, priref
-            )  # Dutch version
-            # log_to_file(f"{ObjectNumber} Dutch version of object is created")
-
-            if authors != "null":
-                for author in authors:
-                    relation.create(source=obj, target=author, relationship="authors")
-
-            manager = ITranslationManager(obj)
-            if not manager.has_translation("en"):
-                manager.register_translation("en", brains[0].getObject())
-
-            # adding images
-            # import_images(container=obj, images=images)
-            obj.hasImage = True
-            obj.reindexObject()
-
-        else:
-            obj_en = create_and_setup_object(
-                title, container_en, info, intl, "artwork", title_url, priref
-            )  # English version
-            # log_to_file(f"{ObjectNumber} English version of object is created")
-            if authors_en != "null":
-                for author in authors_en:
-                    relation.create(
-                        source=obj_en, target=author, relationship="authors"
-                    )
-
-            manager = ITranslationManager(obj_en)
-            if not manager.has_translation("nl"):
-                manager.register_translation("nl", brains[0].getObject())
-
-            # adding images
-            import_images(container=obj_en, object_id=info["en"]["Id"], headers=headers)
-            obj_en.hasImage = True
-
-            obj_en.reindexObject()
-
-    # Check if object with ObjectNumber already exists in the container
-    elif brains:
-        for brain in brains:
-            # Object exists, so we fetch it and update it
-            obj = brain.getObject()
-
-            # First clear all of the fields
-            schema = obj.getTypeInfo().lookupSchema()
-            fields = getFields(schema)
-
-            # Exclude these fields from clearing
-            exclude_fields = ["id", "UID", "title", "description", "authors"]
-
-            for field_name, field in fields.items():
-                if field_name not in exclude_fields:
-                    # Clear the field by setting it to its missing_value
-                    setattr(obj, field_name, field.missing_value)
-
-            # Update the object's fields with new data
-            lang = obj.language
-            for k, v in info[lang].items():
-                if v:
-                    setattr(obj, k, v)
-
-            for k, v in intl[lang].items():
-                if v:
-                    setattr(obj, k, json.dumps(v))
-
-            if lang == "nl":
-                if authors != "null":
-                    for author in authors:
-                        relation.delete(
-                            source=obj, target=author, relationship="authors"
-                        )
-                        relation.create(
-                            source=obj, target=author, relationship="authors"
-                        )
-
-            else:
-                if authors != "null":
-                    for author_en in authors_en:
-                        relation.delete(
-                            source=obj, target=author_en, relationship="authors"
-                        )
-                        relation.create(
-                            source=obj, target=author_en, relationship="authors"
-                        )
-
-            log_to_file(f"Object is updated: {priref} id and {title} title")
-
-            # adding images
-            import_images(container=obj, object_id=info["en"]["Id"], headers=headers)
-            obj.hasImage = True
-
-            # Reindex the updated object
-            obj.reindexObject()
-
-    # Object doesn't exist, so we create a new one
-    if not brains:
-        if not title:
-            title = "Untitled Object"  # default value for untitled objects
-
-        obj = create_and_setup_object(
-            title, container, info, intl, "artwork", title_url, priref
-        )  # Dutch version
-
-        # log_to_file(f"{ObjObjectNumberTxt} object is created")
-
-        # adding images
-
-        import_images(container=obj, object_id=info["en"]["Id"], headers=headers)
-        # obj.hasImage = True
-
-        obj_en = self.translate(obj, info["en"])
-
-        if authors != "null":
-            for author in authors:
-                relation.create(source=obj, target=author, relationship="authors")
-            for author_en in authors_en:
-                relation.create(source=obj_en, target=author_en, relationship="authors")
-
-    counter = counter + 1
 
 
 def create_and_setup_object(title, container, info, intl, object_type, obj_id, priref):
@@ -1345,8 +1068,6 @@ def import_authors(self, record):
             if creator.find("name") is not None:
                 name_parts = creator.find("name").text.split(",")
                 formatted_name = " ".join(name_parts[::-1])  # This reverses the order
-                log_to_file(f"normal name: {name_parts}")
-                log_to_file(f"formatted name: {formatted_name}")
             else:
                 formatted_name = "Unknown"
 
@@ -1455,29 +1176,34 @@ def format_production_dates(start_prec, start, end_prec, end, notes):
     return date_range
 
 
-def reset_fields(obj):
-    # Only keep the id of the item; all other fields can be reset
-    protected_fields = ["id"]
+def reset_artwork_fields(obj):
+    # Define the fields you want to preserve and not reset
+    preserved_fields = ["priref"]
 
-    # Iterate over all schemata for the object (to cover behaviors as well)
-    for schema in iterSchemata(obj):
-        for fieldname, field in getFieldsInOrder(schema):
-            if fieldname not in protected_fields:
-                # Determine the default 'empty' value for the field based on its type
-                if IRichText.providedBy(field):
-                    default_value = RichTextValue(
-                        raw="", mimeType="text/plain", outputMimeType="text/x-html-safe"
-                    )
-                elif IList.providedBy(field):
-                    default_value = []
-                elif IText.providedBy(field) or ITextLine.providedBy(field):
-                    default_value = ""
-                else:
-                    default_value = field.missing_value
+    # Iterate over all fields defined in the IArtwork schema
+    for fieldname in IArtwork:
+        # Skip over preserved fields
+        if fieldname in preserved_fields:
+            continue
 
-                # Reset the field value using the mutator if available or directly
-                mutator = getattr(obj, "set%s" % fieldname.capitalize(), None)
-                if mutator:
-                    mutator(default_value)
-                else:
-                    setattr(obj, fieldname, default_value)
+        # Access the field from the schema
+        field = IArtwork[fieldname]
+
+        # Determine the default 'empty' value for the field based on its type
+        if IRichText.providedBy(field):
+            default_value = RichTextValue(
+                raw="", mimeType="text/plain", outputMimeType="text/x-html-safe"
+            )
+        elif IList.providedBy(field):
+            default_value = []
+        elif IText.providedBy(field) or ITextLine.providedBy(field):
+            default_value = ""
+        else:
+            default_value = field.missing_value
+
+        # Reset the field value using the mutator if available or directly
+        mutator = getattr(obj, "set%s" % fieldname.capitalize(), None)
+        if mutator:
+            mutator(default_value)
+        else:
+            setattr(obj, fieldname, default_value)
