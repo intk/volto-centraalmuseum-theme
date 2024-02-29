@@ -815,12 +815,10 @@ class AdminFixes(BrowserView):
                 # Update the object's fields with new data
                 lang = obj.language
                 for k, v in info[lang].items():
-                    if v:
-                        setattr(obj, k, v)
+                    setattr(obj, k, v)
 
                 for k, v in intl[lang].items():
-                    if v:
-                        setattr(obj, k, json.dumps(v))
+                    setattr(obj, k, json.dumps(v))
 
                 if lang == "nl":
                     if authors != "null":
@@ -1255,6 +1253,7 @@ def import_images(container, images):
                         image=imagefield,
                         container=container,
                     )
+                    container.preview_image = imagefield
 
                     # if primaryDisplay == '1':
                     #     ordering = IExplicitOrdering(container)
