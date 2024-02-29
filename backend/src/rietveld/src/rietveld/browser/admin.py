@@ -27,6 +27,10 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
 from zope.schema import getFields
+from plone.dexterity.utils import iterSchemata
+from zope.schema import getFieldsInOrder
+from plone.app.textfield.value import RichTextValue
+from zope.schema.interfaces import IList, IText, ITextLine, IRichText
 
 import base64
 import io
@@ -799,6 +803,7 @@ class AdminFixes(BrowserView):
             for brain in brains:
                 # Object exists, so we fetch it and update it
                 obj = brain.getObject()
+                reset_fields(obj)
 
                 # First clear all of the fields
                 schema = obj.getTypeInfo().lookupSchema()
@@ -1446,3 +1451,28 @@ def format_production_dates(start_prec, start, end_prec, end, notes):
         date_range += f" ({notes})" if date_range else notes
     log_to_file(date_range)
     return date_range
+
+def reset_fields(obj):
+    # Only keep the id of the item; all other fields can be reset
+    protected_fields = ['id']
+
+    # Iterate over all schemata for the object (to cover behaviors as well)
+    for schema in iterSchemata(obj):
+        for fieldname, field in getFieldsInOrder(schema):
+            if fieldname not in protected_fields:
+                # Determine the default 'empty' value for the field based on its type
+                if IRichText.providedBy(field):
+                    default_value = RichTextValue(raw=u"", mimeType='text/plain', outputMimeType='text/x-html-safe')
+                elif IList.providedBy(field):
+                    default_value = []
+                elif IText.providedBy(field) or ITextLine.providedBy(field):
+                    default_value = u""
+                else:
+                    default_value = field.missing_value
+
+                # Reset the field value using the mutator if available or directly
+                mutator = getattr(obj, 'set%s' % fieldname.capitalize(), None)
+                if mutator:
+                    mutator(default_value)
+                else:
+                    setattr(obj, fieldname, default_value)
