@@ -64,7 +64,7 @@ const Search = (props) => {
     pathname = pathname.slice(0, -1);
   }
 
-  return authors.length < 1 ? null : (
+  return sortedItems.length < 2 ? null : (
     <div className="kijkverder">
       <Container id="page-search-artwork">
         <div id="page-search-title" className="page-search-title">
