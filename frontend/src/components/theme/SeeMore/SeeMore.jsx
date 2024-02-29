@@ -46,11 +46,11 @@ const Search = (props) => {
       portal_type: 'artwork',
       artwork_author: authorQueryString,
       path: currentPath,
-      metadata_fields: ['ObjDateFromTxt'],
+      metadata_fields: ['dating'],
     };
     searchContent('', options);
   };
-  const authors_text = authors.join(', ');
+  const authors_text = authors[0];
 
   const breakpointColumnsObj = {
     // default: 3,
@@ -65,46 +65,50 @@ const Search = (props) => {
   }
 
   return (
-    <Container id="page-search-artwork">
-      <div id="page-search-title" className="page-search-title">
-        <h1>{intl.formatMessage(messages.seemore)}</h1>
-      </div>
+    <div className="kijkverder">
+      <Container id="page-search-artwork">
+        <div id="page-search-title" className="page-search-title">
+          <h1>{intl.formatMessage(messages.seemore)}</h1>
+        </div>
 
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="search-items"
-        columnClassName="masonry-grid_column"
-        style={{ display: 'flex' }}
-      >
-        {authors.length !== 0 &&
-          sortedItems.slice(0, 20).map(
-            (item) =>
-              pathname !== item['@id'] && (
-                <div className="SeeMoreItem" key={item['@id']}>
-                  <ArtworkPreview {...item} />
-                  <UniversalLink item={item}>
-                    <div className="item_title">{item?.title}</div>
-                  </UniversalLink>
-                  <div className="description">
-                    <p>
-                      {authors_text && (
-                        <span className="item-description">{authors_text}</span>
-                      )}
-                      {authors_text && item.ObjDateFromTxt && (
-                        <span className="item-description">, </span>
-                      )}
-                      {item.ObjDateFromTxt && (
-                        <span className="item-description">
-                          {item.ObjDateFromTxt}
-                        </span>
-                      )}
-                    </p>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="search-items"
+          columnClassName="masonry-grid_column"
+          style={{ display: 'flex' }}
+        >
+          {authors.length !== 0 &&
+            sortedItems.slice(0, 20).map(
+              (item) =>
+                pathname !== item['@id'] && (
+                  <div className="SeeMoreItem" key={item['@id']}>
+                    <ArtworkPreview {...item} />
+                    <UniversalLink item={item}>
+                      <div className="item_title">{item?.title}</div>
+                    </UniversalLink>
+                    <div className="description">
+                      <p>
+                        {authors_text && (
+                          <span className="item-description">
+                            {authors_text}
+                          </span>
+                        )}
+                        {authors_text && item.dating && (
+                          <span className="item-description">, </span>
+                        )}
+                        {item.dating && (
+                          <span className="item-description">
+                            {String(item.dating.split('(')[0])}
+                          </span>
+                        )}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ),
-          )}
-      </Masonry>
-    </Container>
+                ),
+            )}
+        </Masonry>
+      </Container>
+    </div>
   );
 };
 
