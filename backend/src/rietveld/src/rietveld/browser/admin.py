@@ -11,6 +11,7 @@ from plone.app.multilingual.api import translate
 from plone.app.multilingual.interfaces import ITranslationManager
 from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityContent
+from plone.dexterity.utils import iterSchemata
 from plone.folder.interfaces import IExplicitOrdering
 from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
@@ -27,10 +28,11 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
 from zope.schema import getFields
-from plone.dexterity.utils import iterSchemata
 from zope.schema import getFieldsInOrder
-from plone.app.textfield.value import RichTextValue
-from zope.schema.interfaces import IList, IText, ITextLine, IRichText
+from zope.schema.interfaces import IList
+from zope.schema.interfaces import IRichText
+from zope.schema.interfaces import IText
+from zope.schema.interfaces import ITextLine
 
 import base64
 import io
@@ -1452,9 +1454,10 @@ def format_production_dates(start_prec, start, end_prec, end, notes):
     log_to_file(date_range)
     return date_range
 
+
 def reset_fields(obj):
     # Only keep the id of the item; all other fields can be reset
-    protected_fields = ['id']
+    protected_fields = ["id"]
 
     # Iterate over all schemata for the object (to cover behaviors as well)
     for schema in iterSchemata(obj):
@@ -1462,16 +1465,18 @@ def reset_fields(obj):
             if fieldname not in protected_fields:
                 # Determine the default 'empty' value for the field based on its type
                 if IRichText.providedBy(field):
-                    default_value = RichTextValue(raw=u"", mimeType='text/plain', outputMimeType='text/x-html-safe')
+                    default_value = RichTextValue(
+                        raw="", mimeType="text/plain", outputMimeType="text/x-html-safe"
+                    )
                 elif IList.providedBy(field):
                     default_value = []
                 elif IText.providedBy(field) or ITextLine.providedBy(field):
-                    default_value = u""
+                    default_value = ""
                 else:
                     default_value = field.missing_value
 
                 # Reset the field value using the mutator if available or directly
-                mutator = getattr(obj, 'set%s' % fieldname.capitalize(), None)
+                mutator = getattr(obj, "set%s" % fieldname.capitalize(), None)
                 if mutator:
                     mutator(default_value)
                 else:
