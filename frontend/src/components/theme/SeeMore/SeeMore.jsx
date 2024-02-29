@@ -33,13 +33,11 @@ const Search = (props) => {
     const authorTitle = content?.title;
     authors = [authorTitle];
   } else if (content['@type'] === 'artwork') {
-    authors =
-      content.authors?.map((author) => author?.title?.split('(')[0].trim()) ||
-      [];
+    authors = content.authors?.map((author) => author?.title || []);
   }
 
   let authorQueryString = authors.length
-    ? authors.map((author) => `"${author}"`).join(' || ')
+    ? authors.map((author) => `"${author}"`).join('OR')
     : undefined;
 
   const doSearch = () => {
