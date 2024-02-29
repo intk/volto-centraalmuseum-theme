@@ -64,7 +64,7 @@ const Search = (props) => {
     pathname = pathname.slice(0, -1);
   }
 
-  return (
+  return authors.length < 1 ? null : (
     <div className="kijkverder">
       <Container id="page-search-artwork">
         <div id="page-search-title" className="page-search-title">
@@ -77,35 +77,32 @@ const Search = (props) => {
           columnClassName="masonry-grid_column"
           style={{ display: 'flex' }}
         >
-          {authors.length !== 0 &&
-            sortedItems.slice(0, 20).map(
-              (item) =>
-                pathname !== item['@id'] && (
-                  <div className="SeeMoreItem" key={item['@id']}>
-                    <ArtworkPreview {...item} />
-                    <UniversalLink item={item}>
-                      <div className="item_title">{item?.title}</div>
-                    </UniversalLink>
-                    <div className="description">
-                      <p>
-                        {authors_text && (
-                          <span className="item-description">
-                            {authors_text}
-                          </span>
-                        )}
-                        {authors_text && item.dating && (
-                          <span className="item-description">, </span>
-                        )}
-                        {item.dating && (
-                          <span className="item-description">
-                            {String(item.dating.split('(')[0])}
-                          </span>
-                        )}
-                      </p>
-                    </div>
+          {sortedItems.slice(0, 20).map(
+            (item) =>
+              pathname !== item['@id'] && (
+                <div className="SeeMoreItem" key={item['@id']}>
+                  <ArtworkPreview {...item} />
+                  <UniversalLink item={item}>
+                    <div className="item_title">{item?.title}</div>
+                  </UniversalLink>
+                  <div className="description">
+                    <p>
+                      {authors_text && (
+                        <span className="item-description">{authors_text}</span>
+                      )}
+                      {authors_text && item.dating && (
+                        <span className="item-description">, </span>
+                      )}
+                      {item.dating && (
+                        <span className="item-description">
+                          {String(item.dating.split('(')[0])}
+                        </span>
+                      )}
+                    </p>
                   </div>
-                ),
-            )}
+                </div>
+              ),
+          )}
         </Masonry>
       </Container>
     </div>
