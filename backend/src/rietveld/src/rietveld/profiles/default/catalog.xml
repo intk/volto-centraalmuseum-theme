@@ -51,6 +51,13 @@
     <indexed_attr value="artwork_date" />
   </index>
 
+  <index meta_type="FieldIndex"
+         name="dating"
+  >
+    <indexed_attr value="dating" />
+  </index>
+
   <column value="artwork_date"/>
+  <column value="dating"/>
   <column value="artwork_author"/>
 </object>
