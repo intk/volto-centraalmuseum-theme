@@ -14,6 +14,7 @@ from plone.app.textfield.value import RichTextValue
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.utils import iterSchemata
 from plone.folder.interfaces import IExplicitOrdering
+from plone.i18n.normalizer import idnormalizer
 from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
@@ -132,8 +133,8 @@ class AdminFixes(BrowserView):
         api_answer = response.text
         api_answer_bytes = api_answer.encode("utf-8")
 
-        container = get_base_folder(self.context, "artwork")
-        container_en = get_base_folder(self.context, "artwork_en")
+        container = get_base_folder(self.context, collection_type)
+        container_en = get_base_folder(self.context, f"{collection_type}_en")
         site = api.portal.get()
         catalog = site.portal_catalog
 
@@ -150,6 +151,8 @@ class AdminFixes(BrowserView):
 
         # Find the title element
         title_element = tree.find(".//record/Title/title")
+
+        creator_for_title = get_creator(xml_record=tree)
 
         # record_text = tree.findtext(".//record")
 
@@ -446,7 +449,7 @@ class AdminFixes(BrowserView):
         documentation_info = []
         for documentation in documentations:
             # Extracting data
-            title = documentation.findtext(".//Title/title")
+            title_documentation = documentation.findtext(".//Title/title")
             statement_of_responsibility = documentation.findtext(
                 ".//statement_of_responsibility"
             )
@@ -486,7 +489,7 @@ class AdminFixes(BrowserView):
 
             # Building the documentation string
             documentation_components = [
-                title,
+                title_documentation,
                 statement_of_responsibility,
                 source_details,
                 source_pagination,
@@ -750,7 +753,18 @@ class AdminFixes(BrowserView):
             .replace(" ", "-")
             .lower()
         )
-        title_url = f"{object_number_stripped}-{title_stripped}"
+        # title_url = f"{object_number_stripped}-{title_stripped}"
+
+        object_number_ascii = object_number_stripped.encode("ascii", "ignore").decode(
+            "ascii"
+        )
+        title_ascii = title_stripped.encode("ascii", "ignore").decode("ascii")
+        creator_ascii = creator_for_title.encode("ascii", "ignore").decode("ascii")
+        dirty_id = f"{object_number_ascii} {title_ascii} {creator_ascii}"
+        log_to_file(f"obj number {object_number_ascii}")
+        log_to_file(f"title {title}")
+        log_to_file(f"creator_asci {creator_ascii}")
+        title_url = idnormalizer.normalize(dirty_id, max_length=len(dirty_id))
 
         # images
         images = tree.findall(".//Reproduction/reproduction.reference/reference_number")
@@ -1207,3 +1221,28 @@ def reset_artwork_fields(obj):
             mutator(default_value)
         else:
             setattr(obj, fieldname, default_value)
+
+
+def get_creator(xml_record):
+    log_to_file(f"this is the xml recor {xml_record}")
+    # Using a more streamlined approach to navigate through the XML structure
+    creator_element = xml_record.find(".//Production/creator/name")
+
+    log_to_file(f"this is the creator_element {creator_element}")
+
+    # Checking if the element exists
+    if creator_element is not None:
+        creator = creator_element.text
+        creator_split = creator.split(",")
+
+        if len(creator_split) > 1:
+            first_name = creator_split[1].strip()
+            last_name = creator_split[0].strip()
+            # Using the format method for string formatting
+            name = "{} {}".format(first_name, last_name)
+            return name
+        else:
+            # Directly returning the creator if there's no comma to split the name
+            return creator
+    # Returning None if the creator element doesn't exist
+    return None
