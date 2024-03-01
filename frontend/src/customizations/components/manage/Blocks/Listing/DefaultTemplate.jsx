@@ -60,7 +60,24 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                   <UniversalLink item={item}>{item.title}</UniversalLink>
                 </h2>
                 {item.description && <p>{item.description}</p>}
-                {item['@type'] === 'artwork' ? item?.dating && item.dating : ''}
+                <div className="description">
+                  <p>
+                    {item.artwork_author && (
+                      <span className="item-description">
+                        {item.artwork_author[0]}
+                      </span>
+                    )}
+                    {item.artwork_author && item.dating && (
+                      <span className="item-description">, </span>
+                    )}
+                    {item.dating && (
+                      <span className="item-description">
+                        {String(item.dating.split('(')[0])}
+                      </span>
+                    )}
+                  </p>
+                </div>
+                {console.log(item)}
               </div>
             </div>
           ))}
