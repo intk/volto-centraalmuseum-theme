@@ -77,7 +77,6 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                     )}
                   </p>
                 </div>
-                {console.log(item)}
               </div>
             </div>
           ))}
