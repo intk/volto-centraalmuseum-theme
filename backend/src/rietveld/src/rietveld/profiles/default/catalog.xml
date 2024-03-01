@@ -57,7 +57,7 @@
     <indexed_attr value="dating" />
   </index>
 
-  <column value="artwork_date"/>
-  <column value="dating"/>
-  <column value="artwork_author"/>
+  <column value="artwork_date" />
+  <column value="dating" />
+  <column value="artwork_author" />
 </object>
