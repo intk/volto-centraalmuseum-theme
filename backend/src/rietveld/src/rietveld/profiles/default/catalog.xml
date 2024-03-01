@@ -44,4 +44,13 @@
   >
     <indexed_attr value="authorID" />
   </index>
+
+  <index meta_type="FieldIndex"
+         name="artwork_date"
+  >
+    <indexed_attr value="artwork_date" />
+  </index>
+
+  <column value="artwork_date"/>
+  <column value="artwork_author"/>
 </object>

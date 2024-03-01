@@ -168,4 +168,6 @@ class IArtwork(model.Schema):
     searchable(
         remarks,
         priref,
+        dating,
+        authors,
     )

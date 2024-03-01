@@ -22,3 +22,8 @@ def artwork_author(obj):
         title = target_object.Title().strip()  # Strip leading and trailing spaces
         titles.append(title)
     return titles
+
+
+@indexer(IArtwork)
+def artwork_date(obj):
+    return obj.dating
