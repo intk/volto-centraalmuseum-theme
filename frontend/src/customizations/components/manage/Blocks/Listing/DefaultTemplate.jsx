@@ -60,6 +60,7 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                   <UniversalLink item={item}>{item.title}</UniversalLink>
                 </h2>
                 {item.description && <p>{item.description}</p>}
+                {item['@type'] === 'artwork' ? item?.dating && item.dating : ''}
               </div>
             </div>
           ))}
