@@ -1120,7 +1120,7 @@ body.artwork-listing-page{
     }
     @media screen and (min-width:992px){
       font-size: 60px !important;
-      margin-top: 38px !important;
+      margin-top: 39px !important;
       margin-bottom: 17px !important;
     }
   }
@@ -1132,7 +1132,7 @@ body.artwork-listing-page{
       padding: 0px 123px 0px 123px !important;
     }
     @media screen and (min-width: 992px){
-      padding-right: 94.5px !important;
+      padding-right: 93.5px !important;
       padding-left: 107.5px !important;
     }
   }
