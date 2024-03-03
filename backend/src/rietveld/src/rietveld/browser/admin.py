@@ -330,9 +330,12 @@ class AdminFixes(BrowserView):
         # Creating Artists
         creators = tree.findall(".//Production")
 
-        creator_info = []
-        base_url_creator = "/nl/maker/"
-        base_url_role = "/nl/@@search?creator_role="
+        creator_info_nl = []
+        creator_info_en = []
+        base_url_creator_nl = "/nl/maker/"
+        base_url_role_nl = "/nl/@@search?creator_role="
+        base_url_creator_en = "/en/creator/"
+        base_url_role_en = "/en/@@search?creator_role="
 
         for production in creators:
             creator = production.find(".//creator")
@@ -358,14 +361,19 @@ class AdminFixes(BrowserView):
             url = creator.findtext(".//Internet_address/url")
 
             # Creating dynamic links
-            # name_link = f'<a href="{base_url_creator}{name.replace(" ", "-").lower()}">{name}</a>'
-            # role_link = (
-            #     f'<a href="{base_url_role}{role.replace(" ", "-").lower()}">{role}</a>'
-            # )
-            name_link = f"<span>{name}</span>"
-            role_link = f"<span>{role}</span>"
+            name_link_nl = f'<a href="{base_url_creator_nl}{name.replace(" ", "-").lower()}">{name}</a>'
+            role_link_nl = (
+                f'<a href="{base_url_role_nl}{role.replace(" ", "-").lower()}">{role}</a>'
+            )
+            name_link_en = f'<a href="{base_url_creator_en}{name.replace(" ", "-").lower()}">{name}</a>'
+            role_link_en = (
+                f'<a href="{base_url_role_en}{role.replace(" ", "-").lower()}">{role}</a>'
+            )
+            # name_link = f"<span>{name}</span>"
+            # role_link = f"<span>{role}</span>"
 
-            formatted_name = f"{qualifier} {name_link}" if qualifier else name_link
+            formatted_name_nl = f"{qualifier} {name_link_nl}" if qualifier else name_link_nl
+            formatted_name_en = f"{qualifier} {name_link_en}" if qualifier else name_link_en
 
             # Formatting the lifespan
             lifespan = ""
@@ -381,24 +389,34 @@ class AdminFixes(BrowserView):
                 lifespan = f" ({death_date} {death_place})".strip()
 
             # Constructing the final string
-            creator_str = f"{formatted_name} ({role_link}) {lifespan}"
+            creator_str_nl = f"{formatted_name_nl} ({role_link_nl}) {lifespan}"
+            creator_str_en = f"{formatted_name_en} ({role_link_en}) {lifespan}"
 
-            creator_info.append(creator_str)
+            creator_info_nl.append(creator_str_nl)
+            creator_info_en.append(creator_str_en)
 
         # Join the creator info into a single HTML string
-        creator_info_html = (
-            "<div>" + "".join(f"<p>{info}</p>" for info in creator_info) + "</div>"
+        creator_info_html_nl = (
+            "<div>" + "".join(f"<p>{info}</p>" for info in creator_info_nl) + "</div>"
+        )
+        creator_info_html_en = (
+            "<div>" + "".join(f"<p>{info}</p>" for info in creator_info_en) + "</div>"
         )
 
         # Convert to RichText
-        creators_richtext = RichTextValue(
-            raw=creator_info_html,
+        creators_richtext_nl = RichTextValue(
+            raw=creator_info_html_nl,
+            mimeType="text/html",
+            outputMimeType="text/x-html-safe",
+        )
+        creators_richtext_en = RichTextValue(
+            raw=creator_info_html_en,
             mimeType="text/html",
             outputMimeType="text/x-html-safe",
         )
 
-        info["nl"]["creator"] = creators_richtext
-        info["en"]["creator"] = creators_richtext
+        info["nl"]["creator"] = creators_richtext_nl
+        info["en"]["creator"] = creators_richtext_en
 
         # Creating Dimensions
         dimensions = tree.findall(".//Dimension")
