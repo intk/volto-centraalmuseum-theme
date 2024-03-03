@@ -362,18 +362,18 @@ class AdminFixes(BrowserView):
 
             # Creating dynamic links
             name_link_nl = f'<a href="{base_url_creator_nl}{name.replace(" ", "-").lower()}">{name}</a>'
-            role_link_nl = (
-                f'<a href="{base_url_role_nl}{role.replace(" ", "-").lower()}">{role}</a>'
-            )
+            role_link_nl = f'<a href="{base_url_role_nl}{role.replace(" ", "-").lower()}">{role}</a>'
             name_link_en = f'<a href="{base_url_creator_en}{name.replace(" ", "-").lower()}">{name}</a>'
-            role_link_en = (
-                f'<a href="{base_url_role_en}{role.replace(" ", "-").lower()}">{role}</a>'
-            )
+            role_link_en = f'<a href="{base_url_role_en}{role.replace(" ", "-").lower()}">{role}</a>'
             # name_link = f"<span>{name}</span>"
             # role_link = f"<span>{role}</span>"
 
-            formatted_name_nl = f"{qualifier} {name_link_nl}" if qualifier else name_link_nl
-            formatted_name_en = f"{qualifier} {name_link_en}" if qualifier else name_link_en
+            formatted_name_nl = (
+                f"{qualifier} {name_link_nl}" if qualifier else name_link_nl
+            )
+            formatted_name_en = (
+                f"{qualifier} {name_link_en}" if qualifier else name_link_en
+            )
 
             # Formatting the lifespan
             lifespan = ""
