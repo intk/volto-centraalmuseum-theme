@@ -6,6 +6,7 @@ import installVideoPageBlock from './VideoPageBlock';
 import installVimeoBlock from './VimeoBlock';
 import installObjectBlock from './ObjectBlock';
 import installSeethehouseBlock from './SeethehouseBlock';
+import installListingBlock from './Listing';
 import { compose } from 'redux';
 
 const installBlocks = (config) => {
@@ -18,6 +19,7 @@ const installBlocks = (config) => {
     installVimeoBlock,
     installSeethehouseBlock,
     installObjectBlock,
+    installListingBlock,
   )(config);
 };
 
