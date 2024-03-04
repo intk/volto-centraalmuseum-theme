@@ -30,7 +30,7 @@ const SelectFacet = (props) => {
     <div className="select-facet">
       <Header as="h4">{facet.title ?? facet?.field?.label}</Header>
       <Select
-        placeholder={`Typ om te zoeken`}
+        placeholder={`Type om te zoeken`}
         className="react-select-container"
         classNamePrefix="react-select"
         options={choices}
