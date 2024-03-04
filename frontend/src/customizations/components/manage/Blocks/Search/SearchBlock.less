@@ -522,7 +522,7 @@
         }
 
     .Search-main-button {
-      padding: 17px 29px 12px;
+      padding: 17px 29.4px 12px;
       border: 1px solid #282931;
       margin-top: 41px;
       margin-left: 10px;
@@ -552,6 +552,41 @@
 
     .react-select__menu {
       width: 99%;
+    }
+
+    .listing-items {
+      display: flex !important;
+      flex-direction: column !important;
+      padding-bottom: 16px;
+      padding-top: 16px;
+
+      @media screen and (min-width: 768px) {
+        flex-direction: row !important;
+      }
+
+      .jaarverslag-title {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        color: #b6a782;
+        font-family: 'StyreneRegular', Arial, sans-serif;
+        font-size: 19px;
+        letter-spacing: 0em;
+        line-height: 25px;
+        // color: var(--bonnefanten-primary);
+      }
+
+      a {
+        max-width: 100% !important;
+        margin-right: 50px;
+
+        @media screen and (min-width: 768px) {
+          max-width: 41.6% !important;
+        }
+
+        @media screen and (min-width: 1200px) {
+          max-width: 25% !important;
+        }
+      }
     }
   }
   }
