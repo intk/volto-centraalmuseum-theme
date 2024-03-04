@@ -10,4 +10,15 @@
       name="artwork_author"
       />
 
+  <adapter
+      factory=".indexes.artwork_author_vocab"
+      name="artwork_author_vocab"
+      />
+
+  <adapter
+      factory=".indexes.artwork_material"
+      name="artwork_material"
+      />
+
+
 </configure>

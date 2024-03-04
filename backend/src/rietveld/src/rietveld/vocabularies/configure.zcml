@@ -1,10 +1,14 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-  <!-- Example vocabulary
   <utility
-      name="rietveld.vocabulary.industries"
-      component=".industries_vocabulary"
+      name="artwork_author_vocab"
+      component=".searchindex.artwork_authorVocabularyFactory"
       />
-   -->
+
+    <utility
+      name="artwork_material"
+      component=".searchindex.artwork_materialVocabularyFactory"
+      />
+
 
 </configure>

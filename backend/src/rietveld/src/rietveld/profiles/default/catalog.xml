@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object name="portal_catalog">
-  <!-- Index
-  <index meta_type="FieldIndex"
-         name="industry"
-  >
-    <indexed_attr value="industry" />
-  </index>
--->
-  <!-- Metadata
-  <column value="industry" />
--->
   <index meta_type="FieldIndex"
          name="priref"
   >
     <indexed_attr value="priref" />
   </index>
-  <!--
-  <index meta_type="ZCTextIndex"
-         name="object_remarks"
-  >
-    <indexed_attr value="object_remarks" />
-    <extra name="index_type"
-           value="Okapi BM25 Rank"
-    />
-    <extra name="lexicon_id"
-           value="plone_lexicon"
-    />
-  </index> -->
   <index meta_type="ZCTextIndex"
          name="artwork_author"
   >
@@ -51,13 +29,21 @@
     <indexed_attr value="artwork_date" />
   </index>
 
-  <index meta_type="FieldIndex"
-         name="dating"
+  <index meta_type="KeywordIndex"
+         name="artwork_material"
   >
-    <indexed_attr value="dating" />
+    <indexed_attr value="artwork_material" />
+  </index>
+
+  <index meta_type="KeywordIndex"
+         name="artwork_author_vocab"
+  >
+    <indexed_attr value="artwork_author_vocab" />
   </index>
 
   <column value="artwork_date" />
   <column value="dating" />
   <column value="artwork_author" />
+  <column value="artwork_author_vocab" />
+  <column value="artwork_material" />
 </object>
