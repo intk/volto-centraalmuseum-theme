@@ -22,7 +22,7 @@ const AdvancedSearchTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   }
   return (
     <>
-      {/* <BodyClass className="artwork-listing-page" /> */}
+      <BodyClass className="artwork-listing-page" />
       <div id="page-listing">
         <section id="content-core">
           {items.map((item) => (
