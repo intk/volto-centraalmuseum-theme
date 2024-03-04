@@ -5,12 +5,14 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
+
 @implementer(IVocabularyFactory)
 class KeywordsVocabulary(BKV):
     """KeywordsVocabulary"""
 
     def __init__(self, index):
         self.keyword_index = index
+
 
 @implementer(IVocabularyFactory)
 class ArtworkMaterialVocabulary(KeywordsVocabulary):

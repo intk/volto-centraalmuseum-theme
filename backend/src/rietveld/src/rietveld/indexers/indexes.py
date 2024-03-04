@@ -23,6 +23,7 @@ def artwork_author(obj):
         titles.append(title)
     return titles
 
+
 @indexer(IArtwork)
 def artwork_author_vocab(obj):
     relations = getattr(obj, "authors", [])
@@ -34,6 +35,7 @@ def artwork_author_vocab(obj):
         title = target_object.Title().strip()  # Strip leading and trailing spaces
         titles.append(title)
     return titles
+
 
 @indexer(IArtwork)
 def artwork_material(obj):

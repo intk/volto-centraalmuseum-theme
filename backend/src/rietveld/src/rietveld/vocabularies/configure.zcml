@@ -5,7 +5,7 @@
       component=".searchindex.artwork_authorVocabularyFactory"
       />
 
-    <utility
+  <utility
       name="artwork_material"
       component=".searchindex.artwork_materialVocabularyFactory"
       />
