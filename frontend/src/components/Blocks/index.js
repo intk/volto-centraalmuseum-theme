@@ -7,6 +7,8 @@ import installVimeoBlock from './VimeoBlock';
 import installObjectBlock from './ObjectBlock';
 import installSeethehouseBlock from './SeethehouseBlock';
 import installListingBlock from './Listing';
+import installAdvancedSearch from './AdvancedSearch';
+import installSearchBlock from './Search';
 import { compose } from 'redux';
 
 const installBlocks = (config) => {
@@ -20,6 +22,8 @@ const installBlocks = (config) => {
     installSeethehouseBlock,
     installObjectBlock,
     installListingBlock,
+    installAdvancedSearch,
+    installSearchBlock,
   )(config);
 };
 

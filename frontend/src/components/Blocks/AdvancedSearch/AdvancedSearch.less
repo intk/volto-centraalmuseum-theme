@@ -1,0 +1,97 @@
+#advancedsearchblock{
+  #search-page{
+    margin-top:-30px;
+    width: auto !important;
+
+    @media screen and (min-width: 768px) {
+      margin-left: 13.5px;
+      margin-right: 13.5px;
+      margin-top: 57px;
+    }
+
+    @media screen and (min-width: 992px) {
+      margin-left: 5%;
+      margin-right: 5%;
+      padding-right: 13px;
+      padding-left: 13.5px;
+      margin-top: 35px;
+    }
+  }
+  .searchbar{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+
+    @media screen and (min-width: 992px){
+      flex-direction: row;
+    }
+
+  }
+  .text-input-facet{
+    flex-grow: 1;
+    .ui.input{
+      width: 100%;
+      margin-bottom: 15px;
+          @media screen and (min-width: 992px) {
+            margin-bottom: 0px;
+          }
+    }
+  }
+  .text-input-facet input{
+    // height: 58px;
+    width: 100% !important;
+    font-family: 'StyreneBold', Arial, sans-serif;
+    font-size: 17px;
+    padding: 16px 20px;
+  }
+  .text-input-facet input::placeholder{
+    font-size: 17px;
+  }
+
+  .Search-main-button{
+    border-radius: 0%;
+    color: var(--bonnefanten-bg) !important;
+    background-color: var(--bonnefanten-primary) !important;
+    clip-path: polygon(0% 10px, 10px 0%, calc(100%) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100%));
+    padding: 16px 28px;
+    border: 2px solid var(--bonnefanten-primary);
+    font-family: 'StyreneBold', Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    @media screen and (min-width: 992px) {
+      width: 19%;
+      margin-left: 10px;
+      padding: 12px 28px;
+    }
+    @media screen and (min-width: 1300px) {
+      margin-left: 13px;
+    }
+  }
+  .Search-main-button:hover{
+  background-color: var(--bonnefanten-bg) !important;
+  color: var(--bonnefanten-primary) !important;
+  clip-path: none;
+  }
+  .react-select__indicator .icon path{
+    fill: var(--bonnefanten-primary) !important;
+  }
+  .react-select__menu{
+    width: 99%;
+  }
+  .link-to-search {
+    margin-top: 25px;
+    margin-bottom: 0px;
+    @media screen and (min-width: 992px) {
+      margin-top: 2px;
+    }
+    a{
+      border-bottom: 1px solid #b6a782;
+      text-decoration: none;
+      font-size: 16px;
+      letter-spacing: 0.00em;
+      color: #b6a782 !important;
+      text-decoration: none !important;
+    }
+  }
+}
+
