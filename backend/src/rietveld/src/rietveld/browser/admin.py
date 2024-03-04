@@ -362,9 +362,9 @@ class AdminFixes(BrowserView):
 
             # Creating dynamic links
             name_link_nl = f'<a href="{base_url_creator_nl}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-            role_link_nl = f'<a href="{base_url_role_nl}{role.replace(" ", "-").lower()}">{role}</a>'
+            role_link_nl = f'<a href="{base_url_role_nl}{role}">{role}</a>'
             name_link_en = f'<a href="{base_url_creator_en}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-            role_link_en = f'<a href="{base_url_role_en}{role.replace(" ", "-").lower()}">{role}</a>'
+            role_link_en = f'<a href="{base_url_role_en}{role}">{role}</a>'
             # name_link = f"<span>{name}</span>"
             # role_link = f"<span>{role}</span>"
 
