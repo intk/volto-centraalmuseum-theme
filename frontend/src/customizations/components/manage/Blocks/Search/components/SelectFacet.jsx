@@ -10,7 +10,7 @@ import {
   selectFacetSchemaEnhancer,
   selectFacetStateToValue,
   selectFacetValueToQuery,
-} from '../../../../../../components/blocks/Search/base';
+} from '@package/components/Blocks/Search/base';
 import { Header } from 'semantic-ui-react';
 
 const SelectFacet = (props) => {
