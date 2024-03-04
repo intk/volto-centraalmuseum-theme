@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-02-28T13:28:49.802Z\n"
+"POT-Creation-Date: 2024-03-04T09:34:09.327Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -12,6 +12,21 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
+
+#: components/Blocks/Search/SortOn
+# defaultMessage: Ascending
+msgid "Ascending"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Base search query
+msgid "Base search query"
+msgstr ""
+
+#: components/Blocks/Search/FilterList
+# defaultMessage: Clear filters
+msgid "Clear filters"
+msgstr ""
 
 #: components/Blocks/SiteData/schema
 # defaultMessage: Image of the first column
@@ -53,9 +68,64 @@ msgstr ""
 msgid "Column Two Title Link"
 msgstr ""
 
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Controls
+msgid "Controls"
+msgstr ""
+
+#: components/Blocks/Search/FilterList
+# defaultMessage: Current filters applied
+msgid "Current filters applied"
+msgstr ""
+
+#: components/Blocks/Search/SortOn
+# defaultMessage: Descending
+msgid "Descending"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Facet
+msgid "Facet"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Facet widget
+msgid "Facet widget"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Facets
+msgid "Facets"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Field
+msgid "Field"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Headline
+msgid "Headline"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Hidden facets will still filter the results if proper parameters are passed in URLs
+msgid "Hidden facets will still filter the results if proper parameters are passed in URLs"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Hide facet?
+msgid "Hide facet?"
+msgstr ""
+
 #: components/Blocks/SiteData/schema
 # defaultMessage: Image caption
 msgid "ImageCaption"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Label
+msgid "Label"
 msgstr ""
 
 #: components/Blocks/SeethehouseBlock/SeethehouseBlockView
@@ -63,6 +133,18 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Multiple choices?
+msgid "Multiple choices?"
+msgstr ""
+
+#: components/Blocks/Search/SortOn
+# defaultMessage: No selection
+msgid "No selection"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/Search/TopFiltersLayout
 #: components/theme/Search/NotFoundSearch
 #: components/theme/Search/SearchBar
 # defaultMessage: Search
@@ -74,9 +156,49 @@ msgstr ""
 msgid "Search Site"
 msgstr ""
 
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Search block
+msgid "Search block"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Search button label
+msgid "Search button label"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Search input label
+msgid "Search input label"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Section title
+msgid "Section title"
+msgstr ""
+
 #: components/Blocks/SeethehouseBlock/SeethehouseBlockView
 # defaultMessage: Would you like to see the house with your own eyes?
 msgid "Seewithyourowneyes"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Show search button?
+msgid "Show search button?"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Show search input?
+msgid "Show search input?"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Show sorting?
+msgid "Show sorting?"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Show total results
+msgid "Show total results"
 msgstr ""
 
 #: components/Blocks/SiteData/schema
@@ -89,6 +211,21 @@ msgstr ""
 msgid "Site Logo"
 msgstr ""
 
+#: components/Blocks/Search/SortOn
+# defaultMessage: Sort
+msgid "Sort"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Sort on options
+msgid "Sort on options"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: The button presence disables the live search, the query is issued when you press ENTER
+msgid "The button presence disables the live search, the query is issued when you press ENTER"
+msgstr ""
+
 #: components/Blocks/SeethehouseBlock/SeethehouseBlockView
 # defaultMessage: Tickets
 msgid "Ticket"
@@ -97,6 +234,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Verwerving
 msgid "acquisition"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/AdvancedSearchView
+# defaultMessage: Geavanceerd zoeken...
+msgid "advancedsearchlink"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -112,6 +254,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Geassocieerde periode
 msgid "associatedPeriods"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Available views
+msgid "availableViews"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -304,4 +451,19 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Titel
 msgid "title"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/schema
+# defaultMessage: Views
+msgid "views"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/AdvancedSearchView
+# defaultMessage: Zoeken
+msgid "zoeken"
+msgstr ""
+
+#: components/Blocks/AdvancedSearch/AdvancedSearchView
+# defaultMessage: Zoek in de collectie
+msgid "zoekindecollectie"
 msgstr ""
