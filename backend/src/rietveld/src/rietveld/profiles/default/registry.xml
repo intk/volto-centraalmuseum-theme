@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="rietveld"
+>
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+           prefix="plone.app.querystring.field.artwork_author"
+  >
+    <value key="title">Artwork's Author</value>
+    <value key="description" />
+    <value key="enabled">True</value>
+    <value key="sortable">True</value>
+    <value key="operations">
+      <element>plone.app.querystring.operation.string.contains</element>
+      <element>plone.app.querystring.operation.string.is</element>
+      <element>plone.app.querystring.operation.string.isNot</element>
+    </value>
+    <value key="group"
+           i18n:translate=""
+    >rietveld</value>
+    <value key="vocabulary">artwork_author</value>
+  </records>
+</registry>
