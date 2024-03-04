@@ -333,15 +333,40 @@
     #page-document.ui.container{
       // width: 100% !important;
       // max-width: 1300px !important;
-      @media screen and (min-width:1200px){
-        width: 1170px !important;
+      width: auto !important;
+      margin-left: 4% !important;
+      margin-right: 4% !important;
+      @media screen and (min-width:768px) {
+        width: 750px !important;
         margin-right: auto !important;
         margin-left: auto !important;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 2px;
+        padding-left: 2px;
+      }
+      @media screen and (min-width:992px) {
+        width: 970px !important;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+      @media screen and (min-width:1200px){
+        width: 1170px !important;
+      }
 
-        h1.documentFirstHeading{
+      h1.documentFirstHeading {
+        text-align: center;
+        margin-top: 56px;
+        font-size: 40px;
+        margin-bottom: 35px !important;
+        @media screen and (min-width: 768px) {
+          margin-bottom: 18px !important;
+          margin-top: 20px !important;
+          font-size: 80px;
+        }
+        @media screen and (min-width: 992px){
           margin-top: 9.5px !important;
+        }
+
+        @media screen and (min-width: 1200px) {
           margin-left: 9% !important;
           margin-right: auto !important;
         }
@@ -355,15 +380,7 @@
       }
     }
     .search-wrapper {
-      padding-bottom: 41px;
-
-      @media screen and (min-width: 768px) {
-        padding-bottom: 41px;
-      }
-
-      @media screen and (min-width: 992px) {
-        padding-bottom: 20px;
-      }
+      padding-bottom: 20px;
     }
     .search-input-actions, .react-select__indicator{
       display: none;
