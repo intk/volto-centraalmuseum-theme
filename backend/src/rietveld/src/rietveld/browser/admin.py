@@ -333,9 +333,9 @@ class AdminFixes(BrowserView):
         creator_info_nl = []
         creator_info_en = []
         base_url_creator_nl = "/nl/maker/"
-        base_url_role_nl = "/nl/@@search?artwork_author_role="
+        base_url_role_nl = "/nl/search?artwork_author_role="
         base_url_creator_en = "/en/creator/"
-        base_url_role_en = "/en/@@search?artwork_author_role="
+        base_url_role_en = "/en/search?artwork_author_role="
         author_roles_list = []
         author_qualifiers_list = []
 
