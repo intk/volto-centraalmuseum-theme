@@ -1134,6 +1134,12 @@ def import_authors(self, record):
                 authors.append(author_nl)
                 content.transition(obj=author_nl, transition="publish")
             else:
+                for brain in found_nl:
+                    author_nl = brain.getObject()
+                    # Update the object's fields here
+                    for key, value in author_info.items():
+                        setattr(author_nl, key, value)
+                    author_nl.reindexObject()
                 authors.extend([brain.getObject() for brain in found_nl])
 
             # Create or append EN author
@@ -1153,6 +1159,12 @@ def import_authors(self, record):
                     if not manager.has_translation("en"):
                         manager.register_translation("en", author_en)
             else:
+                for brain in found_en:
+                    author_en = brain.getObject()
+                    # Update the object's fields here
+                    for key, value in author_info.items():
+                        setattr(author_en, key, value)
+                    author_en.reindexObject()
                 authors_en.extend([brain.getObject() for brain in found_en])
 
     return authors, authors_en
