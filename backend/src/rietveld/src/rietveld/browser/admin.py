@@ -1254,11 +1254,8 @@ def reset_artwork_fields(obj):
 
 
 def get_creator(xml_record):
-    log_to_file(f"this is the xml recor {xml_record}")
     # Using a more streamlined approach to navigate through the XML structure
     creator_element = xml_record.find(".//Production/creator/name")
-
-    log_to_file(f"this is the creator_element {creator_element}")
 
     # Checking if the element exists
     if creator_element is not None:
