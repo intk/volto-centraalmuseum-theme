@@ -149,6 +149,11 @@ class IArtwork(model.Schema):
         value_type=TextLine(),
         required=False,
     )
+    authorQualifiers = List(
+        title="Author Qualifiers",
+        value_type=TextLine(),
+        required=False,
+    )
     form_directives.widget(
         "authors",
         RelatedItemsFieldWidget,

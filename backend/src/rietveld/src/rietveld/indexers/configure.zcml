@@ -25,4 +25,9 @@
       name="artwork_author_role"
       />
 
+  <adapter
+      factory=".indexes.artwork_author_qualifier"
+      name="artwork_author_qualifier"
+      />
+
 </configure>

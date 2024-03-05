@@ -337,6 +337,7 @@ class AdminFixes(BrowserView):
         base_url_creator_en = "/en/creator/"
         base_url_role_en = "/en/@@search?creator_role="
         author_roles_list = []
+        author_qualifiers_list = []
 
         for production in creators:
             creator = production.find(".//creator")
@@ -345,6 +346,9 @@ class AdminFixes(BrowserView):
 
             if role is not None:
                 author_roles_list.append(role)
+
+            if qualifier is not None:
+                author_qualifiers_list.append(qualifier)
 
             name = creator.findtext(".//name")
             # Handle the name order
@@ -424,6 +428,10 @@ class AdminFixes(BrowserView):
 
         info["nl"]["authorRoles"] = author_roles_list
         info["en"]["authorRoles"] = author_roles_list
+
+        info["nl"]["authorQualifiers"] = author_qualifiers_list
+        info["en"]["authorQualifiers"] = author_qualifiers_list
+
         # Creating Dimensions
         dimensions = tree.findall(".//Dimension")
 

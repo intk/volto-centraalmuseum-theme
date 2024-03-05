@@ -15,5 +15,10 @@
       component=".searchindex.artwork_author_roleVocabularyFactory"
       />
 
+  <utility
+      name="artwork_author_qualifier"
+      component=".searchindex.artwork_author_qualifierVocabularyFactory"
+      />
+
 
 </configure>

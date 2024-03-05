@@ -47,10 +47,17 @@
     <indexed_attr value="artwork_author_role" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="artwork_author_qualifier"
+  >
+    <indexed_attr value="artwork_author_qualifier" />
+  </index>
+
   <column value="artwork_date" />
   <column value="dating" />
   <column value="artwork_author" />
   <column value="artwork_author_vocab" />
   <column value="artwork_author_role" />
+  <column value="artwork_author_qualifier" />
   <column value="artwork_material" />
 </object>
