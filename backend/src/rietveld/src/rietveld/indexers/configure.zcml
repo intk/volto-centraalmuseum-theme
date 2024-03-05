@@ -20,5 +20,9 @@
       name="artwork_material"
       />
 
+  <adapter
+      factory=".indexes.artwork_author_role"
+      name="artwork_author_role"
+      />
 
 </configure>

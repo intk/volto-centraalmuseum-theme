@@ -40,3 +40,5 @@ class ArtworkMaterialVocabulary(KeywordsVocabulary):
 artwork_authorVocabularyFactory = KeywordsVocabulary("artwork_author_vocab")
 
 artwork_materialVocabularyFactory = ArtworkMaterialVocabulary("artwork_material")
+
+artwork_author_roleVocabularyFactory = KeywordsVocabulary("artwork_author_role")

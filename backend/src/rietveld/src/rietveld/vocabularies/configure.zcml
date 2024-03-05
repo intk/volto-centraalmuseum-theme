@@ -10,5 +10,10 @@
       component=".searchindex.artwork_materialVocabularyFactory"
       />
 
+  <utility
+      name="artwork_author_role"
+      component=".searchindex.artwork_author_roleVocabularyFactory"
+      />
+
 
 </configure>

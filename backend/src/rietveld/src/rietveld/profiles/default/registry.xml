@@ -5,7 +5,7 @@
   <records interface="plone.app.querystring.interfaces.IQueryField"
            prefix="plone.app.querystring.field.artwork_author_vocab"
   >
-    <value key="title">Artwork's Author</value>
+    <value key="title">Artwork's Author Vocabulary</value>
     <value key="description" />
     <value key="enabled">True</value>
     <value key="sortable">True</value>
@@ -36,5 +36,23 @@
            i18n:translate=""
     >rietveld</value>
     <value key="vocabulary">artwork_material</value>
+  </records>
+
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+           prefix="plone.app.querystring.field.artwork_author_role"
+  >
+    <value key="title">Authors' role</value>
+    <value key="description" />
+    <value key="enabled">True</value>
+    <value key="sortable">True</value>
+    <value key="operations">
+      <element>plone.app.querystring.operation.string.contains</element>
+      <element>plone.app.querystring.operation.string.is</element>
+      <element>plone.app.querystring.operation.string.isNot</element>
+    </value>
+    <value key="group"
+           i18n:translate=""
+    >rietveld</value>
+    <value key="vocabulary">artwork_author_role</value>
   </records>
 </registry>

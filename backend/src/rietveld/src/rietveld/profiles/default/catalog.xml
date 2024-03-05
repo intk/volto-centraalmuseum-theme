@@ -41,9 +41,16 @@
     <indexed_attr value="artwork_author_vocab" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="artwork_author_role"
+  >
+    <indexed_attr value="artwork_author_role" />
+  </index>
+
   <column value="artwork_date" />
   <column value="dating" />
   <column value="artwork_author" />
   <column value="artwork_author_vocab" />
+  <column value="artwork_author_role" />
   <column value="artwork_material" />
 </object>
