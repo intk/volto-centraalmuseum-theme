@@ -173,6 +173,11 @@ class AdminFixes(BrowserView):
         object_name_values = [
             name.text for name in objectnames if name.text is not None
         ]
+        collectiontypes = tree.findall(".//record/collection/term")
+        collection_type_values = [
+            type.text for type in collectiontypes if type.text is not None
+        ]
+
         current_location_text = tree.findtext(".//current_location.name")
         try:
             current_location_number = float(current_location_text)
@@ -292,6 +297,9 @@ class AdminFixes(BrowserView):
 
         info["nl"]["objectName"] = object_name_values
         info["en"]["objectName"] = object_name_values
+
+        info["nl"]["collection"] = collection_type_values
+        info["en"]["collection"] = collection_type_values
 
         info["nl"]["dating"] = date
         info["en"]["dating"] = date

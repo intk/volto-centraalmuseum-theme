@@ -67,6 +67,12 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    collection = List(
+        title="Collection type",
+        value_type=TextLine(),
+        required=False,
+    )
+
     associatedPeriods = List(
         title="Associated Periods",
         value_type=TextLine(),

@@ -45,4 +45,9 @@
       name="artwork_type"
       />
 
+  <adapter
+      factory=".indexes.artwork_collection_type"
+      name="artwork_collection_type"
+      />
+
 </configure>

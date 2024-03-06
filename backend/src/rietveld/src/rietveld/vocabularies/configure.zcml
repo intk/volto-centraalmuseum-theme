@@ -30,5 +30,10 @@
       component=".searchindex.artwork_typeVocabularyFactory"
       />
 
+  <utility
+      name="artwork_collection_type"
+      component=".searchindex.artwork_collection_typeVocabularyFactory"
+      />
+
 
 </configure>

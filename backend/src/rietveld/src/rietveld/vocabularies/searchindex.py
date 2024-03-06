@@ -50,3 +50,5 @@ artwork_author_qualifierVocabularyFactory = KeywordsVocabulary(
 artwork_author_placeVocabularyFactory = KeywordsVocabulary("artwork_author_place")
 
 artwork_typeVocabularyFactory = KeywordsVocabulary("artwork_type")
+
+artwork_collection_typeVocabularyFactory = KeywordsVocabulary("artwork_collection_type")
