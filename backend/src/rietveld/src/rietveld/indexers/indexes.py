@@ -61,6 +61,7 @@ def artwork_author_place(obj):
 
     return types_list
 
+
 @indexer(IArtwork)
 def artwork_motif(obj):
     types = getattr(obj, "motifs", None)
