@@ -333,9 +333,12 @@ class AdminFixes(BrowserView):
         creator_info_nl = []
         creator_info_en = []
         base_url_creator_nl = "/nl/maker/"
-        base_url_role_nl = "/nl/search?artwork_author_role="
         base_url_creator_en = "/en/creator/"
+        base_url_role_nl = "/nl/search?artwork_author_role="
         base_url_role_en = "/en/search?artwork_author_role="
+        base_url_qualifier_nl = "/nl/search?artwork_author_qualifier="
+        base_url_qualifier_en = "/nl/search?artwork_author_qualifier="
+
         author_roles_list = []
         author_qualifiers_list = []
 
@@ -370,17 +373,19 @@ class AdminFixes(BrowserView):
 
             # Creating dynamic links
             name_link_nl = f'<a href="{base_url_creator_nl}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-            role_link_nl = f'<a href="{base_url_role_nl}{role}">{role}</a>'
+            role_link_nl = f'<a href="{base_url_role_nl}{role}&Language=nl">{role}</a>'
             name_link_en = f'<a href="{base_url_creator_en}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-            role_link_en = f'<a href="{base_url_role_en}{role}">{role}</a>'
+            role_link_en = f'<a href="{base_url_role_en}{role}&Language=en">{role}</a>'
+            qualifier_link_nl = f'<a href="{base_url_qualifier_nl}{qualifier}&Language=nl">{qualifier}</a>'
+            qualifier_link_en = f'<a href="{base_url_qualifier_en}{qualifier}&Language=en">{qualifier}</a>'
             # name_link = f"<span>{name}</span>"
             # role_link = f"<span>{role}</span>"
 
             formatted_name_nl = (
-                f"{qualifier} {name_link_nl}" if qualifier else name_link_nl
+                f"{qualifier_link_nl} {name_link_nl}" if qualifier else name_link_nl
             )
             formatted_name_en = (
-                f"{qualifier} {name_link_en}" if qualifier else name_link_en
+                f"{qualifier_link_en} {name_link_en}" if qualifier else name_link_en
             )
 
             # Formatting the lifespan
