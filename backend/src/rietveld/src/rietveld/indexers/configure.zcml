@@ -40,4 +40,9 @@
       name="artwork_motif"
       />
 
+  <adapter
+      factory=".indexes.artwork_type"
+      name="artwork_type"
+      />
+
 </configure>

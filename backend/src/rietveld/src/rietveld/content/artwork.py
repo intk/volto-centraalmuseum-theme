@@ -62,7 +62,7 @@ class IArtwork(model.Schema):
     )
 
     objectName = List(
-        title="Object Name",
+        title="Object Type",
         value_type=TextLine(),
         required=False,
     )

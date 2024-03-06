@@ -136,5 +136,27 @@ def artwork_material(obj):
 
 
 @indexer(IArtwork)
+def artwork_type(obj):
+    # Retrieve the ObjMaterialTxt attribute, which could be None, a single material, or multiple materials
+    materials = getattr(obj, "objectName", None)
+
+    # If it's a string, split by comma and strip each material of surrounding whitespace
+    if isinstance(materials, str):
+        materials_list = [
+            material.strip() for material in materials.split(",") if material.strip()
+        ]
+    # If it's already a list or a tuple (or any iterable but string), just strip the materials
+    elif hasattr(materials, "__iter__") and not isinstance(materials, str):
+        materials_list = [
+            material.strip() for material in materials if material.strip()
+        ]
+    # If it's None or empty string, return an empty list
+    else:
+        materials_list = []
+
+    return materials_list
+
+
+@indexer(IArtwork)
 def artwork_date(obj):
     return obj.dating
