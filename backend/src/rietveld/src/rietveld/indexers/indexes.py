@@ -61,6 +61,24 @@ def artwork_author_place(obj):
 
     return types_list
 
+@indexer(IArtwork)
+def artwork_motif(obj):
+    types = getattr(obj, "motifs", None)
+
+    # If it's a string, split by comma and strip each type of surrounding whitespace
+    if isinstance(types, str):
+        types_list = [
+            material.strip() for material in types.split(",") if material.strip()
+        ]
+    # If it's already a list or a tuple (or any iterable but string), just strip the techniques
+    elif hasattr(types, "__iter__") and not isinstance(types, str):
+        types_list = [material.strip() for material in types if material.strip()]
+    # If it's None or empty string, return an empty list
+    else:
+        types_list = []
+
+    return types_list
+
 
 @indexer(IArtwork)
 def artwork_author_qualifier(obj):
