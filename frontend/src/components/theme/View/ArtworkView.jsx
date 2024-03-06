@@ -148,7 +148,6 @@ const messages = defineMessages({
 
 export default function ArtworkView(props) {
   const intl = useIntl();
-  console.log(intl.locale);
   const { content } = props;
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
