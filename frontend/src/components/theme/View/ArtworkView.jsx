@@ -148,6 +148,7 @@ const messages = defineMessages({
 
 export default function ArtworkView(props) {
   const intl = useIntl();
+  console.log(intl.locale);
   const { content } = props;
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
@@ -644,7 +645,9 @@ export default function ArtworkView(props) {
                       <p>
                         {content?.motifs?.map((motif, index) => (
                           <span>
-                            <a href={`/search?SearchableText=${motif}`}>
+                            <a
+                              href={`/search?artwork_motif=${motif}&Language=${intl.locale}`}
+                            >
                               {motif}
                             </a>
                             {index !== content.motifs.length - 1 ? ', ' : ''}
