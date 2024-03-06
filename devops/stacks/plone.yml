@@ -75,7 +75,7 @@ services:
   #     - NET_ADMIN
 
   frontend:
-    image: intkbv/centraalmuseum-frontend:latest
+    image: intkbv/centraalmuseum-frontend:sha-83c6fb3
     environment:
       RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
     depends_on:
@@ -103,17 +103,20 @@ services:
         - traefik.http.routers.frontend.middlewares=gzip
 
   backend:
-    image: intkbv/centraalmuseum-backend:latest
+    image: intkbv/centraalmuseum-backend:sha-e849a73
     environment:
       SITE: Plone
+      ZEO_ADDRESS: zeo:8100
     volumes:
-      - site-data:/data
+      # - site-data:/data
+      - /var/local/centraalmuseum:/app/logs
     networks:
       - nw-webserver
       - backend
     ports:
       - 8080:8080
     deploy:
+      replicas: 2
       labels:
         - traefik.enable=true
         - traefik.docker.network=nw-webserver
@@ -151,6 +154,17 @@ services:
         - traefik.http.routers.rt-backend-classic.service=svc-backend
         - traefik.http.routers.rt-backend-classic.middlewares=gzip,mw-backend-auth,mw-backend-vhm-classic
 
+  zeo:
+    image: plone/plone-zeo:latest
+    # ports:
+    #   - "8100:8100"
+    volumes:
+      - /var/local/centraalmuseum/data:/data
+    networks:
+      # - nw-webserver
+      - backend
+      - nw-webserver
+
   # db:
   #   image: postgres:14.2
   #   environment:
@@ -173,11 +187,11 @@ volumes:
       type: none
       device: /data/traefik/config
       o: bind
-  site-data:
-    driver_opts:
-      type: none
-      device: /srv/rietveld/data
-      o: bind
+  # site-data:
+  #   driver_opts:
+  #     type: none
+  #     device: /srv/rietveld/data
+  #     o: bind
 
 networks:
   nw-webserver:
