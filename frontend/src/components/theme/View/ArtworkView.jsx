@@ -520,7 +520,9 @@ export default function ArtworkView(props) {
                       <p>
                         {content?.objectName?.map((material, index) => (
                           <span>
-                            <a href={`/search?SearchableText=${material}`}>
+                            <a
+                              href={`/search?artwork_type=${material}&Language=${intl.locale}`}
+                            >
                               {material}
                             </a>
                             {index !== content.objectName.length - 1
