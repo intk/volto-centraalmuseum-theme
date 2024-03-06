@@ -486,7 +486,9 @@ export default function ArtworkView(props) {
                         {content?.materialTechnique?.map((technique, index) => (
                           <>
                             <span>
-                              <a href={`/search?SearchableText=${technique}`}>
+                              <a
+                                href={`/search?artwork_material=${technique}&Language=${intl.locale}`}
+                              >
                                 {technique}
                               </a>
                             </span>
