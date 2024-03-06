@@ -404,142 +404,131 @@
       padding-left: 14px;
     }
     .text-input-facet, .select-facet {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: space-between !important;
-        // margin-top: 33px;
-        margin-top: 13px;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: space-between !important;
+      // margin-top: 33px;
+      margin-top: 13px;
 
-        // padding-right: 15px;
-        @media screen and (min-width: 768px) {
-          flex-direction: row;
-          padding-right: 0px;
-          margin-top: 15px;
+      // padding-right: 15px;
+      @media screen and (min-width: 768px) {
+        flex-direction: row;
+        padding-right: 0px;
+        margin-top: 15px;
+      }
+    }
+    .ui.header {
+      display: block !important;
+      padding-bottom: 6px;
+      margin-top: 18px !important;
+      margin-bottom: auto !important;
+      font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 17px !important;
+      color: #404040;
+
+      font-size: 16px !important;
+      font-weight: 400;
+      // padding-left: 15px;
+      letter-spacing: 0.8px;
+
+      @media screen and (min-width: 768px) {
+        width: calc(35% - 1.5px);
+        padding-bottom: 0px;
+      }
+    }
+
+    .searchBlock-facets .ui.input>input,
+    .react-select-container>input {
+      padding-top: 15.8px !important;
+      padding-bottom: 15.8px !important;
+      padding-left: 20px !important;
+    }
+
+    .text-input-facet .ui.input,
+    .react-select-container {
+      @media screen and (min-width: 768px) {
+        // padding-left: 10px;
+      }
+    }
+
+    .react-select__control{
+      padding: 13px 30px 9px !important;
+      .react-select__placeholder{
+        font-size: 16.8px;
+        letter-spacing: 0.4px;
+        font-family: 'FranklinBook', Arial, sans-serif !important;
+      }
+    }
+
+    .searchBlock-facets .ui.input,
+    .react-select-container {
+      width: 100%;
+
+      input,
+      .react-select__value-container {
+        border-radius: 0px !important;
+        // background-color: var(--bonnefanten-bg) !important;
+        color: #c3c3c3;
+        font-family: 'StyreneBold', Arial, sans-serif !important;
+        font-size: 17px !important;
+        font-weight: 400;
+        letter-spacing: 0em;
+      }
+
+      input::placeholder,
+      .react-select__placeholder::placeholder {
+        font-size: 16px !important;
+        font-weight: 400;
+        letter-spacing: 0em;
+        color: #9c9b9b !important;
+      }
+    }
+
+    .react-select__control,
+    .react-select__control:hover {
+      padding: 11px 20px;
+      border: 1px solid #c3c3c3;
+
+      @media screen and (min-width: 768px) {
+        // padding: 10px 30px;
+      }
+    }
+    .react-select__control--menu-is-open{
+      border-bottom: 0px !important;
+    }
+
+    .react-select__placeholder {
+      // color: var(--bonnefanten-primary) !important;
+      color: #9c9b9b;
+    }
+
+    .react-select__multi-value {
+      flex-direction: row-reverse;
+      // background-color: var(--bonnefanten-primary);
+      border-radius: 3px;
+      color: #c3c3c3 !important;
+
+      .react-select__multi-value__label {
+        padding-right: 6px;
+        padding-left: 0px;
+        // color: var(--bonnefanten-bg) !important;
+        color: #c3c3c3;
+        font-family: 'StyreneBold', Arial, sans-serif;
+        font-size: 16px;
+        letter-spacing: 0em;
+        line-height: 20px;
+      }
+
+      .react-select__multi-value__remove {
+        padding-right: 2px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+          stroke-width: 1.5px;
         }
       }
-        .ui.header {
-          display: block !important;
-          padding-bottom: 6px;
-          margin-top: 18px !important;
-          margin-bottom: auto !important;
-          font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif;
-          font-size: 17px !important;
-          color: #404040;
-
-          font-size: 16px !important;
-          font-weight: 400;
-          // padding-left: 15px;
-          letter-spacing: 0.8px;
-
-          @media screen and (min-width: 768px) {
-            width: calc(35% - 1.5px);
-            padding-bottom: 0px;
-          }
-        }
-
-        .ui.input>input,
-        .react-select-container>input {
-          padding-top: 15.8px !important;
-          padding-bottom: 15.8px !important;
-          padding-left: 20px !important;
-        }
-
-        .text-input-facet .ui.input,
-        .react-select-container {
-          @media screen and (min-width: 768px) {
-            // padding-left: 10px;
-          }
-        }
-
-        .react-select__control{
-          padding: 13px 30px 9px !important;
-          .react-select__placeholder{
-            font-size: 16.8px;
-            letter-spacing: 0.4px;
-            font-family: 'FranklinBook', Arial, sans-serif !important;
-          }
-        }
-
-        .ui.input,
-        .react-select-container {
-          width: 100%;
-
-          input,
-          .react-select__value-container {
-            border-radius: 0px !important;
-            // background-color: var(--bonnefanten-bg) !important;
-            color: #c3c3c3;
-            font-family: 'StyreneBold', Arial, sans-serif !important;
-            font-size: 17px !important;
-            font-weight: 400;
-            letter-spacing: 0em;
-          }
-
-          input::placeholder,
-          .react-select__placeholder::placeholder {
-            font-size: 16px !important;
-            font-weight: 400;
-            letter-spacing: 0em;
-            color: #9c9b9b !important;
-          }
-        }
-
-        .react-select__value-container,
-        .react-select__control,
-        .react-select-container {
-          // background-color: blue !important;
-          // color: red !important;
-        }
-
-        .css-b8ldur-Input {
-          // padding-left: 15px;
-        }
-
-        .react-select__control,
-        .react-select__control:hover {
-          padding: 11px 20px;
-          border: 1px solid #c3c3c3;
-
-          @media screen and (min-width: 768px) {
-            // padding: 10px 30px;
-          }
-        }
-        .react-select__control--menu-is-open{
-          border-bottom: 0px !important;
-        }
-
-        .react-select__placeholder {
-          // color: var(--bonnefanten-primary) !important;
-          color: #9c9b9b;
-        }
-
-        .react-select__multi-value {
-          flex-direction: row-reverse;
-          // background-color: var(--bonnefanten-primary);
-          border-radius: 3px;
-          color: #c3c3c3 !important;
-
-          .react-select__multi-value__label {
-            padding-right: 6px;
-            padding-left: 0px;
-            // color: var(--bonnefanten-bg) !important;
-            color: #c3c3c3;
-            font-family: 'StyreneBold', Arial, sans-serif;
-            font-size: 16px;
-            letter-spacing: 0em;
-            line-height: 20px;
-          }
-
-          .react-select__multi-value__remove {
-            padding-right: 2px;
-
-            svg {
-              width: 16px;
-              height: 16px;
-              stroke-width: 1.5px;
-            }
-          }
-        }
+    }
 
     .Search-main-button {
       padding: 17px 29.4px 12px;
