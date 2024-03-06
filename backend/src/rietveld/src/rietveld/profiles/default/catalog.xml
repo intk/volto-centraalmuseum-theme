@@ -77,6 +77,12 @@
     <indexed_attr value="artwork_collection_type" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="inventoryNumber"
+  >
+    <indexed_attr value="inventoryNumber" />
+  </index>
+
 
   <column value="artwork_date" />
   <column value="dating" />
@@ -89,4 +95,5 @@
   <column value="artwork_material" />
   <column value="artwork_type" />
   <column value="artwork_collection_type" />
+  <column value="inventoryNumber" />
 </object>
