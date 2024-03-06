@@ -75,7 +75,7 @@
   </records>
 
   <records interface="plone.app.querystring.interfaces.IQueryField"
-           prefix="plone.app.querystring.field.artwork_author_qualifier"
+           prefix="plone.app.querystring.field.artwork_author_place"
   >
     <value key="title">Authors' place</value>
     <value key="description" />
