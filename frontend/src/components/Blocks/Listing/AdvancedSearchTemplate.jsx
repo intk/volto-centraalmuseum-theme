@@ -61,7 +61,9 @@ const AdvancedSearchTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                 <h2>
                   <UniversalLink item={item}>{item.title}</UniversalLink>
                 </h2>
-                {item.description && <p>{item.description}</p>}
+                {item['@type'] !== 'artwork'
+                  ? item.description && <p>{item.description}</p>
+                  : ''}
                 <div className="description">
                   <p>
                     {item.artwork_author && (
