@@ -30,4 +30,9 @@
       name="artwork_author_qualifier"
       />
 
+  <adapter
+      factory=".indexes.artwork_author_place"
+      name="artwork_author_place"
+      />
+
 </configure>

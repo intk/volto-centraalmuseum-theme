@@ -341,6 +341,7 @@ class AdminFixes(BrowserView):
 
         author_roles_list = []
         author_qualifiers_list = []
+        author_place_list = []
 
         for production in creators:
             creator = production.find(".//creator")
@@ -368,7 +369,11 @@ class AdminFixes(BrowserView):
             birth_date_precision = creator.findtext(".//birth.date.precision")
             death_date_precision = creator.findtext(".//death.date.precision")
             birth_place = creator.findtext(".//birth.place", "")
+            if birth_place is not None:
+                author_place_list.append(birth_place)
             death_place = creator.findtext(".//death.place", "")
+            if death_place is not None:
+                author_place_list.append(death_place)
             url = creator.findtext(".//Internet_address/url")
 
             # Creating dynamic links
@@ -434,6 +439,10 @@ class AdminFixes(BrowserView):
         info["nl"]["authorRoles"] = author_roles_list
         info["en"]["authorRoles"] = author_roles_list
 
+        info["nl"]["authorPlaces"] = author_place_list
+        info["en"]["authorPlaces"] = author_place_list
+
+        # authorPlace
         info["nl"]["authorQualifiers"] = author_qualifiers_list
         info["en"]["authorQualifiers"] = author_qualifiers_list
 

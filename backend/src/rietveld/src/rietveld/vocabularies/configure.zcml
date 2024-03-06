@@ -20,5 +20,10 @@
       component=".searchindex.artwork_author_qualifierVocabularyFactory"
       />
 
+  <utility
+      name="artwork_author_place"
+      component=".searchindex.artwork_author_placeVocabularyFactory"
+      />
+
 
 </configure>

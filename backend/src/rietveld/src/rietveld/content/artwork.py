@@ -154,6 +154,11 @@ class IArtwork(model.Schema):
         value_type=TextLine(),
         required=False,
     )
+    authorPlaces = List(
+        title="Author Place",
+        value_type=TextLine(),
+        required=False,
+    )
     form_directives.widget(
         "authors",
         RelatedItemsFieldWidget,
