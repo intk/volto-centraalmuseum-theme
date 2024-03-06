@@ -333,7 +333,7 @@ msgstr "Material and technique"
 #: components/theme/View/ArtworkView
 # defaultMessage: Motief
 msgid "motifs"
-msgstr "More of the same motive"
+msgstr "More of the same motif"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Dit object is nu niet in het museum te zien
