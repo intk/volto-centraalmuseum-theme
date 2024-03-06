@@ -270,6 +270,9 @@ class AdminFixes(BrowserView):
         # info["nl"]["rawdata"] = record_text
         # info["en"]["rawdata"] = record_text
 
+        info["nl"]["description"] = description_element_nl
+        info["en"]["description"] = description_element_en
+
         info["nl"]["objectExplanation"] = RichTextValue(
             raw=description_element_nl,
             mimeType="text/html",
