@@ -113,7 +113,7 @@
   <records interface="plone.app.querystring.interfaces.IQueryField"
            prefix="plone.app.querystring.field.artwork_type"
   >
-    <value key="title">Authors' Type</value>
+    <value key="title">Artwork Type</value>
     <value key="description" />
     <value key="enabled">True</value>
     <value key="sortable">True</value>
