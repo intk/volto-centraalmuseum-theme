@@ -381,9 +381,9 @@ class AdminFixes(BrowserView):
 
             # Creating dynamic links
             name_link_nl = f'<a href="{base_url_creator_nl}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-            role_link_nl = f'<a href="{base_url_role_nl}{role}&Language=nl">{role}</a>'
+            # role_link_nl = f'<a href="{base_url_role_nl}{role}&Language=nl">{role}</a>'
             name_link_en = f'<a href="{base_url_creator_en}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-            role_link_en = f'<a href="{base_url_role_en}{role}&Language=en">{role}</a>'
+            # role_link_en = f'<a href="{base_url_role_en}{role}&Language=en">{role}</a>'
             qualifier_link_nl = f'<a href="{base_url_qualifier_nl}{qualifier}&Language=nl">{qualifier}</a>'
             qualifier_link_en = f'<a href="{base_url_qualifier_en}{qualifier}&Language=en">{qualifier}</a>'
             # name_link = f"<span>{name}</span>"
@@ -410,8 +410,16 @@ class AdminFixes(BrowserView):
                 lifespan = f" ({death_date} {death_place})".strip()
 
             # Constructing the final string
-            creator_str_nl = f"{formatted_name_nl} ({role_link_nl}) {lifespan}"
-            creator_str_en = f"{formatted_name_en} ({role_link_en}) {lifespan}"
+            # creator_str_nl = f"{formatted_name_nl} ({role_link_nl}) {lifespan}"
+            # creator_str_en = f"{formatted_name_en} ({role_link_en}) {lifespan}"
+            if role:
+                role_link_nl = f'<a href="{base_url_role_nl}{role}&Language=nl">{role}</a>'
+                role_link_en = f'<a href="{base_url_role_en}{role}&Language=en">{role}</a>'
+                creator_str_nl = f"{formatted_name_nl} ({role_link_nl}) {lifespan}"
+                creator_str_en = f"{formatted_name_en} ({role_link_en}) {lifespan}"
+            else:
+                creator_str_nl = f"{formatted_name_nl} {lifespan}"
+                creator_str_en = f"{formatted_name_en} {lifespan}"
 
             creator_info_nl.append(creator_str_nl)
             creator_info_en.append(creator_str_en)
