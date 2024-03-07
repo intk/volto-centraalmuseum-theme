@@ -26,7 +26,7 @@ export default function AuthorView(props) {
                 authorName: props.content.title,
               })}{' '}
               <a href={props.content.authorURL}>{props.content.authorURL}</a>{' '}
-              {intl.locale === 'en' && '(in Dutch)'}
+              {intl.locale === 'en' && '(in Dutch).'}
             </p>
           )}
         </div>
