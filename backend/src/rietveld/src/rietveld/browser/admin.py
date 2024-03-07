@@ -1046,6 +1046,7 @@ def create_and_setup_object(title, container, info, intl, object_type, obj_id, p
 def import_images(container, images):
     MAX_RETRIES = 2
     DELAY_SECONDS = 1
+    image_index = 0
 
     HEADERS = {
         "Accept": "image/jpeg,image/png,image/*",
@@ -1060,6 +1061,7 @@ def import_images(container, images):
         primaryDisplay = image.get("PrimaryDisplay")
         retries = 0
         success = False
+        image_index += 1
 
         # Tries MAX_RETRIES times and then raise exception
         while retries < MAX_RETRIES:
@@ -1082,7 +1084,8 @@ def import_images(container, images):
                         image=imagefield,
                         container=container,
                     )
-                    container.preview_image = imagefield
+                    if image_index == 1:
+                        container.preview_image = imagefield
 
                     # if primaryDisplay == '1':
                     #     ordering = IExplicitOrdering(container)
