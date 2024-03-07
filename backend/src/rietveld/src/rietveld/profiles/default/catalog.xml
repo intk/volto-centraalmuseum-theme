@@ -145,4 +145,12 @@
   <column value="artwork_type" />
   <column value="artwork_collection_type" />
   <column value="inventoryNumber" />
+  <column value="productionStart" />
+  <column value="productionEnd" />
+  <column value="acquisitionMethod" />
+  <column value="acquisitionDate" />
+  <column value="artwork_exhibition_titles" />
+  <column value="category" />
+  <column value="associatedPeriods" />
+  <column value="associatedPeople" />
 </object>
