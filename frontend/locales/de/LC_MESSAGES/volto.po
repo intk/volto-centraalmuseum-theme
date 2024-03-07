@@ -331,6 +331,11 @@ msgid "duurzameurl"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+# defaultMessage: Als u naar dit object wilt verwijzen gebruik dan de duurzame URL:
+msgid "duurzameurltext"
+msgstr ""
+
+#: components/theme/View/ArtworkView
 # defaultMessage: Tentoonstellingen
 msgid "exhibitions"
 msgstr ""
@@ -343,6 +348,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Inventarisnummer
 msgid "inventoryNumber"
+msgstr ""
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Laat het ons weten!
+msgid "letusknow"
 msgstr ""
 
 #: components/theme/View/ArtworkView

@@ -257,7 +257,7 @@ msgstr "When"
 #: components/theme/View/AuthorView
 # defaultMessage: Bekijk hier alle werken van {authorName} in de collectie van Centraal Museum. Voor kunsthistorische documentatie over {authorName}, ga naar
 msgid "authorUrl"
-msgstr ""
+msgstr "View all art works by {authorName} in the Centraal Museum collection. For art historical documentation on {authorName}, go to"
 
 #: components/Blocks/AdvancedSearch/schema
 # defaultMessage: Available views
@@ -316,6 +316,11 @@ msgid "duurzameurl"
 msgstr "Persistent url"
 
 #: components/theme/View/ArtworkView
+# defaultMessage: Als u naar dit object wilt verwijzen gebruik dan de duurzame URL:
+msgid "duurzameurltext"
+msgstr "To refer to this object please use the following persistent URL:"
+
+#: components/theme/View/ArtworkView
 # defaultMessage: Tentoonstellingen
 msgid "exhibitions"
 msgstr "Exhibitions"
@@ -329,6 +334,11 @@ msgstr "Inscriptions and markings"
 # defaultMessage: Inventarisnummer
 msgid "inventoryNumber"
 msgstr "Object number"
+
+#: components/theme/View/ArtworkView
+# defaultMessage: Laat het ons weten!
+msgid "letusknow"
+msgstr ""
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Materiaal / Techniek
@@ -383,12 +393,12 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Vragen?
 msgid "question"
-msgstr ""
+msgstr "Questions?"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Ziet u een fout? Of heeft u extra informatie over dit object?
 msgid "questionText"
-msgstr ""
+msgstr "Do you have a remark or extra information on this object?"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Opmerkingen
