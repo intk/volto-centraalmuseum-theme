@@ -259,6 +259,11 @@ msgstr ""
 msgid "associatedPeriods"
 msgstr ""
 
+#: components/theme/View/AuthorView
+# defaultMessage: Bekijk hier alle werken van {authorName} in de collectie van Centraal Museum. Voor kunsthistorische documentatie over {authorName}, ga naar
+msgid "authorUrl"
+msgstr ""
+
 #: components/Blocks/AdvancedSearch/schema
 # defaultMessage: Available views
 msgid "availableViews"
