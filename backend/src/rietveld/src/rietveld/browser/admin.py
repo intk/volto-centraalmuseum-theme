@@ -833,13 +833,7 @@ class AdminFixes(BrowserView):
         info["nl"]["inscriptions"] = inscription_info
         info["en"]["inscriptions"] = inscription_info
 
-        title_stripped = (
-            re.sub(r"[^a-zA-Z0-9 ]", "", title)
-            .strip()
-            .replace("  ", " ")
-            .replace(" ", "-")
-            .lower()
-        )
+        title_stripped = title.replace(":", "")
         object_number_stripped = (
             re.sub(r"[^a-zA-Z0-9_/ ]", "", objectnumber)
             .strip()
@@ -849,14 +843,15 @@ class AdminFixes(BrowserView):
             .replace(" ", "-")
             .lower()
         )
+        creator_stripped = creator_for_title.replace("_", "")
         # title_url = f"{object_number_stripped}-{title_stripped}"
 
         object_number_ascii = object_number_stripped.encode("ascii", "ignore").decode(
             "ascii"
         )
-        title_ascii = title_stripped.encode("ascii", "ignore").decode("ascii")
-        creator_ascii = creator_for_title.encode("ascii", "ignore").decode("ascii")
-        dirty_id = f"{object_number_ascii} {title_ascii} {creator_ascii}"
+        # title_ascii = title_stripped.encode("ascii", "ignore").decode("ascii")
+        creator_ascii = creator_stripped.encode("ascii", "ignore").decode("ascii")
+        dirty_id = f"{objectnumber} {title_stripped} {creator_ascii}"
         log_to_file(f"obj number {object_number_ascii}")
         log_to_file(f"title {title}")
         log_to_file(f"creator_asci {creator_ascii}")
