@@ -50,6 +50,16 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    productionStart = TextLine(
+        title="Production Start Date",
+        required=False,
+    )
+
+    productionEnd = TextLine(
+        title="Production End Date",
+        required=False,
+    )
+
     materialTechnique = List(
         title="Material Technique",
         value_type=TextLine(),

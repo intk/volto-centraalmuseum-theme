@@ -83,6 +83,17 @@
     <indexed_attr value="inventoryNumber" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="productionStart"
+  >
+    <indexed_attr value="productionStart" />
+  </index>
+
+  <index meta_type="KeywordIndex"
+         name="productionEnd"
+  >
+    <indexed_attr value="productionEnd" />
+  </index>
 
   <column value="artwork_date" />
   <column value="dating" />

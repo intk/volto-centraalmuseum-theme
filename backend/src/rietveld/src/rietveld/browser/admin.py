@@ -301,8 +301,11 @@ class AdminFixes(BrowserView):
         info["nl"]["collection"] = collection_type_values
         info["en"]["collection"] = collection_type_values
 
-        info["nl"]["dating"] = date
-        info["en"]["dating"] = date
+        info["nl"]["productionStart"] = production_date_start
+        info["en"]["productionStart"] = production_date_start
+
+        info["nl"]["productionEnd"] = production_date_end
+        info["en"]["productionEnd"] = production_date_end
 
         # Add to the frontend
         info["nl"]["physicaldescription"] = physical_description
