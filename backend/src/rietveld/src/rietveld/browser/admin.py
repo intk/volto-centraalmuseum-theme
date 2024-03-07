@@ -646,12 +646,14 @@ class AdminFixes(BrowserView):
 
         # Creating associated subjects
         associated_subject_strings = []
+        associated_subject_titles = []
 
         # Iterate over each Associated_subject element in the XML
         for asubject in tree.findall(".//Associated_subject"):
             # Extract the term from association.subject
             subject_term = asubject.find(".//association.subject/term")
             subject = subject_term.text if subject_term is not None else ""
+            associated_subject_titles.append(subject)
 
             # Extract the term from association.subject.association
             association_term = asubject.find(".//association.subject.association/term")
@@ -687,6 +689,8 @@ class AdminFixes(BrowserView):
         # Assigning to info dictionary
         info["nl"]["category"] = associated_subject_strings
         info["en"]["category"] = associated_subject_strings
+        info["nl"]["associatedSubjects"] = associated_subject_titles
+        info["en"]["associatedSubjects"] = associated_subject_titles
 
         # incscriptions
         inscriptions_list = []

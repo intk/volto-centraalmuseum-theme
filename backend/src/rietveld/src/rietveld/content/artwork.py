@@ -157,6 +157,12 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    associatedSubjects = List(
+        title="Associated Subjects",
+        value_type=TextLine(),
+        required=False,
+    )
+
     PIDworkLink = Text(
         title="PID Work Link",
         required=False,

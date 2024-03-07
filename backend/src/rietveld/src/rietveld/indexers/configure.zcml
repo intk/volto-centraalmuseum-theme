@@ -55,4 +55,9 @@
       name="artwork_exhibition_titles"
       />
 
+  <adapter
+      factory=".indexes.artwork_associated_subjects"
+      name="artwork_associated_subjects"
+      />
+
 </configure>
