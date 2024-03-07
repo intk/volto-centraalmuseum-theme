@@ -35,6 +35,7 @@ from zope.schema import getFieldsInOrder
 from zope.schema.interfaces import IList
 from zope.schema.interfaces import IText
 from zope.schema.interfaces import ITextLine
+import plone.api
 
 import base64
 import io
@@ -906,6 +907,9 @@ class AdminFixes(BrowserView):
                 # Object exists, so we fetch it and update it
                 obj = brain.getObject()
                 reset_artwork_fields(obj)
+                if title_url != obj.id:
+                    log_to_file("the url has been changed")
+                    plone.api.content.rename(obj=obj, new_id=title_url)
 
                 # First clear all of the fields
                 schema = obj.getTypeInfo().lookupSchema()
