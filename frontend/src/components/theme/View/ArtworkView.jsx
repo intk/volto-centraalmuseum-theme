@@ -593,7 +593,9 @@ export default function ArtworkView(props) {
                     <td className="columntwo">
                       {content?.category?.map((subject, index) => (
                         <p>
-                          <a href={`/search?SearchableText=${subject}`}>
+                          <a
+                            href={`/search?artwork_associated_subjects=${content?.associatedSubjects[index]}&Language=${intl.locale}`}
+                          >
                             {subject}
                           </a>
                           {/* {index !== content.subjects.length - 1 ? ', ' : ''} */}
@@ -611,7 +613,9 @@ export default function ArtworkView(props) {
                       <p>
                         {content?.associatedPeriods?.map((period, index) => (
                           <span>
-                            <a href={`/search?SearchableText=${period}`}>
+                            <a
+                              href={`/search?associatedPeriods=${period}&Language=${intl.locale}`}
+                            >
                               {period}
                             </a>
                             {index !== content.associatedPeriods.length - 1
@@ -631,7 +635,9 @@ export default function ArtworkView(props) {
                     <td className="columntwo">
                       {content?.associatedPeople?.map((person, index) => (
                         <p>
-                          <a href={`/search?SearchableText=${person}`}>
+                          <a
+                            href={`/search?associatedPeople=${person}&Language=${intl.locale}`}
+                          >
                             {person}
                           </a>
                         </p>
