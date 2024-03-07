@@ -2,8 +2,10 @@
   #page-search-title {
     display: none;
   }
+
   #page-search-artwork {
-    .listing-image, a.listing-image:hover{
+    .listing-image,
+    a.listing-image:hover {
       border-bottom: 0 !important;
     }
   }
@@ -13,7 +15,7 @@
     margin-top: -12px;
     // margin-left: 12px;
     // margin-right: 12px;
-    @media screen and (min-width:768px){
+    @media screen and (min-width: 768px) {
       padding-top: 8px;
       margin-top: 0px;
     }
@@ -33,7 +35,7 @@
       margin: 4px !important;
       margin-top: 40px !important;
 
-      @media screen and (min-width: 768px){
+      @media screen and (min-width: 768px) {
         padding-right: 111px;
         padding-left: 111px;
         margin-top: 90px !important;
@@ -97,8 +99,8 @@
 
     a:hover {
       text-decoration: underline !important;
-      text-decoration-thickness: 2px;
       text-decoration-color: #282931 !important;
+      text-decoration-thickness: 2px;
       text-underline-offset: 4px;
     }
 
@@ -110,7 +112,8 @@
         margin-bottom: 5px !important;
       }
     }
-    .description p{
+
+    .description p {
       margin: 0 !important;
       line-height: 20px !important;
     }
@@ -120,21 +123,22 @@
       margin-bottom: 5px;
       color: #494a51;
       font-family: 'FranklinBook', Arial, sans-serif;
-      line-height: 16px !important;
       font-size: 12px !important;
       letter-spacing: 0em;
+      line-height: 16px !important;
     }
   }
 
   .item_title {
+    padding-top: 7px !important;
+    padding-bottom: 6px !important;
     color: #282931;
     font-family: 'FranklinBook', Arial, sans-serif !important;
     font-size: 15px;
     line-height: 22px;
     text-decoration: none !important;
-    padding-top: 7px !important;
-    padding-bottom: 6px !important;
   }
+
   .item_title:hover {
     color: #282931 !important;
   }
@@ -143,24 +147,34 @@
 .contenttype-author #main .description-wrapper {
   padding-top: 0px !important;
   padding-bottom: 0.1px !important;
+
+  .author_url{
+    max-width: 660px;
+    margin: 0 auto;
+    font-size: 24px;
+    line-height: 36px;
+    color: #494a51;
+    text-align: center;
+    padding-bottom: 50px;
+  }
 }
 
 .contenttype-author .documentDescription.author:not(.hero-description) {
-  font-size: 38px !important;
-  text-align: center !important;
-  margin-top: 0px !important;
-  font-weight: 400 !important;
-  text-transform: none !important;
-  letter-spacing: 0.0em !important;
   width: 100% !important;
   max-width: 100% !important;
-  line-height: 75px !important;
-  font-family: 'FranklinDmCp', Arial, sans-serif !important;
+  margin-top: 0px !important;
   margin-bottom: 10px !important;
+  font-family: 'FranklinDmCp', Arial, sans-serif !important;
+  font-size: 38px !important;
   font-size: 45px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0em !important;
+  line-height: 75px !important;
+  text-align: center !important;
+  text-transform: none !important;
 
   @media screen and (min-width: 992px) {
-    font-size: 60px !important;
     margin-top: 25px !important;
+    font-size: 60px !important;
   }
 }
