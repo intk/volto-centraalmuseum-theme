@@ -35,7 +35,6 @@ from zope.schema import getFieldsInOrder
 from zope.schema.interfaces import IList
 from zope.schema.interfaces import IText
 from zope.schema.interfaces import ITextLine
-import plone.api
 
 import base64
 import io
@@ -43,6 +42,7 @@ import json
 import logging
 import lxml.etree
 import os
+import plone.api
 import re
 import requests
 import time
