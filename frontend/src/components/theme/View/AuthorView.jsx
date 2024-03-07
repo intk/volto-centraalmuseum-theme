@@ -25,7 +25,8 @@ export default function AuthorView(props) {
               {intl.formatMessage(messages.authorUrl, {
                 authorName: props.content.title,
               })}{' '}
-              {props.content.authorURL} {intl.locale === 'en' && '(in Dutch)'}
+              <a href={props.content.authorURL}>{props.content.authorURL}</a>{' '}
+              {intl.locale === 'en' && '(in Dutch)'}
             </p>
           )}
         </div>
