@@ -1,81 +1,8 @@
 version: "3.3"
 
 services:
-  traefik:
-    image: traefik:v2.9
-
-    ports:
-      - 80:80
-      - 443:443
-
-    deploy:
-      labels:
-        - traefik.enable=true
-        - traefik.docker.network=nw-webserver
-        - traefik.constraint-label=traefik-public
-        - traefik.http.middlewares.admin-auth.basicauth.users=${TRAEFIK_AUTH_USERNAME?Variable not set}:${HASHED_PASSWORD?Variable not set}
-        - traefik.http.routers.traefik-public-https.rule=Host(`${TRAEFIK_FQDN?Variable TRAEFIK_FQDN not set}`)
-        - traefik.http.routers.traefik-public-https.entrypoints=https
-        - traefik.http.routers.traefik-public-https.tls=true
-        - traefik.http.routers.traefik-public-https.service=api@internal
-        - traefik.http.routers.traefik-public-https.middlewares=admin-auth
-        - traefik.http.services.traefik-public.loadbalancer.server.port=8000
-
-        # GENERIC MIDDLEWARES
-        - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
-        - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
-        - traefik.http.middlewares.gzip.compress=true
-        - traefik.http.middlewares.gzip.compress.excludedcontenttypes=image/png, image/jpeg, font/woff2
-
-        # GENERIC ROUTERS
-        - traefik.http.routers.generic-https-redirect.entrypoints=http
-        - traefik.http.routers.generic-https-redirect.rule=HostRegexp(`{host:.*}`)
-        - traefik.http.routers.generic-https-redirect.priority=1
-        - traefik.http.routers.generic-https-redirect.middlewares=https-redirect
-
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - vol-traefik-public-certificates:/certificates
-      - vol-traefik-config:/config
-
-    command:
-      - --providers.docker
-      - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
-      - --providers.docker.exposedbydefault=false
-      - --providers.docker.swarmmode
-      - --entrypoints.http.address=:80
-      - --entrypoints.https.address=:443
-      - --certificatesresolvers.le.acme.email=${TRAEFIK_EMAIL?Variable TRAEFIK_EMAIL not set}
-      - --certificatesresolvers.le.acme.storage=/certificates/acme.json
-      - --certificatesresolvers.le.acme.tlschallenge=true
-      - --providers.file.directory=/config
-      - --providers.file.watch=true
-      - --accesslog
-      - --log
-      - --api
-
-    networks:
-      - nw-webserver
-
-  # mailserver:
-  #   image: ghcr.io/docker-mailserver/docker-mailserver:latest
-  #   hostname: mail.new.centraalmuseum.nl
-  #   ports:
-  #     - "25:25"
-  #     - "465:465"
-  #     - "587:587"
-  #     - "993:993"
-  #   volumes:
-  #     - vol-traefik-public-certificates:/etc/letsencrypt/acme.json:ro
-  #   environment:
-  #     - ENABLE_RSPAMD=1
-  #     - ENABLE_CLAMAV=1
-  #     - ENABLE_FAIL2BAN=1
-  #   cap_add:
-  #     - NET_ADMIN
-
   frontend:
-    image: intkbv/centraalmuseum-frontend:sha-83c6fb3
+    image: intkbv/centraalmuseum-frontend:sha-d74544b
     environment:
       RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
     depends_on:
@@ -87,23 +14,10 @@ services:
       - 3000:3000
     deploy:
       replicas: 2
-      labels:
-        - traefik.enable=true
-        - traefik.docker.network=nw-webserver
-        - traefik.constraint-label=traefik-public
-        # Service
-        - traefik.http.services.svc-frontend.loadbalancer.server.port=3000
-        # Routers
-        ## /
-        - traefik.http.routers.rt-frontend.rule=Host(`${FQDN?Unset}`)
-        - traefik.http.routers.rt-frontend.entrypoints=https
-        - traefik.http.routers.rt-frontend.tls=true
-        - traefik.http.routers.rt-frontend.tls.certresolver=le
-        - traefik.http.routers.rt-frontend.service=svc-frontend
-        - traefik.http.routers.frontend.middlewares=gzip
+
 
   backend:
-    image: intkbv/centraalmuseum-backend:sha-e849a73
+    image: intkbv/centraalmuseum-backend:sha-554bad9
     environment:
       SITE: Plone
       ZEO_ADDRESS: zeo:8100
@@ -117,42 +31,6 @@ services:
       - 8080:8080
     deploy:
       replicas: 2
-      labels:
-        - traefik.enable=true
-        - traefik.docker.network=nw-webserver
-        - traefik.constraint-label=traefik-public
-        # Services
-        - traefik.http.services.svc-backend.loadbalancer.server.port=8080
-
-        # Middlewares
-        ## VHM rewrite /++api++/
-        - "traefik.http.middlewares.mw-backend-vhm-api.replacepathregex.regex=^/\\+\\+api\\+\\+($$|/.*)"
-        - "traefik.http.middlewares.mw-backend-vhm-api.replacepathregex.replacement=/VirtualHostBase/https/${FQDN?Unset}/Plone/++api++/VirtualHostRoot/$$1"
-
-        ## VHM rewrite /ClassicUI/
-        - "traefik.http.middlewares.mw-backend-vhm-classic.replacepathregex.regex=^/ClassicUI($$|/.*)"
-        - "traefik.http.middlewares.mw-backend-vhm-classic.replacepathregex.replacement=/VirtualHostBase/https/${FQDN?Unset}/Plone/VirtualHostRoot/_vh_ClassicUI/$$1"
-
-        ## Basic Authentication
-        ### Note: all dollar signs in the hash need to be doubled for escaping.
-        ### To create user:password pair, it's possible to use this command:
-        ### echo $(htpasswd -nb user password) | sed -e s/\\$/\\$\\$/g
-        ### Defaults to admin:admin
-        - traefik.http.middlewares.mw-backend-auth.basicauth.users=admin:$$apr1$$uZPT5Fgu$$AmlIdamxT5ipBvPlsdfD70
-
-        # Routes
-        ## /++api++
-        - traefik.http.routers.rt-backend-api.rule=Host(`${FQDN?Unset}`) && (PathPrefix(`/++api++`))
-        - traefik.http.routers.rt-backend-api.entrypoints=https
-        - traefik.http.routers.rt-backend-api.tls=true
-        - traefik.http.routers.rt-backend-api.service=svc-backend
-        - traefik.http.routers.rt-backend-api.middlewares=gzip,mw-backend-vhm-api
-        ## /ClassicUI
-        - traefik.http.routers.rt-backend-classic.rule=Host(`${FQDN?Unset}`) && PathPrefix(`/ClassicUI`)
-        - traefik.http.routers.rt-backend-classic.entrypoints=https
-        - traefik.http.routers.rt-backend-classic.tls=true
-        - traefik.http.routers.rt-backend-classic.service=svc-backend
-        - traefik.http.routers.rt-backend-classic.middlewares=gzip,mw-backend-auth,mw-backend-vhm-classic
 
   zeo:
     image: plone/plone-zeo:latest
@@ -164,17 +42,6 @@ services:
       # - nw-webserver
       - backend
       - nw-webserver
-
-  # db:
-  #   image: postgres:14.2
-  #   environment:
-  #     POSTGRES_USER: plone
-  #     POSTGRES_PASSWORD: plone
-  #     POSTGRES_DB: plone
-  #   volumes:
-  #     - vol-site-data:/var/lib/postgresql/data
-  #   networks:
-  #     - nw-data
 
 volumes:
   vol-traefik-public-certificates:
