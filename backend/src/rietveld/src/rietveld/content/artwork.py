@@ -60,6 +60,15 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    acquisitionMethod = TextLine(
+        title="Acquisition Method",
+        required=False,
+    )
+    acquisitionDate = TextLine(
+        title="Acquisition Date",
+        required=False,
+    )
+
     materialTechnique = List(
         title="Material Technique",
         value_type=TextLine(),

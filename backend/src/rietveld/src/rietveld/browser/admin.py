@@ -295,6 +295,9 @@ class AdminFixes(BrowserView):
         info["nl"]["inventoryNumber"] = objectnumber
         info["en"]["inventoryNumber"] = objectnumber
 
+        info["nl"]["acquisitionMethod"] = acquisition_term
+        info["en"]["acquisitionMethod"] = acquisition_term
+
         info["nl"]["objectName"] = object_name_values
         info["en"]["objectName"] = object_name_values
 
@@ -306,6 +309,9 @@ class AdminFixes(BrowserView):
 
         info["nl"]["productionEnd"] = production_date_end
         info["en"]["productionEnd"] = production_date_end
+
+        info["nl"]["acquisitionDate"] = acquisition_date
+        info["en"]["acquisitionDate"] = acquisition_date
 
         # Add to the frontend
         info["nl"]["physicaldescription"] = physical_description

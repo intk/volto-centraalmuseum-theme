@@ -198,7 +198,42 @@
            i18n:translate=""
     >rietveld</value>
     <!-- <value key="vocabulary">productionStart</value> -->
-    <value key="vocabulary">inventoryNumber</value>
+  </records>
+
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+           prefix="plone.app.querystring.field.acquisitionMethod"
+  >
+    <value key="title">Artwork Acquision Method</value>
+    <value key="description" />
+    <value key="enabled">True</value>
+    <value key="sortable">True</value>
+    <value key="operations">
+      <element>plone.app.querystring.operation.string.contains</element>
+      <element>plone.app.querystring.operation.string.is</element>
+      <element>plone.app.querystring.operation.string.isNot</element>
+    </value>
+    <value key="group"
+           i18n:translate=""
+    >rietveld</value>
+  </records>
+
+  <records interface="plone.app.querystring.interfaces.IQueryField"
+           prefix="plone.app.querystring.field.acquisitionDate"
+  >
+    <value key="title">Artwork Acquision Date</value>
+    <value key="description" />
+    <value key="enabled">True</value>
+    <value key="sortable">True</value>
+    <value key="operations">
+      <element>plone.app.querystring.operation.string.contains</element>
+      <element>plone.app.querystring.operation.string.is</element>
+      <element>plone.app.querystring.operation.string.isNot</element>
+    </value>
+    <value key="group"
+           i18n:translate=""
+    >rietveld</value>
+    <!-- <value key="vocabulary">productionStart</value> -->
+  </records>
   </records>
 
 </registry>

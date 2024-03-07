@@ -95,6 +95,18 @@
     <indexed_attr value="productionEnd" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="acquisitionMethod"
+  >
+    <indexed_attr value="acquisitionMethod" />
+  </index>
+
+  <index meta_type="KeywordIndex"
+         name="acquisitionDate"
+  >
+    <indexed_attr value="acquisitionDate" />
+  </index>
+
   <column value="artwork_date" />
   <column value="dating" />
   <column value="artwork_author" />
