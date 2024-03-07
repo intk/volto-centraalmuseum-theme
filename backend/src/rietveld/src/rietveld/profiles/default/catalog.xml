@@ -113,6 +113,26 @@
     <indexed_attr value="artwork_exhibition_titles" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="artwork_associated_subjects"
+  >
+    <indexed_attr value="artwork_associated_subjects" />
+  </index>
+
+  <index meta_type="KeywordIndex"
+         name="associatedPeriods"
+  >
+    <indexed_attr value="associatedPeriods" />
+  </index>
+
+  <index meta_type="KeywordIndex"
+         name="associatedPeople"
+  >
+    <indexed_attr value="associatedPeople" />
+  </index>
+
+
+
   <column value="artwork_date" />
   <column value="dating" />
   <column value="artwork_author" />
