@@ -154,7 +154,8 @@ class AdminFixes(BrowserView):
 
         creator_for_title = get_creator(xml_record=tree)
 
-        # record_text = tree.findtext(".//record")
+        record_text = tree.find(".//record")
+        record_string = etree.tostring(record_text, pretty_print=True).decode("utf-8")
 
         labels = tree.findall(".//record/Label")
         description_element_nl = None
@@ -272,8 +273,8 @@ class AdminFixes(BrowserView):
         info["nl"]["title"] = title
         info["en"]["title"] = title
 
-        # info["nl"]["rawdata"] = record_text
-        # info["en"]["rawdata"] = record_text
+        info["nl"]["rawdata"] = record_string
+        info["en"]["rawdata"] = record_string
 
         info["nl"]["description"] = description_element_nl
         info["en"]["description"] = description_element_en
