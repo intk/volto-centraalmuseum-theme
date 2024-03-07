@@ -604,6 +604,7 @@ class AdminFixes(BrowserView):
 
                 if exhibition.find("./title") is not None:
                     new_exhibition["name"] = exhibition.find("./title").text
+                    exhibitions_title_list.append(new_exhibition["name"])
 
                 venue = exhibition.find(
                     ".//venue"
