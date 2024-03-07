@@ -255,16 +255,22 @@ class AdminFixes(BrowserView):
         date = " ".join(date_parts).strip()
 
         acquisition_date = tree.findtext(".//record/acquisition.date", "")
-        acquisition_date_precision = tree.findtext(".//record/acquisition.date.precision", "")
+        acquisition_date_precision = tree.findtext(
+            ".//record/acquisition.date.precision", ""
+        )
         acquisition_term = tree.findtext(".//record/acquisition.method/term", "")
         acquisition_notes = tree.findtext(".//record/acquisition.notes", "")
 
-        acquisition_parts = [part for part in [acquisition_term, acquisition_date_precision, acquisition_date] if part]
+        acquisition_parts = [
+            part
+            for part in [acquisition_term, acquisition_date_precision, acquisition_date]
+            if part
+        ]
 
         if acquisition_notes:
             acquisition = f"{' '.join(acquisition_parts)} ({acquisition_notes})"
         else:
-            acquisition = ' '.join(acquisition_parts)
+            acquisition = " ".join(acquisition_parts)
 
         if title_element is not None:
             title = title_element.text
