@@ -107,6 +107,12 @@
     <indexed_attr value="acquisitionDate" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="artwork_exhibition_titles"
+  >
+    <indexed_attr value="artwork_exhibition_titles" />
+  </index>
+
   <column value="artwork_date" />
   <column value="dating" />
   <column value="artwork_author" />

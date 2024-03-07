@@ -69,6 +69,12 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    exhibitionTitles = List(
+        title="Exhibitions",
+        value_type=TextLine(),
+        required=False,
+    )
+
     materialTechnique = List(
         title="Material Technique",
         value_type=TextLine(),

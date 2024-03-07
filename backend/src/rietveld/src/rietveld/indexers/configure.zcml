@@ -50,4 +50,9 @@
       name="artwork_collection_type"
       />
 
+  <adapter
+      factory=".indexes.artwork_exhibition_titles"
+      name="artwork_exhibition_titles"
+      />
+
 </configure>

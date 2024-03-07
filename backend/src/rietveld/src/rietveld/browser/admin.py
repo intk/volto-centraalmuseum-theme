@@ -362,6 +362,7 @@ class AdminFixes(BrowserView):
         author_roles_list = []
         author_qualifiers_list = []
         author_place_list = []
+        exhibitions_title_list = []
 
         for production in creators:
             creator = production.find(".//creator")
@@ -639,6 +640,9 @@ class AdminFixes(BrowserView):
                     exhibitions.append(exhibition_str)
         info["nl"]["exhibitions"] = exhibitions
         info["en"]["exhibitions"] = exhibitions
+
+        info["nl"]["exhibitionTitles"] = exhibitions_title_list
+        info["en"]["exhibitionTitles"] = exhibitions_title_list
 
         # Creating associated subjects
         associated_subject_strings = []
