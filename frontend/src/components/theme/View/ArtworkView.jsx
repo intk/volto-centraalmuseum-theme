@@ -68,6 +68,10 @@ const messages = defineMessages({
     defaultMessage:
       'Ziet u een fout? Of heeft u extra informatie over dit object? ',
   },
+  letusknow: {
+    id: 'letusknow',
+    defaultMessage: 'Laat het ons weten!',
+  },
   share: {
     id: 'share',
     defaultMessage: 'Delen',
@@ -135,6 +139,11 @@ const messages = defineMessages({
   duurzameurl: {
     id: 'duurzameurl',
     defaultMessage: 'Duurzame url',
+  },
+  duurzameurltext: {
+    id: 'duurzameurltext',
+    defaultMessage:
+      'Als u naar dit object wilt verwijzen gebruik dan de duurzame URL:',
   },
   showmore: {
     id: 'showmore',
@@ -812,10 +821,7 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        <p>
-                          Als u naar dit object wilt verwijzen gebruik dan de
-                          duurzame URL:
-                        </p>
+                        <p>{intl.formatMessage(messages.duurzameurltext)}</p>
                         <a href={content.PIDworkLink}>
                           <div
                             dangerouslySetInnerHTML={{
@@ -829,15 +835,14 @@ export default function ArtworkView(props) {
                 )}
                 <tr>
                   <td className="columnone">
-                    <p>Vragen?</p>
+                    <p>{intl.formatMessage(messages.question)}</p>{' '}
                   </td>
                   <td className="columntwo">
                     <p>
-                      Ziet u een fout? Of heeft u extra informatie over dit
-                      object?
+                      {intl.formatMessage(messages.questionText)}
                       <span> </span>
                       <a href="mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20object:%2010786">
-                        Laat het ons weten!
+                        {intl.formatMessage(messages.letusknow)}
                       </a>
                     </p>
                   </td>
