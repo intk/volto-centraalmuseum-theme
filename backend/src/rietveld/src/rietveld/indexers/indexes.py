@@ -80,6 +80,7 @@ def artwork_motif(obj):
 
     return types_list
 
+
 @indexer(IArtwork)
 def artwork_exhibition_titles(obj):
     types = getattr(obj, "exhibitionTitles", None)
@@ -97,6 +98,7 @@ def artwork_exhibition_titles(obj):
         types_list = []
 
     return types_list
+
 
 @indexer(IArtwork)
 def artwork_associated_subjects(obj):
