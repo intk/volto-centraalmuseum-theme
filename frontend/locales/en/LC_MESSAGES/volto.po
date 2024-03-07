@@ -338,7 +338,7 @@ msgstr "Object number"
 #: components/theme/View/ArtworkView
 # defaultMessage: Laat het ons weten!
 msgid "letusknow"
-msgstr ""
+msgstr "Please let us know!"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Materiaal / Techniek
