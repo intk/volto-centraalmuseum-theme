@@ -1,3 +1,4 @@
+from datetime import datetime
 from plone.app.dexterity.textindexer.directives import searchable
 from plone.app.textfield import RichText
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
@@ -8,6 +9,7 @@ from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope.interface import implementer
 from zope.schema import Bool
+from zope.schema import Datetime
 from zope.schema import List
 from zope.schema import Text
 from zope.schema import TextLine
@@ -204,6 +206,12 @@ class IArtwork(model.Schema):
                 "author",
             ],
         },
+    )
+
+    last_successful_update = Datetime(
+        title="Last Successful Update",
+        description="",
+        required=False,
     )
 
     creatorDetails = Text(

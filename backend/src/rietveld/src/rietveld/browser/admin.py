@@ -1,6 +1,8 @@
 from collections import defaultdict
 from datetime import datetime
+from datetime import timedelta
 from DateTime import DateTime
+from dateutil import parser
 from lxml import etree
 from plone import api
 from plone.api import content
@@ -18,6 +20,7 @@ from plone.i18n.normalizer import idnormalizer
 from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
+from pytz import timezone
 from rietveld.config import IMAGE_BASE_URL
 from rietveld.config import IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
@@ -97,7 +100,9 @@ class AdminFixes(BrowserView):
 
         return trans
 
-    def import_objects(self, start=0, limit=10, collection_type="collect"):
+    def import_objects(
+        self, start=0, limit=10, collection_type="collect", modified_after=""
+    ):
         counter = 0
         start_time_count = datetime.now()
         start_time = datetime.now().strftime(
@@ -108,13 +113,23 @@ class AdminFixes(BrowserView):
             f"Starting a new batch at {start_time}. start: {start}, end: {limit}"
         )
 
-        object_priref = self.request.form.get("object_priref") #40923
+        object_priref = self.request.form.get("object_priref")  # 40923
         headers = "User-Agent: Mozilla/5.0"
+
+        one_hour_before_now = start_time_count - timedelta(hours=1)
+        formatted_one_hour_before_now = one_hour_before_now.strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+        # if modified_after is '':
+        #     modified_after = self.request.form.get("modified_after", formatted_one_hour_before_now)
 
         if object_priref is not None:
             api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={object_priref}"
         else:
-            api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref=*&limit={limit}&startfrom={start}"
+            api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&limit={limit}&startfrom={start}&search=modification greater '{modified_after}'"
+        # else:
+        #     api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref=*&limit={limit}&startfrom={start}"
+
         log_to_file(f"The URL for fetching: {api_url}")
 
         response = requests.post(api_url)
@@ -135,19 +150,20 @@ class AdminFixes(BrowserView):
         for tree in records_tree:
             transaction.begin()
             log_to_file(f"{counter}. object")
-            try:
-                import_one_record(
-                    self,
-                    tree=tree,
-                    container=container,
-                    container_en=container_en,
-                    catalog=catalog,
-                )
-                transaction.commit()
-            except Exception as e:
-                log_to_file(f"Failure to import the record. Error: {e}")
-                transaction.abort()
-                break
+
+            # try:
+            import_one_record(
+                self,
+                tree=tree,
+                container=container,
+                container_en=container_en,
+                catalog=catalog,
+            )
+            transaction.commit()
+            # except Exception as e:
+            #     log_to_file(f"Failure to import the record. Error: {e}")
+            #     transaction.abort()
+            #     break
             counter = counter + 1
 
         end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -165,6 +181,7 @@ class AdminFixes(BrowserView):
         start_value = self.request.form.get("start_value", "0")
         top_limit = self.request.form.get("top_limit", "50")
         collection_type = self.request.form.get("collection_type", "bruna")
+        modified_after = self.request.form.get("modified_after")
 
         log_to_file("==================================================")
         log_to_file("==================================================")
@@ -173,13 +190,35 @@ class AdminFixes(BrowserView):
 
         # check the number of items in this section in diagnostics
         for offset in range(int(start_value), int(top_limit), 50):
-            self.import_objects(start=offset, limit=50, collection_type=collection_type)
+            self.import_objects(
+                start=offset,
+                limit=50,
+                collection_type=collection_type,
+                modified_after=modified_after,
+            )
             # gc.collect()
 
         log_to_file("Finish Syncing")
 
 
 def import_one_record(self, tree, container, container_en, catalog):
+    priref = tree.get("priref")
+    last_modification_str = tree.get("modification")
+    last_modification_dt = parser.parse(last_modification_str)
+
+    brains = catalog.searchResults(priref=priref, portal_type="artwork")
+    for brain in brains:
+        obj = brain.getObject()
+
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
+
     # Import Authors #
     importedAuthors = import_authors(self, record=tree)
     if importedAuthors:
@@ -844,7 +883,7 @@ def import_one_record(self, tree, container, container_en, catalog):
 
     # CREATING OR UPDATING THE OBJECTS #
     ####################################
-    brains = catalog.searchResults(priref=priref, portal_type="artwork")
+    # brains = catalog.searchResults(priref=priref, portal_type="artwork")
     if len(brains) == 1:
         lang = brains[0].getObject().language
         missing_lang = "en" if lang == "nl" else "nl"
@@ -946,6 +985,7 @@ def import_one_record(self, tree, container, container_en, catalog):
 
             # Reindex the updated object
             obj.reindexObject()
+            obj.last_successful_update = last_modification_dt
 
     # Object doesn't exist, so we create a new one
     if not brains:
@@ -963,6 +1003,8 @@ def import_one_record(self, tree, container, container_en, catalog):
         # obj.hasImage = True
 
         obj_en = self.translate(obj, info["en"])
+
+        obj.last_successful_update = last_modification_dt
 
         if authors != "null":
             for author in authors:
