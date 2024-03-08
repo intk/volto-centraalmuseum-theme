@@ -108,10 +108,13 @@ class AdminFixes(BrowserView):
             f"Starting a new batch at {start_time}. start: {start}, end: {limit}"
         )
 
-        object_priref = self.request.form.get("object_priref", 40923)
+        object_priref = self.request.form.get("object_priref") #40923
         headers = "User-Agent: Mozilla/5.0"
-        # api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={object_priref}"
-        api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref=*&limit={limit}&startfrom={start}"
+
+        if object_priref is not None:
+            api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={object_priref}"
+        else:
+            api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref=*&limit={limit}&startfrom={start}"
         log_to_file(f"The URL for fetching: {api_url}")
 
         response = requests.post(api_url)
