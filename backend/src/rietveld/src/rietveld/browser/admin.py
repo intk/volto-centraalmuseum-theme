@@ -160,7 +160,6 @@ class AdminFixes(BrowserView):
 
         # Parse the XML response
         records = etree.fromstring(api_answer_bytes)
-
         records_tree = records.findall(".//record")
 
         for record in records_tree:
@@ -296,7 +295,6 @@ class AdminFixes(BrowserView):
             )
 
         log_to_file("Finish Syncing")
-
         return "finished updating"
 def import_one_record(self, record, collection_type, container, container_en, catalog):
     priref = record.get("priref")
