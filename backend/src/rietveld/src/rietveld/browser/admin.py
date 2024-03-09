@@ -304,6 +304,20 @@ class AdminFixes(BrowserView):
 
         log_to_file("Finish Syncing")
         return "finished updating"
+
+
+# def delete_one_record(self, tree, container, container_en, catalog):
+#     priref = tree.get("priref")
+#     brains = catalog.searchResults(priref=priref, portal_type="artwork")
+#     if brains:
+#         for brain in brains:
+#             obj = brain.getObject()
+#             parent = obj.aq_parent
+#             obj_id = obj.getId()
+#             parent.manage_delObjects([obj_id])
+#             log_to_file("Deleted object: " + obj_id)
+
+
 def import_one_record(self, record, collection_type, container, container_en, catalog):
     priref = record.get("priref")
     last_modification_str = record.get("modification")
