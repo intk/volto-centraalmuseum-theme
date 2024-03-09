@@ -594,7 +594,7 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {content.category && (
+                {content.category != null && content.category?.length !== 0 && (
                   <tr>
                     <td className="columnone">
                       <p>{intl.formatMessage(messages.category)}</p>
@@ -613,48 +613,51 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {content.associatedPeriods && (
-                  <tr>
-                    <td className="columnone">
-                      <p>{intl.formatMessage(messages.associatedPeriods)}</p>
-                    </td>
-                    <td className="columntwo">
-                      <p>
-                        {content?.associatedPeriods?.map((period, index) => (
-                          <span>
-                            <a
-                              href={`/search?associatedPeriods=${period}&Language=${intl.locale}`}
-                            >
-                              {period}
-                            </a>
-                            {index !== content.associatedPeriods.length - 1
-                              ? ', '
-                              : ''}
-                          </span>
-                        ))}
-                      </p>
-                    </td>
-                  </tr>
-                )}
-                {content.associatedPeople && (
-                  <tr>
-                    <td className="columnone">
-                      <p>{intl.formatMessage(messages.associatedPeople)}</p>
-                    </td>
-                    <td className="columntwo">
-                      {content?.associatedPeople?.map((person, index) => (
+                {content.associatedPeriods != null &&
+                  content.associatedPeriods?.length !== 0 && (
+                    <tr>
+                      <td className="columnone">
+                        <p>{intl.formatMessage(messages.associatedPeriods)}</p>
+                      </td>
+                      <td className="columntwo">
                         <p>
-                          <a
-                            href={`/search?associatedPeople=${person}&Language=${intl.locale}`}
-                          >
-                            {person}
-                          </a>
+                          {content?.associatedPeriods?.map((period, index) => (
+                            <span>
+                              <a
+                                href={`/search?associatedPeriods=${period}&Language=${intl.locale}`}
+                              >
+                                {period}
+                              </a>
+                              {index !== content.associatedPeriods.length - 1
+                                ? ', '
+                                : ''}
+                            </span>
+                          ))}
                         </p>
-                      ))}
-                    </td>
-                  </tr>
-                )}
-                {content.motifs && (
+                      </td>
+                    </tr>
+                  )}
+                {content.associatedPeople != null &&
+                  content.associatedPeople?.length !== 0 && (
+                    <tr>
+                      <td className="columnone">
+                        <p>{intl.formatMessage(messages.associatedPeople)}</p>
+                      </td>
+                      <td className="columntwo">
+                        {content?.associatedPeople?.map((person, index) => (
+                          <p>
+                            <a
+                              href={`/search?associatedPeople=${person}&Language=${intl.locale}`}
+                            >
+                              {person}
+                            </a>
+                          </p>
+                        ))}
+                      </td>
+                    </tr>
+                  )}
+
+                {content.motifs != null && content.motifs?.length !== 0 && (
                   <tr>
                     <td className="columnone">
                       <p>{intl.formatMessage(messages.motifs)}</p>
