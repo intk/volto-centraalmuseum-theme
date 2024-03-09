@@ -216,20 +216,46 @@ class AdminFixes(BrowserView):
         collection_type = self.request.form.get("collection_type", "bruna")
         modified_after = self.request.form.get("modified_after")
 
+        # Learn number of items to import
+
+        if modified_after:
+            api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&fields=priref&limit=1&startfrom=0&search=modification greater '{modified_after}'"
+        elif top_limit is None:
+            api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&fields=priref&limit=1&startfrom=0&search=priref=*"
+
+        if api_url:
+            response = requests.post(api_url)
+            response.raise_for_status()
+            api_answer = response.text
+            api_answer_bytes = api_answer.encode("utf-8")
+
+            records = etree.fromstring(api_answer_bytes)
+            top_limit = records.find(".//hits").text
+
+        log_to_file(f"Initial API call: {api_url}")
+        log_to_file(f"Number of items that have modified in API: {top_limit}")
+
+        if top_limit == "0":
+            return "Number of records to import is 0"
+
         log_to_file("==================================================")
         log_to_file("==================================================")
-        log_to_file(f"Starting the sync function for the date after ")
+        log_to_file(f"Starting the sync function for the {collection_type}")
         log_to_file(f"total count of objects for update = {top_limit}")
 
         # check the number of items in this section in diagnostics
         for offset in range(int(start_value), int(top_limit), 50):
             self.import_objects(
+                full_import=True,
                 start=offset,
                 limit=50,
                 collection_type=collection_type,
                 modified_after=modified_after,
             )
-            # gc.collect()
+
+        log_to_file(f"Finished import '{collection_type}' collection")
+        return "Finished import"
+
 
         log_to_file("Finish Syncing")
 
