@@ -120,7 +120,9 @@ class AdminFixes(BrowserView):
             f"Starting a new batch at {start_time}. start: {start}, end: {start + limit}"
         )
 
-        object_priref = self.request.form.get("object_priref")  #test object priref:40923
+        object_priref = self.request.form.get(
+            "object_priref"
+        )  # test object priref:40923
 
         if object_priref is not None:
             api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={object_priref}"
@@ -135,7 +137,7 @@ class AdminFixes(BrowserView):
         retries = 0
         success = False
 
-        while retries < MAX_RETRIES and success==False:
+        while retries < MAX_RETRIES and success == False:
             try:
                 response = requests.post(api_url)
                 success = True
@@ -143,9 +145,13 @@ class AdminFixes(BrowserView):
                 retries += 1
                 if retries < MAX_RETRIES:
                     time.sleep(DELAY_SECONDS)
-                    log_to_file(f"Temprary failure while fetching API DATA, will try again. Retries {retries}")
+                    log_to_file(
+                        f"Temprary failure while fetching API DATA, will try again. Retries {retries}"
+                    )
                 else:
-                    log_to_file(f"Failure in the batch: start: {start}, end: {start + limit}. Error: {e}")
+                    log_to_file(
+                        f"Failure in the batch: start: {start}, end: {start + limit}. Error: {e}"
+                    )
                     # TODO: add sending mail for the failed attempt of batch
                     return
 
@@ -168,7 +174,7 @@ class AdminFixes(BrowserView):
             retries = 0
             success = False
 
-            while retries < MAX_RETRIES and success==False:
+            while retries < MAX_RETRIES and success == False:
                 try:
                     import_one_record(
                         self,
@@ -184,7 +190,9 @@ class AdminFixes(BrowserView):
                     retries += 1
                     if retries < MAX_RETRIES:
                         time.sleep(DELAY_SECONDS)
-                        log_to_file(f"Temprary failure, will try again. Retries {retries}")
+                        log_to_file(
+                            f"Temprary failure, will try again. Retries {retries}"
+                        )
                     else:
                         log_to_file(f"Failure to import the record. Error: {e}")
                         transaction.abort()
