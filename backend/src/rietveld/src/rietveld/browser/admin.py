@@ -298,6 +298,9 @@ class AdminFixes(BrowserView):
         log_to_file("Finish Syncing")
 
         return "finished updating"
+def import_one_record(self, record, collection_type, container, container_en, catalog):
+    priref = record.get("priref")
+    last_modification_str = record.get("modification")
     last_modification_dt = parser.parse(last_modification_str)
 
     brains = catalog.searchResults(priref=priref, portal_type="artwork")
@@ -312,6 +315,15 @@ class AdminFixes(BrowserView):
                 f"the last successful update is bigger than the last modification {obj.last_successful_update}"
             )
             return
+
+    api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
+
+    response = requests.post(api_url)
+    response.raise_for_status()
+    api_answer = response.text
+    api_answer_bytes = api_answer.encode("utf-8")
+    tree_string = etree.fromstring(api_answer_bytes)
+    tree = tree_string.find(".//record")
 
     # Import Authors #
     importedAuthors = import_authors(self, record=tree)
@@ -516,8 +528,8 @@ class AdminFixes(BrowserView):
         url = creator.findtext(".//Internet_address/url")
 
         # Creating dynamic links
-        name_link_nl = f'<a href="{base_url_creator_nl}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
-        name_link_en = f'<a href="{base_url_creator_en}{idnormalizer.normalize(name, max_length=len(name))}">{name}</a>'
+        name_link_nl = f'<a href="{base_url_creator_nl}{idnormalizer.normalize(name, max_length=len(name) if name is not None else 0)}">{name}</a>'
+        name_link_en = f'<a href="{base_url_creator_en}{idnormalizer.normalize(name, max_length=len(name) if name is not None else 0)}">{name}</a>'
         qualifier_link_nl = (
             f'<a href="{base_url_qualifier_nl}{qualifier}&Language=nl">{qualifier}</a>'
         )
@@ -1096,9 +1108,8 @@ class AdminFixes(BrowserView):
         import_images(container=obj, images=images)
         # obj.hasImage = True
 
-        obj_en = self.translate(obj, info["en"])
-
         obj.last_successful_update = last_modification_dt
+        obj_en = self.translate(obj, info["en"])
 
         if authors != "null":
             for author in authors:
