@@ -256,13 +256,48 @@ class AdminFixes(BrowserView):
         log_to_file(f"Finished import '{collection_type}' collection")
         return "Finished import"
 
+    def update_changed_records(self, collection_type="collect"):
+
+        now = datetime.now()
+        one_hour_before_now = now - timedelta(hours=1)
+        formatted_one_hour_before_now = one_hour_before_now.strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+
+        api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&fields=priref&limit=1&startfrom=0&search=modification greater '{formatted_one_hour_before_now}'"
+
+        log_to_file(f"API URL link for the update check: {api_url}")
+
+        response = requests.post(api_url)
+        response.raise_for_status()
+        api_answer = response.text
+        api_answer_bytes = api_answer.encode("utf-8")
+
+        records = etree.fromstring(api_answer_bytes)
+        number_of_modified = records.find(".//hits").text
+        log_to_file(f"Number of items that have modified in API: {number_of_modified}")
+
+        if number_of_modified == "0":
+            return "no record updated"
+
+        log_to_file("==================================================")
+        log_to_file("==================================================")
+        log_to_file(f"Starting the sync function for the date after ")
+        log_to_file(f"total count of objects for update = {number_of_modified}")
+
+        # check the number of items in this section in diagnostics
+        for offset in range(0, int(number_of_modified), 50):
+            self.import_objects(
+                full_import=False,
+                start=offset,
+                limit=50,
+                collection_type=collection_type,
+                modified_after=formatted_one_hour_before_now,
+            )
 
         log_to_file("Finish Syncing")
 
-
-def import_one_record(self, tree, container, container_en, catalog):
-    priref = tree.get("priref")
-    last_modification_str = tree.get("modification")
+        return "finished updating"
     last_modification_dt = parser.parse(last_modification_str)
 
     brains = catalog.searchResults(priref=priref, portal_type="artwork")
