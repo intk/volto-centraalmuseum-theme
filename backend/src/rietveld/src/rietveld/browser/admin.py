@@ -212,7 +212,7 @@ class AdminFixes(BrowserView):
 
     def serial_import(self):
         start_value = self.request.form.get("start_value", "0")
-        top_limit = self.request.form.get("top_limit", "50")
+        top_limit = self.request.form.get("top_limit")
         collection_type = self.request.form.get("collection_type", "bruna")
         modified_after = self.request.form.get("modified_after")
 
