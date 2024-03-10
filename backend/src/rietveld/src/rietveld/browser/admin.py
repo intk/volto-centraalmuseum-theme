@@ -414,7 +414,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         current_location_number = float(current_location_text)
         current_location_int = int(current_location_number)
         current_location = str(current_location_int)
-    except ValueError:
+    except Exception as e:
         current_location = current_location_text
     ####################
 
