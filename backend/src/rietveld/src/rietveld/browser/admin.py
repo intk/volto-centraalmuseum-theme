@@ -990,7 +990,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         "dating": date,
         "productionStart": production_date_start,
         "productionEnd": production_date_end,
-        "acquisitionDate": acquisition_date,
+        "acquisitionDate": acquisition_date_fixed,
         "physicaldescription": physical_description,
         "remarks": remarks_values,
         "PIDworkLink": PIDworkLink,
