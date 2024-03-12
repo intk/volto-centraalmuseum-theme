@@ -714,7 +714,8 @@ def import_one_record(self, record, collection_type, container, container_en, ca
             page_reference,
         ]
         documentation_str = ", ".join(filter(None, documentation_components)).strip()
-        documentation_info.append(documentation_str)
+        if documentation_str:
+            documentation_info.append(documentation_str)
 
     sorted_documentation_info = sorted(documentation_info)
     #####################
@@ -774,7 +775,8 @@ def import_one_record(self, record, collection_type, container, container_en, ca
 
                 # Joining the non-empty details with commas
                 exhibition_str = ", ".join(exhibition_details)
-                exhibitions.append(exhibition_str)
+                if exhibition_str is not  '':
+                    exhibitions.append(exhibition_str)
     ###################
     # Exhibitions END #
 
