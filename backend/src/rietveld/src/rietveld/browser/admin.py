@@ -124,6 +124,12 @@ class AdminFixes(BrowserView):
             "object_priref"
         )  # test object priref:40923
 
+        collection_type_choice = self.request.form.get(
+            "collection_type"
+        )
+        if collection_type_choice:
+            collection_type = collection_type_choice
+
         if object_priref is not None:
             api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={object_priref}"
         else:
