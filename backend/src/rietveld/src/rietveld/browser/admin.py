@@ -268,12 +268,15 @@ class AdminFixes(BrowserView):
         return "Finished import"
 
     def update_changed_records(self, collection_type="bruna"):
+        modified_after = self.request.form.get("modified_after")
 
         now = datetime.now()
         one_hour_before_now = now - timedelta(hours=1)
         formatted_one_hour_before_now = one_hour_before_now.strftime(
             "%Y-%m-%d %H:%M:%S"
         )
+        if modified_after:
+            formatted_one_hour_before_now = modified_after
 
         api_url = f"https://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&fields=priref&limit=1&startfrom=0&search=modification greater '{formatted_one_hour_before_now}'"
 
