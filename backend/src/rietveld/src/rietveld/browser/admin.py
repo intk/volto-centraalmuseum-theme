@@ -105,7 +105,7 @@ class AdminFixes(BrowserView):
         full_import=False,
         start=0,
         limit=10,
-        collection_type="collect",
+        collection_type="bruna",
         modified_after="",
     ):
         MAX_RETRIES = 2
