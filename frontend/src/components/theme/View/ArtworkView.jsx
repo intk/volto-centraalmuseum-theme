@@ -492,22 +492,24 @@ export default function ArtworkView(props) {
                         >
                           {content.materialTechnique}
                         </a> */}
-                        {content?.materialTechnique?.map((technique, index) => (
-                          <>
-                            <span>
-                              <a
-                                href={`/search?artwork_material=${technique}&Language=${intl.locale}`}
-                              >
-                                {technique}
-                              </a>
-                            </span>
-                            <span>
-                              {index !== content.materialTechnique.length - 1
-                                ? ', '
-                                : ''}
-                            </span>
-                          </>
-                        ))}
+                        {content?.materialTechnique
+                          ?.filter((el) => el.trim() !== '')
+                          .map((technique, index) => (
+                            <>
+                              <span>
+                                <a
+                                  href={`/search?artwork_material=${technique}&Language=${intl.locale}`}
+                                >
+                                  {technique}
+                                </a>
+                              </span>
+                              <span>
+                                {index !== content.materialTechnique.length - 1
+                                  ? ', '
+                                  : ''}
+                              </span>
+                            </>
+                          ))}
                       </p>
                     </td>
                   </tr>
@@ -529,18 +531,20 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        {content?.objectName?.map((material, index) => (
-                          <span>
-                            <a
-                              href={`/search?artwork_type=${material}&Language=${intl.locale}`}
-                            >
-                              {material}
-                            </a>
-                            {index !== content.objectName.length - 1
-                              ? ', '
-                              : ''}
-                          </span>
-                        ))}
+                        {content?.objectName
+                          ?.filter((el) => el.trim() !== '')
+                          .map((material, index) => (
+                            <span>
+                              <a
+                                href={`/search?artwork_type=${material}&Language=${intl.locale}`}
+                              >
+                                {material}
+                              </a>
+                              {index !== content.objectName.length - 1
+                                ? ', '
+                                : ''}
+                            </span>
+                          ))}
                         {/* {content.objectName} */}
                       </p>
                     </td>
@@ -562,9 +566,11 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.dimensions)}</p>
                     </td>
                     <td className="columntwo">
-                      {content?.dimensions?.map((dimension) => (
-                        <p> {dimension} </p>
-                      ))}
+                      {content?.dimensions
+                        ?.filter((el) => el.trim() !== '')
+                        .map((dimension) => (
+                          <p> {dimension} </p>
+                        ))}
                     </td>
                   </tr>
                 )}
@@ -575,11 +581,13 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <ul>
-                        {content?.inscriptions?.map((inscription) => (
-                          <li>
-                            <p>{inscription} </p>
-                          </li>
-                        ))}
+                        {content?.inscriptions
+                          ?.filter((el) => el.trim() !== '')
+                          .map((inscription) => (
+                            <li>
+                              <p>{inscription} </p>
+                            </li>
+                          ))}
                       </ul>
                     </td>
                   </tr>
@@ -600,16 +608,18 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.category)}</p>
                     </td>
                     <td className="columntwo">
-                      {content?.category?.map((subject, index) => (
-                        <p>
-                          <a
-                            href={`/search?artwork_associated_subjects=${content?.associatedSubjects[index]}&Language=${intl.locale}`}
-                          >
-                            {subject}
-                          </a>
-                          {/* {index !== content.subjects.length - 1 ? ', ' : ''} */}
-                        </p>
-                      ))}
+                      {content?.category
+                        ?.filter((el) => el.trim() !== '')
+                        .map((subject, index) => (
+                          <p>
+                            <a
+                              href={`/search?artwork_associated_subjects=${content?.associatedSubjects[index]}&Language=${intl.locale}`}
+                            >
+                              {subject}
+                            </a>
+                            {/* {index !== content.subjects.length - 1 ? ', ' : ''} */}
+                          </p>
+                        ))}
                     </td>
                   </tr>
                 )}
@@ -621,18 +631,20 @@ export default function ArtworkView(props) {
                       </td>
                       <td className="columntwo">
                         <p>
-                          {content?.associatedPeriods?.map((period, index) => (
-                            <span>
-                              <a
-                                href={`/search?associatedPeriods=${period}&Language=${intl.locale}`}
-                              >
-                                {period}
-                              </a>
-                              {index !== content.associatedPeriods.length - 1
-                                ? ', '
-                                : ''}
-                            </span>
-                          ))}
+                          {content?.associatedPeriods
+                            ?.filter((el) => el.trim() !== '')
+                            .map((period, index) => (
+                              <span>
+                                <a
+                                  href={`/search?associatedPeriods=${period}&Language=${intl.locale}`}
+                                >
+                                  {period}
+                                </a>
+                                {index !== content.associatedPeriods.length - 1
+                                  ? ', '
+                                  : ''}
+                              </span>
+                            ))}
                         </p>
                       </td>
                     </tr>
@@ -644,15 +656,17 @@ export default function ArtworkView(props) {
                         <p>{intl.formatMessage(messages.associatedPeople)}</p>
                       </td>
                       <td className="columntwo">
-                        {content?.associatedPeople?.map((person, index) => (
-                          <p>
-                            <a
-                              href={`/search?associatedPeople=${person}&Language=${intl.locale}`}
-                            >
-                              {person}
-                            </a>
-                          </p>
-                        ))}
+                        {content?.associatedPeople
+                          ?.filter((el) => el.trim() !== '')
+                          .map((person, index) => (
+                            <p>
+                              <a
+                                href={`/search?associatedPeople=${person}&Language=${intl.locale}`}
+                              >
+                                {person}
+                              </a>
+                            </p>
+                          ))}
                       </td>
                     </tr>
                   )}
@@ -664,16 +678,18 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        {content?.motifs?.map((motif, index) => (
-                          <span>
-                            <a
-                              href={`/search?artwork_motif=${motif}&Language=${intl.locale}`}
-                            >
-                              {motif}
-                            </a>
-                            {index !== content.motifs.length - 1 ? ', ' : ''}
-                          </span>
-                        ))}
+                        {content?.motifs
+                          ?.filter((el) => el.trim() !== '')
+                          .map((motif, index) => (
+                            <span>
+                              <a
+                                href={`/search?artwork_motif=${motif}&Language=${intl.locale}`}
+                              >
+                                {motif}
+                              </a>
+                              {index !== content.motifs.length - 1 ? ', ' : ''}
+                            </span>
+                          ))}
                       </p>
                     </td>
                   </tr>
@@ -684,9 +700,11 @@ export default function ArtworkView(props) {
                       <p>{intl.formatMessage(messages.credit)}</p>
                     </td>
                     <td className="columntwo">
-                      {content?.remarks?.map((remark) => (
-                        <p>{remark}</p>
-                      ))}
+                      {content?.remarks
+                        ?.filter((remark) => remark.trim() !== '')
+                        .map((remark) => (
+                          <p>{remark}</p>
+                        ))}
                     </td>
                   </tr>
                 )}
@@ -727,7 +745,8 @@ export default function ArtworkView(props) {
                             ))
                           : content.documentation
                               ?.slice(0, 3)
-                              ?.map((doc, index) => (
+                              ?.filter((el) => el.trim() !== '')
+                              .map((doc, index) => (
                                 <li>
                                   <p key={index}>
                                     {doc}
@@ -767,31 +786,34 @@ export default function ArtworkView(props) {
                       ))} */}
                       <ul>
                         {showAllExhibition
-                          ? content?.exhibitions?.map((exhibition, index) => (
-                              <li>
-                                <p key={index}>
-                                  {exhibition}
-                                  {index === 2 &&
-                                    content.exhibitions.length > 3 && (
-                                      <button
-                                        className="expand-data-button"
-                                        onClick={() =>
-                                          setShowAllExhibition(
-                                            !showAllExhibition,
-                                          )
-                                        }
-                                      >
-                                        {`${intl.formatMessage(
-                                          messages.showless,
-                                        )} -`}
-                                      </button>
-                                    )}
-                                </p>
-                              </li>
-                            ))
+                          ? content?.exhibitions
+                              ?.filter((el) => el.trim() !== '')
+                              .map((exhibition, index) => (
+                                <li>
+                                  <p key={index}>
+                                    {exhibition}
+                                    {index === 2 &&
+                                      content.exhibitions.length > 3 && (
+                                        <button
+                                          className="expand-data-button"
+                                          onClick={() =>
+                                            setShowAllExhibition(
+                                              !showAllExhibition,
+                                            )
+                                          }
+                                        >
+                                          {`${intl.formatMessage(
+                                            messages.showless,
+                                          )} -`}
+                                        </button>
+                                      )}
+                                  </p>
+                                </li>
+                              ))
                           : content.exhibitions
                               ?.slice(0, 3)
-                              ?.map((exhibition, index) => (
+                              ?.filter((el) => el.trim() !== '')
+                              .map((exhibition, index) => (
                                 <li>
                                   <p key={index}>
                                     {exhibition}
