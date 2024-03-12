@@ -678,7 +678,7 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {content.remarks && (
+                {content.remarks && content.remarks?.length !== 0 && (
                   <tr>
                     <td className="columnone">
                       <p>{intl.formatMessage(messages.credit)}</p>
@@ -690,7 +690,7 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {content.documentation && (
+                {content.documentation && content.documentation?.length !== 0 && (
                   <tr>
                     <td className="columnone">
                       <p>{intl.formatMessage(messages.documentation)}</p>
@@ -754,7 +754,7 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {content.exhibitions && (
+                {content.exhibitions && content.exhibitions?.length !== 0 && (
                   <tr>
                     <td className="columnone" id="intoview">
                       <p>{intl.formatMessage(messages.exhibitions)}</p>
