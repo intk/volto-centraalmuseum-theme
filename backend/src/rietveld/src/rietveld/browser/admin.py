@@ -485,13 +485,23 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     # Acquisition Date Start #
     ##########################
     acquisition_date = tree.findtext("./acquisition.date", "")
+
+    if acquisition_date and "-" in acquisition_date:
+        acquisition_date_fixed = acquisition_date.split("-")[0]
+    else:
+        acquisition_date_fixed = acquisition_date
+
     acquisition_date_precision = tree.findtext("./acquisition.date.precision", "")
     acquisition_term = tree.findtext("./acquisition.method/term", "")
     acquisition_notes = tree.findtext("./acquisition.notes", "")
 
     acquisition_parts = [
         part
-        for part in [acquisition_term, acquisition_date_precision, acquisition_date]
+        for part in [
+            acquisition_term,
+            acquisition_date_precision,
+            acquisition_date_fixed,
+        ]
         if part
     ]
 
