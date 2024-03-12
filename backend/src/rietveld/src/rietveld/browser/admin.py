@@ -124,9 +124,7 @@ class AdminFixes(BrowserView):
             "object_priref"
         )  # test object priref:40923
 
-        collection_type_choice = self.request.form.get(
-            "collection_type"
-        )
+        collection_type_choice = self.request.form.get("collection_type")
         if collection_type_choice:
             collection_type = collection_type_choice
 
@@ -781,7 +779,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
 
                 # Joining the non-empty details with commas
                 exhibition_str = ", ".join(exhibition_details)
-                if exhibition_str is not  '':
+                if exhibition_str is not "":
                     exhibitions.append(exhibition_str)
     ###################
     # Exhibitions END #
