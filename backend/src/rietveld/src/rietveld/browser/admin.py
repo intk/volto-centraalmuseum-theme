@@ -419,7 +419,8 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     ####################
 
     # Object on Display #
-    object_on_display = True if tree.findtext(".//gepubliceerd") == "x" else False
+    # object_on_display = True if tree.findtext(".//gepubliceerd") == "x" else False
+    object_on_display = True if tree.findtext(".//in_museum") == "x" else False
     ####################
 
     # Physical description
