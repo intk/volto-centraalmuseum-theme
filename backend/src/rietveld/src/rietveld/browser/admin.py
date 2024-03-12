@@ -632,8 +632,18 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         unit = dimension.findtext(".//dimension.unit/term")
         notes = dimension.findtext(".//dimension.notes")
 
-        dimension_str = f"{precision} {type} {' (' + part + ')' if part else ''} {value} {unit} {' (' + notes + ')' if notes else ''}".strip()
-        dimension_info.append(dimension_str)
+        parts = [
+            precision if precision else "",
+            type if type else "",
+            f"({part})" if part else "",
+            value if value else "",
+            unit if unit else "",
+            f"({notes})" if notes else "",
+        ]
+
+        dimension_str = " ".join(filter(None, parts)).strip()
+        if dimension_str:
+            dimension_info.append(dimension_str)
     ##################
     # Dimensions END #
 
