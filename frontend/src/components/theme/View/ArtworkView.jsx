@@ -431,10 +431,12 @@ export default function ArtworkView(props) {
                         {content.ObjOnDisplay === true
                           ? `${intl.formatMessage(messages.nowonview)}${
                               content.displayLocation &&
-                              content.displayLocation.includes('EXPO')
-                                ? ` in EXPO ${
+                              /expo/i.test(content.displayLocation)
+                                ? ` in ${
+                                    content.displayLocation.match(/expo/i)[0]
+                                  } ${
                                     content.displayLocation
-                                      .split('EXPO')[1]
+                                      .split(/expo/i)[1]
                                       .trim()
                                       .split('.')[0]
                                   }`
