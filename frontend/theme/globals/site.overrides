@@ -1132,10 +1132,12 @@ body.artwork-listing-page{
       padding: 0px 123px 0px 123px !important;
     }
     @media screen and (min-width: 992px) {
-      padding-right: 102.5px !important;
-      padding-left: 102.5px !important;
+      padding-right: 108.5px !important;
+      padding-left: 108.5px !important;
     }
     #content-core .listing-items{
+      padding-left: 20px !important;
+      padding-right: 20px !important;
       width: 100% !important;
       @media screen and (max-width: 991px){
         width: 100% !important;
