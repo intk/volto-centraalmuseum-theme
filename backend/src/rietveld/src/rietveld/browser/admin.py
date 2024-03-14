@@ -417,12 +417,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
 
     # Current location #
     current_location_text = tree.findtext(".//current_location.name")
-    try:
-        current_location_number = float(current_location_text)
-        current_location_int = int(current_location_number)
-        current_location = str(current_location_int)
-    except Exception as e:
-        current_location = current_location_text
+    current_location = current_location_text
     ####################
 
     # Object on Display #
