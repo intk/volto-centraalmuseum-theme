@@ -1212,6 +1212,14 @@ def create_and_setup_object(title, container, info, intl, object_type, obj_id, p
 
     return obj
 
+def is_error_response(content):
+    try:
+        root = ET.fromstring(content)
+        if root.find('.//error') is not None:
+            return True
+    except ET.ParseError:
+        pass
+    return False
 
 def import_images(container, images):
     MAX_RETRIES = 2
@@ -1240,6 +1248,10 @@ def import_images(container, images):
                 with requests.get(url=image_url, stream=True, headers=HEADERS) as req:
                     req.raise_for_status()
                     data = req.content
+
+                    if is_error_response(req.content):
+                        log_to_file(f"Skipping {image.text} due to API error response.")
+                        break  # Skip this image
 
                     log_to_file(f"{image.text} image is created")
 
@@ -1273,7 +1285,7 @@ def import_images(container, images):
 
         if not success:
             log_to_file(
-                f"Skipped image {image['text']} due to repeated fetch failures."
+                f"Skipped image {image.text} due to repeated fetch failures."
             )
 
     return f"Images {images} created successfully"
