@@ -1212,14 +1212,16 @@ def create_and_setup_object(title, container, info, intl, object_type, obj_id, p
 
     return obj
 
+
 def is_error_response(content):
     try:
         root = ET.fromstring(content)
-        if root.find('.//error') is not None:
+        if root.find(".//error") is not None:
             return True
     except ET.ParseError:
         pass
     return False
+
 
 def import_images(container, images):
     MAX_RETRIES = 2
@@ -1236,10 +1238,9 @@ def import_images(container, images):
         api.content.delete(obj=obj.getObject())
 
     for image in images:
-        primaryDisplay = image.get("PrimaryDisplay")
+        # primaryDisplay = image.get("PrimaryDisplay")
         retries = 0
         success = False
-        image_index += 1
 
         # Tries MAX_RETRIES times and then raise exception
         while retries < MAX_RETRIES:
@@ -1266,6 +1267,7 @@ def import_images(container, images):
                         image=imagefield,
                         container=container,
                     )
+                    image_index += 1
                     if image_index == 1:
                         container.preview_image = imagefield
 
@@ -1284,9 +1286,7 @@ def import_images(container, images):
                     log_to_file(f"Failed to create {image['text']} image: {e}")
 
         if not success:
-            log_to_file(
-                f"Skipped image {image.text} due to repeated fetch failures."
-            )
+            log_to_file(f"Skipped image {image.text} due to repeated fetch failures.")
 
     return f"Images {images} created successfully"
 
