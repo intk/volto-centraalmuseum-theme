@@ -1144,6 +1144,9 @@ body.artwork-listing-page{
         aspect-ratio: initial !important;
       }
     }
+    #content-core .search-items{
+      width: 100%;
+    }
   }
 }
 
