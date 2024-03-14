@@ -1126,18 +1126,26 @@ body.artwork-listing-page{
   }
 }
 
-#view #page-document .block.listing.Artwork{
-  #page-listing{
-    @media screen and (max-width: 768px){
+#view #page-document .block.listing.Artwork {
+  #page-listing {
+    @media screen and (max-width: 768px) {
       padding: 0px 123px 0px 123px !important;
     }
-    @media screen and (min-width: 992px){
-      padding-right: 93.5px !important;
-      padding-left: 107.5px !important;
+    @media screen and (min-width: 992px) {
+      padding-right: 102.5px !important;
+      padding-left: 102.5px !important;
+    }
+    #content-core .listing-items{
+      width: 100% !important;
+      @media screen and (max-width: 991px){
+        width: 100% !important;
+      }
+      img{
+        aspect-ratio: initial !important;
+      }
     }
   }
 }
-
 
 // listing block pagination
 #view #page-document .pagination-wrapper,
