@@ -431,7 +431,16 @@ export default function ArtworkView(props) {
                         {content.ObjOnDisplay === true
                           ? `${intl.formatMessage(messages.nowonview)} ${
                               content.displayLocation
-                                ? `in EXPO ${content.displayLocation}`
+                                ? `in ${
+                                    content.displayLocation.includes('EXPO')
+                                      ? `EXPO ${
+                                          content.displayLocation
+                                            .split('EXPO')[1]
+                                            .trim()
+                                            .split('.')[0]
+                                        }`
+                                      : content.displayLocation
+                                  }`
                                 : ''
                             }`
                           : intl.formatMessage(messages.notonview)}
