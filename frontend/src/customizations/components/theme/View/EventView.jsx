@@ -25,28 +25,13 @@ import {
 import { isEqual } from 'lodash';
 import { getWidget } from '@plone/volto/helpers/Widget/utils';
 
-// const EventTextfieldView = ({ content }) => (
-//   <React.Fragment>
-//     {content.title && <h1 className="documentFirstHeading">{content.title}</h1>}
-//     {content.description && (
-//       <p className="documentDescription">{content.description}</p>
-//     )}
-//     {content.image && (
-//       <Image
-//         className="document-image"
-//         src={content.image.scales.thumb.download}
-//         floated="right"
-//       />
-//     )}
-//     {content.text && (
-//       <div
-//         dangerouslySetInnerHTML={{
-//           __html: flattenHTMLToAppURL(content.text.data),
-//         }}
-//       />
-//     )}
-//   </React.Fragment>
-// );
+const translations = {
+  expired: {
+    en: 'PAST EXHIBITION',
+    nl: 'TENTOONSTELLING IS AFGELOPEN',
+    de: 'VERLEDEN TENTOONSTELLING',
+  },
+};
 
 function filterBlocks(content, types) {
   if (!(content.blocks && content.blocks_layout?.items)) return content;
@@ -114,9 +99,36 @@ const EventView = (props) => {
   const Container =
     config.getComponent({ name: 'Container' }).component || SemanticContainer;
 
+  const lang = useSelector((state) => state?.intl?.locale);
+  const startDate = new Date(props?.content?.start);
+  const endDate = new Date(props?.content?.end);
+  const format = new Intl.DateTimeFormat(lang, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+  const startHour = format.format(startDate);
+  const endHour = format.format(endDate);
+
   return contentLoaded ? (
     hasBlocksData(content) ? (
       <Container id="page-document">
+        {(!(startHour === '00:00' || endHour === '23:59') &&
+          startDate.getDate() === endDate?.getDate() &&
+          startDate.getMonth() === endDate?.getMonth() &&
+          startDate.getFullYear() === endDate?.getFullYear()) ||
+        (!(
+          startDate.getDate() === endDate?.getDate() &&
+          startDate.getMonth() === endDate?.getMonth() &&
+          startDate.getFullYear() === endDate?.getFullYear()
+        ) &&
+          new Date(props?.content?.end) < new Date()) ? (
+          <p style={{ marginBottom: '0px' }}>
+            <strong>{translations.expired[lang]}</strong>
+          </p>
+        ) : (
+          ''
+        )}
         <RenderBlocks {...props} path={path} content={filteredContent} />
       </Container>
     ) : (
