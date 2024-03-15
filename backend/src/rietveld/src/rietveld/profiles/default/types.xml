@@ -3,7 +3,7 @@
         name="portal_types"
 >
   <object meta_type="Dexterity FTI"
-          name="object"
+          name="exhibition"
   />
   <object meta_type="Dexterity FTI"
           name="artwork"

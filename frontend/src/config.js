@@ -20,6 +20,7 @@ import installFooter from './footer';
 import installBlocks from './components/Blocks';
 import ArtworkView from './components/theme/View/ArtworkView';
 import AuthorView from './components/theme/View/AuthorView';
+import ExhibitionView from './components/theme/View/ExhibitionView';
 
 export default function applyConfig(config) {
   const DEFAULT_LANG = 'nl';
@@ -71,6 +72,10 @@ export default function applyConfig(config) {
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     artwork: ArtworkView,
+  };
+  config.views.contentTypesViews = {
+    ...config.views.contentTypesViews,
+    exhibition: ExhibitionView,
   };
 
   config.settings.asyncPropsExtenders = [
