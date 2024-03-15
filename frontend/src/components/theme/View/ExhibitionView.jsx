@@ -110,8 +110,6 @@ const ExhibitionView = (props) => {
   const startHour = format.format(startDate);
   const endHour = format.format(endDate);
 
-  console.log(props)
-
   return contentLoaded ? (
     hasBlocksData(content) ? (
       <Container id="page-document">

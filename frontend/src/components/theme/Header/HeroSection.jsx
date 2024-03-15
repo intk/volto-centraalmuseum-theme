@@ -48,7 +48,6 @@ function HeroSection(props) {
   const endDate = new Date(end || Date.now());
   const startDate = new Date(start || Date.now());
 
-
   return (
     <div className="herosection">
       {multiple_content_view && <BodyClass className="multiple-content-view" />}
