@@ -44,7 +44,7 @@ function HeroSection(props) {
   } = content || {};
 
   const isEvent =
-    content?.['@type'] === 'Event' || content?.['@type'] === 'Exhibition';
+    content?.['@type'] === 'Event' || content?.['@type'] === 'exhibition';
   const endDate = new Date(end || Date.now());
   const startDate = new Date(start || Date.now());
 
@@ -71,7 +71,7 @@ function HeroSection(props) {
             <div className="header-title-dates">
               <div className="hero-dates-wrapper">
                 {content['@type'] === 'Event' ||
-                content['@type'] === 'Exhibition' ? (
+                content['@type'] === 'exhibition' ? (
                   <div className="hero-dates">
                     <When
                       start={content.start}
