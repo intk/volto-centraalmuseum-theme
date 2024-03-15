@@ -741,6 +741,10 @@ p#photo-credit {
   text-align: center;
 }
 
+.expired .hero-dates {
+  text-decoration: line-through !important;
+}
+
 .hero-dates {
   margin-bottom: 10px;
   color: #fff;
