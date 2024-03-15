@@ -180,14 +180,24 @@ class AdminFixes(BrowserView):
 
             while retries < MAX_RETRIES and success == False:
                 try:
-                    import_one_record(
-                        self,
-                        record=record,
-                        collection_type=collection_type,
-                        container=container,
-                        container_en=container_en,
-                        catalog=catalog,
-                    )
+                    if collection_type == "exhibit":
+                        import_one_exhibition(
+                            self,
+                            record=record,
+                            collection_type=collection_type,
+                            container=container,
+                            container_en=container_en,
+                            catalog=catalog,
+                        )
+                    else:
+                        import_one_record(
+                            self,
+                            record=record,
+                            collection_type=collection_type,
+                            container=container,
+                            container_en=container_en,
+                            catalog=catalog,
+                        )
                     success = True
                     transaction.commit()
                 except Exception as e:
@@ -1162,6 +1172,296 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 relation.create(source=obj, target=author, relationship="authors")
             for author_en in authors_en:
                 relation.create(source=obj_en, target=author_en, relationship="authors")
+
+
+def import_one_exhibition(
+    self, record, collection_type, container, container_en, catalog
+):
+    priref = record.get("priref")
+    last_modification_str = record.get("modification")
+    last_modification_dt = parser.parse(last_modification_str)
+
+    brains = catalog.searchResults(priref=priref, portal_type="exhibition")
+
+    for brain in brains:
+        obj = brain.getObject()
+
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
+
+    api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
+
+    response = requests.post(api_url)
+    response.raise_for_status()
+    api_answer = response.text
+    api_answer_bytes = api_answer.encode("utf-8")
+    tree_string = etree.fromstring(api_answer_bytes)
+    tree = tree_string.find(".//record")
+
+    # Find the title element
+    title_element = tree.find("./title")
+    if title_element is not None:
+        title = title_element.text
+    else:
+        title = ""
+    ############################
+
+    # RAW DATA #
+    record_string = etree.tostring(tree, pretty_print=True).decode("utf-8")
+    ################
+
+    objectnumber = tree.findtext("./object_number")
+
+    ######################################################
+    ######################################################
+    # EXHIBITON SCECIAL
+    ######################################################
+    ######################################################
+    # Textlinefields
+    cm_nummer = tree.findtext(".//nummer_cm")
+
+    alternative_text = tree.findtext(".//alternativetitle-title.alternative")
+
+    start_date = tree.findtext(".//date.start")
+
+    end_date = tree.findtext(".//date.end")
+
+    organisation = tree.findtext(".//venue-venue")
+
+    designer = tree.findtext(".//creator-creator")
+
+    persistent_url = tree.findtext(".//PIDwork-PID_work_URI")
+
+    # Documentations Start #
+    ########################
+    documentations = tree.findall(".//Documentation")
+
+    documentation_info = []
+    for documentation in documentations:
+        # Extracting data
+        title_documentation = documentation.findtext(".//Title/title")
+        statement_of_responsibility = documentation.findtext(
+            ".//statement_of_responsibility"
+        )
+        source_title_lead_word = (
+            documentation.findtext(".//source.title.lead_word") or ""
+        )
+        source_title = documentation.findtext(".//source.title") or ""
+        source_volume = documentation.findtext(".//source.volume") or ""
+        source_issue = documentation.findtext(".//source.issue") or ""
+        source_month = documentation.findtext(".//source.month") or ""
+        source_publication_years = (
+            documentation.findtext(".//source.publication_years") or ""
+        )
+        source_pagination = documentation.findtext(".//source.pagination")
+        place_of_publication = documentation.findtext(
+            ".//Publisher/place_of_publication"
+        )
+        year_of_publication = documentation.findtext(".//Publisher/year_of_publication")
+        page_reference = documentation.findtext("./documentation.page_reference")
+
+        # Building source details
+        source = f"{source_title_lead_word} {source_title}".strip()
+        publication_date = f"{source_month} {source_publication_years}".strip()
+        source_details_list = [
+            source,
+            source_volume,
+            source_issue,
+            publication_date,
+        ]
+        filtered_details = [
+            item for item in source_details_list if item and item.strip()
+        ]
+        source_details = ", ".join(filtered_details)
+        source_details = f"({source_details})" if filtered_details else ""
+
+        # Building the documentation string
+        documentation_components = [
+            title_documentation,
+            statement_of_responsibility,
+            source_details,
+            source_pagination,
+            f"({place_of_publication}, {year_of_publication})"
+            if place_of_publication and year_of_publication
+            else place_of_publication or year_of_publication,
+            page_reference,
+        ]
+        documentation_str = ", ".join(filter(None, documentation_components)).strip()
+        if documentation_str:
+            documentation_info.append(documentation_str)
+
+    sorted_documentation_info = sorted(documentation_info)
+    #####################
+    # Documentation END #
+
+    # Notes field start
+    notes = tree.findtext("./notes")
+
+    notes_richtext_nl = RichTextValue(
+        raw=notes,
+        mimeType="text/html",
+        outputMimeType="text/x-html-safe",
+    )
+    notes_richtext_en = RichTextValue(
+        raw=notes,
+        mimeType="text/html",
+        outputMimeType="text/x-html-safe",
+    )
+    # Notes field end
+
+    ######################################################
+    ######################################################
+    # EXHIBITON SCECIAL END
+    ######################################################
+    ######################################################
+
+    # Assigning values to the fields #
+    ##################################
+    info = {"nl": {}, "en": {}}
+    intl = {"nl": {}, "en": {}}
+
+    # language dependent
+    info["nl"]["notes"] = notes_richtext_nl
+    info["en"]["notes"] = notes_richtext_en
+
+    language_independent_fields = {
+        "title": title,
+        "rawdata": record_string,
+        "priref": priref,
+        "documentation": sorted_documentation_info,
+        "cm_nummer": cm_nummer,
+        "alternative_text": alternative_text,
+        "start_date": start_date,
+        "end_date": end_date,
+        "organisation": organisation,
+        "designer": designer,
+        "notes": notes,
+        "persisten_url": persistent_url,
+    }
+
+    for field, value in language_independent_fields.items():
+        info["nl"][field] = value
+        info["en"][field] = value
+    #########################################
+    # END OF Assigning values to the fields #
+
+    # CREATING URL FOR THE OBJECT #
+    ###############################
+    creator_for_title = get_creator(xml_record=tree)
+
+    title_stripped = title.replace(":", "")
+    if creator_for_title is not None:
+        creator_stripped = creator_for_title.replace("_", "")
+    else:
+        creator_stripped = ""
+    creator_ascii = creator_stripped.encode("ascii", "ignore").decode("ascii")
+    dirty_id = f"{objectnumber} {title_stripped} {creator_ascii}"
+    title_url = idnormalizer.normalize(dirty_id, max_length=len(dirty_id))
+    # CREATING URL FOR THE OBJECT #
+    ###############################
+
+    # Fething the images
+    images = tree.findall(".//Reproduction/reproduction.reference/reference_number")
+
+    # CREATING OR UPDATING THE OBJECTS #
+    ####################################
+    # brains = catalog.searchResults(priref=priref, portal_type="artwork")
+    if len(brains) == 1:
+        lang = brains[0].getObject().language
+        missing_lang = "en" if lang == "nl" else "nl"
+        if missing_lang == "nl":
+            obj = create_and_setup_object(
+                title, container, info, intl, "exhibition", title_url, priref
+            )  # Dutch version
+
+            manager = ITranslationManager(obj)
+            if not manager.has_translation("en"):
+                manager.register_translation("en", brains[0].getObject())
+
+            # adding images
+            import_images(container=obj, images=images)
+            obj.hasImage = True
+            obj.reindexObject()
+
+        else:
+            obj_en = create_and_setup_object(
+                title, container_en, info, intl, "exhibition", title_url, priref
+            )  # English version
+
+            manager = ITranslationManager(obj_en)
+            if not manager.has_translation("nl"):
+                manager.register_translation("nl", brains[0].getObject())
+
+            # adding images
+            import_images(container=obj_en, images=images)
+            obj_en.hasImage = True
+
+            obj_en.reindexObject()
+
+    # Check if object with ObjectNumber already exists in the container
+    elif brains:
+        for brain in brains:
+            # Object exists, so we fetch it and update it
+            obj = brain.getObject()
+            reset_artwork_fields(obj)
+            if title_url != obj.id:
+                log_to_file("the url has been changed")
+                plone.api.content.rename(obj=obj, new_id=title_url)
+
+            # First clear all of the fields
+            schema = obj.getTypeInfo().lookupSchema()
+            fields = getFields(schema)
+
+            # Exclude these fields from clearing
+            exclude_fields = ["id", "UID", "title", "description", "authors"]
+
+            for field_name, field in fields.items():
+                if field_name not in exclude_fields:
+                    # Clear the field by setting it to its missing_value
+                    setattr(obj, field_name, field.missing_value)
+
+            # Update the object's fields with new data
+            lang = obj.language
+            for k, v in info[lang].items():
+                if v:
+                    setattr(obj, k, v)
+            for k, v in intl[lang].items():
+                if v:
+                    setattr(obj, k, json.dumps(v))
+
+            log_to_file(f"Object is updated: {priref} id and {title} title")
+
+            # adding images
+            import_images(container=obj, images=images)
+            obj.hasImage = True
+
+            # Reindex the updated object
+            obj.reindexObject()
+            obj.last_successful_update = last_modification_dt
+
+    # Object doesn't exist, so we create a new one
+    if not brains:
+        if not title:
+            title = "Untitled Object"  # default value for untitled objects
+
+        obj = create_and_setup_object(
+            title, container, info, intl, "exhibition", title_url, priref
+        )  # Dutch version
+
+        log_to_file(f"{priref} object is created")
+
+        # adding images
+        import_images(container=obj, images=images)
+        # obj.hasImage = True
+
+        obj.last_successful_update = last_modification_dt
+        obj_en = self.translate(obj, info["en"])
 
 
 def create_and_setup_object(title, container, info, intl, object_type, obj_id, priref):
