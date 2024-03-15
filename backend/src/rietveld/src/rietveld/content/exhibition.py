@@ -121,6 +121,12 @@ class IExhibition(model.Schema):
 
     persistent_url = TextLine(title="Persisten url", required=False)
 
+    last_successful_update = Datetime(
+        title="Last Successful Update",
+        description="",
+        required=False,
+    )
+
     rawdata = Text(
         title="Rawdata",
         description="",
