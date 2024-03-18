@@ -941,7 +941,7 @@ p#photo-credit {
 .view-viewview.contenttype-exhibition.top-image-align-right {
   @media (min-width: 992px) {
     .header-title-dates {
-      bottom: 32% !important;
+      bottom: 27% !important;
     }
     .hero-title-floating{
       line-height: 80px !important;
