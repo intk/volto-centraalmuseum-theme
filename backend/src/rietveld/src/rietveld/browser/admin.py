@@ -1308,6 +1308,32 @@ def import_one_exhibition(
     #####################
     # Documentation END #
 
+    # Objects related to the exhibition
+    exhibition_objects = tree.findall(".//Object")
+
+    artwork_brains_nl = []
+    artwork_brains_en = []
+
+    for artwork in exhibition_objects:
+        artwork_priref = artwork.findtext(".//priref")
+        artwork_info = extract_and_format_artwork_info(artwork)
+
+
+        temporary_brains_nl = catalog.searchResults(priref=artwork_priref, portal_type="artwork", path="/Plone/nl")
+        for brain_nl in temporary_brains_nl:
+            artwork_obj_nl = brain_nl.getObject()
+            if artwork_obj_nl:
+                artwork_url_nl = artwork_obj_nl.getPhysicalPath()  # Use getId() method to get the artwork ID
+                artwork_brains_nl.append({"url": artwork_url_nl, "title": artwork_info})
+
+
+        temporary_brains_en = catalog.searchResults(priref=artwork_priref, portal_type="artwork", path='/Plone/en')
+        for brain_en in temporary_brains_en:
+            artwork_obj_en = brain_en.getObject()
+            if artwork_obj_en:
+                artwork_url_en = artwork_obj_en.getPhysicalPath()  # Use getId() method to get the artwork ID
+                artwork_brains_en.append({"url": artwork_url_en, "title": artwork_info})
+
     # Notes field start
     notes = tree.findtext("./notes")
 
@@ -1337,6 +1363,9 @@ def import_one_exhibition(
     # language dependent
     info["nl"]["notes"] = notes_richtext_nl
     info["en"]["notes"] = notes_richtext_en
+
+    info["nl"]["objects"] = artwork_brains_nl
+    info["en"]["objects"] = artwork_brains_en
 
     language_independent_fields = {
         "title": whole_title,
@@ -1796,3 +1825,34 @@ def log_to_file(message):
             f.write(message + "\n")
     except Exception as e:
         return f"Error writing to log file: {e}"
+
+
+def extract_and_format_artwork_info(artwork_xml):
+    object_name = artwork_xml.findtext(".//Title/title")
+    creator = artwork_xml.findtext(".//Production/creator")
+    production_start_date = artwork_xml.findtext(".//Production_date/production.date.start")
+
+    name = creator
+
+    if creator is not None:
+        creator_split = creator.split(",")
+
+        if len(creator_split) > 1:
+            first_name = creator_split[1].strip()
+            last_name = creator_split[0].strip()
+            name = "{} {}".format(first_name, last_name)
+
+    return format_artwork_info(object_name=object_name, creator=name, production_start_date=production_start_date)
+
+def format_artwork_info(object_name=None, creator=None, production_start_date=None):
+    info_parts = []
+
+    if object_name:
+        info_parts.append(object_name)
+    if creator:
+        info_parts.append(creator)
+    if production_start_date:
+        info_parts.append(production_start_date)
+
+    info_str = ", ".join(info_parts)
+    return info_str
