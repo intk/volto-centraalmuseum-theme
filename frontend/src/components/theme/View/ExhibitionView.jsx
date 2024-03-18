@@ -128,8 +128,8 @@ const ExhibitionView = (props) => {
               fontFamily: "'FranklinMed', Arial, sans-serif",
               fontSize: '17px',
               letterSpacing: '0.85px',
-              marginTop: '22px',
-              marginBottom: '36px',
+              marginBottom: '22px',
+              marginTop: '36px',
             }}
           >
             <strong>{translations.expired[lang]}</strong>
