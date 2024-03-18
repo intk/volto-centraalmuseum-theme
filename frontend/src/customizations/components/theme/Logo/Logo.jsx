@@ -10,8 +10,8 @@ import config from '@plone/volto/registry';
 import { UniversalLink } from '@plone/volto/components';
 import { toBackendLang } from '@plone/volto/helpers';
 import LogoImage from './Logo.svg';
-import blackLogoImage from './logo-black.svg';
-import navigationLogo from './navigationlogo.svg';
+import blackLogoImage from './Logo.svg';
+import navigationLogo from './Logo.svg';
 
 const messages = defineMessages({
   site: {
