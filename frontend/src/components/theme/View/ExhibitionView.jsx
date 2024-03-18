@@ -123,7 +123,14 @@ const ExhibitionView = (props) => {
           startDate.getFullYear() === endDate?.getFullYear()
         ) &&
           new Date(props?.content?.end) < new Date()) ? (
-          <p style={{ marginBottom: '0px' }}>
+          <p
+            style={{
+              marginBottom: '0px',
+              fontFamily: "'FranklinMed', Arial, sans-serif",
+              fontSize: '17px',
+              letterSpacing: '0.85px',
+            }}
+          >
             <strong>{translations.expired[lang]}</strong>
           </p>
         ) : (
