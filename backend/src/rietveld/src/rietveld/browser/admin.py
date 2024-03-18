@@ -1206,10 +1206,20 @@ def import_one_exhibition(
 
     # Find the title element
     title_element = tree.find("./title")
+
     if title_element is not None:
         title = title_element.text
     else:
         title = ""
+
+    alternative_text = tree.findtext(".//alternativetitle/title.alternative")
+
+    if alternative_text is not None:
+        title_alternative = " - " + alternative_text
+    else:
+        title_alternative = ""
+
+    whole_title = title + title_alternative
     ############################
 
     # RAW DATA #
@@ -1226,21 +1236,19 @@ def import_one_exhibition(
     # Textlinefields
     cm_nummer = tree.findtext(".//nummer_cm")
 
-    alternative_text = tree.findtext(".//alternativetitle-title.alternative")
-
     start_date = tree.findtext(".//date.start")
 
     end_date = tree.findtext(".//date.end")
 
-    organisation = tree.findtext(".//venue-venue")
+    organisation = tree.findtext(".//venue/venue")
 
-    designer = tree.findtext(".//creator-creator")
+    designer = tree.findtext(".//creator/creator")
 
-    persistent_url = tree.findtext(".//PIDwork-PID_work_URI")
+    persistent_url = tree.findtext(".//PIDwork/PID_work_URI")
 
     # Documentations Start #
     ########################
-    documentations = tree.findall(".//Documentation")
+    documentations = tree.findall(".//documentation")
 
     documentation_info = []
     for documentation in documentations:
@@ -1331,7 +1339,7 @@ def import_one_exhibition(
     info["en"]["notes"] = notes_richtext_en
 
     language_independent_fields = {
-        "title": title,
+        "title": whole_title,
         "rawdata": record_string,
         "priref": priref,
         "documentation": sorted_documentation_info,
@@ -1342,7 +1350,7 @@ def import_one_exhibition(
         "organisation": organisation,
         "designer": designer,
         "notes": notes,
-        "persisten_url": persistent_url,
+        "persistent_url": persistent_url,
     }
 
     for field, value in language_independent_fields.items():
@@ -1356,12 +1364,12 @@ def import_one_exhibition(
     creator_for_title = get_creator(xml_record=tree)
 
     title_stripped = title.replace(":", "")
-    if creator_for_title is not None:
-        creator_stripped = creator_for_title.replace("_", "")
-    else:
-        creator_stripped = ""
-    creator_ascii = creator_stripped.encode("ascii", "ignore").decode("ascii")
-    dirty_id = f"{objectnumber} {title_stripped} {creator_ascii}"
+    # if creator_for_title is not None:
+    #     creator_stripped = creator_for_title.replace("_", "")
+    # else:
+    #     creator_stripped = ""
+    # creator_ascii = creator_stripped.encode("ascii", "ignore").decode("ascii")
+    dirty_id = f"{title_stripped}"
     title_url = idnormalizer.normalize(dirty_id, max_length=len(dirty_id))
     # CREATING URL FOR THE OBJECT #
     ###############################
@@ -1377,8 +1385,12 @@ def import_one_exhibition(
         missing_lang = "en" if lang == "nl" else "nl"
         if missing_lang == "nl":
             obj = create_and_setup_object(
-                title, container, info, intl, "exhibition", title_url, priref
+                whole_title, container, info, intl, "exhibition", title_url, priref
             )  # Dutch version
+            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+            obj.start = start_date_obj
+            obj.end = end_date_obj
 
             manager = ITranslationManager(obj)
             if not manager.has_translation("en"):
@@ -1391,8 +1403,12 @@ def import_one_exhibition(
 
         else:
             obj_en = create_and_setup_object(
-                title, container_en, info, intl, "exhibition", title_url, priref
+                whole_title, container_en, info, intl, "exhibition", title_url, priref
             )  # English version
+            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+            obj_en.start = start_date_obj
+            obj_en.end = end_date_obj
 
             manager = ITranslationManager(obj_en)
             if not manager.has_translation("nl"):
@@ -1437,6 +1453,11 @@ def import_one_exhibition(
 
             log_to_file(f"Object is updated: {priref} id and {title} title")
 
+            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+            obj.start = start_date_obj
+            obj.end = end_date_obj
+
             # adding images
             import_images(container=obj, images=images)
             obj.hasImage = True
@@ -1447,11 +1468,11 @@ def import_one_exhibition(
 
     # Object doesn't exist, so we create a new one
     if not brains:
-        if not title:
-            title = "Untitled Object"  # default value for untitled objects
+        if not whole_title:
+            whole_title = "Untitled Object"  # default value for untitled objects
 
         obj = create_and_setup_object(
-            title, container, info, intl, "exhibition", title_url, priref
+            whole_title, container, info, intl, "exhibition", title_url, priref
         )  # Dutch version
 
         log_to_file(f"{priref} object is created")
@@ -1462,6 +1483,13 @@ def import_one_exhibition(
 
         obj.last_successful_update = last_modification_dt
         obj_en = self.translate(obj, info["en"])
+
+        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+        obj.start = start_date_obj
+        obj.end = end_date_obj
+        obj_en.start = start_date_obj
+        obj_en.end = end_date_obj
 
 
 def create_and_setup_object(title, container, info, intl, object_type, obj_id, priref):
