@@ -371,7 +371,9 @@ const ExhibitionView = (props) => {
                   <p>
                     {intl.formatMessage(messages.questionText)}
                     <span> </span>
-                    <a href="mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20object:%2010786">
+                    <a
+                      href={`mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20tentoonstelling:%20${content.title}`}
+                    >
                       {intl.formatMessage(messages.letusknow)}
                     </a>
                   </p>
