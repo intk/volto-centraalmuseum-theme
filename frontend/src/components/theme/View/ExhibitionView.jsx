@@ -35,29 +35,13 @@ const messages = defineMessages({
     id: 'title',
     defaultMessage: 'Titel',
   },
-  materialTechnique: {
-    id: 'materialTechnique',
-    defaultMessage: 'Materiaal / Techniek',
+  designer: {
+    id: 'designer',
+    defaultMessage: 'Vormgever',
   },
-  inventoryNumber: {
-    id: 'inventoryNumber',
-    defaultMessage: 'Inventarisnummer',
-  },
-  date: {
-    id: 'date',
-    defaultMessage: 'Datering',
-  },
-  objectExplanation: {
-    id: 'objectExplanation',
-    defaultMessage: 'Fysieke beschrijving',
-  },
-  credit: {
-    id: 'credit',
-    defaultMessage: 'Opmerkingen',
-  },
-  objectNumber: {
-    id: 'objectNumber',
-    defaultMessage: 'Objectnummer',
+  objects: {
+    id: 'objects',
+    defaultMessage: 'Collectie in deze tentoonstelling',
   },
   question: {
     id: 'question',
@@ -88,53 +72,9 @@ const messages = defineMessages({
     id: 'notonview',
     defaultMessage: 'Dit object is nu niet in het museum te zien',
   },
-  objectName: {
-    id: 'objectName',
-    defaultMessage: 'Objectnaam',
-  },
-  acquisition: {
-    id: 'acquisition',
-    defaultMessage: 'Verwerving',
-  },
-  dimensions: {
-    id: 'dimensions',
-    defaultMessage: 'Afmetingen',
-  },
-  inscriptions: {
-    id: 'inscriptions',
-    defaultMessage: 'Opschriften / merken',
-  },
-  category: {
-    id: 'category',
-    defaultMessage: 'Geassocieerd onderwerp',
-  },
-  remarks: {
-    id: 'remarks',
-    defaultMessage: 'Opmerkingen',
-  },
   documentation: {
     id: 'documentation',
     defaultMessage: 'Documentatie',
-  },
-  exhibitions: {
-    id: 'exhibitions',
-    defaultMessage: 'Tentoonstellingen',
-  },
-  physicaldescription: {
-    id: 'physicaldescription',
-    defaultMessage: 'Fysieke beschrijving',
-  },
-  associatedPeriods: {
-    id: 'associatedPeriods',
-    defaultMessage: 'Geassocieerde periode',
-  },
-  associatedPeople: {
-    id: 'associatedPeople',
-    defaultMessage: 'Geassocieerde persoon',
-  },
-  motifs: {
-    id: 'motifs',
-    defaultMessage: 'Motief',
   },
   duurzameurl: {
     id: 'duurzameurl',
@@ -276,8 +216,7 @@ const ExhibitionView = (props) => {
             {content.designer && (
               <tr>
                 <td className="columnone">
-                  {/* <p>{intl.formatMessage(messages.designer)}</p> */}
-                  <p>Vormgever</p>
+                  <p>{intl.formatMessage(messages.designer)}</p>
                 </td>
                 <td className="columntwo">
                   <p>{content.designer}</p>
@@ -290,11 +229,6 @@ const ExhibitionView = (props) => {
                   <p>{intl.formatMessage(messages.documentation)}</p>
                 </td>
                 <td className="columntwo">
-                  {/* {content.documentation.map((document) => (
-                        <p>
-                          <li>{document}</li>
-                        </p>
-                      ))} */}
                   <ul>
                     {showAllDocumentation
                       ? content?.documentation?.map((doc, index) => (
@@ -349,8 +283,7 @@ const ExhibitionView = (props) => {
             {content.objects && (
               <tr>
                 <td className="columnone">
-                  {/* <p>{intl.formatMessage(messages.materialTechnique)}</p> */}
-                  Collectie in deze tentoonstelling
+                  <p>{intl.formatMessage(messages.objects)}</p>
                 </td>
                 <td className="columntwo">
                   <p>
