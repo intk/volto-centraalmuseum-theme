@@ -25,6 +25,7 @@ import {
 import { isEqual } from 'lodash';
 import { getWidget } from '@plone/volto/helpers/Widget/utils';
 import { defineMessages, useIntl } from 'react-intl';
+import './css/exhibitionview.less';
 
 const messages = defineMessages({
   artist: {
@@ -50,7 +51,7 @@ const messages = defineMessages({
   questionText: {
     id: 'questionText',
     defaultMessage:
-      'Ziet u een fout? Of heeft u extra informatie over dit object? ',
+      'Ziet u een fout? Of heeft u extra informatie over deze tentoonstelling? ',
   },
   letusknow: {
     id: 'letusknow',
@@ -150,6 +151,7 @@ const ExhibitionView = (props) => {
     : content;
 
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
+  const [showAllObjects, setShowAllObjects] = useState(false);
   const intl = useIntl();
 
   // TL;DR: There is a flash of the non block-based view because of the reset
@@ -211,60 +213,122 @@ const ExhibitionView = (props) => {
           ''
         )}
         <RenderBlocks {...props} path={path} content={filteredContent} />
-        <table>
-          <tbody>
-            {content.designer && (
-              <tr>
-                <td className="columnone">
-                  <p>{intl.formatMessage(messages.designer)}</p>
-                </td>
-                <td className="columntwo">
-                  <p>{content.designer}</p>
-                </td>
-              </tr>
-            )}
-            {content.documentation && content.documentation?.length !== 0 && (
-              <tr>
-                <td className="columnone">
-                  <p>{intl.formatMessage(messages.documentation)}</p>
-                </td>
-                <td className="columntwo">
-                  <ul>
-                    {showAllDocumentation
-                      ? content?.documentation?.map((doc, index) => (
-                          <li>
-                            <p key={index}>
-                              {doc}
-                              {index === 2 && content.documentation.length > 3 && (
-                                <button
-                                  className={`expand-data-button ${showAllDocumentation}`}
-                                  onClick={() =>
-                                    setShowAllDocumentation(
-                                      !showAllDocumentation,
-                                    )
-                                  }
-                                >
-                                  {`${intl.formatMessage(messages.showless)} -`}
-                                </button>
-                              )}
-                            </p>
-                          </li>
-                        ))
-                      : content.documentation
-                          ?.slice(0, 3)
-                          ?.filter((el) => el.trim() !== '')
-                          .map((doc, index) => (
+        <div id="rawdata" className="rawdata-section">
+          <table>
+            <tbody>
+              {content.designer && (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.designer)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <p>{content.designer}</p>
+                  </td>
+                </tr>
+              )}
+              {content.documentation && content.documentation?.length !== 0 && (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.documentation)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <ul>
+                      {showAllDocumentation
+                        ? content?.documentation?.map((doc, index) => (
                             <li>
                               <p key={index}>
                                 {doc}
                                 {index === 2 &&
                                   content.documentation.length > 3 && (
                                     <button
-                                      className="expand-data-button"
+                                      className={`expand-data-button ${showAllDocumentation}`}
                                       onClick={() =>
                                         setShowAllDocumentation(
                                           !showAllDocumentation,
                                         )
+                                      }
+                                    >
+                                      {`${intl.formatMessage(
+                                        messages.showless,
+                                      )} -`}
+                                    </button>
+                                  )}
+                              </p>
+                            </li>
+                          ))
+                        : content.documentation
+                            ?.slice(0, 3)
+                            ?.filter((el) => el.trim() !== '')
+                            .map((doc, index) => (
+                              <li>
+                                <p key={index}>
+                                  {doc}
+                                  {index === 2 &&
+                                    content.documentation.length > 3 && (
+                                      <button
+                                        className={`expand-data-button ${showAllDocumentation}`}
+                                        onClick={() =>
+                                          setShowAllDocumentation(
+                                            !showAllDocumentation,
+                                          )
+                                        }
+                                      >
+                                        {/* Toon alles + */}
+                                        {`${intl.formatMessage(
+                                          messages.showmore,
+                                        )} +`}
+                                      </button>
+                                    )}
+                                </p>
+                              </li>
+                            ))}
+                    </ul>
+                  </td>
+                </tr>
+              )}
+              {content.objects && (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.objects)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <ul>
+                      {showAllObjects
+                        ? content?.objects?.map(({ title, url }, index) => (
+                            <li>
+                              <p key={index}>
+                                <a href={`/${url.slice(2).join('/')}`}>
+                                  {title}
+                                </a>
+
+                                {index === 2 && content.objects.length > 3 && (
+                                  <button
+                                    className={`expand-data-button ${showAllObjects}`}
+                                    onClick={() =>
+                                      setShowAllObjects(!showAllObjects)
+                                    }
+                                  >
+                                    {`${intl.formatMessage(
+                                      messages.showless,
+                                    )} -`}
+                                  </button>
+                                )}
+                              </p>
+                            </li>
+                          ))
+                        : content?.objects
+                            ?.slice(0, 3)
+                            .map(({ title, url }, index) => (
+                              <li>
+                                <p key={index}>
+                                  <a href={`/${url.slice(2).join('/')}`}>
+                                    {title}
+                                  </a>
+                                  {index === 2 && content.objects.length > 3 && (
+                                    <button
+                                      className="expand-data-button"
+                                      onClick={() =>
+                                        setShowAllObjects(!showAllObjects)
                                       }
                                     >
                                       {/* Toon alles + */}
@@ -273,71 +337,49 @@ const ExhibitionView = (props) => {
                                       )} +`}
                                     </button>
                                   )}
-                              </p>
-                            </li>
-                          ))}
-                  </ul>
-                </td>
-              </tr>
-            )}
-            {content.objects && (
+                                </p>
+                              </li>
+                            ))}
+                    </ul>
+                  </td>
+                </tr>
+              )}
+              {content.persistent_url && (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.duurzameurl)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <p>
+                      <p>{intl.formatMessage(messages.duurzameurltext)}</p>
+                      <a href={content.persistent_url}>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: content.persistent_url,
+                          }}
+                        />
+                      </a>
+                    </p>
+                  </td>
+                </tr>
+              )}
               <tr>
                 <td className="columnone">
-                  <p>{intl.formatMessage(messages.objects)}</p>
+                  <p>{intl.formatMessage(messages.question)}</p>{' '}
                 </td>
                 <td className="columntwo">
                   <p>
-                    {content?.objects.map(({ title, url }, index) => (
-                      <>
-                        <span>
-                          <a href={`/${url[2]}/${url[3]}/${url[4]}/${url[5]}`}>
-                            {title}
-                          </a>
-                        </span>
-                        <span>
-                          {index !== content.objects.length - 1 ? ', ' : ''}
-                        </span>
-                      </>
-                    ))}
-                  </p>
-                </td>
-              </tr>
-            )}
-            {content.persistent_url && (
-              <tr>
-                <td className="columnone">
-                  <p>{intl.formatMessage(messages.duurzameurl)}</p>
-                </td>
-                <td className="columntwo">
-                  <p>
-                    <p>{intl.formatMessage(messages.duurzameurltext)}</p>
-                    <a href={content.persistent_url}>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: content.persistent_url,
-                        }}
-                      />
+                    {intl.formatMessage(messages.questionText)}
+                    <span> </span>
+                    <a href="mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20object:%2010786">
+                      {intl.formatMessage(messages.letusknow)}
                     </a>
                   </p>
                 </td>
               </tr>
-            )}
-            <tr>
-              <td className="columnone">
-                <p>{intl.formatMessage(messages.question)}</p>{' '}
-              </td>
-              <td className="columntwo">
-                <p>
-                  {intl.formatMessage(messages.questionText)}
-                  <span> </span>
-                  <a href="mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20object:%2010786">
-                    {intl.formatMessage(messages.letusknow)}
-                  </a>
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </Container>
     ) : (
       <Container id="page-document">
