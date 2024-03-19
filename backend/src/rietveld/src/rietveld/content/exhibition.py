@@ -121,6 +121,17 @@ class IExhibition(model.Schema):
 
     persistent_url = TextLine(title="Persisten url", required=False)
 
+    objects = schema.List(
+        title="Objects",
+        description="A list of artwork IDs and titles.",
+        value_type=schema.Tuple(
+            title="Artwork Detail",
+            value_type=schema.TextLine(),
+        ),
+        required=False,
+        default=[],
+    )
+
     last_successful_update = Datetime(
         title="Last Successful Update",
         description="",
