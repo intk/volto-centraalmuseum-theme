@@ -322,6 +322,68 @@ class AdminFixes(BrowserView):
         log_to_file("Finish Syncing")
         return "finished updating"
 
+    def is_exhibit_valid(self, xml_record, priref):
+        title = xml_record.find("title")
+        start_date = xml_record.find("date.start")
+        end_date = xml_record.find("date.end")
+        nummer_cm = xml_record.find("nummer_cm")
+
+        if priref == "16189":
+            nummer_cm = "T16189"
+
+        if nummer_cm != None:
+            try:
+                if priref == "16189":
+                    nummer_cm_text = nummer_cm
+                else:
+                    nummer_cm_text = nummer_cm.text
+
+                if "T" not in nummer_cm_text:
+                    return False
+            except:
+                return False
+
+            if title != None:
+                title_text = title.text
+                if "activiteit" not in title_text:
+                    if start_date != None and end_date != None:
+                        start_date_split = start_date.text.split("-")
+                        end_date_split = end_date.text.split("-")
+                        if self.valid_date(start_date.text) and self.valid_date(
+                            end_date.text
+                        ):
+                            return True
+                        else:
+                            log_to_file(
+                                f"{priref} Dates are invalid for this exhibition. start:{start_date_split}, end: {end_date_split}"
+                            )
+                            return False
+                    else:
+                        return False
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
+
+    def valid_date(self, date):
+        if date:
+            date_split = date.split("-")
+            if len(date_split) == 3:
+                try:
+                    datetime_test = datetime(
+                        int(date_split[0]), int(date_split[1]), int(date_split[2])
+                    )
+                except:
+                    return False
+
+                return True
+            else:
+                return False
+        else:
+            return False
+
 
 # def delete_one_record(self, tree, container, container_en, catalog):
 #     priref = tree.get("priref")
@@ -1203,6 +1265,14 @@ def import_one_exhibition(
     api_answer_bytes = api_answer.encode("utf-8")
     tree_string = etree.fromstring(api_answer_bytes)
     tree = tree_string.find(".//record")
+
+    if not self.is_exhibit_valid(tree, priref):
+        log_to_file(f"Exhibition is not valid {priref}")
+        for brain in brains:
+            obj = brain.getObject()
+            api.content.delete(obj=obj, check_linkintegrity=False)
+            log_to_file(f"Deleted invalid exhibition with priref {priref}")
+        return
 
     # Find the title element
     title_element = tree.find("./title")
