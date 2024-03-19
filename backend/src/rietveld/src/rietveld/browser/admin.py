@@ -1271,9 +1271,7 @@ def import_one_exhibition(
         place_of_publication = documentation.findtext(
             ".//Publisher/place_of_publication"
         )
-        publisher = documentation.findtext(
-            ".//Publisher/publisher"
-        )
+        publisher = documentation.findtext(".//Publisher/publisher")
         year_of_publication = documentation.findtext(".//Publisher/year_of_publication")
         page_reference = documentation.findtext("./documentation.page_reference")
 
