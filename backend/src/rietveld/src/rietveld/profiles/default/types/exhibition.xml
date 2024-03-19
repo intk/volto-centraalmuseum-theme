@@ -35,6 +35,7 @@
     <element value="plone.categorization" />
     <element value="plone.textindexer" />
     <element value="volto.preview_image" />
+    <element value="plone.restapi.behaviors.IBlocks" />
   </property>
   <property name="schema">rietveld.content.exhibition.IExhibition</property>
   <alias from="(Default)"
