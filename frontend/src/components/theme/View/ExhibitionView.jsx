@@ -286,7 +286,7 @@ const ExhibitionView = (props) => {
                   </td>
                 </tr>
               )}
-              {content.objects && (
+              {content.objects && content.objects?.length !== 0 && (
                 <tr>
                   <td className="columnone">
                     <p>{intl.formatMessage(messages.objects)}</p>
