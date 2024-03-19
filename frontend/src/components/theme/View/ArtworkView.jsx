@@ -874,7 +874,9 @@ export default function ArtworkView(props) {
                     <p>
                       {intl.formatMessage(messages.questionText)}
                       <span> </span>
-                      <a href="mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20object:%2010786">
+                      <a
+                        href={`mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20object:%20${content.inventoryNumber}`}
+                      >
                         {intl.formatMessage(messages.letusknow)}
                       </a>
                     </p>
