@@ -69,7 +69,7 @@ body {
     #page-document
     > .block.__button {
     box-sizing: border-box !important;
-    margin-left: 100px;
+    margin-left: 101px;
   }
 
   .hide-top-image .documentDescription {
