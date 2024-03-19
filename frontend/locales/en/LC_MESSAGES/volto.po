@@ -230,6 +230,7 @@ msgid "Ticket"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Verwerving
 msgid "acquisition"
 msgstr "Acquisition"
@@ -240,16 +241,19 @@ msgid "advancedsearchlink"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Vervaardiger
 msgid "artist"
 msgstr "Artist"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Geassocieerde persoon
 msgid "associatedPeople"
 msgstr "Who"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Geassocieerde periode
 msgid "associatedPeriods"
 msgstr "When"
@@ -265,6 +269,7 @@ msgid "availableViews"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Geassocieerd onderwerp
 msgid "category"
 msgstr "What"
@@ -286,96 +291,115 @@ msgid "columns"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Opmerkingen
 msgid "credit"
 msgstr "Remarks"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Datering
 msgid "date"
 msgstr "Dating"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Objectgegevens
 msgid "details"
 msgstr "Object details"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Afmetingen
 msgid "dimensions"
 msgstr "Dimensions"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Documentatie
 msgid "documentation"
 msgstr "Documentation"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Duurzame url
 msgid "duurzameurl"
 msgstr "Persistent url"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Als u naar dit object wilt verwijzen gebruik dan de duurzame URL:
 msgid "duurzameurltext"
 msgstr "To refer to this object please use the following persistent URL:"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Tentoonstellingen
 msgid "exhibitions"
 msgstr "Exhibitions"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Opschriften / merken
 msgid "inscriptions"
 msgstr "Inscriptions and markings"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Inventarisnummer
 msgid "inventoryNumber"
 msgstr "Object number"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Laat het ons weten!
 msgid "letusknow"
 msgstr "Please let us know!"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Materiaal / Techniek
 msgid "materialTechnique"
 msgstr "Material and technique"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Motief
 msgid "motifs"
 msgstr "More of the same motif"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Dit object is nu niet in het museum te zien
 msgid "notonview"
 msgstr "This object is now not on display in the museum"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Nu in het museum
 msgid "nowonview"
 msgstr "Now in the museum"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Fysieke beschrijving
 msgid "objectExplanation"
 msgstr "Physical description"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Objectnaam
 msgid "objectName"
 msgstr "Object type"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Objectnummer
 msgid "objectNumber"
 msgstr "Object number"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Fysieke beschrijving
 msgid "physicaldescription"
 msgstr "Physical description"
@@ -391,16 +415,19 @@ msgid "planYourVisitLink"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Vragen?
 msgid "question"
 msgstr "Questions?"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Ziet u een fout? Of heeft u extra informatie over dit object?
 msgid "questionText"
 msgstr "Do you have a remark or extra information on this object?"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Opmerkingen
 msgid "remarks"
 msgstr ""
@@ -447,21 +474,25 @@ msgid "seemore"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Delen
 msgid "share"
 msgstr ""
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Toon minder
 msgid "showless"
 msgstr "Show less"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Toon alles
 msgid "showmore"
 msgstr "Show more"
 
 #: components/theme/View/ArtworkView
+#: components/theme/View/ExhibitionView
 # defaultMessage: Titel
 msgid "title"
 msgstr "Title"
