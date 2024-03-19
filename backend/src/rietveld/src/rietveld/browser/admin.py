@@ -1267,9 +1267,12 @@ def import_one_exhibition(
         source_publication_years = (
             documentation.findtext(".//source.publication_years") or ""
         )
-        source_pagination = documentation.findtext(".//source.pagination")
+        source_pagination = documentation.findtext(".//pagination")
         place_of_publication = documentation.findtext(
             ".//Publisher/place_of_publication"
+        )
+        publisher = documentation.findtext(
+            ".//Publisher/publisher"
         )
         year_of_publication = documentation.findtext(".//Publisher/year_of_publication")
         page_reference = documentation.findtext("./documentation.page_reference")
@@ -1295,6 +1298,7 @@ def import_one_exhibition(
             statement_of_responsibility,
             source_details,
             source_pagination,
+            publisher,
             f"({place_of_publication}, {year_of_publication})"
             if place_of_publication and year_of_publication
             else place_of_publication or year_of_publication,
@@ -1812,10 +1816,10 @@ def get_creator(xml_record):
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:
