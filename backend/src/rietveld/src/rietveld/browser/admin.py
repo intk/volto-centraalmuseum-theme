@@ -842,7 +842,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
 
             venue = exhibition.find(
                 ".//venue"
-            )  # Adjusted XPath for nested venue details
+            )
             if venue is not None:
                 if venue.find("./venue") is not None:
                     new_exhibition["venue"] = venue.find("./venue").text
@@ -856,17 +856,23 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 if venue.find("./venue.place") is not None:
                     new_exhibition["place"] = venue.find("./venue.place").text
 
+                if new_exhibition["date"] and new_exhibition["to"]:
+                    start_year = new_exhibition["date"].split("-")[0]
+                    end_year = new_exhibition["to"].split("-")[0]
+                    log_to_file(f"start date: {start_year}, end date: {end_year}")
+                    if start_year == end_year:
+                        new_exhibition["date"] = start_year  # Use only start year if the same
+                    else:
+                        new_exhibition["date"] = f"{start_year} - {end_year}"  # Format as 'start - end'
+
+
                 # Creating a list to hold non-empty exhibition details
                 exhibition_details = []
 
                 # for key in ['name', 'venue', 'place', 'date', 'to', 'organiser', 'notes', 'catObject']:
                 for key in ["name", "venue", "place", "date"]:
                     if new_exhibition[key]:
-                        # For date fields, we're only interested in the year part
-                        if key in ["date", "to"]:
-                            exhibition_details.append(new_exhibition[key].split("-")[0])
-                        else:
-                            exhibition_details.append(new_exhibition[key])
+                        exhibition_details.append(new_exhibition[key])
 
                 # Joining the non-empty details with commas
                 exhibition_str = ", ".join(exhibition_details)
