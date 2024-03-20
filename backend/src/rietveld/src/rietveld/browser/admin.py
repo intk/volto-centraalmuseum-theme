@@ -840,9 +840,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 new_exhibition["name"] = exhibition.find("./title").text
                 exhibitions_title_list.append(new_exhibition["name"])
 
-            venue = exhibition.find(
-                ".//venue"
-            )
+            venue = exhibition.find(".//venue")
             if venue is not None:
                 if venue.find("./venue") is not None:
                     new_exhibition["venue"] = venue.find("./venue").text
@@ -861,10 +859,13 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                     end_year = new_exhibition["to"].split("-")[0]
                     log_to_file(f"start date: {start_year}, end date: {end_year}")
                     if start_year == end_year:
-                        new_exhibition["date"] = start_year  # Use only start year if the same
+                        new_exhibition[
+                            "date"
+                        ] = start_year  # Use only start year if the same
                     else:
-                        new_exhibition["date"] = f"{start_year} - {end_year}"  # Format as 'start - end'
-
+                        new_exhibition[
+                            "date"
+                        ] = f"{start_year} - {end_year}"  # Format as 'start - end'
 
                 # Creating a list to hold non-empty exhibition details
                 exhibition_details = []
