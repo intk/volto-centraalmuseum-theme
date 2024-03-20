@@ -899,6 +899,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 elif new_exhibition["to"]:  # If 'date' does not exist but 'to' does
                     end_year = new_exhibition["to"].split("-")[0]
                     new_exhibition["date"] = end_year  # Use end year as the date
+
                 # Creating a list to hold non-empty exhibition details
                 exhibition_details = []
 
