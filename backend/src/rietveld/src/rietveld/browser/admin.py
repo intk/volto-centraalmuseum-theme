@@ -882,19 +882,23 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 if venue.find("./venue.place") is not None:
                     new_exhibition["place"] = venue.find("./venue.place").text
 
-                if new_exhibition["date"] and new_exhibition["to"]:
+                # Adjusting date formatting based on the presence of 'date' and 'to'
+                if new_exhibition["date"]:
                     start_year = new_exhibition["date"].split("-")[0]
-                    end_year = new_exhibition["to"].split("-")[0]
-                    log_to_file(f"start date: {start_year}, end date: {end_year}")
-                    if start_year == end_year:
-                        new_exhibition[
-                            "date"
-                        ] = start_year  # Use only start year if the same
-                    else:
-                        new_exhibition[
-                            "date"
-                        ] = f"{start_year} - {end_year}"  # Format as 'start - end'
+                    if new_exhibition["to"]:
+                        end_year = new_exhibition["to"].split("-")[0]
+                        if start_year == end_year:
+                            new_exhibition[
+                                "date"
+                            ] = start_year  # Use only start year if the same
+                        else:
+                            new_exhibition[
+                                "date"
+                            ] = f"{start_year} - {end_year}"  # Format as 'start - end'
 
+                elif new_exhibition["to"]:  # If 'date' does not exist but 'to' does
+                    end_year = new_exhibition["to"].split("-")[0]
+                    new_exhibition["date"] = end_year  # Use end year as the date
                 # Creating a list to hold non-empty exhibition details
                 exhibition_details = []
 
