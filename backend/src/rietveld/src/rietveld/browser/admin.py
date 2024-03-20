@@ -24,6 +24,7 @@ from pytz import timezone
 from rietveld.config import IMAGE_BASE_URL
 from rietveld.config import IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
+from rietveld.content.exhibition import IExhibition
 from xml.dom import minidom
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import SubElement
@@ -1455,7 +1456,7 @@ def import_one_exhibition(
     # Notes field start
     notes = tree.findtext("./notes")
 
-    html_notes = notes.replace('\n', '<br/>')
+    html_notes = notes.replace("\n", "<br/>")
 
     notes_richtext_nl = RichTextValue(
         raw=html_notes,
@@ -1573,7 +1574,7 @@ def import_one_exhibition(
         for brain in brains:
             # Object exists, so we fetch it and update it
             obj = brain.getObject()
-            reset_artwork_fields(obj)
+            reset_exhibition_fields(obj)
             if title_url != obj.id:
                 log_to_file("the url has been changed")
                 plone.api.content.rename(obj=obj, new_id=title_url)
@@ -1872,7 +1873,7 @@ def import_authors(self, record):
 
 def reset_artwork_fields(obj):
     # Define the fields you want to preserve and not reset
-    preserved_fields = ["priref", "show_notes"]
+    preserved_fields = ["priref"]
 
     # Iterate over all fields defined in the IArtwork schema
     for fieldname in IArtwork:
@@ -1882,6 +1883,39 @@ def reset_artwork_fields(obj):
 
         # Access the field from the schema
         field = IArtwork[fieldname]
+
+        # Determine the default 'empty' value for the field based on its type
+        if IRichText.providedBy(field):
+            default_value = RichTextValue(
+                raw="", mimeType="text/plain", outputMimeType="text/x-html-safe"
+            )
+        elif IList.providedBy(field):
+            default_value = []
+        elif IText.providedBy(field) or ITextLine.providedBy(field):
+            default_value = ""
+        else:
+            default_value = field.missing_value
+
+        # Reset the field value using the mutator if available or directly
+        mutator = getattr(obj, "set%s" % fieldname.capitalize(), None)
+        if mutator:
+            mutator(default_value)
+        else:
+            setattr(obj, fieldname, default_value)
+
+
+def reset_exhibition_fields(obj):
+    # Define the fields you want to preserve and not reset
+    preserved_fields = ["priref", "show_notes"]
+
+    # Iterate over all fields defined in the IArtwork schema
+    for fieldname in IExhibition:
+        # Skip over preserved fields
+        if fieldname in preserved_fields:
+            continue
+
+        # Access the field from the schema
+        field = IExhibition[fieldname]
 
         # Determine the default 'empty' value for the field based on its type
         if IRichText.providedBy(field):
