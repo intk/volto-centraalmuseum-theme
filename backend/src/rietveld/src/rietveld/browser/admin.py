@@ -1870,7 +1870,7 @@ def import_authors(self, record):
 
 def reset_artwork_fields(obj):
     # Define the fields you want to preserve and not reset
-    preserved_fields = ["priref"]
+    preserved_fields = ["priref", "show_notes"]
 
     # Iterate over all fields defined in the IArtwork schema
     for fieldname in IArtwork:
