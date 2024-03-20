@@ -351,6 +351,11 @@ msgstr "Object number"
 msgid "letusknow"
 msgstr "Please let us know!"
 
+#: components/theme/View/ExhibitionView
+# defaultMessage: Locatie
+msgid "location"
+msgstr "Location"
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Materiaal / Techniek
 msgid "materialTechnique"
