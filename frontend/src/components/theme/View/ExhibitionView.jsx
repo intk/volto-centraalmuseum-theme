@@ -213,6 +213,13 @@ const ExhibitionView = (props) => {
           ''
         )}
         <RenderBlocks {...props} path={path} content={filteredContent} />
+        {content?.show_notes && (
+          <p
+            dangerouslySetInnerHTML={{
+              __html: content?.notes?.data,
+            }}
+          />
+        )}
         <div id="rawdata" className="rawdata-section">
           <table>
             <tbody>
