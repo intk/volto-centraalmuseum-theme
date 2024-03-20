@@ -1574,7 +1574,7 @@ def import_one_exhibition(
         for brain in brains:
             # Object exists, so we fetch it and update it
             obj = brain.getObject()
-            show_notes = obj.show_notes;
+            show_notes = obj.show_notes
             reset_exhibition_fields(obj)
             if title_url != obj.id:
                 log_to_file("the url has been changed")
