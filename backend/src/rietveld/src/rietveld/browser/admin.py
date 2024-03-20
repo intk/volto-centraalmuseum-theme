@@ -1378,7 +1378,8 @@ def import_one_exhibition(
         source_publication_years = (
             documentation.findtext(".//source.publication_years") or ""
         )
-        source_pagination = documentation.findtext(".//pagination")
+        pagination = documentation.findtext(".//pagination")
+        source_pagination = documentation.findtext(".//source.pagination")
         place_of_publication = documentation.findtext(
             ".//Publisher/place_of_publication"
         )
@@ -1406,12 +1407,12 @@ def import_one_exhibition(
             title_documentation,
             statement_of_responsibility,
             source_details,
-            source_pagination,
             publisher,
             f"({place_of_publication}, {year_of_publication})"
             if place_of_publication and year_of_publication
             else place_of_publication or year_of_publication,
             page_reference,
+            source_pagination or pagination,
         ]
         documentation_str = ", ".join(filter(None, documentation_components)).strip()
         if documentation_str:
