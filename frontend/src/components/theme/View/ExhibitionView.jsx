@@ -40,6 +40,10 @@ const messages = defineMessages({
     id: 'designer',
     defaultMessage: 'Vormgever',
   },
+  location: {
+    id: 'location',
+    defaultMessage: 'Locatie',
+  },
   objects: {
     id: 'objects',
     defaultMessage: 'Collectie in deze tentoonstelling',
@@ -230,6 +234,16 @@ const ExhibitionView = (props) => {
                   </td>
                   <td className="columntwo">
                     <p>{content.designer}</p>
+                  </td>
+                </tr>
+              )}
+              {content.organisation && (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.location)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <p>{content.organisation}</p>
                   </td>
                 </tr>
               )}
