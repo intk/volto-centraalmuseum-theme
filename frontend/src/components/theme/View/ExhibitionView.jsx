@@ -227,16 +227,6 @@ const ExhibitionView = (props) => {
         <div id="rawdata" className="rawdata-section">
           <table>
             <tbody>
-              {content.designer && (
-                <tr>
-                  <td className="columnone">
-                    <p>{intl.formatMessage(messages.designer)}</p>
-                  </td>
-                  <td className="columntwo">
-                    <p>{content.designer}</p>
-                  </td>
-                </tr>
-              )}
               {content.organisation && (
                 <tr>
                   <td className="columnone">
@@ -244,6 +234,16 @@ const ExhibitionView = (props) => {
                   </td>
                   <td className="columntwo">
                     <p>{content.organisation}</p>
+                  </td>
+                </tr>
+              )}
+              {content.designer && (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.designer)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <p>{content.designer}</p>
                   </td>
                 </tr>
               )}
@@ -452,7 +452,6 @@ ExhibitionView.propTypes = {
     text: PropTypes.shape({
       data: PropTypes.string,
     }),
-    attendees: PropTypes.arrayOf(PropTypes.string).isRequired,
     contact_email: PropTypes.string,
     contact_name: PropTypes.string,
     contact_phone: PropTypes.string,
