@@ -62,6 +62,34 @@ class AdminFixes(BrowserView):
 
         return getattr(self, op)()
 
+    def delete_collection(self):
+        range = self.request.form.get("range", 0)
+        lang = self.request.form.get("lang", "nl")
+        if lang == "nl":
+            container = get_base_folder(self.context, "bruna")
+        else:
+            container = get_base_folder(self.context, "bruna_en")
+        brains = api.content.find(context=container, portal_type="artwork")
+
+        count = 0
+        for brain in brains:
+            count += 1
+            obj = brain.getObject()
+
+            api.content.delete(obj=obj)
+            log_to_file(f"deleted obj {obj.title}")
+
+            # Commit every 1000 objects
+            if count % 1000 == 0:
+                transaction.commit()
+            if count == int(range):
+                return f"stop at range"
+
+        # Ensure any remaining changes are committed
+        transaction.commit()
+
+        return "deleted all of the publications"
+
     def translate(self, obj, fields):
         language = "en"
 
