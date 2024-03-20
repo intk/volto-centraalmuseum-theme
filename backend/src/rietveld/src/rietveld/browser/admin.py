@@ -1455,13 +1455,15 @@ def import_one_exhibition(
     # Notes field start
     notes = tree.findtext("./notes")
 
+    html_notes = notes.replace('\n', '<br/>')
+
     notes_richtext_nl = RichTextValue(
-        raw=notes,
+        raw=html_notes,
         mimeType="text/html",
         outputMimeType="text/x-html-safe",
     )
     notes_richtext_en = RichTextValue(
-        raw=notes,
+        raw=html_notes,
         mimeType="text/html",
         outputMimeType="text/x-html-safe",
     )
