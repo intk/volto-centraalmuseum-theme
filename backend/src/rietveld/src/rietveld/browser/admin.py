@@ -1574,6 +1574,7 @@ def import_one_exhibition(
         for brain in brains:
             # Object exists, so we fetch it and update it
             obj = brain.getObject()
+            show_notes = obj.show_notes;
             reset_exhibition_fields(obj)
             if title_url != obj.id:
                 log_to_file("the url has been changed")
@@ -1606,6 +1607,7 @@ def import_one_exhibition(
             end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
             obj.start = start_date_obj
             obj.end = end_date_obj
+            obj.show_notes = show_notes
 
             # adding images
             import_images(container=obj, images=images)
