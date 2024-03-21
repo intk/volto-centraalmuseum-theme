@@ -307,7 +307,7 @@ const ExhibitionView = (props) => {
                   </td>
                 </tr>
               )}
-              {content.objects && content.objects?.length !== 0 && (
+              {content.objects && content.objects?.length !== 0 ? (
                 <tr>
                   <td className="columnone">
                     <p>{intl.formatMessage(messages.objects)}</p>
@@ -315,36 +315,47 @@ const ExhibitionView = (props) => {
                   <td className="columntwo">
                     <ul>
                       {showAllObjects
-                        ? content?.objects?.map(({ title, url }, index) => (
-                            <li>
-                              <p key={index}>
-                                <a href={`/${url.slice(2).join('/')}`}>
-                                  {title}
-                                </a>
+                        ? content?.objects?.map(
+                            ({ title, url }, index) =>
+                              title && (
+                                <li>
+                                  <p key={index}>
+                                    {url ? (
+                                      <a href={`/${url?.slice(2).join('/')}`}>
+                                        {title}
+                                      </a>
+                                    ) : (
+                                      title
+                                    )}
 
-                                {index === 2 && content.objects.length > 3 && (
-                                  <button
-                                    className={`expand-data-button ${showAllObjects}`}
-                                    onClick={() =>
-                                      setShowAllObjects(!showAllObjects)
-                                    }
-                                  >
-                                    {`${intl.formatMessage(
-                                      messages.showless,
-                                    )} -`}
-                                  </button>
-                                )}
-                              </p>
-                            </li>
-                          ))
+                                    {index === 2 && content.objects.length > 3 && (
+                                      <button
+                                        className={`expand-data-button ${showAllObjects}`}
+                                        onClick={() =>
+                                          setShowAllObjects(!showAllObjects)
+                                        }
+                                      >
+                                        {`${intl.formatMessage(
+                                          messages.showless,
+                                        )} -`}
+                                      </button>
+                                    )}
+                                  </p>
+                                </li>
+                              ),
+                          )
                         : content?.objects
                             ?.slice(0, 3)
                             .map(({ title, url }, index) => (
                               <li>
                                 <p key={index}>
-                                  <a href={`/${url.slice(2).join('/')}`}>
-                                    {title}
-                                  </a>
+                                  {url ? (
+                                    <a href={`/${url.slice(2).join('/')}`}>
+                                      {title}
+                                    </a>
+                                  ) : (
+                                    title
+                                  )}
                                   {index === 2 && content.objects.length > 3 && (
                                     <button
                                       className="expand-data-button"
@@ -361,6 +372,19 @@ const ExhibitionView = (props) => {
                                 </p>
                               </li>
                             ))}
+                    </ul>
+                  </td>
+                </tr>
+              ) : (
+                <tr>
+                  <td className="columnone">
+                    <p>{intl.formatMessage(messages.objects)}</p>
+                  </td>
+                  <td className="columntwo">
+                    <ul>
+                      <li>
+                        <p>{intl.formatMessage(messages.noObjects)}</p>
+                      </li>
                     </ul>
                   </td>
                 </tr>
