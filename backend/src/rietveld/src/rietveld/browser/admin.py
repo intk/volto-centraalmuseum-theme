@@ -1451,7 +1451,9 @@ def import_one_exhibition(
                     artwork_url_nl = (
                         artwork_obj_nl.getPhysicalPath()
                     )  # Use getId() method to get the artwork ID
-                    artwork_brains_nl.append({"url": artwork_url_nl, "title": artwork_info})
+                    artwork_brains_nl.append(
+                        {"url": artwork_url_nl, "title": artwork_info}
+                    )
         else:
             artwork_brains_nl.append({"url": "", "title": artwork_info})
 
@@ -1465,7 +1467,9 @@ def import_one_exhibition(
                     artwork_url_en = (
                         artwork_obj_en.getPhysicalPath()
                     )  # Use getId() method to get the artwork ID
-                    artwork_brains_en.append({"url": artwork_url_en, "title": artwork_info})
+                    artwork_brains_en.append(
+                        {"url": artwork_url_en, "title": artwork_info}
+                    )
         else:
             artwork_brains_en.append({"url": "", "title": artwork_info})
 
