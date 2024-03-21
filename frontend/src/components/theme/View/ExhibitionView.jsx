@@ -48,6 +48,11 @@ const messages = defineMessages({
     id: 'objects',
     defaultMessage: 'Collectie in deze tentoonstelling',
   },
+  noObjects: {
+    id: 'noObjects',
+    defaultMessage:
+      'In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien',
+  },
   question: {
     id: 'question',
     defaultMessage: 'Vragen?',
