@@ -1366,33 +1366,61 @@ def import_one_exhibition(
         # Extracting and preparing data
         doc_title = documentation.findtext(".//Title/title") or ""
         lead_word = documentation.findtext(".//Title/lead_word") or ""
-        statement_of_responsibility = documentation.findtext(".//statement_of_responsibility") or ""
-        place_of_publication = documentation.findtext(".//Publisher/place_of_publication") or ""
-        year_of_publication = documentation.findtext(".//Publisher/year_of_publication") or ""
+        statement_of_responsibility = (
+            documentation.findtext(".//statement_of_responsibility") or ""
+        )
+        place_of_publication = (
+            documentation.findtext(".//Publisher/place_of_publication") or ""
+        )
+        year_of_publication = (
+            documentation.findtext(".//Publisher/year_of_publication") or ""
+        )
         page_reference = documentation.findtext("./documentation.page_reference") or ""
         pagination = documentation.findtext(".//pagination") or ""
         publisher = documentation.findtext(".//Publisher/publisher") or ""
 
         # Assuming 'authors' is a list of names
-        authors = [fix_author_name(name.text) for name in documentation.findall(".//Author/author.name") if fix_author_name(name.text)]
+        authors = [
+            fix_author_name(name.text)
+            for name in documentation.findall(".//Author/author.name")
+            if fix_author_name(name.text)
+        ]
         authors_final = ", ".join(authors)
 
         # Source details
-        source_title_lead_word = documentation.findtext(".//source.title.lead_word") or ""
+        source_title_lead_word = (
+            documentation.findtext(".//source.title.lead_word") or ""
+        )
         source_title = documentation.findtext(".//source.title") or ""
         source_volume = documentation.findtext(".//source.volume") or ""
         source_issue = documentation.findtext(".//source.issue") or ""
         source_month = documentation.findtext(".//source.month") or ""
-        source_publication_years = documentation.findtext(".//source.publication_years") or ""
+        source_publication_years = (
+            documentation.findtext(".//source.publication_years") or ""
+        )
         source_pagination = documentation.findtext(".//source.pagination") or ""
         source_day = documentation.findtext(".//source.day") or ""
 
         # Formatting documentation string as per the provided logic
         new_doc = format_documentation_string(
-            doc_title, lead_word, statement_of_responsibility, place_of_publication,
-            year_of_publication, page_reference, authors_final, publisher, source_title_lead_word,
-            source_title, source_volume, source_issue, source_month, source_publication_years,
-            pagination, source_pagination, source_day)
+            doc_title,
+            lead_word,
+            statement_of_responsibility,
+            place_of_publication,
+            year_of_publication,
+            page_reference,
+            authors_final,
+            publisher,
+            source_title_lead_word,
+            source_title,
+            source_volume,
+            source_issue,
+            source_month,
+            source_publication_years,
+            pagination,
+            source_pagination,
+            source_day,
+        )
 
         if new_doc:
             documentation_info.append(new_doc)
@@ -2001,6 +2029,7 @@ def format_artwork_info(object_name=None, creator=None, production_start_date=No
     info_str = ", ".join(info_parts)
     return info_str
 
+
 def format_documentation_string(
     title,
     lead_word,
@@ -2029,7 +2058,7 @@ def format_documentation_string(
     if statement_of_responsibility:
         new_doc += f", {statement_of_responsibility}"
     elif authors_final:
-            new_doc += f", {authors_final}"
+        new_doc += f", {authors_final}"
     # Publisher
     if publisher:  # Assuming publisher is a single text string
         new_doc += f", {publisher}"
