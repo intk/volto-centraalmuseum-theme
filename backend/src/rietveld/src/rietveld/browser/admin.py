@@ -1455,7 +1455,7 @@ def import_one_exhibition(
                 artwork_brains_en.append({"url": artwork_url_en, "title": artwork_info})
 
     # Notes field start
-    notes = tree.findtext("./notes") or ''
+    notes = tree.findtext("./notes") or ""
 
     html_notes = notes.replace("\n", "<br/>")
 
