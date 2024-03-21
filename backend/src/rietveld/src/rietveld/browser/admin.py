@@ -1363,62 +1363,42 @@ def import_one_exhibition(
 
     documentation_info = []
     for documentation in documentations:
-        # Extracting data
-        title_documentation = documentation.findtext(".//Title/title")
-        statement_of_responsibility = documentation.findtext(
-            ".//statement_of_responsibility"
-        )
-        source_title_lead_word = (
-            documentation.findtext(".//source.title.lead_word") or ""
-        )
+        # Extracting and preparing data
+        doc_title = documentation.findtext(".//Title/title") or ""
+        lead_word = documentation.findtext(".//Title/lead_word") or ""
+        statement_of_responsibility = documentation.findtext(".//statement_of_responsibility") or ""
+        place_of_publication = documentation.findtext(".//Publisher/place_of_publication") or ""
+        year_of_publication = documentation.findtext(".//Publisher/year_of_publication") or ""
+        page_reference = documentation.findtext("./documentation.page_reference") or ""
+        pagination = documentation.findtext(".//pagination") or ""
+        publisher = documentation.findtext(".//Publisher/publisher") or ""
+
+        # Assuming 'authors' is a list of names
+        authors = [fix_author_name(name.text) for name in documentation.findall(".//Author/author.name") if fix_author_name(name.text)]
+        authors_final = ", ".join(authors)
+
+        # Source details
+        source_title_lead_word = documentation.findtext(".//source.title.lead_word") or ""
         source_title = documentation.findtext(".//source.title") or ""
         source_volume = documentation.findtext(".//source.volume") or ""
         source_issue = documentation.findtext(".//source.issue") or ""
         source_month = documentation.findtext(".//source.month") or ""
-        source_publication_years = (
-            documentation.findtext(".//source.publication_years") or ""
-        )
-        pagination = documentation.findtext(".//pagination")
-        source_pagination = documentation.findtext(".//source.pagination")
-        place_of_publication = documentation.findtext(
-            ".//Publisher/place_of_publication"
-        )
-        publisher = documentation.findtext(".//Publisher/publisher")
-        year_of_publication = documentation.findtext(".//Publisher/year_of_publication")
-        page_reference = documentation.findtext("./documentation.page_reference")
+        source_publication_years = documentation.findtext(".//source.publication_years") or ""
+        source_pagination = documentation.findtext(".//source.pagination") or ""
+        source_day = documentation.findtext(".//source.day") or ""
 
-        # Building source details
-        source = f"{source_title_lead_word} {source_title}".strip()
-        publication_date = f"{source_month} {source_publication_years}".strip()
-        source_details_list = [
-            source,
-            source_volume,
-            source_issue,
-            publication_date,
-        ]
-        filtered_details = [
-            item for item in source_details_list if item and item.strip()
-        ]
-        source_details = ", ".join(filtered_details)
-        source_details = f"({source_details})" if filtered_details else ""
+        # Formatting documentation string as per the provided logic
+        new_doc = format_documentation_string(
+            doc_title, lead_word, statement_of_responsibility, place_of_publication,
+            year_of_publication, page_reference, authors_final, publisher, source_title_lead_word,
+            source_title, source_volume, source_issue, source_month, source_publication_years,
+            pagination, source_pagination, source_day)
 
-        # Building the documentation string
-        documentation_components = [
-            title_documentation,
-            statement_of_responsibility,
-            source_details,
-            publisher,
-            f"({place_of_publication}, {year_of_publication})"
-            if place_of_publication and year_of_publication
-            else place_of_publication or year_of_publication,
-            page_reference,
-            source_pagination or pagination,
-        ]
-        documentation_str = ", ".join(filter(None, documentation_components)).strip()
-        if documentation_str:
-            documentation_info.append(documentation_str)
+        if new_doc:
+            documentation_info.append(new_doc)
 
-    sorted_documentation_info = sorted(documentation_info)
+    # Sort the documentation info based on the title or another field as appropriate
+    sorted_documentation_info = sorted(documentation_info, key=lambda x: x.lower())
     #####################
     # Documentation END #
 
@@ -2020,3 +2000,80 @@ def format_artwork_info(object_name=None, creator=None, production_start_date=No
 
     info_str = ", ".join(info_parts)
     return info_str
+
+def format_documentation_string(
+    title,
+    lead_word,
+    statement_of_responsibility,
+    place_of_publication,
+    year_of_publication,
+    page_reference,
+    authors_final,
+    publisher,
+    source_title_lead_word,
+    source_title,
+    source_volume,
+    source_issue,
+    source_month,
+    source_publication_years,
+    pagination,
+    source_pagination,
+    source_day,
+):
+
+    # Initial construction based on title and lead word
+    new_doc = f"{lead_word} {title}".strip() if lead_word or title else ""
+
+    # Add authors or statement of responsibility
+
+    if statement_of_responsibility:
+        new_doc += f", {statement_of_responsibility}"
+    elif authors_final:
+            new_doc += f", {authors_final}"
+    # Publisher
+    if publisher:  # Assuming publisher is a single text string
+        new_doc += f", {publisher}"
+
+    # Publisher and publication dates
+    dates = f"{place_of_publication}, {year_of_publication}".strip(", ")
+    if dates:
+        new_doc += f" ({dates})"
+
+    # Source information
+    sources = f"{source_title_lead_word} {source_title}, {source_volume}, {source_issue}".strip(
+        ", "
+    )
+    source_dates = f"{source_day} {source_month} {source_publication_years}".strip()
+    if source_dates:
+        sources += f", {source_dates}"
+    if sources.strip():
+        new_doc += f", ({sources.strip()})"
+
+    # Pagination
+    pagination_info = source_pagination if not pagination else pagination
+    if pagination_info:
+        new_doc += f", {pagination_info}"
+
+    # Page Reference - added at the end or another suitable place
+    if page_reference:
+        new_doc += f", p. {page_reference}"
+
+    return new_doc
+
+
+def fix_author_name(value):
+    author = value
+    if value:
+        try:
+            author_split = value.split(",")
+            if len(author_split) > 1:
+                firstname = author_split[1]
+                lastname = author_split[0]
+                firstname = firstname.strip()
+                lastname = lastname.strip()
+                author = "%s %s" % (firstname, lastname)
+                return author
+        except:
+            return value
+
+    return author
