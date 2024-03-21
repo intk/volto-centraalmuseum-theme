@@ -366,6 +366,11 @@ msgstr "Material and technique"
 msgid "motifs"
 msgstr "More of the same motif"
 
+#: components/theme/View/ExhibitionView
+# defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
+msgid "noObjects"
+msgstr "No objects from the Centraal Museum collection were shown in this exhibition"
+
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
 # defaultMessage: Dit object is nu niet in het museum te zien

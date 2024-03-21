@@ -376,6 +376,11 @@ msgstr ""
 msgid "motifs"
 msgstr ""
 
+#: components/theme/View/ExhibitionView
+# defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
+msgid "noObjects"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
 # defaultMessage: Dit object is nu niet in het museum te zien
