@@ -1443,24 +1443,31 @@ def import_one_exhibition(
         temporary_brains_nl = catalog.searchResults(
             priref=artwork_priref, portal_type="artwork", path="/Plone/nl"
         )
-        for brain_nl in temporary_brains_nl:
-            artwork_obj_nl = brain_nl.getObject()
-            if artwork_obj_nl:
-                artwork_url_nl = (
-                    artwork_obj_nl.getPhysicalPath()
-                )  # Use getId() method to get the artwork ID
-                artwork_brains_nl.append({"url": artwork_url_nl, "title": artwork_info})
+
+        if temporary_brains_nl:
+            for brain_nl in temporary_brains_nl:
+                artwork_obj_nl = brain_nl.getObject()
+                if artwork_obj_nl:
+                    artwork_url_nl = (
+                        artwork_obj_nl.getPhysicalPath()
+                    )  # Use getId() method to get the artwork ID
+                    artwork_brains_nl.append({"url": artwork_url_nl, "title": artwork_info})
+        else:
+            artwork_brains_nl.append({"url": "", "title": artwork_info})
 
         temporary_brains_en = catalog.searchResults(
             priref=artwork_priref, portal_type="artwork", path="/Plone/en"
         )
-        for brain_en in temporary_brains_en:
-            artwork_obj_en = brain_en.getObject()
-            if artwork_obj_en:
-                artwork_url_en = (
-                    artwork_obj_en.getPhysicalPath()
-                )  # Use getId() method to get the artwork ID
-                artwork_brains_en.append({"url": artwork_url_en, "title": artwork_info})
+        if temporary_brains_en:
+            for brain_en in temporary_brains_en:
+                artwork_obj_en = brain_en.getObject()
+                if artwork_obj_en:
+                    artwork_url_en = (
+                        artwork_obj_en.getPhysicalPath()
+                    )  # Use getId() method to get the artwork ID
+                    artwork_brains_en.append({"url": artwork_url_en, "title": artwork_info})
+        else:
+            artwork_brains_en.append({"url": "", "title": artwork_info})
 
     # Notes field start
     notes = tree.findtext("./notes") or ""
