@@ -30,6 +30,9 @@ const Header = (props) => {
   const cmsView = isCmsUi(pathname);
   const homePageView = isHomePage && !cmsView && !isSearch;
   const [inView, setInView] = React.useState();
+  const isFallback = content?.items?.some(
+    (item) => item?.title?.toLowerCase() === 'slideshow',
+  );
 
   return (
     <div className="portal-top">
@@ -75,7 +78,11 @@ const Header = (props) => {
       {!((cmsView && isSearch) || isHomePage) && (
         <div className="header-bg">
           <div className="header-container">
-            <HeroSection image_url={previewImageUrl} content={content} />
+            <HeroSection
+              isFallback={isFallback}
+              image_url={previewImageUrl}
+              content={content}
+            />
           </div>
         </div>
       )}
