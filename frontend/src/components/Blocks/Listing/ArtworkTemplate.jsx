@@ -39,63 +39,68 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
             style={{ display: 'flex' }}
           >
             {items.map((item) => (
-              <div key={item.url} className="listing-items">
-                {item.image_field && (
-                  <UniversalLink item={item}>
-                    <PreviewImage
-                      item={item}
-                      size="preview"
-                      alt={item.image_caption ? item.image_caption : item.title}
-                      className="ui image"
-                    />
-                  </UniversalLink>
-                )}
-
-                <div
-                  id="jaarverslag-title"
-                  className={`item-title ${
-                    item.review_state === 'private' ? 'private' : ''
-                  }`}
-                >
-                  {item['@type'] === 'Event' ? (
-                    <div className="listing-dates">
-                      <div className={`listing-dates-wrapper`}>
-                        <When
-                          start={item.start}
-                          end={item.end}
-                          whole_day={item.whole_day}
-                          open_end={item.open_end}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    ''
+              <>
+                <div key={item.url} className="listing-items">
+                  {(item['@type'] === 'exhibition' || item.image_field) && (
+                    <UniversalLink item={item}>
+                      <PreviewImage
+                        item={item}
+                        size="preview"
+                        alt={
+                          item.image_caption ? item.image_caption : item.title
+                        }
+                        className="ui image"
+                        isFallback={item['@type'] === 'exhibition'}
+                      />
+                    </UniversalLink>
                   )}
-                  <h2>
-                    <UniversalLink item={item}>{item.title}</UniversalLink>
-                  </h2>
-                  {item['@type'] !== 'artwork'
-                    ? item.description && <p>{item.description}</p>
-                    : ''}
-                  <div className="description">
-                    <p>
-                      {item.artwork_author && (
-                        <span className="item-description">
-                          {item.artwork_author[0]}
-                        </span>
-                      )}
-                      {item.artwork_author && item.dating && (
-                        <span className="item-description">, </span>
-                      )}
-                      {item.dating && (
-                        <span className="item-description">
-                          {String(item.dating.split('(')[0])}
-                        </span>
-                      )}
-                    </p>
+                  <div
+                    id="jaarverslag-title"
+                    className={`item-title ${
+                      item.review_state === 'private' ? 'private' : ''
+                    }`}
+                  >
+                    {item['@type'] === 'Event' ||
+                    item['@type'] === 'Exhibition' ? (
+                      <div className="listing-dates">
+                        <div className={`listing-dates-wrapper`}>
+                          <When
+                            start={item.start}
+                            end={item.end}
+                            whole_day={item.whole_day}
+                            open_end={item.open_end}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <h2>
+                      <UniversalLink item={item}>{item.title}</UniversalLink>
+                    </h2>
+                    {item['@type'] !== 'artwork'
+                      ? item.description && <p>{item.description}</p>
+                      : ''}
+                    <div className="description">
+                      <p>
+                        {item.artwork_author && (
+                          <span className="item-description">
+                            {item.artwork_author[0]}
+                          </span>
+                        )}
+                        {item.artwork_author && item.dating && (
+                          <span className="item-description">, </span>
+                        )}
+                        {item.dating && (
+                          <span className="item-description">
+                            {String(item.dating.split('(')[0])}
+                          </span>
+                        )}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             ))}
           </Masonry>
         </section>
