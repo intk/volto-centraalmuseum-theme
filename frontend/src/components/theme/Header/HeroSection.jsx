@@ -75,7 +75,7 @@ function HeroSection(props) {
               )}
             </figure>
           </>
-        ) : isFallback ? (
+        ) : isFallback && content?.['@type'] === 'exhibition' ? (
           <>
             <BodyClass className="has-hero-image" />
             <figure className="herosection-content-image document-image">
