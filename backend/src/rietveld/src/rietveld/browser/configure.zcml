@@ -19,5 +19,12 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      name="fallback-image"
+      for="*"
+      class=".images.FallbackImageScale"
+      permission="zope2.View"
+      />
+
 
 </configure>

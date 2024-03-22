@@ -21,6 +21,7 @@ import installBlocks from './components/Blocks';
 import ArtworkView from './components/theme/View/ArtworkView';
 import AuthorView from './components/theme/View/AuthorView';
 import ExhibitionView from './components/theme/View/ExhibitionView';
+import installExpressMiddleware from './express-middleware';
 
 export default function applyConfig(config) {
   const DEFAULT_LANG = 'nl';
@@ -115,5 +116,5 @@ export default function applyConfig(config) {
     },
   ];
 
-  return installFooter(installBlocks(config));
+  return installExpressMiddleware(installFooter(installBlocks(config)));
 }
