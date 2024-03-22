@@ -1566,7 +1566,7 @@ def import_one_exhibition(
                 manager.register_translation("en", brains[0].getObject())
 
             # adding images
-            import_images(container=obj, images=images)
+            import_images_on_slideshow(container=obj, images=images)
             obj.hasImage = True
             obj.reindexObject()
 
@@ -1584,7 +1584,7 @@ def import_one_exhibition(
                 manager.register_translation("nl", brains[0].getObject())
 
             # adding images
-            import_images(container=obj_en, images=images)
+            import_images_on_slideshow(container=obj_en, images=images)
             obj_en.hasImage = True
 
             obj_en.reindexObject()
@@ -1630,7 +1630,7 @@ def import_one_exhibition(
             obj.show_notes = show_notes
 
             # adding images
-            import_images(container=obj, images=images)
+            import_images_on_slideshow(container=obj, images=images)
             obj.hasImage = True
 
             # Reindex the updated object
@@ -1649,7 +1649,7 @@ def import_one_exhibition(
         log_to_file(f"{priref} object is created")
 
         # adding images
-        import_images(container=obj, images=images)
+        import_images_on_slideshow(container=obj, images=images)
         # obj.hasImage = True
 
         obj.last_successful_update = last_modification_dt
@@ -1774,6 +1774,87 @@ def import_images(container, images):
                     # if primaryDisplay == '1':
                     #     ordering = IExplicitOrdering(container)
                     #     ordering.moveObjectsToTop([new_image.getId()])
+
+                    success = True
+                    break
+
+            except requests.RequestException as e:
+                retries += 1
+                if retries < MAX_RETRIES:
+                    time.sleep(DELAY_SECONDS)
+                else:
+                    log_to_file(f"Failed to create {image['text']} image: {e}")
+
+        if not success:
+            log_to_file(f"Skipped image {image.text} due to repeated fetch failures.")
+
+    return f"Images {images} created successfully"
+
+
+def import_images_on_slideshow(container, images):
+    MAX_RETRIES = 2
+    DELAY_SECONDS = 1
+    image_index = 0
+
+    HEADERS = {
+        "Accept": "image/jpeg,image/png,image/*",
+        "User-Agent": "Mozilla/5.0 (Plone Image Importer)",
+    }
+
+    # Check for the existence of a "Slideshow" page, or create one
+    results = api.content.find(context=container, id="slideshow")
+    if len(results) == 0:
+        slideshow_page = api.content.create(
+            container=container,
+            type="Document",
+            title="Slideshow",
+            id="slideshow",
+            exclude_from_nav=True,
+        )
+        slideshow_page.reindexObject(
+            idxs=["exclude_from_nav"]
+        )  # Ensure the catalog indexes this attribute
+    else:
+        slideshow_page = results[0].getObject()
+        if not slideshow_page.exclude_from_nav:
+            slideshow_page.exclude_from_nav = True
+            slideshow_page.reindexObject(idxs=["exclude_from_nav"])
+
+    # Delete the existing images inside the slideshow_page
+    for obj in api.content.find(context=slideshow_page, portal_type="Image"):
+        api.content.delete(obj=obj.getObject())
+
+    for image in images:
+        retries = 0
+        success = False
+
+        while retries < MAX_RETRIES:
+            try:
+                image_url = f"{IMAGE_BASE_URL}?database=collect&command=getcontent&server=images&value={image.text}&imageformat=jpg"
+                with requests.get(url=image_url, stream=True, headers=HEADERS) as req:
+                    req.raise_for_status()
+                    data = req.content
+
+                    if is_error_response(req.content):
+                        log_to_file(f"Skipping {image.text} due to API error response.")
+                        break
+
+                    log_to_file(f"{image.text} image is created")
+
+                    imagefield = NamedBlobImage(
+                        data=data,
+                        contentType="image/jpeg",
+                        filename=image.text,
+                    )
+                    new_image = api.content.create(
+                        type="Image",
+                        title=image.text,
+                        image=imagefield,
+                        container=slideshow_page,
+                    )
+                    image_index += 1
+                    if image_index == 1:
+                        slideshow_page.preview_image = imagefield
 
                     success = True
                     break
