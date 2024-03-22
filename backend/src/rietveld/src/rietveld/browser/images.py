@@ -16,26 +16,26 @@ class FallbackImageScale(ImageScaling):
                 slideshow_page = child
                 break
 
-        # # If the "Slideshow" page exists, find the first image
-        # if slideshow_page is not None:
-        #     for image in slideshow_page.contentValues():
-        #         if image.portal_type == "Image":  # Assuming the image type is "Image"
-        #             obj = image
-        #             self.fieldname = "image"
-        #             break
-
-        if obj is None:
-            # If no slideshow or no image in the slideshow, use the container's top image
-            for child in context.contentValues():
-                if getattr(
-                    child, "image", None
-                ):  # Assuming direct children could have an "image" attribute
-                    obj = child
+        # If the "Slideshow" page exists, find the first image
+        if slideshow_page is not None:
+            for image in slideshow_page.contentValues():
+                if image.portal_type == "Image":  # Assuming the image type is "Image"
+                    obj = image
                     self.fieldname = "image"
                     break
-                elif getattr(child, "preview_image", None):
-                    obj = child
-                    break
+
+        # if obj is None:
+        #     # If no slideshow or no image in the slideshow, use the container's top image
+        #     for child in context.contentValues():
+        #         if getattr(
+        #             child, "image", None
+        #         ):  # Assuming direct children could have an "image" attribute
+        #             obj = child
+        #             self.fieldname = "image"
+        #             break
+        #         elif getattr(child, "preview_image", None):
+        #             obj = child
+        #             break
 
         # Fallback to a default image if no image is found in the "Slideshow" page
         if obj is None:
