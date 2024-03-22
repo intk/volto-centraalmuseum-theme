@@ -17,8 +17,6 @@ export default function PreviewImage({
       item?.image_field || 'preview_image'
     }/${size}`,
   );
-  // console.log('url', url);
-  console.log('isFallback');
 
   return showPlaceholder ? (
     <Placeholder>
@@ -26,7 +24,6 @@ export default function PreviewImage({
     </Placeholder>
   ) : (
     <>
-      {console.log('isFallback')}
       <Image
         src={url}
         // style={{ backgroundImage: `url("${url}")` }}
