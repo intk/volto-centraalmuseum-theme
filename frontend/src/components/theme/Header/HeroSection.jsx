@@ -5,6 +5,7 @@ import Image from '../../Image/Image';
 // eslint-disable-next-line no-unused-vars
 import { defineMessages, useIntl } from 'react-intl';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
 const getDateRangeDescription = (lang, start, end) => {
   const format = (date, options) =>
@@ -43,10 +44,15 @@ function HeroSection(props) {
     end,
   } = content || {};
 
+  const isFallback = props.isFallback;
+
   const isEvent =
     content?.['@type'] === 'Event' || content?.['@type'] === 'exhibition';
   const endDate = new Date(end || Date.now());
   const startDate = new Date(start || Date.now());
+  const fallback_image =
+    content &&
+    flattenToAppURL(content['@id'] + '/@@fallback-image/images/great');
 
   return (
     <div className="herosection">
@@ -68,35 +74,57 @@ function HeroSection(props) {
                 </figcaption>
               )}
             </figure>
-            <div className="header-title-dates">
-              <div className="hero-dates-wrapper">
-                {content['@type'] === 'Event' ||
-                content['@type'] === 'exhibition' ? (
-                  <div className="hero-dates">
-                    <When
-                      start={content.start}
-                      end={content.end}
-                      whole_day={content.whole_day}
-                      open_end={content.open_end}
-                    />
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
-              <h1 className="hero-title-floating">{title}</h1>
-              <div className="description-container">
-                <Container>
-                  {description && (
-                    <p className="content-description">{description}</p>
-                  )}
-                </Container>
-              </div>
-            </div>
+          </>
+        ) : isFallback ? (
+          <>
+            <BodyClass className="has-hero-image" />
+            <figure className="herosection-content-image document-image">
+              {/* Assuming fallback_image is defined and holds the URL of the fallback image */}
+              <Image
+                src={fallback_image}
+                width="100vw"
+                height="90vh"
+                size="large"
+              />
+
+              {/* Assuming you want to display the caption for fallback image as well, if available */}
+              {preview_caption && (
+                <figcaption className="content-image-caption">
+                  {preview_caption}
+                </figcaption>
+              )}
+            </figure>
           </>
         ) : (
           <div className="herosection-missing-image"></div>
         )}
+
+        <div className="header-title-dates">
+          <div className="hero-dates-wrapper">
+            {content &&
+            (content['@type'] === 'Event' ||
+              content['@type'] === 'exhibition') ? (
+              <div className="hero-dates">
+                <When
+                  start={content.start}
+                  end={content.end}
+                  whole_day={content.whole_day}
+                  open_end={content.open_end}
+                />
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+          <h1 className="hero-title-floating">{title}</h1>
+          <div className="description-container">
+            <Container>
+              {description && (
+                <p className="content-description">{description}</p>
+              )}
+            </Container>
+          </div>
+        </div>
       </div>
       {title && !image_url && (
         <Container>
