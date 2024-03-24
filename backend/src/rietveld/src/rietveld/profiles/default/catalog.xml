@@ -131,6 +131,11 @@
     <indexed_attr value="associatedPeople" />
   </index>
 
+  <index meta_type="BooleanIndex"
+         name="hasImage"
+  >
+    <indexed_attr value="hasImage" />
+  </index>
 
 
   <column value="artwork_date" />
@@ -153,4 +158,5 @@
   <column value="category" />
   <column value="associatedPeriods" />
   <column value="associatedPeople" />
+  <column value="hasImage" />
 </object>
