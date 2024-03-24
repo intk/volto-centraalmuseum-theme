@@ -41,7 +41,7 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
             {items.map((item) => (
               <>
                 <div key={item.url} className="listing-items">
-                  {(item['@type'] === 'exhibition' || item.image_field) && (
+                  {item.image_field ? (
                     <UniversalLink item={item}>
                       <PreviewImage
                         item={item}
@@ -50,9 +50,23 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                           item.image_caption ? item.image_caption : item.title
                         }
                         className="ui image"
-                        isFallback={item['@type'] === 'exhibition'}
                       />
                     </UniversalLink>
+                  ) : (
+                    item.hasImage &&
+                    item['@type'] === 'exhibition' && (
+                      <UniversalLink item={item}>
+                        <PreviewImage
+                          item={item}
+                          size="preview"
+                          alt={
+                            item.image_caption ? item.image_caption : item.title
+                          }
+                          className="ui image"
+                          isFallback={item.hasImage === true}
+                        />
+                      </UniversalLink>
+                    )
                   )}
                   <div
                     id="jaarverslag-title"
