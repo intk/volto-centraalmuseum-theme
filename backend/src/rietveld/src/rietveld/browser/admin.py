@@ -1819,11 +1819,11 @@ def import_images_on_slideshow(container, images):
             id="slideshow",
             exclude_from_nav=True,
         )
-        api.content.transition(obj=slideshow_page, transition='publish')
+        api.content.transition(obj=slideshow_page, transition="publish")
 
     else:
         slideshow_page = results[0].getObject()
-        api.content.transition(obj=slideshow_page, transition='publish')
+        api.content.transition(obj=slideshow_page, transition="publish")
         if not slideshow_page.exclude_from_nav:
             slideshow_page.exclude_from_nav = True
             slideshow_page.reindexObject(idxs=["exclude_from_nav"])
