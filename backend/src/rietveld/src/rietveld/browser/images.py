@@ -1,7 +1,9 @@
 from plone import api
 from plone.namedfile.scaling import ImageScaling
 from Products.Five.browser import BrowserView
+
 import json
+
 
 class FallbackImageScale(ImageScaling):
     fieldname = "preview_image"
@@ -90,6 +92,7 @@ class FallbackImageScale(ImageScaling):
             **parameters,
         )
 
+
 class HasFallbackImageView(BrowserView):
     def __call__(self):
         context = self.context
@@ -101,10 +104,12 @@ class HasFallbackImageView(BrowserView):
         # Attempt to replicate logic here to check for fallback image
         # For example, this might check if a certain image field is empty
         # or if a specific named image (e.g., 'fallback-preview-image') exists
-        slideshow_page = context.get('slideshow', None)
+        slideshow_page = context.get("slideshow", None)
         if slideshow_page:
             # Example: check if slideshow has images
-            use_fallback_image = any(obj.portal_type == "Image" for obj in slideshow_page.contentValues())
+            use_fallback_image = any(
+                obj.portal_type == "Image" for obj in slideshow_page.contentValues()
+            )
 
         if not use_fallback_image:
             # Check for a site-wide fallback image
@@ -115,5 +120,5 @@ class HasFallbackImageView(BrowserView):
             except Exception:
                 use_fallback_image = False
 
-        request.response.setHeader('Content-Type', 'application/json')
-        return json.dumps({'hasFallbackImage': use_fallback_image})
+        request.response.setHeader("Content-Type", "application/json")
+        return json.dumps({"hasFallbackImage": use_fallback_image})
