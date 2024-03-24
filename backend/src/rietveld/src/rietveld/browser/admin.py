@@ -1566,8 +1566,9 @@ def import_one_exhibition(
                 manager.register_translation("en", brains[0].getObject())
 
             # adding images
-            import_images_on_slideshow(container=obj, images=images)
-            obj.hasImage = True
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj.hasImage = True
             obj.reindexObject()
 
         else:
@@ -1584,8 +1585,9 @@ def import_one_exhibition(
                 manager.register_translation("nl", brains[0].getObject())
 
             # adding images
-            import_images_on_slideshow(container=obj_en, images=images)
-            obj_en.hasImage = True
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj_en.hasImage = True
 
             obj_en.reindexObject()
 
@@ -1630,8 +1632,9 @@ def import_one_exhibition(
             obj.show_notes = show_notes
 
             # adding images
-            import_images_on_slideshow(container=obj, images=images)
-            obj.hasImage = True
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj.hasImage = True
 
             # Reindex the updated object
             obj.reindexObject()
@@ -1649,11 +1652,16 @@ def import_one_exhibition(
         log_to_file(f"{priref} object is created")
 
         # adding images
-        import_images_on_slideshow(container=obj, images=images)
-        # obj.hasImage = True
+        if images:
+            import_images_on_slideshow(container=obj, images=images)
+            obj.hasImage = True
 
         obj.last_successful_update = last_modification_dt
         obj_en = self.translate(obj, info["en"])
+        obj_en.hasImage = obj.hasImage
+
+        obj.reindexObject()
+        obj_en.reindexObject()
 
         start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
         end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
@@ -1811,11 +1819,11 @@ def import_images_on_slideshow(container, images):
             id="slideshow",
             exclude_from_nav=True,
         )
-        slideshow_page.reindexObject(
-            idxs=["exclude_from_nav"]
-        )  # Ensure the catalog indexes this attribute
+        api.content.transition(obj=slideshow_page, transition='publish')
+
     else:
         slideshow_page = results[0].getObject()
+        api.content.transition(obj=slideshow_page, transition='publish')
         if not slideshow_page.exclude_from_nav:
             slideshow_page.exclude_from_nav = True
             slideshow_page.reindexObject(idxs=["exclude_from_nav"])
@@ -1853,8 +1861,8 @@ def import_images_on_slideshow(container, images):
                         container=slideshow_page,
                     )
                     image_index += 1
-                    if image_index == 1:
-                        slideshow_page.preview_image = imagefield
+                    # if image_index == 1:
+                    #     slideshow_page.preview_image = imagefield
 
                     success = True
                     break
