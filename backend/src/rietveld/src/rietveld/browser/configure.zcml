@@ -27,11 +27,11 @@
       />
 
   <browser:page
-      for="*"
       name="has_fallback_image"
-      permission="zope2.View"
+      for="*"
       class=".images.HasFallbackImageView"
-  />
+      permission="zope2.View"
+      />
 
 
 </configure>
