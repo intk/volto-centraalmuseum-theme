@@ -1,12 +1,14 @@
-# get a preview image
 from plone import api
 from plone.namedfile.scaling import ImageScaling
-
+from Products.Five.browser import BrowserView
+import json
 
 class FallbackImageScale(ImageScaling):
     fieldname = "preview_image"
+    use_fallback_image = False
 
     def __init__(self, context, request):
+        super(FallbackImageScale, self).__init__(context, request)
         obj = None
         slideshow_page = None
 
@@ -19,9 +21,10 @@ class FallbackImageScale(ImageScaling):
         # If the "Slideshow" page exists, find the first image
         if slideshow_page is not None:
             for image in slideshow_page.contentValues():
-                if image.portal_type == "Image":  # Assuming the image type is "Image"
+                if image.portal_type == "Image":
                     obj = image
                     self.fieldname = "image"
+                    self.use_fallback_image = True
                     break
 
         # if obj is None:
@@ -43,13 +46,14 @@ class FallbackImageScale(ImageScaling):
                 site = api.portal.get()
                 obj = site.restrictedTraverse("fallback-preview-image")
                 self.fieldname = "image"
+                self.use_fallback_image = True
             except Exception:
-                print("You should create /fallback-preview-image")
+                print("Fallback preview image not found.")
+                self.use_fallback_image = False
 
         print("Using", obj)
         self.context = obj or context
         self.request = request
-        ImageScaling.__init__(self, self.context, self.request)
 
     def scale(
         self,
@@ -85,3 +89,31 @@ class FallbackImageScale(ImageScaling):
             include_srcset=include_srcset,
             **parameters,
         )
+
+class HasFallbackImageView(BrowserView):
+    def __call__(self):
+        context = self.context
+        request = self.request
+
+        # Initialize as False
+        use_fallback_image = False
+
+        # Attempt to replicate logic here to check for fallback image
+        # For example, this might check if a certain image field is empty
+        # or if a specific named image (e.g., 'fallback-preview-image') exists
+        slideshow_page = context.get('slideshow', None)
+        if slideshow_page:
+            # Example: check if slideshow has images
+            use_fallback_image = any(obj.portal_type == "Image" for obj in slideshow_page.contentValues())
+
+        if not use_fallback_image:
+            # Check for a site-wide fallback image
+            try:
+                site = api.portal.get()
+                obj = site.restrictedTraverse("fallback-preview-image")
+                use_fallback_image = obj is not None
+            except Exception:
+                use_fallback_image = False
+
+        request.response.setHeader('Content-Type', 'application/json')
+        return json.dumps({'hasFallbackImage': use_fallback_image})
