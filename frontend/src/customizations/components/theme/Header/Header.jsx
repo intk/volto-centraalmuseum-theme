@@ -30,9 +30,7 @@ const Header = (props) => {
   const cmsView = isCmsUi(pathname);
   const homePageView = isHomePage && !cmsView && !isSearch;
   const [inView, setInView] = React.useState();
-  const isFallback = content?.items?.some(
-    (item) => item?.title?.toLowerCase() === 'slideshow',
-  );
+  const isFallback = content?.hasImage;
 
   return (
     <div className="portal-top">
