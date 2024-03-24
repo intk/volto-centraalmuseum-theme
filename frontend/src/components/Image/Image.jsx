@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { getImageAttributes } from '@package/helpers/images';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { BodyClass } from '@plone/volto/helpers';
 
 /**
  * Image component
@@ -119,8 +120,44 @@ const Image = ({
     }
   }, [imageRef, applySrcSet, imageHasLoaded, srcSet, srcset]);
 
+  const [orientationClass, setOrientationClass] = useState('');
+  useEffect(() => {
+    const determineOrientation = () => {
+      if (imageRef.current) {
+        const { naturalWidth, naturalHeight } = imageRef.current;
+        if (naturalWidth > naturalHeight) {
+          setOrientationClass('landscape');
+        } else {
+          setOrientationClass('portrait');
+        }
+      }
+    };
+
+    if (imageRef.current && imageRef.current.complete) {
+      // If image is already loaded
+      determineOrientation();
+    } else {
+      // If image has not loaded yet
+      const handleLoad = () => {
+        determineOrientation();
+      };
+      const imgEl = imageRef.current;
+      imgEl.addEventListener('load', handleLoad);
+
+      // Cleanup
+      return () => {
+        imgEl.removeEventListener('load', handleLoad);
+      };
+    }
+  }, [src]); // Dependency array, re-run if src changes
+
   return (
     <>
+      <BodyClass
+        className={
+          orientationClass === 'portrait' ? 'top-image-align-right' : ''
+        }
+      />
       <picture className={pictureClassName}>
         {srcset?.length > 0 && <source srcSet={srcset} sizes={sizes} />}
         <img
