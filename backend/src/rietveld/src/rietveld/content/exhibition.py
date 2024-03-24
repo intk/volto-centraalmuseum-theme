@@ -115,6 +115,8 @@ class IExhibition(model.Schema):
         required=False,
     )
 
+    hasImage = Bool(title="Has Image", required=False)
+
     notes = RichText(title="Notes", required=False)
 
     show_notes = Bool(title="Show Notes", required=False, default=True)
