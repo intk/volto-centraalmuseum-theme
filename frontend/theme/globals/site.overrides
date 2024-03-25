@@ -1410,6 +1410,12 @@ body.artwork-listing-page{
     }
 }
 
+.view-viewview.contenttype-exhibition{
+  .description-container{
+    margin-top: 0px !important;
+  }
+}
+
 .view-viewview.contenttype-exhibition.top-image-align-right {
   .description-container{
     display: block !important;
