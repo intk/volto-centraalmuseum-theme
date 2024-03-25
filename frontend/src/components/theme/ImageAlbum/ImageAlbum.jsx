@@ -48,11 +48,32 @@ const ImageAlbum = (props) => {
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    const action = getContent(slideshowPath, id);
-    dispatch(action).then((content) => {
-      setAlbumItems(content.items || []);
-    });
-  }, [dispatch, id, slideshowPath]);
+    const fetchContentConditionally = async () => {
+      try {
+        const response = await fetch(
+          `/++api++/${pathname}/@@has_fallback_image`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        if (data.hasFallbackImage) {
+          const action = getContent(slideshowPath, id);
+          const content = await dispatch(action);
+
+          setAlbumItems(content.items || []);
+        } else {
+          setAlbumItems([]);
+        }
+      } catch (error) {
+        setAlbumItems([]);
+      }
+    };
+
+    // Call the async function
+    fetchContentConditionally();
+  }, [dispatch, id, slideshowPath, pathname]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetIndex = useCallback(

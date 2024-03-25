@@ -80,29 +80,36 @@ function HeroSection(props) {
   const [albumItems, setAlbumItems] = useState([]);
 
   useEffect(() => {
-    // Define an async function inside the useEffect to handle sequential fetch operations
     const fetchContent = async () => {
-      if (isFallback) {
-        try {
-          const action = getContent(slideshowPath, id);
-          const content = await dispatch(action)
-            .then((res) => res)
-            .catch((error) => '');
+      try {
+        const response = await fetch(
+          `/++api++/${pathname}/@@has_fallback_image`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data.hasFallbackImage) {
+          try {
+            const action = getContent(slideshowPath, id);
+            const contentActionResponse = await dispatch(action);
+            const content = await contentActionResponse;
 
-          if (content && content.items) {
-            setAlbumItems(content.items);
-          } else {
+            if (content && content.items) {
+              setAlbumItems(content.items);
+            } else {
+              setAlbumItems([]);
+            }
+          } catch (error) {
             setAlbumItems([]);
           }
-        } catch (error) {
-          return;
+        } else {
+          setAlbumItems([]);
         }
-      }
+      } catch (error) {}
     };
-
-    // Call the async function
     fetchContent();
-  }, [dispatch, id, slideshowPath, isFallback]);
+  }, [dispatch, id, slideshowPath, pathname]);
 
   return (
     <div className="herosection">
