@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import { BodyClass } from '@plone/volto/helpers';
 import Image from '../../Image/Image';
@@ -6,6 +6,9 @@ import Image from '../../Image/Image';
 import { defineMessages, useIntl } from 'react-intl';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import ImageAlbum from '../../theme/ImageAlbum/ImageAlbum';
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 
 const getDateRangeDescription = (lang, start, end) => {
   const format = (date, options) =>
@@ -53,6 +56,35 @@ function HeroSection(props) {
   const fallback_image =
     content &&
     flattenToAppURL(content['@id'] + '/@@fallback-image/images/great');
+
+  const getContent = (url, subrequest) => {
+    const query = { b_size: 1000000 };
+    let qs = Object.keys(query)
+      .map((key) => key + '=' + query[key])
+      .join('&');
+    return {
+      type: GET_CONTENT,
+      subrequest,
+      request: {
+        op: 'get',
+        path: `${url}${qs ? `?${qs}` : ''}`,
+      },
+    };
+  };
+  const pathname = useSelector((state) => state.router.location.pathname);
+  const slideshowPath = `${pathname}/slideshow`;
+  const id = `full-items@${slideshowPath}`;
+
+  const dispatch = useDispatch();
+
+  const [albumItems, setAlbumItems] = useState([]);
+
+  useEffect(() => {
+    const action = getContent(slideshowPath, id);
+    dispatch(action).then((content) => {
+      setAlbumItems(content.items || []);
+    });
+  }, [dispatch, id, slideshowPath]);
 
   return (
     <div className="herosection">
@@ -118,6 +150,13 @@ function HeroSection(props) {
           </div>
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
+            {albumItems.length > 1 && (
+              <ImageAlbum
+                items={props.content?.items}
+                itemTitle={props.content?.objectTitle}
+                image="false"
+              />
+            )}
             <Container>
               {description && (
                 <p className="content-description">{description}</p>
