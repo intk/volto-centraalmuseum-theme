@@ -699,13 +699,12 @@ p#photo-credit {
     }
   }
   @media (max-width: 768px) {
-    // display: none;
+    display: none;
   }
 }
 
 .herosection-content-wrapper {
   position: relative;
-
 }
 
 .header-title-dates {
@@ -745,15 +744,13 @@ p#photo-credit {
   text-align: center !important;
 
   @media (max-width: 991px) {
-    font-size: 65px;
-    padding-bottom: 20px;
+    font-size: 86px;
   }
 
   @media (max-width: 768px) {
-    padding-bottom: 40px;
-    font-size: 50px !important;
+    font-size: 60px !important;
     letter-spacing: 0.05em !important;
-    line-height: 53px;
+    line-height: 58px;
   }
 }
 
@@ -769,7 +766,7 @@ p#photo-credit {
 }
 
 .hero-dates {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #fff;
   font-family: 'FranklinMed', Arial, sans-serif;
   font-size: 17px;
@@ -894,7 +891,7 @@ p#photo-credit {
   pointer-events: none;
 }
 
-.view-viewview.top-image-align-right {
+.view-viewview.top-image-align-right:not(.contenttype-exhibition) {
   @media (min-width: 992px) {
     .header-container {
       background: #fbf9f2 !important;
@@ -917,10 +914,7 @@ p#photo-credit {
     }
 
     .header-title-dates {
-      height: 92%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      bottom: 32%;
       width: 50%;
       padding-right: 100px;
       padding-left: 100px;
@@ -947,11 +941,10 @@ p#photo-credit {
 .view-viewview.contenttype-exhibition.top-image-align-right {
   @media (min-width: 992px) {
     .header-title-dates {
-      // bottom: 27% !important;
+      bottom: 27% !important;
     }
     .hero-title-floating{
       line-height: 80px !important;
-      padding-bottom: 40px;
     }
   }
 }
@@ -1382,6 +1375,108 @@ body.artwork-listing-page{
     #page-edit.ui.container > *:not(.block.image.align, .block.video.align) {
       padding-right: 0px !important;
       padding-left: 10px !important;
+    }
+  }
+}
+
+.contenttype-exhibition{
+  .hero-title-floating {
+      z-index: 3;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      color: #ffffff;
+      font-family: 'FranklinDmCp', Arial, sans-serif;
+      font-size: 76px;
+      line-height: 85px;
+      text-align: center !important;
+
+
+
+      @media (max-width: 991px) {
+        font-size: 65px;
+        padding-bottom: 18px;
+      }
+
+      @media (max-width: 768px) {
+        padding-bottom: 25px;
+        padding-top: 10px;
+        font-size: 50px !important;
+        letter-spacing: 0.00em !important;
+        line-height: 53px !important;
+      }
+    }
+}
+
+.view-viewview.contenttype-exhibition.top-image-align-right {
+  .description-container{
+    display: block !important;
+    width: 100% !important;
+  }
+  .herosection-content-wrapper{
+    display: flex;
+    flex-direction: row;
+  }
+  @media screen and (max-width:992px){
+    .hero-dates{
+      margin-bottom: 0px !important;
+    }
+    .header-title-dates{
+      bottom: 35px !important;
+    }
+  }
+  @media (min-width: 992px) {
+    .header-container {
+      background: #fbf9f2 !important;
+    }
+
+    .herosection-content-image {
+      width: 50%;
+      margin-left: auto;
+
+      &::after {
+        background-image: none !important;
+      }
+    }
+
+    .herosection-content-image img {
+      -o-object-fit: contain !important;
+      object-fit: contain !important;
+      -o-object-position: right !important;
+      object-position: right !important;
+    }
+
+    .header-title-dates {
+      bottom: auto !important;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50%;
+      padding-right: 100px;
+      padding-left: 100px;
+      padding-top: 5px;
+
+      .hero-title-floating,
+      .description-container,
+      .hero-dates {
+        color: #000000 !important;
+      }
+    }
+    .hero-title-floating{
+      padding-bottom: 40px !important;
+    }
+  }
+
+  @media (min-width: 992px) and (max-width: 1300px) {
+    .hero-title-floating {
+      font-size: 76px !important;
+      line-height: 0.8em;
+    }
+
+    .description-container {
+      font-size: 1.5vw;
     }
   }
 }
