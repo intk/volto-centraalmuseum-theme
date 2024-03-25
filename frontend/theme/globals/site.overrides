@@ -745,12 +745,13 @@ p#photo-credit {
 
   @media (max-width: 991px) {
     font-size: 86px;
+    line-height: 70px !important;
   }
 
   @media (max-width: 768px) {
     font-size: 60px !important;
     letter-spacing: 0.05em !important;
-    line-height: 58px;
+    line-height: 58px !important;
   }
 }
 
