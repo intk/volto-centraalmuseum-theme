@@ -507,6 +507,11 @@ msgstr ""
 msgid "title"
 msgstr ""
 
+#: components/theme/ImageAlbum/ImageAlbum
+# defaultMessage: BEKIJK
+msgid "view"
+msgstr ""
+
 #: components/Blocks/AdvancedSearch/schema
 # defaultMessage: Views
 msgid "views"

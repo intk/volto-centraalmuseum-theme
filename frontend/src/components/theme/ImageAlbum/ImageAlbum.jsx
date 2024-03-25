@@ -9,6 +9,14 @@ import './image-album.less';
 import loadable from '@loadable/component';
 import { debounce } from 'lodash'; // Import debounce from lodash
 
+import { defineMessages, useIntl } from 'react-intl';
+const messages = defineMessages({
+  view: {
+    id: 'view',
+    defaultMessage: 'BEKIJK',
+  },
+});
+
 const Slider = loadable(() => import('react-slick'));
 const MAX_THUMBS = 1;
 
@@ -319,6 +327,8 @@ const ImageAlbum = (props) => {
     }
   };
 
+  const intl = useIntl();
+
   return (
     <div className="image-album">
       <div
@@ -330,7 +340,7 @@ const ImageAlbum = (props) => {
       >
         {props.image === 'false' ? (
           <button onClick={() => setOpen(true)} className={`button button1`}>
-            Bekijk
+            {intl.formatMessage(messages.view)}
           </button>
         ) : (
           <div className="imagethumb" style={{ position: 'relative' }}>
