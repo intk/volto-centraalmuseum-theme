@@ -20,60 +20,45 @@ const messages = defineMessages({
 const Slider = loadable(() => import('react-slick'));
 const MAX_THUMBS = 1;
 
-const getContent = (url, subrequest) => {
-  const query = { b_size: 1000000 };
-  let qs = Object.keys(query)
-    .map((key) => key + '=' + query[key])
-    .join('&');
-  return {
-    type: GET_CONTENT,
-    subrequest,
-    request: {
-      op: 'get',
-      path: `${url}${qs ? `?${qs}` : ''}`,
-    },
-  };
-};
-
 const ImageAlbum = (props) => {
-  const pathname = useSelector((state) => state.router.location.pathname);
-  const slideshowPath = `${pathname}/slideshow`;
-  const id = `full-items@${slideshowPath}`;
+  // const pathname = useSelector((state) => state.router.location.pathname);
+  // const slideshowPath = `${pathname}/slideshow`;
+  // const id = `full-items@${slideshowPath}`;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const [albumItems, setAlbumItems] = useState([]);
+  // const [albumItems, setAlbumItems] = useState([]);
   const [open, setOpen] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const sliderRef = useRef(null);
 
-  useEffect(() => {
-    const fetchContentConditionally = async () => {
-      try {
-        const response = await fetch(
-          `/++api++/${pathname}/@@has_fallback_image`,
-        );
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
+  // useEffect(() => {
+  //   const fetchContentConditionally = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `/++api++/${pathname}/@@has_fallback_image`,
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       const data = await response.json();
 
-        if (data.hasFallbackImage) {
-          const action = getContent(slideshowPath, id);
-          const content = await dispatch(action);
+  //       if (data.hasFallbackImage) {
+  //         const action = getContent(slideshowPath, id);
+  //         const content = await dispatch(action);
 
-          setAlbumItems(content.items || []);
-        } else {
-          setAlbumItems([]);
-        }
-      } catch (error) {
-        setAlbumItems([]);
-      }
-    };
+  //         setAlbumItems(content.items || []);
+  //       } else {
+  //         setAlbumItems([]);
+  //       }
+  //     } catch (error) {
+  //       setAlbumItems([]);
+  //     }
+  //   };
 
-    // Call the async function
-    fetchContentConditionally();
-  }, [dispatch, id, slideshowPath, pathname]);
+  //   // Call the async function
+  //   fetchContentConditionally();
+  // }, [dispatch, id, slideshowPath, pathname]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetIndex = useCallback(
@@ -320,9 +305,9 @@ const ImageAlbum = (props) => {
     );
   };
 
-  const thumbsToShow = albumItems.slice(1, MAX_THUMBS);
+  const thumbsToShow = props.items.slice(1, MAX_THUMBS);
   const moreImagesLength =
-    albumItems.length > MAX_THUMBS ? albumItems.length - MAX_THUMBS : null;
+    props.items.length > MAX_THUMBS ? props.items.length - MAX_THUMBS : null;
 
   const carouselSettings = {
     // afterChange: (current) => setActiveSlideIndex(current),
@@ -342,7 +327,7 @@ const ImageAlbum = (props) => {
   };
 
   const handleClick = () => {
-    if (albumItems.length) {
+    if (props.items.length) {
       setActiveSlideIndex(0);
       setOpen(true);
     }
@@ -368,15 +353,15 @@ const ImageAlbum = (props) => {
             <Image
               key="prev-image"
               src={
-                albumItems[0]
+                props.items[0]
                   ? flattenToAppURL(
-                      `${albumItems[0]?.['@id']}/@@images/${
-                        albumItems[0]?.image_field || 'image'
+                      `${props.items[0]?.['@id']}/@@images/${
+                        props.items[0]?.image_field || 'image'
                       }/great`,
                     )
                   : ''
               }
-              alt={albumItems[0]?.title}
+              alt={props.items[0]?.title}
               className="modal-slide-img"
             />
             <CustomExpandButton
@@ -406,15 +391,15 @@ const ImageAlbum = (props) => {
               <Image
                 key={i}
                 src={
-                  albumItems[0]
+                  props.items[0]
                     ? flattenToAppURL(
-                        `${albumItems[0]?.['@id']}/@@images/${
-                          albumItems[0]?.image_field || 'image'
+                        `${props.items[0]?.['@id']}/@@images/${
+                          props.items[0]?.image_field || 'image'
                         }/great`,
                       )
                     : ''
                 }
-                alt={albumItems[0]?.title}
+                alt={props.items[0]?.title}
                 className="modal-slide-img"
               />
             </div>
@@ -441,7 +426,7 @@ const ImageAlbum = (props) => {
             ref={sliderRef}
             beforeChange={(current, next) => changeSlide(next)}
           >
-            {albumItems.map((item, i) => (
+            {props.items.map((item, i) => (
               <Image
                 key={i}
                 src={
@@ -459,7 +444,7 @@ const ImageAlbum = (props) => {
             ))}
           </Slider>
           <div className="slide-image-count">
-            {activeSlideIndex + 1}/{albumItems.length}
+            {activeSlideIndex + 1}/{props.items.length}
           </div>
         </Modal.Content>
       </Modal>

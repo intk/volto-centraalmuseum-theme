@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { PreviewImage } from '@plone/volto/components';
@@ -7,6 +7,7 @@ import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 import { BodyClass } from '@plone/volto/helpers';
 import Masonry from 'react-masonry-css';
+import { useSelector } from 'react-redux';
 
 const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   let link = null;
@@ -27,6 +28,34 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
     992: 2,
     768: 1,
   };
+
+  const pathname = useSelector((state) => state.router.location.pathname);
+  const [updatedItems, setUpdatedItems] = useState([]);
+
+  useEffect(() => {
+    const fetchHasFallbackImage = async (item) => {
+      try {
+        const response = await fetch(
+          `/++api++/${item['@id']}/@@has_fallback_image`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return { ...item, hasFallbackImage: data.hasFallbackImage };
+      } catch (error) {
+        return { ...item, hasFallbackImage: false };
+      }
+    };
+
+    const fetchAllFallbackImages = async () => {
+      const promises = items.map((item) => fetchHasFallbackImage(item));
+      const results = await Promise.all(promises);
+      setUpdatedItems(results);
+    };
+    fetchAllFallbackImages();
+  }, [pathname, items]);
+
   return (
     <>
       <BodyClass className="artwork-listing-page" />
@@ -38,7 +67,7 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
             columnClassName="masonry-grid_column"
             style={{ display: 'flex' }}
           >
-            {items.map((item) => (
+            {updatedItems.map((item, index) => (
               <>
                 <div key={item.url} className="listing-items">
                   {item.image_field ? (
@@ -53,8 +82,8 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                       />
                     </UniversalLink>
                   ) : (
-                    item.hasImage &&
-                    item['@type'] === 'exhibition' && (
+                    item['@type'] === 'exhibition' &&
+                    item.hasFallbackImage === true && (
                       <UniversalLink item={item}>
                         <PreviewImage
                           item={item}

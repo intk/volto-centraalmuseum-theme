@@ -47,8 +47,6 @@ function HeroSection(props) {
     end,
   } = content || {};
 
-  const isFallback = props.isFallback;
-
   const isEvent =
     content?.['@type'] === 'Event' || content?.['@type'] === 'exhibition';
   const endDate = new Date(end || Date.now());
@@ -89,6 +87,7 @@ function HeroSection(props) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+
         if (data.hasFallbackImage) {
           try {
             const action = getContent(slideshowPath, id);
@@ -132,19 +131,16 @@ function HeroSection(props) {
               )}
             </figure>
           </>
-        ) : isFallback && content?.['@type'] === 'exhibition' ? (
+        ) : albumItems.length > 0 && content?.['@type'] === 'exhibition' ? (
           <>
             <BodyClass className="has-hero-image" />
             <figure className="herosection-content-image document-image">
-              {/* Assuming fallback_image is defined and holds the URL of the fallback image */}
               <Image
                 src={fallback_image}
                 width="100vw"
                 height="90vh"
                 size="large"
               />
-
-              {/* Assuming you want to display the caption for fallback image as well, if available */}
               {preview_caption && (
                 <figcaption className="content-image-caption">
                   {preview_caption}
@@ -177,7 +173,7 @@ function HeroSection(props) {
           <div className="description-container">
             {albumItems.length > 1 && (
               <ImageAlbum
-                items={props.content?.items}
+                items={albumItems}
                 itemTitle={props.content?.objectTitle}
                 image="false"
               />
