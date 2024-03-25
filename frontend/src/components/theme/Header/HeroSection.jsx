@@ -81,9 +81,17 @@ function HeroSection(props) {
 
   useEffect(() => {
     const action = getContent(slideshowPath, id);
-    dispatch(action).then((content) => {
-      setAlbumItems(content.items || []);
-    });
+    dispatch(action)
+      .then((content) => {
+        if (content && content.items) {
+          setAlbumItems(content.items);
+        } else {
+          setAlbumItems([]);
+        }
+      })
+      .catch((error) => {
+        setAlbumItems([]);
+      });
   }, [dispatch, id, slideshowPath]);
 
   return (
