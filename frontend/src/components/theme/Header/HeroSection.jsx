@@ -80,19 +80,29 @@ function HeroSection(props) {
   const [albumItems, setAlbumItems] = useState([]);
 
   useEffect(() => {
-    const action = getContent(slideshowPath, id);
-    dispatch(action)
-      .then((content) => {
-        if (content && content.items) {
-          setAlbumItems(content.items);
-        } else {
-          setAlbumItems([]);
+    // Define an async function inside the useEffect to handle sequential fetch operations
+    const fetchContent = async () => {
+      if (isFallback) {
+        try {
+          const action = getContent(slideshowPath, id);
+          const content = await dispatch(action)
+            .then((res) => res)
+            .catch((error) => '');
+
+          if (content && content.items) {
+            setAlbumItems(content.items);
+          } else {
+            setAlbumItems([]);
+          }
+        } catch (error) {
+          return;
         }
-      })
-      .catch((error) => {
-        setAlbumItems([]);
-      });
-  }, [dispatch, id, slideshowPath]);
+      }
+    };
+
+    // Call the async function
+    fetchContent();
+  }, [dispatch, id, slideshowPath, isFallback]);
 
   return (
     <div className="herosection">
