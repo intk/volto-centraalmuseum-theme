@@ -92,7 +92,7 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                             item.image_caption ? item.image_caption : item.title
                           }
                           className="ui image"
-                          isFallback={item.hasImage === true}
+                          isFallback={true}
                         />
                       </UniversalLink>
                     )
