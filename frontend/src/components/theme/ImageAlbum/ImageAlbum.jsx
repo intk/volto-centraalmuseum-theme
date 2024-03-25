@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useRef, useCallback } from 'react';
 import { Modal, Image } from 'semantic-ui-react';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './image-album.less';
@@ -21,44 +19,9 @@ const Slider = loadable(() => import('react-slick'));
 const MAX_THUMBS = 1;
 
 const ImageAlbum = (props) => {
-  // const pathname = useSelector((state) => state.router.location.pathname);
-  // const slideshowPath = `${pathname}/slideshow`;
-  // const id = `full-items@${slideshowPath}`;
-
-  // const dispatch = useDispatch();
-
-  // const [albumItems, setAlbumItems] = useState([]);
   const [open, setOpen] = useState(false);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const sliderRef = useRef(null);
-
-  // useEffect(() => {
-  //   const fetchContentConditionally = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `/++api++/${pathname}/@@has_fallback_image`,
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-
-  //       if (data.hasFallbackImage) {
-  //         const action = getContent(slideshowPath, id);
-  //         const content = await dispatch(action);
-
-  //         setAlbumItems(content.items || []);
-  //       } else {
-  //         setAlbumItems([]);
-  //       }
-  //     } catch (error) {
-  //       setAlbumItems([]);
-  //     }
-  //   };
-
-  //   // Call the async function
-  //   fetchContentConditionally();
-  // }, [dispatch, id, slideshowPath, pathname]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetIndex = useCallback(
