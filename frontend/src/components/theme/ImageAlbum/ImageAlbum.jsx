@@ -8,8 +8,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import './image-album.less';
 import loadable from '@loadable/component';
 import { debounce } from 'lodash'; // Import debounce from lodash
-
 import { defineMessages, useIntl } from 'react-intl';
+
 const messages = defineMessages({
   view: {
     id: 'view',
@@ -120,8 +120,8 @@ const ImageAlbum = (props) => {
               d="M3.10156,2.39844l4.89844,4.89453l5.25,-5.25l0.70703,0.70703l-5.25,5.25l4.89844,4.89453l0.35156,0.35547l-0.70703,0.70703l-0.35547,-0.35156l-4.89453,-4.89844l-5.25,5.25l-0.70703,-0.70703l5.25,-5.25l-4.89453,-4.89844l-0.35547,-0.35156l0.70703,-0.70703z"
               id="strokeMainSVG"
               fill="#dddddd"
-              stroke="#dddddd"
-              stroke-width="2"
+              stroke="#000"
+              stroke-width="1"
               stroke-linejoin="round"
             ></path>
             <g
@@ -203,8 +203,8 @@ const ImageAlbum = (props) => {
         aria-label="Previous Slide" // Accessibility label for screen readers
       >
         <svg
-          width="80"
-          height="100"
+          width="70"
+          height="90"
           viewBox="0 0 50 85"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -262,8 +262,8 @@ const ImageAlbum = (props) => {
         aria-label="Previous Slide" // Accessibility label for screen readers
       >
         <svg
-          width="80"
-          height="100"
+          width="70"
+          height="90"
           viewBox="0 0 50 85"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
