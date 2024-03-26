@@ -1353,7 +1353,15 @@ def import_one_exhibition(
 
     organisation = tree.findtext(".//venue/venue")
 
-    designer = tree.findtext(".//creator/creator")
+    artwork_creator=tree.findtext(".//creator/creator")
+    artwork_creator_role=tree.findtext(".//creator/creator.role")
+    artwork_vermelding=tree.findtext(".//creator/Vermelding")
+
+    designer = artwork_creator
+
+    if artwork_creator_role.lower() == "vormgever" :
+        designer = artwork_vermelding
+
 
     persistent_url = tree.findtext(".//PIDwork/PID_work_URI")
 
