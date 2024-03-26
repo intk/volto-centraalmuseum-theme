@@ -685,6 +685,7 @@ p#photo-credit {
     text-align: center;
   }
   h1.documentFirstHeading{
+    max-width: 650px !important;
     margin: 0px !important;
     padding-top: 0px !important;
     // padding-left: 50px !important;
@@ -695,6 +696,8 @@ p#photo-credit {
     line-height: 35px !important;
     letter-spacing: normal !important;
     text-align: left !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 
     @media (min-width: 768px){
       font-size: 80px !important;
