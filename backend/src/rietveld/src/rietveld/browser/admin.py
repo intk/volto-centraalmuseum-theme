@@ -1353,13 +1353,13 @@ def import_one_exhibition(
 
     organisation = tree.findtext(".//venue/venue")
 
-    artwork_creator=tree.findtext(".//creator/creator")
-    artwork_creator_role=tree.findtext(".//creator/creator.role")
-    artwork_vermelding=tree.findtext(".//creator/Vermelding")
+    artwork_creator = tree.findtext(".//creator/creator")
+    artwork_creator_role = tree.findtext(".//creator/creator.role")
+    artwork_vermelding = tree.findtext(".//creator/Vermelding")
 
     designer = artwork_creator
 
-    if artwork_creator_role.lower() == "vormgever" :
+    if artwork_creator_role.lower() == "vormgever":
         designer = artwork_vermelding
 
 
