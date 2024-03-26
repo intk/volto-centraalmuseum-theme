@@ -1359,7 +1359,7 @@ def import_one_exhibition(
 
     designer = artwork_creator
 
-    if "vormgever" in artwork_creator_role.lower() :
+    if "vormgever" in artwork_creator_role.lower():
         designer = artwork_vermelding
 
     persistent_url = tree.findtext(".//PIDwork/PID_work_URI")
