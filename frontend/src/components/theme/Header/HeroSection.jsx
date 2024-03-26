@@ -9,6 +9,7 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import ImageAlbum from '../../theme/ImageAlbum/ImageAlbum';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
+import { isCmsUi } from '@plone/volto/helpers';
 
 const getDateRangeDescription = (lang, start, end) => {
   const format = (date, options) =>
@@ -55,6 +56,7 @@ function HeroSection(props) {
     content &&
     flattenToAppURL(content['@id'] + '/@@fallback-image/images/great');
 
+  //Source of the error 404
   const getContent = (url, subrequest) => {
     const query = { b_size: 1000000 };
     let qs = Object.keys(query)
@@ -69,11 +71,13 @@ function HeroSection(props) {
       },
     };
   };
+
   const pathname = useSelector((state) => state.router.location.pathname);
   const slideshowPath = `${pathname}/slideshow`;
   const id = `full-items@${slideshowPath}`;
 
   const dispatch = useDispatch();
+  const cmsView = isCmsUi(pathname);
 
   const [albumItems, setAlbumItems] = useState([]);
 
@@ -107,8 +111,10 @@ function HeroSection(props) {
         }
       } catch (error) {}
     };
-    fetchContent();
-  }, [dispatch, id, slideshowPath, pathname]);
+    if (content?.['@type'] === 'exhibition' && !cmsView) {
+      fetchContent();
+    }
+  }, [dispatch, id, slideshowPath, pathname, content, cmsView]);
 
   return (
     <div className="herosection">
@@ -149,7 +155,9 @@ function HeroSection(props) {
             </figure>
           </>
         ) : (
-          <div className="herosection-missing-image"></div>
+          <>
+            <BodyClass className="hide-top-image"></BodyClass>
+          </>
         )}
 
         <div className="header-title-dates">

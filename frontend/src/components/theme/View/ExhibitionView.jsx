@@ -127,6 +127,31 @@ function filterBlocks(content, types) {
   };
 }
 
+const getDateRangeDescription = (lang, start, end) => {
+  const format = (date, options) =>
+    new Intl.DateTimeFormat(lang, options).format(date);
+  const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+  const dayOptions = { day: 'numeric' };
+
+  if (
+    !end ||
+    (start.getDate() === end.getDate() &&
+      start.getMonth() === end.getMonth() &&
+      start.getFullYear() === end.getFullYear())
+  ) {
+    return format(start, defaultOptions);
+  }
+
+  if (
+    start.getMonth() === end.getMonth() &&
+    start.getFullYear() === end.getFullYear()
+  ) {
+    return `${format(start, dayOptions)} — ${format(end, defaultOptions)}`;
+  }
+
+  return `${format(start, defaultOptions)} — ${format(end, defaultOptions)}`;
+};
+
 /**
  * EventView view component class.
  * @function EventView
@@ -135,7 +160,7 @@ function filterBlocks(content, types) {
  */
 const ExhibitionView = (props) => {
   const { content, location } = props;
-  const path = getBaseUrl(location?.pathname || '');
+  // const path = getBaseUrl(location?.pathname || '');
   const dispatch = useDispatch();
   const { views } = config.widgets;
   const contentSchema = useSelector((state) => state.schema?.schema);
@@ -215,13 +240,32 @@ const ExhibitionView = (props) => {
               marginBottom: '22px',
               marginTop: '36px',
             }}
+            className="date-indicator"
           >
             <strong>{translations.expired[lang]}</strong>
           </p>
         ) : (
           ''
         )}
-        <RenderBlocks {...props} path={path} content={filteredContent} />
+        {hasBlocksData(content) && content.blocks_layout.items.length > 0 ? (
+          <>
+            {startDate && (
+              <div className="block-date hero-dates">
+                {getDateRangeDescription(intl.locale, startDate, endDate)}
+              </div>
+            )}
+            <RenderBlocks {...props} content={filteredContent} />
+          </>
+        ) : (
+          <>
+            {startDate && (
+              <div className="block-date hero-dates">
+                {getDateRangeDescription(intl.locale, startDate, endDate)}
+              </div>
+            )}
+            <h1 className="documentFirstHeading">{content.title}</h1>
+          </>
+        )}
         {content?.show_notes && (
           <p
             dangerouslySetInnerHTML={{

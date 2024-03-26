@@ -26,16 +26,24 @@
   <property name="default_view_fallback">False</property>
   <property name="add_permission">plone.app.contenttypes.addDocument</property>
   <property name="klass">plone.volto.content.FolderishDocument</property>
-  <property name="behaviors">
-    <element value="plone.namefromtitle" />
-    <element value="plone.shortname" />
-    <!-- <element value="volto.preview_image"/> -->
-    <element value="plone.basic" />
-    <element value="plone.translatable" />
-    <element value="plone.categorization" />
+  <property name="behaviors"
+            purge="false"
+  >
     <element value="plone.textindexer" />
-    <element value="volto.preview_image" />
-    <element value="plone.restapi.behaviors.IBlocks" />
+    <element value="plone.eventbasic" />
+    <element value="plone.eventrecurrence" />
+    <element value="plone.eventlocation" />
+    <element value="plone.eventattendees" />
+    <element value="plone.eventcontact" />
+    <element value="plone.dublincore" />
+    <element value="plone.namefromtitle" />
+    <element value="plone.richtext" />
+    <element value="plone.allowdiscussion" />
+    <element value="plone.excludefromnavigation" />
+    <element value="plone.shortname" />
+    <element value="plone.relateditems" />
+    <element value="plone.versioning" />
+    <element value="plone.locking" />
   </property>
   <property name="schema">rietveld.content.exhibition.IExhibition</property>
   <alias from="(Default)"

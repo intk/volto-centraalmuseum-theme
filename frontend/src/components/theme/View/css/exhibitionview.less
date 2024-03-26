@@ -729,6 +729,10 @@
 
     .columnone {
       @media (min-width: 768px) {
+        width: 40%;
+        padding: 13px 15px 0px 5px;
+      }
+      @media (min-width: 992px) {
         width: 33.3%;
         padding: 13px 15px 0px 5px;
       }
@@ -749,6 +753,11 @@
       }
 
       @media (min-width: 768px) {
+        width: 60%;
+        padding: 13px 0px 0px 15px;
+      }
+
+      @media (min-width: 992px) {
         width: 66.6%;
         padding: 13px 0px 0px 15px;
       }
@@ -788,6 +797,34 @@
   #page-edit {
     .ui.raised.segments {
       max-width: ~'min(70vw, 1000px)';
+    }
+  }
+}
+
+.view-viewview.hide-top-image.contenttype-exhibition {
+  #rawdata {
+    max-width: 650px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 45px !important;
+    padding-right: 0px !important;
+  }
+  .columnone{
+    padding-right: 60px !important;
+  }
+  .columntwo{
+    padding-left: 40px !important;
+  }
+
+  @media (max-width: 1200px){
+    #rawdata{
+      padding-left: 0px !important;
+    }
+    .columnone {
+      padding-right: 0px !important;
+    }
+    table{
+      padding-left: 0px !important;
     }
   }
 }
