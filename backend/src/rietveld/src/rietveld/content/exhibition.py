@@ -107,12 +107,21 @@ class IExhibition(model.Schema):
 
     organisation = TextLine(title="Organisation", required=False)
 
-    designer = TextLine(title="Designer", required=False)
-
     documentation = List(
         title="Documentation",
         value_type=TextLine(),
         required=False,
+    )
+
+    exhibition_designer = schema.List(
+        title="Exhibition Designer",
+        description="",
+        value_type=schema.Tuple(
+            title="Designer",
+            value_type=schema.TextLine(),
+        ),
+        required=False,
+        default=[],
     )
 
     hasImage = Bool(title="Has Image", required=False)

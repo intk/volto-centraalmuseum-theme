@@ -1353,15 +1353,6 @@ def import_one_exhibition(
 
     organisation = tree.findtext(".//venue/venue")
 
-    artwork_creator = tree.findtext(".//creator/creator")
-    artwork_creator_role = tree.findtext(".//creator/creator.role")
-    artwork_vermelding = tree.findtext(".//creator/Vermelding")
-
-    designer = artwork_creator
-
-    if "vormgever" in artwork_creator_role.lower():
-        designer = artwork_vermelding
-
     persistent_url = tree.findtext(".//PIDwork/PID_work_URI")
 
     # Documentations Start #
@@ -1480,6 +1471,34 @@ def import_one_exhibition(
         else:
             artwork_brains_en.append({"url": "", "title": artwork_info})
 
+    ######################################################
+    ###DESIGNER START #######################
+    exhibition_designers_xml = tree.findall("./creator")
+    log_to_file(f"exhibition_designers_xml: {exhibition_designers_xml}")
+
+    exhibition_designers = []
+
+    for designer in exhibition_designers_xml:
+        artwork_creator = designer.findtext(".//creator")
+        artwork_creator_role = designer.findtext(".//creator.role")
+        artwork_vermelding = designer.findtext(".//Vermelding")
+
+        designer = artwork_creator
+
+        log_to_file(f"artwork_creator: {artwork_creator}")
+        log_to_file(f"artwork_crator_role: {artwork_creator_role}")
+        log_to_file(f"artwork_vermelding: {artwork_vermelding}")
+
+        if artwork_creator_role:
+            if "vormgever" in artwork_creator_role.lower():
+                designer = artwork_vermelding
+
+        exhibition_designers.append(
+            {"designer": designer, "role": artwork_creator_role}
+        )
+    ######################################################
+    ###DESIGNER END #######################
+
     # Notes field start
     notes = tree.findtext("./notes") or ""
 
@@ -1515,6 +1534,9 @@ def import_one_exhibition(
     info["nl"]["objects"] = artwork_brains_nl
     info["en"]["objects"] = artwork_brains_en
 
+    info["nl"]["exhibition_designer"] = exhibition_designers
+    info["en"]["exhibition_designer"] = exhibition_designers
+
     language_independent_fields = {
         "title": whole_title,
         "rawdata": record_string,
@@ -1525,7 +1547,6 @@ def import_one_exhibition(
         "start_date": start_date,
         "end_date": end_date,
         "organisation": organisation,
-        "designer": designer,
         "persistent_url": persistent_url,
     }
 

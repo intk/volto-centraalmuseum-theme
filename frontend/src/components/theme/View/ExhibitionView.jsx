@@ -286,16 +286,22 @@ const ExhibitionView = (props) => {
                   </td>
                 </tr>
               )}
-              {content.designer && (
+              {content.exhibition_designer?.length > 0 && (
                 <tr>
                   <td className="columnone">
                     <p>{intl.formatMessage(messages.designer)}</p>
                   </td>
                   <td className="columntwo">
-                    <p>{content.designer}</p>
+                    {content.exhibition_designer.map((designer, index) => (
+                      <p key={index}>
+                        {designer.designer}{' '}
+                        {designer.role && `(${designer.role})`}
+                      </p>
+                    ))}
                   </td>
                 </tr>
               )}
+
               {content.documentation && content.documentation?.length !== 0 && (
                 <tr>
                   <td className="columnone">
