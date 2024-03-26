@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import {
   hasBlocksData,
   // flattenHTMLToAppURL,
-  getBaseUrl,
+  // getBaseUrl,
 } from '@plone/volto/helpers';
 // import { Image, Grid } from 'semantic-ui-react';
 import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
