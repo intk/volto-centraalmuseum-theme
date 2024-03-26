@@ -26,6 +26,7 @@ import { isEqual } from 'lodash';
 import { getWidget } from '@plone/volto/helpers/Widget/utils';
 import { defineMessages, useIntl } from 'react-intl';
 import './css/exhibitionview.less';
+import { BodyClass } from '@plone/volto/helpers';
 
 const messages = defineMessages({
   artist: {
@@ -243,6 +244,7 @@ const ExhibitionView = (props) => {
             className="date-indicator"
           >
             <strong>{translations.expired[lang]}</strong>
+            <BodyClass className="expired-exhibition" />
           </p>
         ) : (
           ''
@@ -266,7 +268,7 @@ const ExhibitionView = (props) => {
             <h1 className="documentFirstHeading">{content.title}</h1>
           </>
         )}
-        {content?.show_notes && (
+        {content?.show_notes && content?.notes?.data !== '' && (
           <p
             dangerouslySetInnerHTML={{
               __html: content?.notes?.data,

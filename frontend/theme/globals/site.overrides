@@ -668,73 +668,7 @@ p#photo-credit {
     }
   }
 }
-.view-viewview.hide-top-image.contenttype-exhibition{
-  .ui.container{
-    padding-top: 115px !important;
-    @media (max-width: 768px) {
-      padding-top: 60px !important;
-    }
-  }
 
-  .date-indicator{
-    margin-top: 34px !important;
-  }
-
-  .date-indicator,
-  .block-date.hero-dates{
-    text-align: center;
-  }
-  h1.documentFirstHeading{
-    max-width: 650px !important;
-    margin: 0px !important;
-    padding-top: 0px !important;
-    // padding-left: 50px !important;
-    // padding-right: 50px !important;
-    left: auto !important;
-    right: auto !important;
-    font-size: 40px !important;
-    line-height: 35px !important;
-    letter-spacing: normal !important;
-    text-align: left !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-
-    @media (min-width: 768px){
-      font-size: 80px !important;
-      line-height: 62px !important;
-      text-align: center !important;
-    }
-
-    @media (min-width: 1200px){
-      margin-left: 101px !important;
-    }
-  }
-
-  .expired .block-date.hero-dates {
-    text-decoration: line-through !important;
-  }
-
-  .block-date.hero-dates {
-    color: #282931 !important;
-    font-family: 'FranklinMed', Arial, sans-serif !important;
-    font-size: 17px !important;
-    letter-spacing: 0.05em !important;
-    line-height: 35px !important;
-    text-align: center !important;
-    text-transform: uppercase !important;
-    margin-bottom: 10px !important;
-    margin-top: -13px !important;
-
-    @media (max-width: 768px) {
-      font-size: 14px !important;
-      line-height: 20px !important;
-      display: none !important;
-    }
-    @media (min-width: 1200px) {
-      margin-left: 101px !important;
-    }
-  }
-}
 
 
 //Hero title
