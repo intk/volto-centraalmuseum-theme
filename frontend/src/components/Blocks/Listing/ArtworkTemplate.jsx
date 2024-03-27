@@ -33,6 +33,8 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   const [updatedItems, setUpdatedItems] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchHasFallbackImage = async (item) => {
       try {
         const response = await fetch(
@@ -51,9 +53,16 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
     const fetchAllFallbackImages = async () => {
       const promises = items.map((item) => fetchHasFallbackImage(item));
       const results = await Promise.all(promises);
-      setUpdatedItems(results);
+      if (isMounted) {
+        setUpdatedItems(results);
+      }
     };
+
     fetchAllFallbackImages();
+
+    return () => {
+      isMounted = false;
+    };
   }, [pathname, items]);
 
   return (
@@ -68,82 +77,72 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
             style={{ display: 'flex' }}
           >
             {updatedItems.map((item, index) => (
-              <>
-                <div key={item.url} className="listing-items">
-                  {item.image_field ? (
-                    <UniversalLink item={item}>
-                      <PreviewImage
-                        item={item}
-                        size="preview"
-                        alt={
-                          item.image_caption ? item.image_caption : item.title
-                        }
-                        className="ui image"
-                      />
-                    </UniversalLink>
-                  ) : (
-                    item['@type'] === 'exhibition' &&
-                    item.hasFallbackImage === true && (
-                      <UniversalLink item={item}>
-                        <PreviewImage
-                          item={item}
-                          size="preview"
-                          alt={
-                            item.image_caption ? item.image_caption : item.title
-                          }
-                          className="ui image"
-                          isFallback={true}
+              <div key={`item-${index}`} className="listing-items">
+                {item.image_field ? (
+                  <UniversalLink item={item}>
+                    <PreviewImage
+                      item={item}
+                      size="large"
+                      alt={item.image_caption ? item.image_caption : item.title}
+                      className="ui image"
+                    />
+                  </UniversalLink>
+                ) : item['@type'] === 'exhibition' &&
+                  item.hasFallbackImage === true ? (
+                  <UniversalLink item={item}>
+                    <PreviewImage
+                      item={item}
+                      size="large"
+                      alt={item.image_caption ? item.image_caption : item.title}
+                      className="ui image"
+                      isFallback={true}
+                    />
+                  </UniversalLink>
+                ) : null}
+                <div
+                  id="jaarverslag-title"
+                  className={`item-title ${
+                    item.review_state === 'private' ? 'private' : ''
+                  }`}
+                >
+                  {item['@type'] === 'Event' ||
+                  item['@type'] === 'Exhibition' ? (
+                    <div className="listing-dates">
+                      <div className={`listing-dates-wrapper`}>
+                        <When
+                          start={item.start}
+                          end={item.end}
+                          whole_day={item.whole_day}
+                          open_end={item.open_end}
                         />
-                      </UniversalLink>
-                    )
-                  )}
-                  <div
-                    id="jaarverslag-title"
-                    className={`item-title ${
-                      item.review_state === 'private' ? 'private' : ''
-                    }`}
-                  >
-                    {item['@type'] === 'Event' ||
-                    item['@type'] === 'Exhibition' ? (
-                      <div className="listing-dates">
-                        <div className={`listing-dates-wrapper`}>
-                          <When
-                            start={item.start}
-                            end={item.end}
-                            whole_day={item.whole_day}
-                            open_end={item.open_end}
-                          />
-                        </div>
                       </div>
-                    ) : (
-                      ''
-                    )}
-                    <h2>
-                      <UniversalLink item={item}>{item.title}</UniversalLink>
-                    </h2>
-                    {item['@type'] !== 'artwork'
-                      ? item.description && <p>{item.description}</p>
-                      : ''}
-                    <div className="description">
-                      <p>
-                        {item.artwork_author && (
-                          <span className="item-description">
-                            {item.artwork_author[0]}
-                          </span>
-                        )}
-                        {item.artwork_author && item.dating && (
-                          <span className="item-description">, </span>
-                        )}
-                        {item.dating && (
-                          <span className="item-description">
-                            {String(item.dating.split('(')[0])}
-                          </span>
-                        )}
-                      </p>
                     </div>
+                  ) : null}
+                  <h2>
+                    <UniversalLink item={item}>{item.title}</UniversalLink>
+                  </h2>
+                  {item['@type'] !== 'artwork' && item.description ? (
+                    <p>{item.description}</p>
+                  ) : null}
+                  <div className="description">
+                    <p>
+                      {item.artwork_author && (
+                        <span className="item-description">
+                          {item.artwork_author[0]}
+                        </span>
+                      )}
+                      {item.artwork_author && item.dating && (
+                        <span className="item-description">, </span>
+                      )}
+                      {item.dating && (
+                        <span className="item-description">
+                          {String(item.dating.split('(')[0])}
+                        </span>
+                      )}
+                    </p>
                   </div>
                 </div>
-              </>
+              </div>
             ))}
           </Masonry>
         </section>
