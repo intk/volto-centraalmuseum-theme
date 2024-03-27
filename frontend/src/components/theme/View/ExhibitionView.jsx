@@ -189,14 +189,6 @@ const ExhibitionView = (props) => {
   const [showAllObjects, setShowAllObjects] = useState(false);
   const intl = useIntl();
 
-  // TL;DR: There is a flash of the non block-based view because of the reset
-  // of the content on route change. Subscribing to the content change at this
-  // level has nasty implications, so we can't watch the Redux state for loaded
-  // content flag here (because it forces an additional component update)
-  // Instead, we can watch if the content is "empty", but this has a drawback
-  // since the locking mechanism inserts a `lock` key before the content is there.
-  // So "empty" means `content` is present, but only with a `lock` key, thus the next
-  // ugly condition comes to life
   const contentLoaded = content && !isEqual(Object.keys(content), ['lock']);
 
   React.useEffect(() => {
@@ -313,7 +305,7 @@ const ExhibitionView = (props) => {
                     <ul>
                       {showAllDocumentation
                         ? content?.documentation?.map((doc, index) => (
-                            <li>
+                            <li key={`li-${index}`}>
                               <p key={index}>
                                 {doc}
                                 {index === 2 &&
@@ -338,7 +330,7 @@ const ExhibitionView = (props) => {
                             ?.slice(0, 3)
                             ?.filter((el) => el.trim() !== '')
                             .map((doc, index) => (
-                              <li>
+                              <li key={`li-${index}`}>
                                 <p key={index}>
                                   {doc}
                                   {index === 2 &&
@@ -375,7 +367,7 @@ const ExhibitionView = (props) => {
                         ? content?.objects?.map(
                             ({ title, url }, index) =>
                               title && (
-                                <li>
+                                <li key={`li-${index}`}>
                                   <p key={index}>
                                     {url ? (
                                       <a href={`/${url?.slice(2).join('/')}`}>
@@ -404,7 +396,7 @@ const ExhibitionView = (props) => {
                         : content?.objects
                             ?.slice(0, 3)
                             .map(({ title, url }, index) => (
-                              <li>
+                              <li key={`li-${index}`}>
                                 <p key={index}>
                                   {url ? (
                                     <a href={`/${url.slice(2).join('/')}`}>

@@ -146,6 +146,7 @@ function HeroSection(props) {
                 width="100vw"
                 height="90vh"
                 size="large"
+                image=""
               />
               {preview_caption && (
                 <figcaption className="content-image-caption">
