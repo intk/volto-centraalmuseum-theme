@@ -162,7 +162,6 @@ export default function ArtworkView(props) {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
   const [showAllExhibition, setShowAllExhibition] = useState(false);
-  const [hasImage, setHasImage] = useState(true);
 
   const HandleClick = () => {
     setDescriptionOpen(!descriptionOpen);
