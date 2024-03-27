@@ -72,7 +72,7 @@ class IArtwork(model.Schema):
     )
 
     exhibitionTitles = List(
-        title="Exhibitions",
+        title="Exhibition Titles",
         value_type=TextLine(),
         required=False,
     )
