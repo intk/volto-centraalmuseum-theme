@@ -1,6 +1,6 @@
 // http://localhost:8080/Plone/nl/archief/@@import_vubis?import=artwork&max=10&query=authorName=Douglas%20Gordon
 // import { RenderBlocks } from '@plone/volto/components';
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 // import { FormattedMessage } from 'react-intl';
 import { Container } from 'semantic-ui-react';
 // import { Card } from '@package/components'; // SocialLinks,
@@ -24,6 +24,7 @@ import twbutton from './assets/share_button_twitter.svg';
 // import downloadbutton from './assets/download.svg';
 import { defineMessages, useIntl } from 'react-intl';
 import { SeeMore } from '../../index';
+import { BodyClass } from '@plone/volto/helpers';
 // import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 const messages = defineMessages({
@@ -161,6 +162,7 @@ export default function ArtworkView(props) {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
   const [showAllExhibition, setShowAllExhibition] = useState(false);
+  const [hasImage, setHasImage] = useState(true);
 
   const HandleClick = () => {
     setDescriptionOpen(!descriptionOpen);
@@ -201,6 +203,12 @@ export default function ArtworkView(props) {
       window.scrollTo({ top: topPosition, behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    if (props.content?.items.length === 0) {
+      setDataExpand(true);
+    }
+  }, [props.content.items.length]);
 
   // Buttons for the image and text
   const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
@@ -331,6 +339,11 @@ export default function ArtworkView(props) {
               }}
               ref={(el) => (reactSwipeEl = el)}
             >
+              {props.content?.items.length === 0 && (
+                <>
+                  <BodyClass className="artwork-no-image" />
+                </>
+              )}
               {props.content?.items.map((item, index) => {
                 if (item['@type'] === 'Image') {
                   return (
@@ -458,25 +471,27 @@ export default function ArtworkView(props) {
                   </tr>
                 )}
 
-                {content.creator && (
-                  <tr>
-                    <td className="columnone">
-                      <p>{intl.formatMessage(messages.artist)}</p>
-                    </td>
-                    <td className="columntwo">
-                      {/* {content?.creator?.map((artist) => (
+                {content.creator &&
+                  content.creator.data !== '' &&
+                  content.creator.data !== '<div></div>' && (
+                    <tr>
+                      <td className="columnone">
+                        <p>{intl.formatMessage(messages.artist)}</p>
+                      </td>
+                      <td className="columntwo">
+                        {/* {content?.creator?.map((artist) => (
                         <p>{artist}</p>
                       ))} */}{' '}
-                      <div
-                        id="creator"
-                        className={`data-description ${descriptionOpen}`}
-                        dangerouslySetInnerHTML={{
-                          __html: content.creator.data,
-                        }}
-                      />
-                    </td>
-                  </tr>
-                )}
+                        <div
+                          id="creator"
+                          className={`data-description ${descriptionOpen}`}
+                          dangerouslySetInnerHTML={{
+                            __html: content.creator.data,
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  )}
 
                 {content.dating && (
                   <tr>
