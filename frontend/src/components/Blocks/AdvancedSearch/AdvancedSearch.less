@@ -1,97 +1,128 @@
-#advancedsearchblock{
-  #search-page{
-    margin-top:-30px;
-    width: auto !important;
+#advancedsearchblock {
+  position: relative;
+
+  #search-page {
+    position: relative;
+    right: 50%;
+    left: 50%;
+    width: 100vw;
+    padding: 41px 93px 120px 107px;
+    margin-right: -50vw !important;
+    margin-left: -50vw !important;
+    // width: auto !important;
+    margin-top: -30px;
+    padding-right: 108.5px !important;
+    padding-left: 108.5px !important;
+
+    .searchbar{
+      width: 86%;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     @media screen and (min-width: 768px) {
-      margin-left: 13.5px;
-      margin-right: 13.5px;
       margin-top: 57px;
+      margin-right: 13.5px;
+      margin-left: 13.5px;
     }
 
     @media screen and (min-width: 992px) {
-      margin-left: 5%;
-      margin-right: 5%;
       padding-right: 13px;
       padding-left: 13.5px;
-      margin-top: 35px;
+      margin-top: 2px;
+      margin-right: 5%;
+      margin-left: 5%;
     }
   }
-  .searchbar{
-    display: flex;
-    flex-direction: column;
-    width: auto;
 
-    @media screen and (min-width: 992px){
+  .searchbar {
+    display: flex;
+    // width: auto;
+    flex-direction: column;
+
+    @media screen and (min-width: 992px) {
       flex-direction: row;
     }
-
   }
-  .text-input-facet{
+
+  .text-input-facet {
     flex-grow: 1;
-    .ui.input{
+
+    .ui.input {
       width: 100%;
       margin-bottom: 15px;
-          @media screen and (min-width: 992px) {
-            margin-bottom: 0px;
-          }
+      @media screen and (min-width: 992px) {
+        margin-bottom: 0px;
+      }
     }
-  }
-  .text-input-facet input{
-    // height: 58px;
-    width: 100% !important;
-    font-family: 'StyreneBold', Arial, sans-serif;
-    font-size: 17px;
-    padding: 16px 20px;
-  }
-  .text-input-facet input::placeholder{
-    font-size: 17px;
   }
 
-  .Search-main-button{
+  .text-input-facet input {
+    // height: 58px;
+    width: 100% !important;
+    padding: 19px 18px 15px;
+    font-family: 'FranklinBook', Arial, sans-serif;
+    font-size: 16px;
+    border: 1px solid #c3c3c3 !important;
+    border-radius: 0%;
+    letter-spacing: 0.05em;
+  }
+
+  .text-input-facet input::placeholder {
+    font-size: 16px;
+    color: #282931;
+    opacity: 0.7;
+  }
+
+  .Search-main-button {
+    padding: 17px 28px;
+    border: 1px solid #282931;
+    background-color: white !important;
     border-radius: 0%;
     color: var(--bonnefanten-bg) !important;
-    background-color: var(--bonnefanten-primary) !important;
-    clip-path: polygon(0% 10px, 10px 0%, calc(100%) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100%));
-    padding: 16px 28px;
-    border: 2px solid var(--bonnefanten-primary);
-    font-family: 'StyreneBold', Arial, sans-serif;
+    font-family: 'FranklinMed', Arial, sans-serif;
     font-size: 17px;
     line-height: 1.4;
+    letter-spacing: 0.05em;
     @media screen and (min-width: 992px) {
-      width: 19%;
-      margin-left: 10px;
-      padding: 12px 28px;
+      width: 20%;
+      padding: 14px 28px 10px;
     }
     @media screen and (min-width: 1300px) {
-      margin-left: 13px;
+      // margin-left: 13px;
     }
   }
-  .Search-main-button:hover{
-  background-color: var(--bonnefanten-bg) !important;
-  color: var(--bonnefanten-primary) !important;
-  clip-path: none;
+
+  .Search-main-button:hover {
+    cursor: pointer;
+    background-color: #282931 !important;
+    // clip-path: none;
+    color: white !important;
   }
-  .react-select__indicator .icon path{
+
+  .react-select__indicator .icon path {
     fill: var(--bonnefanten-primary) !important;
   }
-  .react-select__menu{
+
+  .react-select__menu {
     width: 99%;
   }
+
   .link-to-search {
+    display: none;
     margin-top: 25px;
     margin-bottom: 0px;
     @media screen and (min-width: 992px) {
       margin-top: 2px;
     }
-    a{
+
+    a {
       border-bottom: 1px solid #b6a782;
-      text-decoration: none;
-      font-size: 16px;
-      letter-spacing: 0.00em;
       color: #b6a782 !important;
+      font-size: 16px;
+      letter-spacing: 0em;
+      text-decoration: none;
       text-decoration: none !important;
     }
   }
 }
-
