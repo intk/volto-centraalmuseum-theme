@@ -1688,6 +1688,12 @@ def import_one_exhibition(
         obj_en = self.translate(obj, info["en"])
         obj_en.hasImage = obj.hasImage
 
+        slideshow_translation = api.content.find(context=obj_en, id="slideshow")
+        if len(slideshow_translation) > 0:
+            slideshow_page = slideshow_translation[0].getObject()
+            if api.content.get_state(slideshow_page) == "private":
+                content.transition(obj=slideshow_page, transition="publish")
+
         obj.reindexObject()
         obj_en.reindexObject()
 
