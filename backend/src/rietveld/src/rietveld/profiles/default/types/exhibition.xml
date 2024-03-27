@@ -17,7 +17,15 @@
   <property name="immediate_view">view</property>
   <property name="global_allow">True</property>
   <property name="filter_content_types">False</property>
-  <property name="allowed_content_types" />
+   <property name="allowed_content_types">
+    <element value="Document" />
+    <element value="Event" />
+    <element value="File" />
+    <element value="Folder" />
+    <element value="Image" />
+    <element value="Link" />
+    <element value="News Item" />
+  </property>
   <property name="allow_discussion">False</property>
   <property name="default_view">document_view</property>
   <property name="view_methods">

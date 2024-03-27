@@ -1842,7 +1842,7 @@ def import_images_on_slideshow(container, images):
     if len(results) == 0:
         slideshow_page = api.content.create(
             container=container,
-            type="Document",
+            type="Folder",
             title="Slideshow",
             id="slideshow",
             exclude_from_nav=True,
