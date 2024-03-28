@@ -745,8 +745,8 @@ export default function ArtworkView(props) {
                       <ul>
                         {showAllDocumentation
                           ? content?.documentation?.map((doc, index) => (
-                              <li>
-                                <p key={index}>
+                              <li key={index}>
+                                <p>
                                   {doc}
                                   {index === 2 &&
                                     content.documentation.length > 3 && (

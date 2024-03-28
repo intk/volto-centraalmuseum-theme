@@ -791,6 +791,11 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     for documentation in documentations:
         # Extracting data
         title_documentation = documentation.findtext(".//Title/title")
+        title_lead_word = documentation.findtext(".//Title/lead_word")
+        if title_lead_word:
+            document_title = f"{title_lead_word} {title_documentation}"
+        else:
+            document_title = title_documentation
         statement_of_responsibility = documentation.findtext(
             ".//statement_of_responsibility"
         )
