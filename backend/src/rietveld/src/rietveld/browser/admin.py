@@ -833,7 +833,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
 
         # Building the documentation string
         documentation_components = [
-            title_documentation,
+            document_title,
             statement_of_responsibility,
             source_details,
             source_pagination,
