@@ -440,14 +440,26 @@ export default function ArtworkView(props) {
                     </td>
                     <td className="columntwo">
                       <p>
-                        {content.ObjOnDisplay === true
-                          ? `${intl.formatMessage(messages.nowonview)}${` in
-                              ${content.exhibitionTitles[0]}`}`
-                          : intl.formatMessage(messages.notonview)}
+                        {content.ObjOnDisplay === true ? (
+                          <>
+                            {intl.formatMessage(messages.nowonview)}
+                            {content.exhibitionTitles[0] ? ' in ' : ' '}
+                            {content.exhibitionTitles[0] && (
+                              <a
+                                href={`/search?SearchableText=${content.exhibitionTitles[0]}&type=exhibit&Language=${intl.locale}`}
+                              >
+                                {content.exhibitionTitles[0]}
+                              </a>
+                            )}
+                          </>
+                        ) : (
+                          intl.formatMessage(messages.notonview)
+                        )}
                       </p>
                     </td>
                   </tr>
                 }
+
                 {content.title && (
                   <tr>
                     <td className="columnone">
