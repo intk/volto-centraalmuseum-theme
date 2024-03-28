@@ -1863,7 +1863,7 @@ def import_images_on_slideshow(container, images):
     else:
         slideshow_page = results[0].getObject()
         if api.content.get_state(slideshow_page) == "private":
-                content.transition(obj=slideshow_page, transition="publish")
+            content.transition(obj=slideshow_page, transition="publish")
         if not slideshow_page.exclude_from_nav:
             slideshow_page.exclude_from_nav = True
             slideshow_page.reindexObject(idxs=["exclude_from_nav"])
