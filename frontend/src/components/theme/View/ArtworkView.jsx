@@ -441,19 +441,8 @@ export default function ArtworkView(props) {
                     <td className="columntwo">
                       <p>
                         {content.ObjOnDisplay === true
-                          ? `${intl.formatMessage(messages.nowonview)}${
-                              content.displayLocation &&
-                              /expo/i.test(content.displayLocation)
-                                ? ` in ${
-                                    content.displayLocation.match(/expo/i)[0]
-                                  } ${
-                                    content.displayLocation
-                                      .split(/expo/i)[1]
-                                      .trim()
-                                      .split('.')[0]
-                                  }`
-                                : content.displayLocation
-                            }`
+                          ? `${intl.formatMessage(messages.nowonview)}${` in
+                              ${content.exhibitionTitles[0]}`}`
                           : intl.formatMessage(messages.notonview)}
                       </p>
                     </td>
