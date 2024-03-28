@@ -452,7 +452,7 @@ export default function ArtworkView(props) {
                                       .trim()
                                       .split('.')[0]
                                   }`
-                                : ''
+                                : content.displayLocation
                             }`
                           : intl.formatMessage(messages.notonview)}
                       </p>
