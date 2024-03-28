@@ -111,7 +111,7 @@ const AdvancedSearch = () => {
     // Redirect to the search page with the search query as a parameter
     // history.push(`/search?SearchableText=${encodeURIComponent(searchQuery)}`);
     history.push(
-      `${locale}/advancedsearch#query=%5B%7B"i"%3A"portal_type"%2C"o"%3A"paqo.selection.any"%2C"v"%3A%5B"artwork"%5D%7D%2C%7B"i"%3A"SearchableText"%2C"o"%3A"paqo.string.contains"%2C"v"%3A"${encodeURIComponent(
+      `/${locale}/advancedsearch#query=%5B%7B"i"%3A"portal_type"%2C"o"%3A"paqo.selection.any"%2C"v"%3A%5B"artwork"%5D%7D%2C%7B"i"%3A"SearchableText"%2C"o"%3A"paqo.string.contains"%2C"v"%3A"${encodeURIComponent(
         searchQuery,
       )}"%7D%5D&sort_order=ascending`,
     );
