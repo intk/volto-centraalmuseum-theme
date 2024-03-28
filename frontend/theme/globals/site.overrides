@@ -766,7 +766,7 @@ p#photo-credit {
 }
 
 .expired .hero-dates {
-  text-decoration: line-through !important;
+  text-decoration: line-through;
 }
 
 .hero-dates {
@@ -1094,7 +1094,7 @@ p#photo-credit {
     }
 
     .expired .hero-dates {
-      text-decoration: line-through !important;
+      text-decoration: line-through;
     }
   }
   @media only screen and (min-width: 1800px) {
@@ -1143,6 +1143,12 @@ p#photo-credit {
   }
 }
 
+.section-tentoonstellingsarchief, .exhibitions-archive{
+  #page-document #page-listing .expired .hero-dates {
+    text-decoration: none !important;
+  }
+}
+
 body.artwork-listing-page.listing #view #page-document .block.listing.Artwork #page-listing{
   #content-core .listing-items #jaarverslag-title{
     a,h2 {
@@ -1160,7 +1166,6 @@ body.artwork-listing-page.listing #view #page-document .block.listing.Artwork #p
   .item-description {
     font-size: 12px !important;
   }
-
 }
 
 //Artwork listing
@@ -1182,6 +1187,11 @@ body.artwork-listing-page{
       margin-top: 39px !important;
       margin-bottom: 17px !important;
     }
+  }
+  p.exhibition-description {
+    font-size: 17px !important;
+    font-family: 'FranklinBook', Arial, sans-serif;
+    line-height: 30px;
   }
 }
 

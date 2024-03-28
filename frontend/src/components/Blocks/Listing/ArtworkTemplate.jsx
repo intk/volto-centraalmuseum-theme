@@ -106,7 +106,7 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                   }`}
                 >
                   {item['@type'] === 'Event' ||
-                  item['@type'] === 'Exhibition' ? (
+                  item['@type'] === 'exhibition' ? (
                     <div className="listing-dates">
                       <div className={`listing-dates-wrapper`}>
                         <When
@@ -122,7 +122,7 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                     <UniversalLink item={item}>{item.title}</UniversalLink>
                   </h2>
                   {item['@type'] !== 'artwork' && item.description ? (
-                    <p>{item.description}</p>
+                    <p className="exhibition-description">{item.description}</p>
                   ) : null}
                   <div className="description">
                     <p>
