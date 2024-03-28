@@ -1,4 +1,5 @@
 import ArtworkTemplate from './ArtworkTemplate';
+import ArtworkListingTemplate from './ArtworkListingTemplate';
 import DefaultTemplate from './DefaultTemplate';
 import AdvancedSearchTemplate from './AdvancedSearchTemplate';
 // import MasonryTemplate from './MasonryTemplate';
@@ -51,6 +52,12 @@ export default (config) => {
       isDefault: false,
       title: 'Artwork Listing',
       template: ArtworkTemplate,
+    },
+    {
+      id: 'Artwork Listing',
+      isDefault: false,
+      title: 'Artwork Listing Template',
+      template: ArtworkListingTemplate,
     },
     {
       id: 'Default',

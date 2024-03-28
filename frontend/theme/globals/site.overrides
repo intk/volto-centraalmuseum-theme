@@ -1143,6 +1143,26 @@ p#photo-credit {
   }
 }
 
+body.artwork-listing-page.listing #view #page-document .block.listing.Artwork #page-listing{
+  #content-core .listing-items #jaarverslag-title{
+    a,h2 {
+      color: #282931 !important;
+      font-size: 10px !important;
+      font-size: 15px !important;
+      line-height: 22px !important;
+      font-family: 'FranklinBook', Arial, sans-serif !important;
+      margin-bottom: 3px !important;
+    }
+    .description > p {
+      margin-top: 4px !important;
+    }
+  }
+  .item-description {
+    font-size: 12px !important;
+  }
+
+}
+
 //Artwork listing
 body.artwork-listing-page{
   h1.documentFirstHeading {
