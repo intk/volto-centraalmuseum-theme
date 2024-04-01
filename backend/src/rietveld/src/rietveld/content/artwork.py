@@ -13,6 +13,7 @@ from zope.schema import Datetime
 from zope.schema import List
 from zope.schema import Text
 from zope.schema import TextLine
+from zope.schema import Tuple
 
 
 class IArtwork(model.Schema):
