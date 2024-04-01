@@ -25,6 +25,9 @@ import twbutton from './assets/share_button_twitter.svg';
 import { defineMessages, useIntl } from 'react-intl';
 import { SeeMore } from '../../index';
 import { BodyClass } from '@plone/volto/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { isCmsUi } from '@plone/volto/helpers';
+import { Link } from 'react-router-dom';
 // import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 const messages = defineMessages({
@@ -156,6 +159,25 @@ const messages = defineMessages({
   },
 });
 
+function formatExhibitionDate(startDate, endDate) {
+  if (!startDate && !endDate) return '';
+
+  const startYear = startDate?.split('-')[0];
+  const endYear = endDate?.split('-')[0];
+
+  if (startYear && endYear) {
+    if (startYear === endYear) {
+      return startYear; // Same year, just show the start year
+    } else {
+      return `${startYear} - ${endYear}`; // Different years, show range
+    }
+  } else if (startYear) {
+    return startYear; // Only start date is available
+  } else if (endYear) {
+    return endYear; // Only end date is available
+  }
+}
+
 export default function ArtworkView(props) {
   const intl = useIntl();
   const { content } = props;
@@ -208,6 +230,42 @@ export default function ArtworkView(props) {
       setDataExpand(true);
     }
   }, [props.content.items.length]);
+
+  const dispatch = useDispatch();
+  const pathname = useSelector((state) => state.router.location.pathname);
+  const cmsView = isCmsUi(pathname);
+  const id = content.id;
+
+  const [exhibitionURL, setExhibitionUrl] = useState([]);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch(
+          `/++api++/${pathname}/@@artwork_exhibition?language=${
+            intl.locale
+          }&exhibitions_list=${encodeURIComponent(
+            JSON.stringify(content.exhibitions_list),
+          )}`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        if (data.exhibitions_url_list) {
+          setExhibitionUrl(data.exhibitions_url_list);
+        } else {
+          setExhibitionUrl([]);
+        }
+      } catch (error) {
+        setExhibitionUrl([]);
+      }
+    };
+    if (!cmsView) {
+      fetchContent();
+    }
+  }, [dispatch, intl, id, pathname, content, cmsView]);
 
   // Buttons for the image and text
   const Controls = ({ zoomIn, zoomOut, resetTransform }) => (
@@ -796,72 +854,132 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-                {content.exhibitions && content.exhibitions?.length !== 0 && (
-                  <tr>
-                    <td className="columnone" id="intoview">
-                      <p>{intl.formatMessage(messages.exhibitions)}</p>
-                    </td>
-                    <td className="columntwo">
-                      {/* {content.exhibitions.map((exhibition) => (
-                        <p>
-                          <li>{exhibition}</li>
-                        </p>
-                      ))} */}
-                      <ul>
-                        {showAllExhibition
-                          ? content?.exhibitions
-                              ?.filter((el) => el.trim() !== '')
-                              .map((exhibition, index) => (
-                                <li>
-                                  <p key={index}>
-                                    {exhibition}
-                                    {index === 2 &&
-                                      content.exhibitions.length > 3 && (
-                                        <button
-                                          className="expand-data-button"
-                                          onClick={() =>
-                                            setShowAllExhibition(
-                                              !showAllExhibition,
-                                            )
-                                          }
-                                        >
-                                          {`${intl.formatMessage(
-                                            messages.showless,
-                                          )} -`}
-                                        </button>
+
+                {content.exhibitions_list &&
+                  content.exhibitions_list.length !== 0 && (
+                    <tr>
+                      <td className="columnone" id="intoview">
+                        <p>{intl.formatMessage(messages.exhibitions)}</p>
+                      </td>
+                      <td className="columntwo">
+                        <ul>
+                          {showAllExhibition
+                            ? content.exhibitions_list.map(
+                                (exhibition, index) => {
+                                  const formattedDate = formatExhibitionDate(
+                                    exhibition.venue_start,
+                                    exhibition.venue_end,
+                                  );
+                                  const exhibitionUrl =
+                                    exhibitionURL[exhibition.cm_nummer];
+                                  return (
+                                    <li key={index}>
+                                      {exhibitionUrl ? (
+                                        <Link to={exhibitionUrl}>
+                                          {' '}
+                                          {exhibition.name}
+                                          {exhibition.venue_name &&
+                                            `, ${exhibition.venue_name}`}
+                                          {exhibition.venue_place &&
+                                            `, ${exhibition.venue_place}`}
+                                          {formattedDate &&
+                                            `, ${formattedDate}`}
+                                        </Link>
+                                      ) : (
+                                        <p>
+                                          {exhibition.name}
+                                          {exhibition.venue_name &&
+                                            `, ${exhibition.venue_name}`}
+                                          {exhibition.venue_place &&
+                                            `, ${exhibition.venue_place}`}
+                                          {formattedDate &&
+                                            `, ${formattedDate}`}
+                                        </p>
                                       )}
-                                  </p>
-                                </li>
-                              ))
-                          : content.exhibitions
-                              ?.slice(0, 3)
-                              ?.filter((el) => el.trim() !== '')
-                              .map((exhibition, index) => (
-                                <li>
-                                  <p key={index}>
-                                    {exhibition}
-                                    {index === 2 &&
-                                      content.exhibitions.length > 3 && (
-                                        <button
-                                          className="expand-data-button"
-                                          onClick={() =>
-                                            setShowAllExhibition(
-                                              !showAllExhibition,
-                                            )
-                                          }
-                                        >
-                                          {`${intl.formatMessage(
-                                            messages.showmore,
-                                          )} +`}
-                                        </button>
+                                      <p>
+                                        {' '}
+                                        {index === 2 &&
+                                          content.exhibitions_list.length >
+                                            3 && (
+                                            <button
+                                              className="expand-data-button"
+                                              onClick={() =>
+                                                setShowAllExhibition(
+                                                  !showAllExhibition,
+                                                )
+                                              }
+                                            >
+                                              {intl.formatMessage(
+                                                messages.showless,
+                                              )}{' '}
+                                              -
+                                            </button>
+                                          )}
+                                      </p>
+                                    </li>
+                                  );
+                                },
+                              )
+                            : content.exhibitions_list
+                                .slice(0, 3)
+                                .map((exhibition, index) => {
+                                  const formattedDate = formatExhibitionDate(
+                                    exhibition.venue_start,
+                                    exhibition.venue_end,
+                                  );
+                                  const exhibitionUrl =
+                                    exhibitionURL[exhibition.cm_nummer];
+                                  return (
+                                    <li key={index}>
+                                      {exhibitionUrl ? (
+                                        <Link to={exhibitionUrl}>
+                                          {' '}
+                                          {exhibition.name}
+                                          {exhibition.venue_name &&
+                                            `, ${exhibition.venue_name}`}
+                                          {exhibition.venue_place &&
+                                            `, ${exhibition.venue_place}`}
+                                          {formattedDate &&
+                                            `, ${formattedDate}`}
+                                        </Link>
+                                      ) : (
+                                        <p>
+                                          {exhibition.name}
+                                          {exhibition.venue_name &&
+                                            `, ${exhibition.venue_name}`}
+                                          {exhibition.venue_place &&
+                                            `, ${exhibition.venue_place}`}
+                                          {formattedDate &&
+                                            `, ${formattedDate}`}
+                                        </p>
                                       )}
-                                  </p>
-                                </li>
-                              ))}
-                      </ul>
-                    </td>
-                  </tr>
-                )}
+                                      <p>
+                                        {index === 2 &&
+                                          content.exhibitions_list.length >
+                                            3 && (
+                                            <button
+                                              className="expand-data-button"
+                                              onClick={() =>
+                                                setShowAllExhibition(
+                                                  !showAllExhibition,
+                                                )
+                                              }
+                                            >
+                                              {intl.formatMessage(
+                                                messages.showmore,
+                                              )}{' '}
+                                              +
+                                            </button>
+                                          )}
+                                      </p>
+                                    </li>
+                                  );
+                                })}
+                        </ul>
+                      </td>
+                    </tr>
+                  )}
+
                 {content.PIDworkLink && (
                   <tr>
                     <td className="columnone">
