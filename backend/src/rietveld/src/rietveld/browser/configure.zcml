@@ -33,5 +33,11 @@
       permission="zope2.View"
       />
 
-
+  <browser:page
+      name="artwork_exhibition"
+      for="*"
+      class=".artwork.HasExhibitionArtworks"
+      permission="zope2.View"
+      />
+      
 </configure>
