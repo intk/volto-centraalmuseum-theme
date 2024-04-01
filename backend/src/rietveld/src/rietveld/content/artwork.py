@@ -147,6 +147,17 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    exhibitions_list = List(
+        title="Exhibitions List",
+        description="List of exhibitions that artwork appears",
+        value_type=Tuple(
+            title="Exhibition details",
+            value_type=TextLine(),
+        ),
+        required=False,
+        default=[],
+    )
+
     documentation = List(
         title="Documentation",
         value_type=TextLine(),
