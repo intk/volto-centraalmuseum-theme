@@ -861,7 +861,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         venue_end = exhibition.findtext(".//venue/venue.date.end")
         venue_place = exhibition.findtext(".//venue/venue.place")
         cm_nummer = exhibition.findtext(".//nummer_cm")
-        priref = exhibition.findtext(".//priref")
+        exhibition_priref = exhibition.findtext(".//priref")
 
         exhibition_brain.append(
             {
@@ -871,7 +871,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 "venue_end": venue_end,
                 "venue_place": venue_place,
                 "cm_nummer": cm_nummer,
-                "priref": priref,
+                "priref": exhibition_priref,
             }
         )
 
