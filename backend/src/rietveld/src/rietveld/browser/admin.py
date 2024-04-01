@@ -850,6 +850,22 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     #####################
     # Documentation END #
 
+
+    exhibitions_list_xml = tree.findall(".//Exhibition")
+    exhibition_brain = []
+
+    for exhibition in exhibitions_list_xml:
+        name = exhibition.findtext(".//title")
+
+        venue_name = exhibition.findtext(".//venue/venue")
+        venue_start = exhibition.findtext(".//venue/venue.date.start")
+        venue_end = exhibition.findtext(".//venue/venue.date.end")
+        venue_place = exhibition.findtext(".//venue/venue.place")
+        cm_nummer = exhibition.findtext(".//nummer_cm")
+        priref = exhibition.findtext(".//priref")
+
+        exhibition_brain.append({"name": name, "venue_name": venue_name, "venue_start": venue_start, "venue_end": venue_end, "venue_place": venue_place, "cm_nummer": cm_nummer, "priref": priref})
+
     # Exhibitions Start #
     #####################
     exhibitions = []
@@ -1092,6 +1108,9 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     # language dependent
     info["nl"]["description"] = description_element_nl
     info["en"]["description"] = description_element_en
+
+    info["nl"]["exhibitions_list"] = exhibition_brain
+    info["en"]["exhibitions_list"] = exhibition_brain
 
     language_independent_fields = {
         "title": title,
