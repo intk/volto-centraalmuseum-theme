@@ -131,6 +131,12 @@
     <indexed_attr value="associatedPeople" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="cm_nummer"
+  >
+    <indexed_attr value="cm_nummer" />
+  </index>
+
   <index meta_type="BooleanIndex"
          name="hasImage"
   >
