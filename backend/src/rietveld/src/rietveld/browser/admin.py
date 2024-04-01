@@ -850,7 +850,6 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     #####################
     # Documentation END #
 
-
     exhibitions_list_xml = tree.findall(".//Exhibition")
     exhibition_brain = []
 
@@ -864,7 +863,17 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         cm_nummer = exhibition.findtext(".//nummer_cm")
         priref = exhibition.findtext(".//priref")
 
-        exhibition_brain.append({"name": name, "venue_name": venue_name, "venue_start": venue_start, "venue_end": venue_end, "venue_place": venue_place, "cm_nummer": cm_nummer, "priref": priref})
+        exhibition_brain.append(
+            {
+                "name": name,
+                "venue_name": venue_name,
+                "venue_start": venue_start,
+                "venue_end": venue_end,
+                "venue_place": venue_place,
+                "cm_nummer": cm_nummer,
+                "priref": priref,
+            }
+        )
 
     # Exhibitions Start #
     #####################
