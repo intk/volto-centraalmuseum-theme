@@ -633,7 +633,7 @@
     padding-left: 107px !important;
 
     .searchbar{
-      width: 86%;
+      width: 95% !important;
       margin-left: auto;
       margin-right: auto;
       padding-left: 8px;
@@ -647,8 +647,9 @@
           padding-right: 0px;
       }
       @media (min-width: 992px ){
+        width: 86% !important;
         padding-left: 1%;
-        padding-right: 1%;
+        padding-right: 4%;
       }
       @media (min-width: 1200px){
         padding-left: calc(1% - 7px);
@@ -661,7 +662,7 @@
     }
 
     @media screen and (min-width: 768px) {
-      margin-top: 57px;
+      margin-top: 25px !important;
       padding-top: 10px;
       margin-right: 13.5px;
       margin-left: 13.5px;
@@ -729,6 +730,9 @@
     line-height: 1.4;
     letter-spacing: 0.05em;
     font-weight: 400 !important;
+    @media screen and (max-width: 992px){
+      margin: 0px !important;
+    }
     @media screen and (min-width: 992px) {
       width: 20%;
       padding: 14px 28px 10px;
