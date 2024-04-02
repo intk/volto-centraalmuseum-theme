@@ -311,7 +311,7 @@
     opacity: 0.65;
   }
   #loterij-gemente{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 15px;
     .image-wrapper-small{
       height: 100px;
@@ -328,15 +328,28 @@
         width: 200px !important;
       }
     }
+    @media screen and (min-width: 768px) and (max-width: 992px){
+      padding-left: 30px !important;
+      padding-top: 1px;
+    }
     .gemente{
       padding-left: 20px;
       @media screen and (max-width: 768px) {
-        padding-left: 25px;
+        padding-left: 32px;
+      }
+      @media screen and (min-width: 1200px) {
+        padding-top: 9px;
       }
 
       img{
-        width: 138px !important;
+        width: 134px !important;
+        @media screen and (min-width: 1200px){
+          width: 136px !important
+        }
       }
+    }
+    @media screen and (min-width: 1200px){
+      margin-bottom: 12px;
     }
   }
   #ministerie{
@@ -344,22 +357,36 @@
     @media screen and (max-width: 768px){
       padding-left: 16px;
     }
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      padding-left: 38px !important;
+    }
   }
   #socialmedia{
     margin-top: 10px;
-    padding-left: 5px;
+    padding-left: 0px;
     @media screen and (max-width: 768px){
-      margin-top: 20px;
+      padding-left: 15px;
+      margin-top: -4px;
+      margin-bottom: 4px;
       width: 170px;
     }
     @media screen and (min-width: 768px) and (max-width: 992px) {
       margin-top: 40px;
+      padding-left: 15px;
+    }
+    @media screen and (min-width: 992px){
+      .column-grid{
+        margin-bottom: 0px;
+      }
+    }
+    @media screen and (min-width: 1200px){
+      padding-bottom: 2px;
     }
   }
   .column-blocks-wrapper.social_icons{
     max-height: 30px;
     max-width: 45px;
-    margin-top: 20px;
+    margin-top: 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -372,8 +399,18 @@
       opacity: 1;
     }
 
+    @media screen and (min-width: 1200px){
+      max-width: 40.5px;
+      padding-left: 6px;
+      .block.image.align{
+        padding-top: 40px !important;
+      }
+    }
+
     @media screen and (max-width: 768px){
-      // max-width: 30px;
+      max-width: 35px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
 
     .image-wrapper-{
@@ -397,10 +434,21 @@
     }
     img{
       margin-left: 15px !important;
+      @media screen and (max-width:768px){
+        margin-left: 10px;
+      }
+      @media screen and (min-width: 1200px){
+        margin-left: 10px !important;
+      }
     }
   }
   .logo_ministerie{
-    // @media screen and (min-width: 768px){
+    @media screen and (max-width: 768px){
+      padding-top: 20px !important;
+      img.medium{
+        width: 183px !important;
+      }
+    }
     margin-top: -80px;
     // }
     .image-wrapper-medium{
@@ -416,7 +464,12 @@
   }
   #information{
     @media screen and (max-width: 768px) {
-      padding-bottom: 25px;
+      padding-bottom: 0px;
+    }
+    .column-blocks-wrapper{
+      @media screen and(max-width:768px){
+        margin-bottom: 22px !important;
+      }
     }
   }
 }
@@ -499,7 +552,7 @@
 
   @media only screen and (min-width: 769px) and (max-width: 992px) {
     padding-bottom: 7px;
-    padding-left: 7px !important;
+    padding-left: 0px !important;
 
     .column-grid {
       padding-left: 30px;
@@ -528,6 +581,11 @@
   @media screen and (min-width: 1200px){
     img{
       margin-left: 40% !important;
+     }
+  }
+  @media screen and (min-width:1400px){
+    img{
+      padding-left: 38px;
     }
   }
 
@@ -563,7 +621,7 @@
       padding-right: 0px !important;
       padding-left: 0px !important;
       margin-top: 0px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
 
       image-wrapper-small {
         padding-right: 30px;
@@ -614,7 +672,7 @@
   #page-document.Footer #information.columns-view,
   #page-document.Footer #logos.columns-view {
     padding-right: 28px !important;
-    padding-left: 35px !important;
+    padding-left: 30px !important;
 
     .column-blocks-wrapper {
       padding-top: 9px !important;
@@ -725,9 +783,9 @@
   #page-document.Footer > .columns-view {
     // max-width: 100% !important;
     padding-top: 36px !important;
-    padding-right: 15px !important;
-    padding-bottom: 36px !important;
-    padding-left: 22px !important;
+    padding-right: 23px !important;
+    padding-bottom: 34px !important;
+    padding-left: 29px !important;
   }
 
   .section-footer #page-document .columns-view,
@@ -750,6 +808,13 @@
   .section-footer #page-document > .columns-view,
   #page-document.Footer > .columns-view {
     padding-bottom: 43px !important;
+  }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+
+  .section-footer #page-document>.columns-view,
+  #page-document.Footer>.columns-view {
+    padding-bottom: 3px !important;
   }
 }
 
@@ -781,7 +846,7 @@
   #page-document.Footer > .columns-view > .ui.column.grid.column-grid,
   .section-footer #page-document > .columns-view > .ui.column.grid.column-grid {
     // padding-left: 15px;
-    max-width: 750px !important;
+    max-width: 660px !important;
   }
 
   .section-footer #page-document > .columns-view,
@@ -827,8 +892,8 @@
     }
 
     .column-blocks-wrapper {
-      padding-right: 15px;
-      padding-left: 19px;
+      // padding-right: 15px;
+      // padding-left: 19px;
     }
   }
 }
