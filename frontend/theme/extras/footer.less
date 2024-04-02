@@ -316,20 +316,41 @@
     .image-wrapper-small{
       height: 100px;
     }
-    .column-blocks-wrapper{
-      padding-left: 8px;
+    @media screen and (max-width: 768px) {
+      margin-top: 27px;
+      margin-bottom: 12px;
+      padding-left: 14px !important;
+      .column-blocks-wrapper{
+        padding-left: 8px;
+        width: 50% !important;
+      }
+      .image-wrapper-small {
+        width: 200px !important;
+      }
     }
     .gemente{
       padding-left: 2px;
+      @media screen and (max-width: 768px) {
+        padding-left: 25px;
+      }
 
       img{
         width: 138px !important;
       }
     }
   }
+  #ministerie{
+    @media screen and (max-width: 768px){
+      padding-left: 16px;
+    }
+  }
   #socialmedia{
     margin-top: 10px;
     padding-left: 5px;
+    @media screen and (max-width: 768px){
+      margin-top: 20px;
+      width: 170px;
+    }
   }
   .column-blocks-wrapper.social_icons{
     max-height: 30px;
@@ -339,9 +360,16 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    @media screen and (max-width: 768px){
+      max-width: 30px;
+    }
 
     .image-wrapper-{
       height: 22px !important;
+      // margin-bottom: 0px;
+      @media screen and (max-width: 768px){
+        margin-bottom: 0px;
+      }
     }
     img{
       height: 100% !important;
@@ -356,9 +384,9 @@
     }
   }
   .logo_ministerie{
-    @media screen and (min-width: 768px){
-      margin-top: -80px
-    }
+    // @media screen and (min-width: 768px){
+    margin-top: -80px;
+    // }
     .image-wrapper-medium{
       margin-bottom: 0px !important;
     }
@@ -369,6 +397,11 @@
   #information .column-grid{
     margin-top:0px !important;
     margin-bottom: 0px !important;
+  }
+  #information{
+    @media screen and (max-width: 768px) {
+      padding-bottom: 25px;
+    }
   }
 }
 
@@ -429,9 +462,22 @@
     padding-right: 15px !important;
     padding-left: 15px !important;
 
+    .block.align.center{
+      text-align: left;
+      margin-bottom: 0px;
+    }
+    .image-wrapper-{
+      margin-bottom: 0px;
+    }
+
     img {
-      max-width: 351px !important;
+      max-width: 100% !important;
       margin-bottom: 0px !important;
+      margin-right: auto;
+    }
+    .column-blocks-wrapper{
+      padding-left: 7px !important;
+      padding-bottom: 0px;
     }
   }
 
@@ -482,7 +528,7 @@
   #page-document.Footer #information.columns-view,
   #page-document.Footer #logos.columns-view {
     padding-right: 30px !important;
-    padding-left: 30px !important;
+    padding-left: 8px !important;
 
     .column-grid {
       justify-content: space-between;
@@ -498,7 +544,7 @@
       padding-right: 0px !important;
       padding-left: 0px !important;
       margin-top: 0px;
-      margin-bottom: 22px;
+      margin-bottom: 10px;
 
       image-wrapper-small {
         padding-right: 30px;
@@ -661,7 +707,7 @@
     // max-width: 100% !important;
     padding-top: 36px !important;
     padding-right: 15px !important;
-    padding-bottom: 21px !important;
+    padding-bottom: 36px !important;
     padding-left: 22px !important;
   }
 
