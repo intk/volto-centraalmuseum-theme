@@ -8,6 +8,7 @@ import installObjectBlock from './ObjectBlock';
 import installSeethehouseBlock from './SeethehouseBlock';
 import installListingBlock from './Listing';
 import installAdvancedSearch from './AdvancedSearch';
+import installAdvancedSearchExhibition from './AdvancedSearchExhibition';
 import installSearchBlock from './Search';
 import { compose } from 'redux';
 
@@ -24,6 +25,7 @@ const installBlocks = (config) => {
     installListingBlock,
     installAdvancedSearch,
     installSearchBlock,
+    installAdvancedSearchExhibition,
   )(config);
 };
 
