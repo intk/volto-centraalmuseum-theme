@@ -27,6 +27,7 @@ msgid "Ascending"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Base search query
 msgid "Base search query"
 msgstr ""
@@ -77,6 +78,7 @@ msgid "Column Two Title Link"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Controls
 msgid "Controls"
 msgstr ""
@@ -92,36 +94,43 @@ msgid "Descending"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Facet
 msgid "Facet"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Facet widget
 msgid "Facet widget"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Facets
 msgid "Facets"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Field
 msgid "Field"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Headline
 msgid "Headline"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Hidden facets will still filter the results if proper parameters are passed in URLs
 msgid "Hidden facets will still filter the results if proper parameters are passed in URLs"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Hide facet?
 msgid "Hide facet?"
 msgstr ""
@@ -132,6 +141,7 @@ msgid "ImageCaption"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Label
 msgid "Label"
 msgstr ""
@@ -142,6 +152,7 @@ msgid "Menu"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Multiple choices?
 msgid "Multiple choices?"
 msgstr ""
@@ -152,6 +163,7 @@ msgid "No selection"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 #: components/Blocks/Search/TopFiltersLayout
 #: components/theme/Search/NotFoundSearch
 #: components/theme/Search/SearchBar
@@ -165,21 +177,25 @@ msgid "Search Site"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Search block
 msgid "Search block"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Search button label
 msgid "Search button label"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Search input label
 msgid "Search input label"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Section title
 msgid "Section title"
 msgstr ""
@@ -190,21 +206,25 @@ msgid "Seewithyourowneyes"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Show search button?
 msgid "Show search button?"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Show search input?
 msgid "Show search input?"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Show sorting?
 msgid "Show sorting?"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Show total results
 msgid "Show total results"
 msgstr ""
@@ -225,11 +245,13 @@ msgid "Sort"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Sort on options
 msgid "Sort on options"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: The button presence disables the live search, the query is issued when you press ENTER
 msgid "The button presence disables the live search, the query is issued when you press ENTER"
 msgstr ""
@@ -245,6 +267,7 @@ msgid "acquisition"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView
+#: components/Blocks/AdvancedSearchExhibition/AdvancedSearchView
 # defaultMessage: Geavanceerd zoeken...
 msgid "advancedsearchlink"
 msgstr ""
@@ -271,6 +294,7 @@ msgid "authorUrl"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Available views
 msgid "availableViews"
 msgstr ""
@@ -516,11 +540,13 @@ msgid "view"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
+#: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Views
 msgid "views"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView
+#: components/Blocks/AdvancedSearchExhibition/AdvancedSearchView
 # defaultMessage: Zoeken
 msgid "zoeken"
 msgstr ""
@@ -528,4 +554,9 @@ msgstr ""
 #: components/Blocks/AdvancedSearch/AdvancedSearchView
 # defaultMessage: Zoek in de collectie
 msgid "zoekindecollectie"
+msgstr ""
+
+#: components/Blocks/AdvancedSearchExhibition/AdvancedSearchView
+# defaultMessage: Zoek in het tentoonstellingsarchief
+msgid "zoekindetentoonstelling"
 msgstr ""
