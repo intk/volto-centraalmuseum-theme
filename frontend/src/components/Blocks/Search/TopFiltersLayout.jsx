@@ -109,8 +109,18 @@ const TopSideFacets = (props) => {
           {(Object.keys(data).includes('showSearchInput')
             ? data.showSearchInput
             : true) && (
-            <div className="search-wrapper">
+            <div className="searchbar">
               <SearchInput {...props} isLive={isLive} />
+              {data.showSearchButton && (
+                <Button
+                  className="Search-main-button"
+                  primary
+                  onClick={() => onTriggerSearch(searchText)}
+                >
+                  {data.searchButtonLabel ||
+                    intl.formatMessage(messages.searchButtonText)}
+                </Button>
+              )}
             </div>
           )}
 
@@ -194,18 +204,7 @@ const TopSideFacets = (props) => {
           )}
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
-        {data.showSearchButton && (
-          <Button
-            className="Search-main-button"
-            primary
-            onClick={() => onTriggerSearch(searchText)}
-          >
-            {data.searchButtonLabel ||
-              intl.formatMessage(messages.searchButtonText)}
-          </Button>
-        )}
-      </Grid.Row>
+      <Grid.Row></Grid.Row>
       <Grid.Row>
         <SearchDetails
           text={searchedText}

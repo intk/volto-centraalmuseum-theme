@@ -9,6 +9,7 @@ import { withSearch, withQueryString } from './hocs';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import { isEqual, isFunction } from 'lodash';
+import cx from 'classnames';
 import './SearchBlock.less';
 
 const getListingBodyVariation = (data) => {
@@ -82,20 +83,29 @@ const SearchBlockView = (props) => {
   const listingBodyVariation = variations.find(({ id }) => id === selectedView);
 
   return (
-    <div className="block search">
-      <Layout
-        {...props}
-        isEditMode={mode === 'edit'}
-        selectedView={selectedView}
-        setSelectedView={setSelectedView}
-      >
-        <ListingBody
-          variation={{ ...data, ...listingBodyVariation }}
-          data={listingBodyData}
-          path={props.path}
+    <div id="advancedsearchblock" className="block search">
+      <div id="search-page">
+        <Layout
+          {...props}
           isEditMode={mode === 'edit'}
-        />
-      </Layout>
+          selectedView={selectedView}
+          setSelectedView={setSelectedView}
+        >
+          <div
+            className={cx(
+              'block listing',
+              listingBodyVariation.id || 'default',
+            )}
+          >
+            <ListingBody
+              variation={{ ...data, ...listingBodyVariation }}
+              data={listingBodyData}
+              path={props.path}
+              isEditMode={mode === 'edit'}
+            />
+          </div>
+        </Layout>
+      </div>
     </div>
   );
 };
