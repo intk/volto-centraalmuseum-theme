@@ -1,22 +1,21 @@
-
 //   // Newsletter Section
-#Newsletter{
-  background-color: #e1ecf2;
-  padding-bottom: 70px;
+#Newsletter {
   padding-top: 25px;
+  padding-bottom: 70px;
   padding-left: 15px;
+  background-color: #e1ecf2;
 
-  .message{
+  .message {
     width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
     padding-top: 15px;
+    margin-right: auto;
+    margin-left: auto;
     color: blue;
     font-family: 'FranklinBook', Arial, sans-serif;
-    font-size: 1.230em;
+    font-size: 1.23em;
+    letter-spacing: 0em;
     line-height: 36px;
-    letter-spacing: 0.0em;
+    text-align: center;
   }
 
   .Header {
@@ -25,50 +24,54 @@
   }
 
   h3 {
+    margin-top: 45px;
+    color: #282931;
     font-family: 'FranklinDmCp', Arial, sans-serif;
     font-size: 48px;
-    color: #282931;
-    letter-spacing: 0.0em;
-    line-height: 55px;
     font-weight: 400;
-    margin-top: 45px;
-    text-transform: none;
+    letter-spacing: 0em;
+    line-height: 55px;
     text-align: center;
+    text-transform: none;
     // padding-left: 10px;
   }
 
-  #newsletter-form{
-    display:flex;
+  #newsletter-form {
+    display: flex;
     justify-content: center;
-    #formfield-form-widgets-email{
-      border: 1px solid #c3c3c3;
-      background: white;
+
+    #formfield-form-widgets-email {
       width: 28%;
+      border: 1px solid #c3c3c3;
       margin-right: 5px;
-      #form-widgets-email{
-        border: 0px;
+      background: white;
+
+      #form-widgets-email {
         width: 98%;
-        color: #848484;
-        line-height: 22.8px;
         padding: 16.5px 20px 13.5px;
+        border: 0px;
+        color: #848484;
         font-family: 'FranklinBook', Arial, Helvetica;
-        letter-spacing: 0.8px;
         font-size: 16px;
+        letter-spacing: 0.8px;
+        line-height: 22.8px;
       }
     }
-    .formControls{
+
+    .formControls {
       width: 11%;
     }
+
     #form-buttons-subscribe {
-      background-color: white;
-      padding: 15px 15px 12px;
-      color: black;
       width: 100%;
-      font-family: 'FranklinMed', Arial, Helvetica;
-      letter-spacing: 0.05em;
-      font-size: 17px;
-      line-height: 24px;
+      padding: 15px 15px 12px;
       border: 1px solid black;
+      background-color: white;
+      color: black;
+      font-family: 'FranklinMed', Arial, Helvetica;
+      font-size: 17px;
+      letter-spacing: 0.05em;
+      line-height: 24px;
     }
 
     #form-buttons-subscribe:hover {
@@ -79,51 +82,18 @@
   }
   @media only screen and (max-width: 769px) {
     padding-left: 0px;
+
     h3.Header {
-      font-size: 25.2px;
-      margin-bottom: 8px;
       margin-top: 7px;
-    }
-        #newsletter-form {
-          flex-direction: column;
-          align-items: center;
-          padding-left: 30px;
-          padding-right: 30px;
-
-          #formfield-form-widgets-email {
-            width: 100% !important;
-            margin-right: 0px;
-          }
-
-          .formControls {
-            width: 100% !important;
-
-            #form-buttons-subscribe {
-              width: 100% !important;
-            }
-          }
-        }
-  }
-
-  @media only screen and (min-width: 769px) and (max-width: 992px) {
-    padding-right: 0px;
-    padding-left: 0px;
-    padding-top: 15px;
-
-    .Header {
-      margin-top: 30px;
-      margin-bottom: 20px;
-    }
-
-    .message {
-      width: 100% !important;
+      margin-bottom: 8px;
+      font-size: 25.2px;
     }
 
     #newsletter-form {
       flex-direction: column;
       align-items: center;
-      padding-left: 45px;
-      padding-right: 45px;
+      padding-right: 30px;
+      padding-left: 30px;
 
       #formfield-form-widgets-email {
         width: 100% !important;
@@ -140,26 +110,63 @@
     }
   }
 
-  @media only screen and (min-width: 992px){
+  @media only screen and (min-width: 769px) and (max-width: 992px) {
+    padding-top: 15px;
+    padding-right: 0px;
+    padding-left: 0px;
+
+    .Header {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      width: 100% !important;
+    }
+
+    #newsletter-form {
+      flex-direction: column;
+      align-items: center;
+      padding-right: 45px;
+      padding-left: 45px;
+
+      #formfield-form-widgets-email {
+        width: 100% !important;
+        margin-right: 0px;
+      }
+
+      .formControls {
+        width: 100% !important;
+
+        #form-buttons-subscribe {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
     padding-left: 25px;
 
-    #newsletter-form{
+    #newsletter-form {
       padding-right: 5px;
     }
 
-    #newsletter-form #form-buttons-subscribe{
+    #newsletter-form #form-buttons-subscribe {
       line-height: 26px !important;
     }
+
     .Header {
       margin-top: 43px;
       margin-bottom: 19px;
     }
   }
 
-  @media (max-width: 1223px){
-    #formfield-form-widgets-email{
+  @media (max-width: 1223px) {
+    #formfield-form-widgets-email {
       width: 35.2% !important;
     }
+
     .formControls {
       width: 14.2% !important;
     }
@@ -167,17 +174,14 @@
 
   @media only screen and (min-width: 1223px) {
     #formfield-form-widgets-email {
-        width: 28.2% !important;
-      }
+      width: 28.2% !important;
+    }
 
     .formControls {
       width: 11.2% !important;
     }
   }
-
 }
-
-
 
 .view-viewview.hide-top-image {
   #view #page-document.Footer.ui.container {
@@ -188,8 +192,9 @@
 //
 //To hide the title and the description
 //
-#page-document.Footer{
-  .documentFirstHeading, .documentDescription{
+#page-document.Footer {
+  .documentFirstHeading,
+  .documentDescription {
     display: none !important;
   }
 }
@@ -198,51 +203,52 @@
 // General styling for the text elements
 //
 .section-footer #page-document .columns-view,
-#page-document.Footer .columns-view, .section-footer #page-edit>.ui.container>.blocks-form {
+#page-document.Footer .columns-view,
+.section-footer #page-edit > .ui.container > .blocks-form {
   h3 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    color: #282931;
     font-family: 'FranklinMed', Arial, sans-serif;
     font-size: 17px;
-    line-height: 36px;
     letter-spacing: 0.85px;
-    color: #282931;
+    line-height: 36px;
     text-transform: uppercase;
-    margin-bottom: 10px;
-    margin-top: 0px;
 
     a {
-      color: #282931;
       border-bottom: 0px !important;
+      color: #282931;
       font-size: 17px;
     }
 
     a:hover {
-      text-decoration: none !important;
-      color: #494a51 !important;
       border-bottom: 0px !important;
+      color: #494a51 !important;
+      text-decoration: none !important;
     }
   }
 
   p {
+    margin-top: 0px;
+    margin-bottom: 0px;
     color: #494a51;
     font-size: 18px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    line-height: 28px;
     letter-spacing: normal;
+    line-height: 28px;
   }
 
   a {
-    font-size: 18px;
-    text-decoration: none;
     border-bottom: 1px solid black;
     color: @brand-primary-text;
+    font-size: 18px;
     line-height: 28px;
+    text-decoration: none;
   }
 
   a:hover,
   a:focus {
-    color: @brand-primary-red;
     border-bottom: 1px solid @brand-primary-red !important;
+    color: @brand-primary-red;
   }
 
   a.titleLink {
@@ -251,62 +257,61 @@
   }
 
   a.titleLink:hover {
-    color: @brand-primary-text !important;
     border: 0px !important;
+    color: @brand-primary-text !important;
   }
 
-  .block.image.align{
+  .block.image.align {
     z-index: auto !important;
   }
+
   .block.image.align.left img:not(.small) {
     max-width: 430px !important;
   }
 
   .image-wrapper-small {
-    margin-bottom: 0px;
-    width: 100%;
     display: flex;
+    width: 100%;
     flex-direction: column;
+    margin-bottom: 0px;
   }
 
   img.small {
-    max-width: 150px !important;
-    // padding-top: 15px;
-    opacity: 0.65;
-    margin-bottom: 0px !important;
+    width: 170px;
+    max-width: 170px !important;
     padding: 0% !important;
     margin: 0% !important;
-    width: 150px;
+    margin-bottom: 0px !important;
+    // padding-top: 15px;
+    opacity: 0.65;
   }
 
   .block.image.align.left .image-wrapper- {
-    margin: 0px !important;
     padding-top: 0px !important;
+    margin: 0px !important;
   }
 
   img:hover {
-    opacity: 1;
     cursor: pointer;
+    opacity: 1;
   }
 
   #photo-credit {
-    font-size: 15px !important;
     padding-top: 24px;
-    opacity: 0.65;
-    margin-right: 20px;
     margin-top: 0px !important;
+    margin-right: 20px;
+    font-size: 15px !important;
     line-height: 22px !important;
+    opacity: 0.65;
   }
 }
 
-
 #Footer-wrapper {
-  background-color: #f9fafb !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  width: 100% !important;
   position: relative;
   z-index: 0;
+  width: 100% !important;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
   background-color: #fbf9f2 !important;
 }
 
@@ -340,11 +345,11 @@
 // Styling about the specific things about the footer SITE LOGO
 //
 .section-footer #page-document #sitelogo.columns-view,
-#page-document.Footer #sitelogo.columns-view{
+#page-document.Footer #sitelogo.columns-view {
   padding-bottom: 2px;
 
   @media (max-width: 430px) {
-      .image-wrapper- {
+    .image-wrapper- {
       //   height: 100%;
 
       img {
@@ -355,8 +360,8 @@
     }
   }
   @media only screen and (max-width: 769px) {
-    padding-left: 15px !important;
     padding-right: 15px !important;
+    padding-left: 15px !important;
 
     img {
       max-width: 351px !important;
@@ -367,9 +372,11 @@
   @media only screen and (min-width: 769px) and (max-width: 992px) {
     padding-bottom: 7px;
     padding-left: 7px !important;
-    .column-grid{
+
+    .column-grid {
       padding-left: 30px;
     }
+
     img {
       max-width: 330px !important;
     }
@@ -377,6 +384,7 @@
 
   @media only screen and (min-width: 992px) {
     padding-bottom: 10px;
+
     img {
       padding-left: 78px;
     }
@@ -397,39 +405,41 @@
 @media only screen and (max-width: 769px) {
   #page-document.Footer #information.columns-view,
   #page-document.Footer #logos.columns-view {
-    padding-left: 30px !important;
     padding-right: 30px !important;
+    padding-left: 30px !important;
 
-    .column-grid{
+    .column-grid {
       justify-content: space-between;
-      margin-top: 0px;
       padding-top: 0px;
+      margin-top: 0px;
+      margin-right: 0px;
       margin-bottom: 22px;
       margin-left: 0px;
-      margin-right: 0px;
     }
 
     .column-blocks-wrapper {
-      margin-top: 0px;
       padding-top: 0px;
-      margin-bottom: 22px;
-      padding-left: 0px !important;
       padding-right: 0px !important;
+      padding-left: 0px !important;
+      margin-top: 0px;
+      margin-bottom: 22px;
 
-      image-wrapper-small{
-        padding-left: 30px;
+      image-wrapper-small {
         padding-right: 30px;
+        padding-left: 30px;
 
-        img{
-          margin-right: 0px !important;
+        img {
           padding-top: 0px !important;
+          margin-right: 0px !important;
         }
       }
     }
+
     .column-blocks-wrapper.centralmuseumlogo {
-      .image-wrapper-small{
+      .image-wrapper-small {
         padding-left: 26px;
-        #photo-credit{
+
+        #photo-credit {
           padding-top: 24px !important;
         }
       }
@@ -440,8 +450,15 @@
     margin-top: 76px;
   }
 
-  #page-document.Footer .columns-view#logos>.ui.column.grid.column-grid>.column.column-blocks-wrapper,
-  .section-footer #page-document .columns-view#logos>.ui.column.grid.column-grid>.column.column-blocks-wrapper {
+  #page-document.Footer
+    .columns-view#logos
+    > .ui.column.grid.column-grid
+    > .column.column-blocks-wrapper,
+  .section-footer
+    #page-document
+    .columns-view#logos
+    > .ui.column.grid.column-grid
+    > .column.column-blocks-wrapper {
     max-width: 50% !important;
   }
 }
@@ -455,12 +472,13 @@
   .section-footer #page-document #information.columns-view,
   #page-document.Footer #information.columns-view,
   #page-document.Footer #logos.columns-view {
-    padding-left: 12px !important;
     padding-right: 28px !important;
+    padding-left: 12px !important;
+
     .column-blocks-wrapper {
-      padding-left: 40px !important;
       padding-top: 9px !important;
       padding-right: 17px !important;
+      padding-left: 40px !important;
     }
   }
 
@@ -474,14 +492,14 @@
     padding-top: 2px !important;
   }
 }
-@media only screen and (min-width: 992px){
+@media only screen and (min-width: 992px) {
   #page-document.Footer #logos.columns-view,
   .section-footer #page-document #logos.columns-view {
     margin-top: 46px;
   }
 
-  #page-document.Footer #information.columns-view{
-    .column-blocks-wrapper{
+  #page-document.Footer #information.columns-view {
+    .column-blocks-wrapper {
       padding-top: 8px;
     }
   }
@@ -489,86 +507,95 @@
   .section-footer #page-document #information.columns-view,
   #page-document.Footer #information.columns-view,
   #page-document.Footer #logos.columns-view {
-    padding-left: 11.5px !important;
     padding-right: 0px !important;
+    padding-left: 11.5px !important;
 
     .column-blocks-wrapper {
-      padding-left: 7px !important;
       padding-right: 7px !important;
+      padding-left: 7px !important;
     }
   }
 }
 @media only screen and (min-width: 1200px) {
-
   .section-footer #page-document #information.columns-view,
-    #page-document.Footer #information.columns-view,
-    #page-document.Footer #logos.columns-view {
-      padding-left: 15.0px !important;
-      padding-right: 0px !important;
+  #page-document.Footer #information.columns-view,
+  #page-document.Footer #logos.columns-view {
+    padding-right: 0px !important;
+    padding-left: 15px !important;
 
-      .column-blocks-wrapper {
-        padding-left: 0px !important;
-        padding-right: 7px !important;
-      }
+    .column-blocks-wrapper {
+      padding-right: 7px !important;
+      padding-left: 0px !important;
     }
+  }
 }
-
-
-
 
 //
 //Column Block General styling
 //
-.section-footer #page-edit>.ui.container>.blocks-form>.invisible>div>.block-editor-columnsBlock {
+.section-footer
+  #page-edit
+  > .ui.container
+  > .blocks-form
+  > .invisible
+  > div
+  > .block-editor-columnsBlock {
   position: relative;
-  width: 100vw;
   right: 50%;
   left: 50%;
-  margin-right: -50vw !important;
-  margin-left: -50vw !important;
-  padding-left: 10vw !important;
+  width: 100vw;
   padding-right: 10vw !important;
-}
-.section-footer.has-sidebar #page-edit>.ui.container>.blocks-form>.invisible>div>.block-editor-columnsBlock {
-  padding-left: 15vw !important;
-  padding-right: 15vw !important;
-}
-
-#page-document.ui.container.Footer > .columns-view, .section-footer #page-document>.columns-view>.ui.column.grid.column-grid{
-  position: relative;
-  width: 100vw;
-  right: 50%;
-  left: 50%;
+  padding-left: 10vw !important;
   margin-right: -50vw !important;
   margin-left: -50vw !important;
 }
 
+.section-footer.has-sidebar
+  #page-edit
+  > .ui.container
+  > .blocks-form
+  > .invisible
+  > div
+  > .block-editor-columnsBlock {
+  padding-right: 15vw !important;
+  padding-left: 15vw !important;
+}
 
-#page-document.Footer>.columns-view>.ui.column.grid.column-grid,
-.section-footer #page-document>.columns-view>.ui.column.grid.column-grid {
+#page-document.ui.container.Footer > .columns-view,
+.section-footer #page-document > .columns-view > .ui.column.grid.column-grid {
+  position: relative;
+  right: 50%;
+  left: 50%;
+  width: 100vw;
+  margin-right: -50vw !important;
+  margin-left: -50vw !important;
+}
+
+#page-document.Footer > .columns-view > .ui.column.grid.column-grid,
+.section-footer #page-document > .columns-view > .ui.column.grid.column-grid {
   .column-blocks-wrapper {
     padding-top: 7px;
   }
 }
 
 @media (max-width: 769px) {
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     // max-width: 100% !important;
     padding-top: 36px !important;
+    padding-right: 15px !important;
     padding-bottom: 21px !important;
     padding-left: 22px !important;
-    padding-right: 15px !important;
   }
 
   .section-footer #page-document .columns-view,
-  #page-document.Footer>.columns-view,
-  .section-footer #page-edit>.ui.container>.blocks-form {
+  #page-document.Footer > .columns-view,
+  .section-footer #page-edit > .ui.container > .blocks-form {
     padding-top: 0px;
 
     .column-grid {
-      margin-bottom: 0px;
       margin-top: 0px;
+      margin-bottom: 0px;
     }
 
     .column-blocks-wrapper {
@@ -577,132 +604,137 @@
     }
   }
 }
-@media(min-width: 685px) and (max-width: 769px){
-  .section-footer #page-document>.columns-view,
-    #page-document.Footer>.columns-view {
-      padding-bottom: 43px !important;
-    }
+@media (min-width: 685px) and (max-width: 769px) {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
+    padding-bottom: 43px !important;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
-  #page-document.ui.container.Footer{
+  #page-document.ui.container.Footer {
     width: 100% !important;
     max-width: 750px !important;
   }
 
-  #page-document.Footer>.columns-view,
-    .section-footer #page-document>.columns-view {
-      padding-left: 15px !important;
-      padding-right: 5px !important;
-      padding-top: 57px !important;
-      padding-bottom: 76px;
+  #page-document.Footer > .columns-view,
+  .section-footer #page-document > .columns-view {
+    padding-top: 57px !important;
+    padding-right: 5px !important;
+    padding-bottom: 76px;
+    padding-left: 15px !important;
 
-      .column-blocks-wrapper {
-          position: static !important;
-          padding-left: 0% !important;
-          padding-right: 0% !important;
-        }
-        .column-grid {
-          margin-left: 0% !important;
-          margin-right: 0% !important;
-        }
+    .column-blocks-wrapper {
+      position: static !important;
+      padding-right: 0% !important;
+      padding-left: 0% !important;
     }
 
-  #page-document.Footer>.columns-view>.ui.column.grid.column-grid,
-  .section-footer #page-document>.columns-view>.ui.column.grid.column-grid {
+    .column-grid {
+      margin-right: 0% !important;
+      margin-left: 0% !important;
+    }
+  }
+
+  #page-document.Footer > .columns-view > .ui.column.grid.column-grid,
+  .section-footer #page-document > .columns-view > .ui.column.grid.column-grid {
     // padding-left: 15px;
     max-width: 750px !important;
   }
 
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     max-width: 750px !important;
   }
 
-        .section-footer #page-edit>.columnsBlock>.ui.column.grid.column-grid,
-  #page-document.Footer>.columns-view>.ui.column.grid.column-grid,
-  .section-footer #page-document>.columns-view>.ui.column.grid.column-grid {
+  .section-footer #page-edit > .columnsBlock > .ui.column.grid.column-grid,
+  #page-document.Footer > .columns-view > .ui.column.grid.column-grid,
+  .section-footer #page-document > .columns-view > .ui.column.grid.column-grid {
     flex-direction: column !important;
 
     .column-blocks-wrapper {
-      padding-left: 0px;
       align-self: flex-start !important;
-
+      padding-left: 0px;
     }
   }
-  #page-document.Footer>.columns-view>.ui.column.grid.column-grid>.column-blocks-wrapper,
-  .section-footer #page-document>.columns-view>.ui.column.grid.column-grid>.column-blocks-wrapper {
+
+  #page-document.Footer
+    > .columns-view
+    > .ui.column.grid.column-grid
+    > .column-blocks-wrapper,
+  .section-footer
+    #page-document
+    > .columns-view
+    > .ui.column.grid.column-grid
+    > .column-blocks-wrapper {
     width: 100% !important;
   }
 }
 
 @media (min-width: 992px) {
-.section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
-    padding-left: 20px !important;
-    padding-right: 42px !important;
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     padding-top: 57px !important;
+    padding-right: 42px !important;
     padding-bottom: 55px;
-    .column-grid{
-      margin-left: 0px;
+    padding-left: 20px !important;
+
+    .column-grid {
       margin-right: 0px;
+      margin-left: 0px;
     }
+
     .column-blocks-wrapper {
-      padding-left: 19px;
       padding-right: 15px;
+      padding-left: 19px;
     }
   }
-
 }
-  @media (min-width: 1200px) {
-  .section-footer #page-document>.columns-view,
-    #page-document.Footer>.columns-view {
-      padding-left: 42px !important;
-      padding-bottom: 55px;
-      .column-blocks-wrapper {
-          padding-left: 15px;
-        }
+@media (min-width: 1200px) {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
+    padding-bottom: 55px;
+    padding-left: 42px !important;
+
+    .column-blocks-wrapper {
+      padding-left: 15px;
+    }
   }
 }
 @media (min-width: 1263px) {
-
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     padding-bottom: 76px;
   }
 }
 @media (min-width: 1273px) {
-  .section-footer #page-document>.columns-view,
-    #page-document.Footer>.columns-view {
-      padding-bottom: 78px;
-    }
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
+    padding-bottom: 78px;
+  }
 }
 @media (min-width: 1477px) {
-
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     padding-bottom: 92px;
   }
 }
 
 @media (min-width: 1503px) {
-
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     padding-bottom: 63px;
   }
 }
 @media (min-width: 1827px) {
-
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     padding-bottom: 36px;
   }
 }
 @media (min-width: 1827px) {
-
-  .section-footer #page-document>.columns-view,
-  #page-document.Footer>.columns-view {
+  .section-footer #page-document > .columns-view,
+  #page-document.Footer > .columns-view {
     padding-bottom: 35px;
   }
 }
