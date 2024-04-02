@@ -501,14 +501,23 @@ export default function ArtworkView(props) {
                         {content.ObjOnDisplay === true ? (
                           <>
                             {intl.formatMessage(messages.nowonview)}
-                            {content.exhibitionTitles[0] ? ' in ' : ' '}
-                            {content.exhibitionTitles[0] && (
-                              <a
-                                href={`/search?SearchableText=${content.exhibitionTitles[0]}&type=exhibit&Language=${intl.locale}`}
-                              >
-                                {content.exhibitionTitles[0]}
-                              </a>
-                            )}
+                            {content.exhibitions_list[0] ? ' in ' : ' '}
+                            {content.exhibitions_list[0] &&
+                              (exhibitionURL[
+                                content.exhibitions_list[0].cm_nummer
+                              ] ? (
+                                <Link
+                                  to={
+                                    exhibitionURL[
+                                      content.exhibitions_list[0].cm_nummer
+                                    ]
+                                  }
+                                >
+                                  {content.exhibitions_list[0].name}
+                                </Link>
+                              ) : (
+                                content.exhibitions_list[0].name
+                              ))}
                           </>
                         ) : (
                           intl.formatMessage(messages.notonview)
