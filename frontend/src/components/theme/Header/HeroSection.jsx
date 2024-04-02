@@ -56,7 +56,6 @@ function HeroSection(props) {
     content &&
     flattenToAppURL(content['@id'] + '/@@fallback-image/images/great');
 
-  //Source of the error 404
   const getContent = (url, subrequest) => {
     const query = { b_size: 1000000 };
     let qs = Object.keys(query)
