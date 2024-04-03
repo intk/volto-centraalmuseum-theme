@@ -155,4 +155,4 @@ class IExhibition(model.Schema):
         required=False,
     )
 
-    searchable(priref, cm_nummer)
+    searchable("priref", "cm_nummer")
