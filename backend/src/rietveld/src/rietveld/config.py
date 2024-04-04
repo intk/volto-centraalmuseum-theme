@@ -30,7 +30,7 @@ IMPORT_LOCATIONS = {
     "bruna": "nl/collectie/bruna",
     "bruna_en": "en/collection/bruna",
     "rsa": "nl/collectie/rsa",
-    "rsa_en" : "en/collection/rsa",
+    "rsa_en": "en/collection/rsa",
     "exhibit": "nl/tentoonstellingen",
     "exhibit_en": "en/exhibitions",
 }
