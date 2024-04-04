@@ -45,6 +45,10 @@ class IExhibition(model.Schema):
         required=False,
     )
 
+    priref = TextLine(title="Priref", required=False)
+
+    cm_nummer = TextLine(title="cm_nummer", required=False)
+
     start = schema.Datetime(
         title=_("label_event_start", default="Event Starts"),
         description=_(
@@ -94,10 +98,6 @@ class IExhibition(model.Schema):
         default=False,
     )
     directives.widget("open_end", SingleCheckBoxFieldWidget, klass="event_open_end")
-
-    priref = TextLine(title="Priref", required=False)
-
-    cm_nummer = TextLine(title="cm_nummer", required=False)
 
     alternative_text = TextLine(title="Alternative title", required=False)
 
@@ -155,4 +155,8 @@ class IExhibition(model.Schema):
         required=False,
     )
 
-    searchable("priref", "cm_nummer")
+    searchable(
+        "priref",
+        "cm_nummer",
+        "objects",
+    )
