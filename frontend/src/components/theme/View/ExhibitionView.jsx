@@ -16,17 +16,13 @@ import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import { useDispatch, useSelector } from 'react-redux';
 import config from '@plone/volto/registry';
 import { getSchema } from '@plone/volto/actions';
-import {
-  Container as SemanticContainer,
-  Segment,
-  Grid,
-  Label,
-} from 'semantic-ui-react';
+import { Container as SemanticContainer } from 'semantic-ui-react';
 import { isEqual } from 'lodash';
-import { getWidget } from '@plone/volto/helpers/Widget/utils';
+// import { getWidget } from '@plone/volto/helpers/Widget/utils';
 import { defineMessages, useIntl } from 'react-intl';
 import './css/exhibitionview.less';
 import { BodyClass } from '@plone/volto/helpers';
+import { isCmsUi } from '@plone/volto/helpers';
 
 const messages = defineMessages({
   artist: {
@@ -163,17 +159,17 @@ const ExhibitionView = (props) => {
   const { content, location } = props;
   // const path = getBaseUrl(location?.pathname || '');
   const dispatch = useDispatch();
-  const { views } = config.widgets;
-  const contentSchema = useSelector((state) => state.schema?.schema);
-  const fieldsetsToExclude = [
-    'categorization',
-    'dates',
-    'ownership',
-    'settings',
-  ];
-  const fieldsets = contentSchema?.fieldsets.filter(
-    (fs) => !fieldsetsToExclude.includes(fs.id),
-  );
+  // const { views } = config.widgets;
+  // const contentSchema = useSelector((state) => state.schema?.schema);
+  // const fieldsetsToExclude = [
+  //   'categorization',
+  //   'dates',
+  //   'ownership',
+  //   'settings',
+  // ];
+  // const fieldsets = contentSchema?.fieldsets.filter(
+  //   (fs) => !fieldsetsToExclude.includes(fs.id),
+  // );
   // const description = content?.description;
   let hasLeadImage = content?.preview_image;
 
@@ -197,6 +193,37 @@ const ExhibitionView = (props) => {
       dispatch(getSchema(content['@type'], location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [artworkURL, setArtworkUrl] = useState([]);
+  const cmsView = isCmsUi(location.pathname);
+  React.useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch(
+          `/++api++/${location.pathname}/@@exhibition_artwork?language=${
+            intl.locale
+          }&artworks_list=${encodeURIComponent(
+            JSON.stringify(content.objects),
+          )}`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+
+        if (data.artworks_url_list) {
+          setArtworkUrl(data.artworks_url_list);
+        } else {
+          setArtworkUrl([]);
+        }
+      } catch (error) {
+        setArtworkUrl([]);
+      }
+    };
+    if (!cmsView) {
+      fetchContent();
+    }
+  }, [dispatch, intl, location.pathname, content, cmsView]);
 
   const Container =
     config.getComponent({ name: 'Container' }).component || SemanticContainer;
@@ -280,21 +307,22 @@ const ExhibitionView = (props) => {
                   </td>
                 </tr>
               )}
-              {content.exhibition_designer?.length > 0 && (
-                <tr>
-                  <td className="columnone">
-                    <p>{intl.formatMessage(messages.designer)}</p>
-                  </td>
-                  <td className="columntwo">
-                    {content.exhibition_designer.map((designer, index) => (
-                      <p key={index}>
-                        {designer.designer}{' '}
-                        {designer.role && `(${designer.role})`}
-                      </p>
-                    ))}
-                  </td>
-                </tr>
-              )}
+              {content?.exhibition_designer &&
+                content?.exhibition_designer?.length > 0 && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.designer)}</p>
+                    </td>
+                    <td className="columntwo">
+                      {content.exhibition_designer.map((designer, index) => (
+                        <p key={index}>
+                          {designer.designer}{' '}
+                          {designer.role && `(${designer.role})`}
+                        </p>
+                      ))}
+                    </td>
+                  </tr>
+                )}
 
               {content.documentation && content.documentation?.length !== 0 && (
                 <tr>
@@ -364,15 +392,14 @@ const ExhibitionView = (props) => {
                   <td className="columntwo">
                     <ul>
                       {showAllObjects
-                        ? content?.objects?.map(
-                            ({ title, url }, index) =>
+                        ? content?.objects?.map(({ priref, title }, index) => {
+                            const artworkUrl = artworkURL[priref];
+                            return (
                               title && (
                                 <li key={`li-${index}`}>
                                   <p key={index}>
-                                    {url ? (
-                                      <a href={`/${url?.slice(2).join('/')}`}>
-                                        {title}
-                                      </a>
+                                    {artworkUrl ? (
+                                      <a href={artworkUrl}>{title}</a>
                                     ) : (
                                       title
                                     )}
@@ -391,36 +418,38 @@ const ExhibitionView = (props) => {
                                     )}
                                   </p>
                                 </li>
-                              ),
-                          )
+                              )
+                            );
+                          })
                         : content?.objects
                             ?.slice(0, 3)
-                            .map(({ title, url }, index) => (
-                              <li key={`li-${index}`}>
-                                <p key={index}>
-                                  {url ? (
-                                    <a href={`/${url.slice(2).join('/')}`}>
-                                      {title}
-                                    </a>
-                                  ) : (
-                                    title
-                                  )}
-                                  {index === 2 && content.objects.length > 3 && (
-                                    <button
-                                      className="expand-data-button"
-                                      onClick={() =>
-                                        setShowAllObjects(!showAllObjects)
-                                      }
-                                    >
-                                      {/* Toon alles + */}
-                                      {`${intl.formatMessage(
-                                        messages.showmore,
-                                      )} +`}
-                                    </button>
-                                  )}
-                                </p>
-                              </li>
-                            ))}
+                            .map(({ priref, title }, index) => {
+                              const artworkUrl = artworkURL[priref];
+                              return (
+                                <li key={`li-${index}`}>
+                                  <p key={index}>
+                                    {artworkUrl ? (
+                                      <a href={artworkUrl}>{title}</a>
+                                    ) : (
+                                      title
+                                    )}
+                                    {index === 2 && content.objects.length > 3 && (
+                                      <button
+                                        className="expand-data-button"
+                                        onClick={() =>
+                                          setShowAllObjects(!showAllObjects)
+                                        }
+                                      >
+                                        {/* Toon alles + */}
+                                        {`${intl.formatMessage(
+                                          messages.showmore,
+                                        )} +`}
+                                      </button>
+                                    )}
+                                  </p>
+                                </li>
+                              );
+                            })}
                     </ul>
                   </td>
                 </tr>
@@ -478,37 +507,7 @@ const ExhibitionView = (props) => {
         </div>
       </Container>
     ) : (
-      <Container id="page-document">
-        {fieldsets?.map((fs) => {
-          return (
-            <div className="fieldset" key={fs.id}>
-              {fs.id !== 'default' && <h2>{fs.title}</h2>}
-              {fs.fields?.map((f, key) => {
-                let field = {
-                  ...contentSchema?.properties[f],
-                  id: f,
-                  widget: getWidget(f, contentSchema?.properties[f]),
-                };
-                let Widget = views?.getWidget(field);
-                return f !== 'title' ? (
-                  <Grid celled="internally" key={key}>
-                    <Grid.Row>
-                      <Label title={field.id}>{field.title}:</Label>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Segment basic>
-                        <Widget value={content[f]} />
-                      </Segment>
-                    </Grid.Row>
-                  </Grid>
-                ) : (
-                  <Widget key={key} value={content[f]} />
-                );
-              })}
-            </div>
-          );
-        })}
-      </Container>
+      <Container id="page-document"></Container>
     )
   ) : null;
 };

@@ -1319,17 +1319,17 @@ def import_one_exhibition(
 
     brains = catalog.searchResults(priref=priref, portal_type="exhibition")
 
-    for brain in brains:
-        obj = brain.getObject()
+    # for brain in brains:
+    #     obj = brain.getObject()
 
-        if (
-            obj.last_successful_update is not None
-            and obj.last_successful_update >= last_modification_dt
-        ):
-            log_to_file(
-                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-            )
-            return
+    #     if (
+    #         obj.last_successful_update is not None
+    #         and obj.last_successful_update >= last_modification_dt
+    #     ):
+    #         log_to_file(
+    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+    #         )
+    #         return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -1470,39 +1470,8 @@ def import_one_exhibition(
     for artwork in exhibition_objects:
         artwork_priref = artwork.findtext(".//priref")
         artwork_info = extract_and_format_artwork_info(artwork)
-
-        temporary_brains_nl = catalog.searchResults(
-            priref=artwork_priref, portal_type="artwork", path="/Plone/nl"
-        )
-
-        if temporary_brains_nl:
-            for brain_nl in temporary_brains_nl:
-                artwork_obj_nl = brain_nl.getObject()
-                if artwork_obj_nl:
-                    artwork_url_nl = (
-                        artwork_obj_nl.getPhysicalPath()
-                    )  # Use getId() method to get the artwork ID
-                    artwork_brains_nl.append(
-                        {"url": artwork_url_nl, "title": artwork_info}
-                    )
-        else:
-            artwork_brains_nl.append({"url": "", "title": artwork_info})
-
-        temporary_brains_en = catalog.searchResults(
-            priref=artwork_priref, portal_type="artwork", path="/Plone/en"
-        )
-        if temporary_brains_en:
-            for brain_en in temporary_brains_en:
-                artwork_obj_en = brain_en.getObject()
-                if artwork_obj_en:
-                    artwork_url_en = (
-                        artwork_obj_en.getPhysicalPath()
-                    )  # Use getId() method to get the artwork ID
-                    artwork_brains_en.append(
-                        {"url": artwork_url_en, "title": artwork_info}
-                    )
-        else:
-            artwork_brains_en.append({"url": "", "title": artwork_info})
+        artwork_brains_nl.append({"priref": artwork_priref, "title": artwork_info})
+        artwork_brains_en.append({"priref": artwork_priref, "title": artwork_info})
 
     ######################################################
     ###DESIGNER START #######################
@@ -2139,10 +2108,10 @@ def get_creator(xml_record):
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:

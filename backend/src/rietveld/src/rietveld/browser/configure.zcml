@@ -40,4 +40,12 @@
       permission="zope2.View"
       />
 
+
+  <browser:page
+      name="exhibition_artwork"
+      for="*"
+      class=".exhibition.HasArtworks"
+      permission="zope2.View"
+      />
+
 </configure>
