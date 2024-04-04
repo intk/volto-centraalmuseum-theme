@@ -1319,17 +1319,17 @@ def import_one_exhibition(
 
     brains = catalog.searchResults(priref=priref, portal_type="exhibition")
 
-    # for brain in brains:
-    #     obj = brain.getObject()
+    for brain in brains:
+        obj = brain.getObject()
 
-    #     if (
-    #         obj.last_successful_update is not None
-    #         and obj.last_successful_update >= last_modification_dt
-    #     ):
-    #         log_to_file(
-    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-    #         )
-    #         return
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -2108,10 +2108,10 @@ def get_creator(xml_record):
 
 
 def log_to_file(message):
-    # log_file_path = "/app/logs/collectionLogs.txt"
-    log_file_path = (
-        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    )
+    log_file_path = "/app/logs/collectionLogs.txt"
+    # log_file_path = (
+    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    # )
 
     # Attempt to create the file if it doesn't exist
     try:
