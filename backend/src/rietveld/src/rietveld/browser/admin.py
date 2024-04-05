@@ -306,8 +306,9 @@ class AdminFixes(BrowserView):
         log_to_file(f"Finished import '{collection_type}' collection")
         return "Finished import"
 
-    def update_changed_records(self, collection_type="bruna"):
+    def update_changed_records(self):
         modified_after = self.request.form.get("modified_after")
+        collection_type = self.request.form.get("collection_type")
 
         now = datetime.now()
         one_hour_before_now = now - timedelta(hours=1)
