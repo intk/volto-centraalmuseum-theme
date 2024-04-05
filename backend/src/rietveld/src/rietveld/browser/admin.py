@@ -2096,12 +2096,11 @@ def reset_exhibition_fields(obj):
 
 def get_creator(xml_record):
     # Using a more streamlined approach to navigate through the XML structure
-    creator_element = xml_record.find(".//Production/creator/name")
+    creator_element = xml_record.findtext(".//Production/creator/name")
 
     # Checking if the element exists
     if creator_element is not None:
-        creator = creator_element.text
-        creator_split = creator.split(",")
+        creator_split = creator_element.split(",")
 
         if len(creator_split) > 1:
             first_name = creator_split[1].strip()
@@ -2111,7 +2110,7 @@ def get_creator(xml_record):
             return name
         else:
             # Directly returning the creator if there's no comma to split the name
-            return creator
+            return creator_element
     # Returning None if the creator element doesn't exist
     return None
 
