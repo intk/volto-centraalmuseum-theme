@@ -641,10 +641,13 @@ def import_one_record(self, record, collection_type, container, container_en, ca
             author_qualifiers_list.append(qualifier)
 
         name = creator.findtext(".//name")
+        if not name:
+            continue
         # Handle the name order
-        if name is not None and "," in name:
-            last_name, first_name = name.split(", ")
-            name = f"{first_name} {last_name}"
+        if name:
+            name_split = name.split(",")
+            if len(name_split) > 1:
+                name = f"{name_split[1]} {name_split[0]}"
 
         birth_date = creator.findtext(".//birth.date.start", "").split("-")[0]
         if birth_date == "":
@@ -1947,8 +1950,11 @@ def import_authors(self, record):
             )
 
             if creator.find("name") is not None:
-                name_parts = creator.find("name").text.split(",")
-                formatted_name = " ".join(name_parts[::-1])  # This reverses the order
+                formatted_name = creator.find("name").text
+                if formatted_name:
+                    name_parts = formatted_name.split(",")
+                    if len(name_parts) > 1:
+                        formatted_name = f"{name_parts[1]} {name_parts[0]}"
             else:
                 formatted_name = "Unknown"
 
@@ -1977,11 +1983,14 @@ def import_authors(self, record):
 
             # Create or append NL author
             if not found_nl:
-                author_nl = content.create(
-                    container=container, type="author", **author_info
-                )
-                authors.append(author_nl)
-                content.transition(obj=author_nl, transition="publish")
+                try:
+                    author_nl = content.create(
+                        container=container, type="author", **author_info
+                    )
+                    authors.append(author_nl)
+                    content.transition(obj=author_nl, transition="publish")
+                except:
+                    return
             else:
                 for brain in found_nl:
                     author_nl = brain.getObject()
