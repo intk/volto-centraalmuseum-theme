@@ -1,4 +1,5 @@
 body {
+  display: block !important;
   color: #404040;
   font-family: 'FranklinBook', Arial, sans-serif;
   font-size: 16px;
@@ -1519,4 +1520,14 @@ body.artwork-listing-page{
       font-size: 1.5vw;
     }
   }
+}
+
+body.contenttype-lrf #page-document.ui.container,
+body.homepage-view #page-document.ui.container {
+    width: 100dvw !important;
+    max-width: 100% !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
 }
