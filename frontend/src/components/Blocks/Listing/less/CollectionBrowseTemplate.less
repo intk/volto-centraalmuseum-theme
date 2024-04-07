@@ -1,0 +1,181 @@
+#page-document{
+  .collectionbrowseview{
+    background-color: #fbf9f2;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: auto;
+    padding-top: 40px;
+    padding-bottom: 50px;
+
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+
+    @media screen and (min-width: 768px){
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+
+    .slick-arrow{
+      // background-color: blue;
+      z-index: 1;
+    }
+    .slick-prev{
+      left: 5px;
+      height: 35px;
+      width:  58px;
+      &:before{
+        font-family: 'FranklinMed';
+        font-size: 30px !important;
+        color: #282931;
+      }
+      path{
+        color: #4d4d4d !important;
+        font-size: 40px !important;
+      }
+    }
+    .slick-next{
+      right: 5px;
+      height: 35px;
+      width: 58px;
+      &:before {
+        font-family: 'FranklinMed';
+        font-size: 30px !important;
+        color: #282931;
+      }
+      path {
+        color: #4d4d4d !important;
+        font-size: 40px !important;
+      }
+    }
+
+    .plone-item-card-link{
+      .listing-image{
+        width: 100%;
+        display: block;
+        img{
+
+          width: 100%;
+        }
+      }
+    }
+
+    .collection-slider-template{
+
+      .collectie-header{
+        padding-bottom: 0px;
+
+        .collectie_online{
+          font-size: 16px;
+          font-family: 'FranklinMed', Arial, sans-serif;
+          letter-spacing: 0.03em;
+          text-align: center;
+          padding-top: 22px;
+          margin-bottom: 0px;
+        }
+
+        .browse_collection{
+          font-size: 45px !important;
+          margin-left: 40px;
+          margin-right: 40px;
+          line-height: 1.0;
+          text-align: center;
+          margin-top: 1px;
+          margin-bottom: 40px;
+          font-family: 'FranklinDmCp', Arial, sans-serif;
+          color: #282931;
+          letter-spacing: 0.00em;
+          font-weight: 400;
+          text-transform: none;
+        }
+      }
+      .content-wrapper{
+        padding-bottom: 30px;
+
+
+        .slick-slider{
+          position: relative !important;
+        }
+
+        .description p {
+          margin-bottom: 0px;
+          margin-top: 0px;
+          font-size: 17px;
+        }
+
+        .item-description.dash{
+          @media (max-width: 992px){
+            display: none;
+          }
+        }
+
+        .plone-item-title{
+          margin-top: 16px !important;
+          margin-bottom: 0px !important;
+          font-size: 1.350em;
+          line-height: 2px;
+          font-family: 'FranklinMed', Arial, sans-serif !important;
+          color: #494A51;
+          letter-spacing: 0.0em;
+          font-weight: 400;
+          text-transform: none;
+          p{
+            font-family: 'FranklinMed', Arial, sans-serif !important;
+            border-bottom: 0px !important;
+            font-size: 20px;
+            color: #282931;
+            margin-bottom: 1px !important;
+            margin-top: 8px;
+            line-height: 30px;
+          }
+        }
+        .slick-slide{
+          .plone-item-card{
+            height: 135vw;
+            min-height: 130vw;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            @media (min-width: 768px){
+              height: 82vw;
+              min-height: 500px;
+              margin-left: 0px;
+              margin-right: 0px;
+              margin-top: auto;
+              margin-bottom: auto;
+            }
+            @media (min-width: 1400px){
+              height: 45vw;
+            }
+          }
+          .plone-item-card-link{
+            border-bottom: 0px !important;
+            height: 100%;
+          }
+          .content{
+            padding: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .listing-image{
+              width: auto !important;
+              flex: 0 1 auto;
+              max-height: calc(100% - 100px);
+              border-bottom: 0px !important;
+
+              img{
+                max-height: 100%;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
