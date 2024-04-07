@@ -5,7 +5,6 @@ import ArtworkPreview from '../../theme/ArtworkPreview/ArtworkPreview';
 // import { useIntl } from 'react-intl';
 import Slider from 'react-slick';
 import './less/CollectionBrowseTemplate.less';
-import './less/CollectionSliderTemplate.less';
 
 // const messages = defineMessages({
 //   collectie_online: {

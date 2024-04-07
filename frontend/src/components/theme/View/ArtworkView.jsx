@@ -537,10 +537,10 @@ export default function ArtworkView(props) {
                     </td>
                   </tr>
                 )}
-
                 {content.creator &&
                   content.creator.data !== '' &&
-                  content.creator.data !== '<div></div>' && (
+                  content.creator.data !== '<div></div>' &&
+                  content.creator.data !== ' ' && (
                     <tr>
                       <td className="columnone">
                         <p>{intl.formatMessage(messages.artist)}</p>

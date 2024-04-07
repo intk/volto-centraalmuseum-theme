@@ -57,7 +57,7 @@ const SearchWidget = ({ onClose }) => {
 
   return (
     <div ref={ref} className="searchWrapper">
-      <Form action="/search" onSubmit={onSubmit}>
+      <Form action="/search" onSubmit={(e) => onSubmit(e)}>
         <Form.Field className={`searchbox${visible ? ' visible' : ''}`}>
           <Input
             id="input"
@@ -84,7 +84,7 @@ const SearchWidget = ({ onClose }) => {
 
                 setVisible(true);
               } else {
-                onSubmit();
+                onSubmit(e);
               }
             }}
           >

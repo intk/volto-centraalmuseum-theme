@@ -71,9 +71,11 @@ const AdvancedSearchTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                         {item.artwork_author[0]}
                       </span>
                     )}
-                    {item.artwork_author && item.dating && (
-                      <span className="item-description">, </span>
-                    )}
+                    {item.artwork_author &&
+                      item.artwork_author.length > 0 &&
+                      item.dating && (
+                        <span className="item-description">, </span>
+                      )}
                     {item.dating && (
                       <span className="item-description">
                         {String(item.dating.split('(')[0])}
