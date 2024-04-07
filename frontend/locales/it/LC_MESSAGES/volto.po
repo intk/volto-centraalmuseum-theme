@@ -289,9 +289,19 @@ msgstr ""
 msgid "availableViews"
 msgstr ""
 
+#: components/Blocks/Listing/CollectionSliderTemplate
+# defaultMessage: Blader door de collectie
+msgid "browse_collection"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Geassocieerd onderwerp
 msgid "category"
+msgstr ""
+
+#: components/Blocks/Listing/CollectionSliderTemplate
+# defaultMessage: COLLECTIE ONLINE
+msgid "collectie_online"
 msgstr ""
 
 #: components/Blocks/ImageAndTextBlock/templates
@@ -313,6 +323,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Opmerkingen
 msgid "credit"
+msgstr ""
+
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: dagelijks
+msgid "daily"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -385,6 +400,18 @@ msgstr ""
 msgid "materialTechnique"
 msgstr ""
 
+#: components/Blocks/Listing/NutezienSliderTemplate
+#: components/Blocks/Listing/VerwachtSliderTemplate
+#: components/Blocks/Listing/WhatsonTemplate
+# defaultMessage: MEER INFO
+msgid "meerinfo"
+msgstr ""
+
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: maandelijks
+msgid "monthly"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Motief
 msgid "motifs"
@@ -405,6 +432,12 @@ msgstr ""
 #: components/theme/View/ExhibitionView
 # defaultMessage: Nu in het museum
 msgid "nowonview"
+msgstr ""
+
+#: components/Blocks/Listing/NutezienSliderTemplate
+#: components/Blocks/Listing/WhatsonTemplate
+# defaultMessage: Nu te zien
+msgid "nutezien"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -518,10 +551,20 @@ msgstr ""
 msgid "showmore"
 msgstr ""
 
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: Te Doen
+msgid "tedoen"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
 # defaultMessage: Titel
 msgid "title"
+msgstr ""
+
+#: components/Blocks/Listing/VerwachtSliderTemplate
+# defaultMessage: Verwacht
+msgid "verwacht"
 msgstr ""
 
 #: components/theme/ImageAlbum/ImageAlbum
@@ -533,6 +576,11 @@ msgstr ""
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Views
 msgid "views"
+msgstr ""
+
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: wekelijks
+msgid "weekly"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView

@@ -289,10 +289,20 @@ msgstr "View all art works by {authorName} in the Centraal Museum collection. Fo
 msgid "availableViews"
 msgstr ""
 
+#: components/Blocks/Listing/CollectionSliderTemplate
+# defaultMessage: Blader door de collectie
+msgid "browse_collection"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Geassocieerd onderwerp
 msgid "category"
 msgstr "What"
+
+#: components/Blocks/Listing/CollectionSliderTemplate
+# defaultMessage: COLLECTIE ONLINE
+msgid "collectie_online"
+msgstr ""
 
 #: components/Blocks/ImageAndTextBlock/templates
 #: components/Blocks/Quoteblock/templates
@@ -314,6 +324,11 @@ msgstr ""
 # defaultMessage: Opmerkingen
 msgid "credit"
 msgstr "Remarks"
+
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: dagelijks
+msgid "daily"
+msgstr ""
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Datering
@@ -385,6 +400,18 @@ msgstr "Location"
 msgid "materialTechnique"
 msgstr "Material and technique"
 
+#: components/Blocks/Listing/NutezienSliderTemplate
+#: components/Blocks/Listing/VerwachtSliderTemplate
+#: components/Blocks/Listing/WhatsonTemplate
+# defaultMessage: MEER INFO
+msgid "meerinfo"
+msgstr ""
+
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: maandelijks
+msgid "monthly"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Motief
 msgid "motifs"
@@ -406,6 +433,12 @@ msgstr "This object is now not on display in the museum"
 # defaultMessage: Nu in het museum
 msgid "nowonview"
 msgstr "Now in the museum"
+
+#: components/Blocks/Listing/NutezienSliderTemplate
+#: components/Blocks/Listing/WhatsonTemplate
+# defaultMessage: Nu te zien
+msgid "nutezien"
+msgstr ""
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Fysieke beschrijving
@@ -518,11 +551,21 @@ msgstr "Show less"
 msgid "showmore"
 msgstr "Show more"
 
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: Te Doen
+msgid "tedoen"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
 # defaultMessage: Titel
 msgid "title"
 msgstr "Title"
+
+#: components/Blocks/Listing/VerwachtSliderTemplate
+# defaultMessage: Verwacht
+msgid "verwacht"
+msgstr ""
 
 #: components/theme/ImageAlbum/ImageAlbum
 # defaultMessage: BEKIJK
@@ -533,6 +576,11 @@ msgstr "VIEW"
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Views
 msgid "views"
+msgstr ""
+
+#: components/Blocks/Listing/TedoenTemplate
+# defaultMessage: wekelijks
+msgid "weekly"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView
