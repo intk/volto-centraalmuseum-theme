@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-04-07T22:56:36.578Z\n"
+"POT-Creation-Date: 2024-04-07T23:10:48.957Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -327,11 +327,6 @@ msgstr ""
 msgid "credit"
 msgstr ""
 
-#: components/Blocks/Listing/TedoenTemplate
-# defaultMessage: dagelijks
-msgid "daily"
-msgstr ""
-
 #: components/theme/View/ArtworkView
 # defaultMessage: Datering
 msgid "date"
@@ -402,18 +397,6 @@ msgstr ""
 msgid "materialTechnique"
 msgstr ""
 
-#: components/Blocks/Listing/NutezienSliderTemplate
-#: components/Blocks/Listing/VerwachtSliderTemplate
-#: components/Blocks/Listing/WhatsonTemplate
-# defaultMessage: MEER INFO
-msgid "meerinfo"
-msgstr ""
-
-#: components/Blocks/Listing/TedoenTemplate
-# defaultMessage: maandelijks
-msgid "monthly"
-msgstr ""
-
 #: components/theme/View/ArtworkView
 # defaultMessage: Motief
 msgid "motifs"
@@ -434,12 +417,6 @@ msgstr ""
 #: components/theme/View/ExhibitionView
 # defaultMessage: Nu in het museum
 msgid "nowonview"
-msgstr ""
-
-#: components/Blocks/Listing/NutezienSliderTemplate
-#: components/Blocks/Listing/WhatsonTemplate
-# defaultMessage: Nu te zien
-msgid "nutezien"
 msgstr ""
 
 #: components/theme/View/ArtworkView
@@ -553,20 +530,10 @@ msgstr ""
 msgid "showmore"
 msgstr ""
 
-#: components/Blocks/Listing/TedoenTemplate
-# defaultMessage: Te Doen
-msgid "tedoen"
-msgstr ""
-
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
 # defaultMessage: Titel
 msgid "title"
-msgstr ""
-
-#: components/Blocks/Listing/VerwachtSliderTemplate
-# defaultMessage: Verwacht
-msgid "verwacht"
 msgstr ""
 
 #: components/theme/ImageAlbum/ImageAlbum
@@ -578,11 +545,6 @@ msgstr ""
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Views
 msgid "views"
-msgstr ""
-
-#: components/Blocks/Listing/TedoenTemplate
-# defaultMessage: wekelijks
-msgid "weekly"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView
