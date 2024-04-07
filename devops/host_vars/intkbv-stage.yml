@@ -1,0 +1,8 @@
+---
+ssh_port: 22
+hostname: "cm"
+fqdn: "{{ hostname }}.intk.com"
+swap_file_size_mb: "512"
+additional_ports:
+  - 80
+  - 443

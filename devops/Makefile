@@ -26,6 +26,9 @@ ifeq ($(DEPLOY_ENV), dev)
 else ifeq ($(DEPLOY_ENV), prod)
 	CONTEXT=prod
 	CONTEXT_HOST=ssh://$(DEPLOY_USER)@$(DEPLOY_HOST):$(DEPLOY_PORT)
+else ifeq ($(DEPLOY_ENV), stage)
+	CONTEXT=stage
+	CONTEXT_HOST=ssh://$(DEPLOY_USER)@$(DEPLOY_HOST):$(DEPLOY_PORT)
 else
 $(error DEPLOY_ENV is not supported)
 endif
@@ -146,5 +149,6 @@ remove-backend:
 .PHONY: remove-all
 remove-all:
 	${DOCKER_CONTEXT} service rm plone_backend
+	${DOCKER_CONTEXT} service rm plone_backend-sync
 	${DOCKER_CONTEXT} service rm plone_frontend
-	${DOCKER_CONTEXT} service rm plone_traefik
+	${DOCKER_CONTEXT} service rm plone_zeo
