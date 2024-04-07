@@ -13,16 +13,28 @@
     @media screen and (min-width: 768px){
       padding-left: 40px !important;
       padding-right: 40px !important;
+      padding-bottom: 20px;
     }
-
+    @media screen and (min-width: 992px) {
+      padding-top: 69px;
+      padding-bottom: 50px;
+    }
     .slick-arrow{
-      // background-color: blue;
       z-index: 1;
     }
     .slick-prev{
       left: 5px;
       height: 35px;
       width:  58px;
+      top: calc(50% - 8px);
+      @media screen and (min-width: 768px){
+        left: -14px;
+      }
+      @media screen and (min-width: 992px) {
+        // top: calc(50% - 7px);
+      }
+
+
       &:before{
         font-family: 'FranklinMed';
         font-size: 30px !important;
@@ -37,6 +49,13 @@
       right: 5px;
       height: 35px;
       width: 58px;
+      top: calc(50% - 8px);
+      @media screen and (min-width: 768px) {
+        right: -14px;
+      }
+      @media screen and (min-width: 992px) {
+        // top: calc(50% - 7px);
+      }
       &:before {
         font-family: 'FranklinMed';
         font-size: 30px !important;
@@ -64,6 +83,10 @@
       .collectie-header{
         padding-bottom: 0px;
 
+        @media screen and (min-width: 768px){
+          padding-bottom: 1px;
+        }
+
         .collectie_online{
           font-size: 16px;
           font-family: 'FranklinMed', Arial, sans-serif;
@@ -71,14 +94,20 @@
           text-align: center;
           padding-top: 22px;
           margin-bottom: 0px;
+
+          @media screen and (min-width: 922px){
+            line-height: 16px;
+          }
         }
 
         .browse_collection{
+          // width: 100%;
+          display: block;
           font-size: 45px !important;
           margin-left: 40px;
           margin-right: 40px;
           line-height: 1.0;
-          text-align: center;
+          text-align: center !important;
           margin-top: 1px;
           margin-bottom: 40px;
           font-family: 'FranklinDmCp', Arial, sans-serif;
@@ -86,10 +115,45 @@
           letter-spacing: 0.00em;
           font-weight: 400;
           text-transform: none;
+          border-bottom: 0 !important ;
+
+          @media screen and (min-width: 992px){
+            font-size: 80px !important;
+            margin-bottom: 20px;
+          }
+        }
+        .browse_collection:hover {
+          text-decoration: underline;
+          cursor: pointer;
         }
       }
       .content-wrapper{
         padding-bottom: 30px;
+
+        .image-description-wrapper{
+          position: relative;
+        }
+
+        .title-description {
+          @media screen and (min-width: 992px) {
+            width: 100%;
+            display: none;
+            position: absolute !important;
+            padding-bottom: 15px;
+            padding-left: 25px;
+            bottom: 0px;
+            left: 0px;
+          }
+        }
+        .image-description-wrapper:hover {
+          .title-description {
+            display: block;
+            @media screen and (min-width:992px){
+              background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 300%) !important;
+            }
+          }
+        }
+
 
 
         .slick-slider{
@@ -100,6 +164,9 @@
           margin-bottom: 0px;
           margin-top: 0px;
           font-size: 17px;
+          @media screen and (min-width: 992px) {
+            color: white;
+          }
         }
 
         .item-description.dash{
@@ -118,6 +185,9 @@
           letter-spacing: 0.0em;
           font-weight: 400;
           text-transform: none;
+          @media screen and (max-width: 992px){
+            padding-top: 0.1px;
+          }
           p{
             font-family: 'FranklinMed', Arial, sans-serif !important;
             border-bottom: 0px !important;
@@ -126,6 +196,19 @@
             margin-bottom: 1px !important;
             margin-top: 8px;
             line-height: 30px;
+
+            @media screen and (min-width: 992px){
+              color: white;
+              font-size: 23px;
+            }
+          }
+        }
+        .plone-item-title:hover{
+          p{
+            text-decoration: underline !important;
+            text-underline-offset: 5px !important;
+            text-decoration-thickness: 0.3px !important;
+            // text-decoration-color: #white !important;
           }
         }
         .slick-slide{
@@ -148,7 +231,7 @@
               margin-top: auto;
               margin-bottom: auto;
             }
-            @media (min-width: 1400px){
+            @media (min-width: 992px){
               height: 45vw;
             }
           }
@@ -165,8 +248,11 @@
             .listing-image{
               width: auto !important;
               flex: 0 1 auto;
-              max-height: calc(100% - 100px);
               border-bottom: 0px !important;
+
+              @media screen and (max-width: 992px){
+                max-height: calc(100% - 100px);
+              }
 
               img{
                 max-height: 100%;
