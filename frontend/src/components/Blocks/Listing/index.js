@@ -2,6 +2,13 @@ import ArtworkTemplate from './ArtworkTemplate';
 import ArtworkListingTemplate from './ArtworkListingTemplate';
 import DefaultTemplate from './DefaultTemplate';
 import AdvancedSearchTemplate from './AdvancedSearchTemplate';
+import CollectionSliderTemplate from './CollectionSliderTemplate';
+// import NutezienSliderTemplate from './NutezienSliderTemplate';
+// import VerwachtSliderTemplate from './VerwachtSliderTemplate';
+// import WhatsonTemplate from './WhatsonTemplate';
+// import TedoenTemplate from './TedoenTemplate';
+// import HomepageSliderTemplate from './HomepageSliderTemplate';
+import CollectionBrowseTemplate from './CollectionBrowseTemplate';
 // import MasonryTemplate from './MasonryTemplate';
 
 export default (config) => {
@@ -71,6 +78,48 @@ export default (config) => {
       title: 'Advanced Search Listing',
       template: AdvancedSearchTemplate,
     },
+    {
+      id: 'collectionsliderview',
+      isDefault: false,
+      title: 'Collection Slider Wiew',
+      template: CollectionSliderTemplate,
+    },
+    {
+      id: 'collectionbrowseview',
+      isDefault: false,
+      title: 'Collection Browse Wiew',
+      template: CollectionBrowseTemplate,
+    },
+    // {
+    //   id: 'homepagesliderview',
+    //   isDefault: false,
+    //   title: 'Homepage Slider Wiew',
+    //   template: HomepageSliderTemplate,
+    // },
+    // {
+    //   id: 'nuteziensliderview',
+    //   isDefault: false,
+    //   title: 'Nutezien Slider',
+    //   template: NutezienSliderTemplate,
+    // },
+    // {
+    //   id: 'verwachtsliderview',
+    //   isDefault: false,
+    //   title: 'Verwacht Slider',
+    //   template: VerwachtSliderTemplate,
+    // },
+    // {
+    //   id: 'whatsonview',
+    //   isDefault: false,
+    //   title: 'Whatson Listing',
+    //   template: WhatsonTemplate,
+    // },
+    // {
+    //   id: 'tedoenview',
+    //   isDefault: false,
+    //   title: 'Homepage Tedoen Listing',
+    //   template: TedoenTemplate,
+    // },
   ];
 
   return config;
