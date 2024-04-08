@@ -84,7 +84,7 @@ const SearchBar = ({ onClose }) => {
 
                 setVisible(true);
               } else {
-                onSubmit();
+                onSubmit(e);
               }
             }}
           >

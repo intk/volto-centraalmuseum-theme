@@ -105,7 +105,13 @@ class Search extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { currentPage: 1, isClient: false, active: 'relevance' };
+    this.state = {
+      currentPage: 1,
+      isClient: false,
+      active: 'relevance',
+      updatedItems: [],
+    };
+    this.isMountedFlag = false;
   }
 
   /**
@@ -116,7 +122,46 @@ class Search extends Component {
   componentDidMount() {
     this.doSearch();
     this.setState({ isClient: true });
+    this.isMountedFlag = true;
+    this.fetchAllFallbackImages();
   }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.pathname !== this.props.pathname ||
+      prevProps.items !== this.props.items
+    ) {
+      this.fetchAllFallbackImages();
+    }
+  }
+
+  componentWillUnmount() {
+    this.isMountedFlag = false;
+  }
+
+  fetchHasFallbackImage = async (item) => {
+    try {
+      const response = await fetch(
+        `/++api++/${item['@id']}/@@has_fallback_image`,
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return { ...item, hasFallbackImage: data.hasFallbackImage };
+    } catch (error) {
+      return { ...item, hasFallbackImage: false };
+    }
+  };
+
+  fetchAllFallbackImages = async () => {
+    const { items } = this.props;
+    const promises = items.map((item) => this.fetchHasFallbackImage(item));
+    const results = await Promise.all(promises);
+    if (this.isMountedFlag) {
+      this.setState({ updatedItems: results });
+    }
+  };
 
   /**
    * Component will receive props
@@ -293,14 +338,23 @@ class Search extends Component {
               )}
             </header>
             <section id="content-core">
-              {this.props.items.map((item) => (
+              {this.state.updatedItems?.map((item) => (
                 <article className="tileItem" key={item['@id']}>
-                  {item.image_field !== '' ? (
+                  {item.image_field ? (
                     <PreviewImage
                       item={item}
                       size="preview"
                       alt={item.image_caption ? item.image_caption : item.title}
                       className="ui image"
+                    />
+                  ) : item['@type'] === 'exhibition' &&
+                    item.hasFallbackImage === true ? (
+                    <PreviewImage
+                      item={item}
+                      size="large"
+                      alt={item.image_caption ? item.image_caption : item.title}
+                      className="ui image"
+                      isFallback={true}
                     />
                   ) : (
                     <div className="image-placeholder"></div>
