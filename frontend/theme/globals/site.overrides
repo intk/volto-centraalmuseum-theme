@@ -1537,3 +1537,7 @@ body.homepage-view #page-document.ui.container {
     display: none;
   }
 }
+
+#page-edit{
+  max-width: 65vw !important;
+}
