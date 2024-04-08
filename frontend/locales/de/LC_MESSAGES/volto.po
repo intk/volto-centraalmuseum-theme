@@ -410,6 +410,11 @@ msgstr ""
 msgid "materialTechnique"
 msgstr ""
 
+#: components/Blocks/Listing/RecommendedTemplate
+# defaultMessage: More info
+msgid "moreInfo"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Motief
 msgid "motifs"
