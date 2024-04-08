@@ -182,7 +182,7 @@ const CollectionBrowseTemplate = (props) => {
           </p>
           <UniversalLink
             className="browse_collection"
-            href={props?.linkHref[0]?.['@id']}
+            href={props?.linkHref?.[0]?.['@id']}
           >
             {/* {intl.formatMessage(messages.browse_collection)} */}
             {props?.linkTitle}
