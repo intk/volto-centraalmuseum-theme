@@ -1531,3 +1531,9 @@ body.homepage-view #page-document.ui.container {
     margin-right: 0 !important;
     margin-left: 0 !important;
 }
+
+.view-viewview{
+  #toolbar .pusher{
+    display: none;
+  }
+}
