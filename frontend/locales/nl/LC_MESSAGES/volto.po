@@ -417,7 +417,7 @@ msgstr ""
 #: components/Blocks/Listing/RecommendedTemplate
 # defaultMessage: More info
 msgid "moreInfo"
-msgstr ""
+msgstr "Meer info"
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Motief
