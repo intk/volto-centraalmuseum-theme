@@ -19,7 +19,7 @@ const Card = ({ item, index, showDescription = true }) => {
   return (
     <div className="plone-item-card">
       {/* <BodyClass className="masonary-listing-page" /> */}
-      <UniversalLink href={item['@id']} className="plone-item-card-link">
+      <div className="plone-item-card-link">
         <div className="content">
           <div
             className={`image-description-wrapper ${
@@ -88,13 +88,15 @@ const Card = ({ item, index, showDescription = true }) => {
                   )}
                 </p>
               </div> */}
-              <button className="showmore-button">
-                {intl.formatMessage(messages.moreInfo)}
-              </button>
+              <UniversalLink item={item}>
+                <button className="showmore-button">
+                  {intl.formatMessage(messages.moreInfo)}
+                </button>
+              </UniversalLink>
             </div>
           </div>
         </div>
-      </UniversalLink>
+      </div>
     </div>
   );
 };
