@@ -20,18 +20,29 @@
       padding-bottom: 20px;
     }
     @media screen and (min-width: 992px) {
-      padding-top: 69px;
-      padding-bottom: 50px;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      padding-top: 77px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
     }
     .listing-wrapper{
       padding-left: 30px;
       padding-right: 30px;
-      @media screen and (min-width: 1400px) {
-        margin-left: auto;
-        margin-right: auto;
-        padding-right: 1px;
-        max-width: calc(80% + 65px);
+      @media screen and (min-width: 768px){
+        padding-left: 0px;
+        padding-right: 0px;
       }
+      @media screen and (min-width: 992px){
+        padding-left: 8%;
+        padding-right: 8%;
+      }
+      // @media screen and (min-width: 1400px) {
+      //   margin-left: auto;
+      //   margin-right: auto;
+      //   padding-right: 1px;
+      //   max-width: calc(80% + 65px);
+      // }
     }
     .slick-arrow{
       z-index: 1;
@@ -83,6 +94,15 @@
 
     .plone-item-card{
       margin-bottom: 75px;
+
+      @media screen and (min-width: 768px){
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+      @media screen and (min-width: 992px){
+        margin-left: 0px;
+        margin-right: 0px;
+      }
     }
 
     .plone-item-card-link{
@@ -102,7 +122,7 @@
         padding-bottom: 0px;
 
         @media screen and (min-width: 768px){
-          padding-bottom: 1px;
+          // padding-bottom: 1px;
         }
 
         .collectie_online{
@@ -149,11 +169,72 @@
       }
       .content-wrapper{
         padding-bottom: 30px;
+        @media screen and (min-width: 768px){
+          display: flex;
+        }
+        @media screen and (min-width: 992px){
+          flex-direction: column;
+          padding-top: 9px;
+          padding-bottom: 5px;
+        }
+
 
         .image-description-wrapper{
           position: relative;
+
+          @media screen and (min-width: 992px){
+            display: flex;
+          }
+        }
+        .image-description-wrapper > a{
+          border-bottom: 0 !important;
         }
 
+        @media screen and (min-width: 992px){
+          .image-description-wrapper.even{
+            .image-link{
+              width: 55%;
+              padding: 15px;
+              padding-left: 55px;
+            }
+            #jaarverslag-title{
+              width: 45%;
+              padding: 40px;
+              padding-right: 75px;
+              padding-top: 5vw;
+              padding-bottom: 25px;
+            }
+          }
+          .image-description-wrapper.odd {
+            flex-direction: row-reverse;
+            .image-link {
+                width: 55%;
+                padding: 15px;
+                padding-right: 55px;
+              }
+
+              #jaarverslag-title {
+                width: 45%;
+                padding: 40px;
+                padding-left: 55px;
+                padding-top: 3vw;
+                padding-bottom: 25px;
+              }
+          }
+        }
+        @media screen and (min-width: 1300px){
+          .image-description-wrapper.even {
+              #jaarverslag-title {
+                padding-top: 60px;
+              }
+            }
+
+            .image-description-wrapper.odd {
+              #jaarverslag-title {
+                padding-top: 40px;
+              }
+            }
+        }
         .slick-slider{
           position: relative !important;
         }
@@ -174,9 +255,12 @@
         }
         .listing-dates-wrapper{
           padding-top: 21px;
+          @media screen and (min-width:992px) {
+            padding-top: 16px;
+          }
         }
         .hero-dates {
-          color: #494a51;
+          color: #282931;
           font-family: 'FranklinMed', Arial, sans-serif;
           font-size: 15px;
           letter-spacing: 0.05em;
@@ -184,6 +268,10 @@
           padding-bottom: 10px;
           padding-top: 14px;
           text-transform: uppercase;
+          // @media screen and (min-width: 992px){
+          //   padding-bottom: 0px;
+          //   margin-bottom: 0px;
+          // }
         }
         .expired .hero-dates {
           text-decoration: line-through;
@@ -191,27 +279,40 @@
 
         #jaarverslag-title {
           h2 {
+            color: #282931 !important;
             margin-top: 1.5px !important;
             border-bottom: 0px !important;
             margin-bottom: 5px !important;
             font-size: 32px;
             line-height: 40px !important;
             text-decoration: none !important;
-            // text-transform: none !important;
+            @media screen and (min-width:992px) {
+              line-height: 37.5px !important;
+              margin-top: 0px !important;
+            }
           }
 
           h2 a:hover {
-            border-bottom: 2px solid #494a51 !important;
+            // border-bottom: 2px solid #494a51 !important;
+            text-decoration: underline !important;
             color: #282931 !important;
           }
 
           a {
+            color: #282931 !important;
             border-bottom: 0px !important;
             font-family: 'FranklinDmCp', Arial, sans-serif;
             font-size: 32px;
             letter-spacing: 0em !important;
             line-height: 40px !important;
             text-decoration: none !important;
+            @media screen and (min-width:992px){
+              font-size: 4.5vw;
+              line-height: 0.85 !important;
+            }
+            @media screen and (min-width: 1300px){
+              font-size: 60px;
+            }
           }
 
           p {
@@ -222,6 +323,19 @@
             font-size: 18.88px;
             letter-spacing: 0em;
             line-height: 30px !important;
+
+            @media screen and (min-width:768px){
+              font-size: 19.68px;
+            }
+            @media screen and (min-width:992px) {
+              margin-top: 8px;
+            }
+          }
+          .listing-dates{
+            @media screen and (min-width:992px){
+              padding-left: 3px;
+              padding-bottom: 2px;
+            }
           }
         }
 
@@ -259,7 +373,7 @@
         cursor: pointer;
       }
       .showmore-button:hover {
-        background-color: black;
+        background-color: #282931;
         color: white;
       }
 

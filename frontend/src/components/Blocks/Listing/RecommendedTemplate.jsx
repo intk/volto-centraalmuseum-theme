@@ -15,16 +15,20 @@ const messages = defineMessages({
   },
 });
 
-const Card = ({ item, showDescription = true }) => {
+const Card = ({ item, index, showDescription = true }) => {
   const intl = useIntl();
   return (
     <div className="plone-item-card">
       {/* <BodyClass className="masonary-listing-page" /> */}
       <UniversalLink href={item['@id']} className="plone-item-card-link">
         <div className="content">
-          <div className="image-description-wrapper">
+          <div
+            className={`image-description-wrapper ${
+              index % 2 === 1 ? 'odd' : 'even'
+            }`}
+          >
             {item.image_field ? (
-              <UniversalLink item={item}>
+              <UniversalLink item={item} className="image-link">
                 <PreviewImage
                   item={item}
                   size="large"
@@ -34,7 +38,7 @@ const Card = ({ item, showDescription = true }) => {
               </UniversalLink>
             ) : item['@type'] === 'exhibition' &&
               item.hasFallbackImage === true ? (
-              <UniversalLink item={item}>
+              <UniversalLink item={item} className="image-link">
                 <PreviewImage
                   item={item}
                   size="large"
@@ -152,7 +156,7 @@ const RecommendedTemplate = (props) => {
       </div>
       <div className="content-wrapper">
         {updatedItems.map((item, index) => (
-          <Card key={index} item={item} showDescription={true} />
+          <Card key={index} item={item} showDescription={true} index={index} />
         ))}
       </div>
     </div>
