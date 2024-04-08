@@ -4,6 +4,7 @@ import DefaultTemplate from './DefaultTemplate';
 import AdvancedSearchTemplate from './AdvancedSearchTemplate';
 import CollectionSliderTemplate from './CollectionSliderTemplate';
 import CollectionBrowseTemplate from './CollectionBrowseTemplate';
+import RecommendedTemplate from './RecommendedTemplate';
 // import MasonryTemplate from './MasonryTemplate';
 
 export default (config) => {
@@ -84,6 +85,12 @@ export default (config) => {
       isDefault: false,
       title: 'Collection Browse Wiew',
       template: CollectionBrowseTemplate,
+    },
+    {
+      id: 'RecommendedTemplate',
+      isDefault: false,
+      title: 'Exhibition Recommended Wiew',
+      template: RecommendedTemplate,
     },
   ];
 
