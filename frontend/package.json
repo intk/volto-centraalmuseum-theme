@@ -155,6 +155,7 @@
     "@eeacms/volto-columns-block": "^6.0.2",
     "@eeacms/volto-hero-block": "^1.0.0",
     "@eeacms/volto-listing-block": "4.2.1",
+    "@fortawesome/fontawesome-free": "6.5.2",
     "@kitconcept/volto-blocks-grid": "*",
     "@kitconcept/volto-button-block": "*",
     "@kitconcept/volto-carousel-block": "1.1.0",
