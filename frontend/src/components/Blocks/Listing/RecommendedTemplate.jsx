@@ -6,7 +6,6 @@ import { defineMessages, useIntl } from 'react-intl';
 import './less/RecommendedTemplate.less';
 import { PreviewImage } from '@plone/volto/components';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
-import { MaybeWrap } from '@plone/volto/components';
 
 const messages = defineMessages({
   moreInfo: {
