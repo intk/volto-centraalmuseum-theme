@@ -8,10 +8,13 @@ export const VimeoBlockSchema = (props) => {
         title: 'Default',
         fields: [
           'VideoLink',
+          'FirstFrame',
           'button1',
           'button1link',
           'button2',
           'button2link',
+          'button3',
+          'button3link',
         ],
       },
     ],
@@ -20,6 +23,12 @@ export const VimeoBlockSchema = (props) => {
       VideoLink: {
         title: 'Video Link',
         widget: 'url',
+      },
+      FirstFrame: {
+        title: 'First frame of the video',
+        widget: 'object_browser',
+        mode: 'image',
+        allowExternals: true,
       },
       button1: {
         type: 'sting',
@@ -36,6 +45,14 @@ export const VimeoBlockSchema = (props) => {
       button2link: {
         type: 'sting',
         title: 'Button 2 Link',
+      },
+      button3: {
+        type: 'sting',
+        title: 'Button 3',
+      },
+      button3link: {
+        type: 'sting',
+        title: 'Button 3 Link',
       },
     },
     required: [],

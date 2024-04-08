@@ -1,123 +1,211 @@
-
 #vimeo-block {
-position: relative;
-max-height: 720px;
-width: 100vw;
-overflow: hidden;
-right: 50%;
-left: 50%;
-margin-right: -50vw !important;
-margin-left: -50vw !important;
-padding-left: 0px !important;
-padding-right: 0px !important;
-@media (min-width: 1640px){
-  max-height: 1000px;;
-}
+  position: relative;
+  // right: 50%;
+  // left: 50%;
+  // overflow: hidden;
+  width: 100%;
+  max-height: 720px;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  // margin-right: -50vw !important;
+  // margin-left: -50vw !important;
+  background-color: #fbf9f2;
+  @media (min-width: 1640px) {
+    max-height: 1000px;
+  }
 }
 
 #vimeo-block .video-wrapper {
   position: relative;
-  padding-bottom: 56.25%;
   /* 16:9 Aspect Ratio */
-  height: 0;
+  max-height: 720px;
+  height: 54.5vw;
+
+  iframe .player{
+    width:  100% !important;
+    height:  100% !important;
+  }
+
+  .first-frame{
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: auto;
+    img{
+      max-height: 54.5vw;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    height: 55.25vw;
+    .first-frame img{
+      max-height: 55.25vw;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    margin-left: 300px;
+    height: 40vw;
+
+    .first-frame img{
+      max-height: 40vw;
+    }
+
+    iframe {
+      top: 0;
+    }
+  }
 }
+
+#vimeo-block .vimeo-buttons{
+  // height: 54.5vw;
+  padding: 30px;
+  padding-left: 72px;
+  padding-top: 68px;
+  padding-bottom: 40px;
+
+  .arrow-lists{
+    // margin-left: -40px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
+  a{
+    border-bottom: 0 !important;
+    width: auto;
+    font-family: 'FranklinBook', 'Helvetica Neue',Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 1.42857143;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 0.5px;
+    color: #494a51;
+  }
+  a:hover{
+    text-decoration:none !important;
+    border-bottom: 0 !important;
+    color: #494a51;
+  }
+  li{
+    margin-bottom: 5px;
+  }
+  li::marker{
+    font-family: "Font Awesome 6 Free";
+    content: "\f105";
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width:992px){
+    padding-bottom: 35px;
+
+    .arrow-lists{
+      display: flex;
+      padding-left: 38px;
+    }
+    li {
+      margin-right: 31px;
+      padding-left: 9px;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    // width: 100%;
+  }
+}
+
+// #vimeo-block{
+//   @media screen and (min-width: 992px) {
+//     display: flex;
+//   }
+// }
 
 #vimeo-block iframe {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  // top: 0;
+  // left: 0;
   width: 100%;
   height: 100%;
-  @media screen and (min-width:1400px) and (max-width:1500px) {
-    bottom: 5%;
-  }
-  @media screen and (min-width:1500px) and (max-width:1640px) {
-    bottom: 10%;
-  }
-  @media screen and (min-width:1900px) and (max-width:2000px) {
-    bottom: 5%;
-  }
-  @media screen and (min-width:2000px) and (max-width:2200px) {
-    bottom: 10%;
-  }
-  @media screen and (min-width:2200px) and (max-width:2500px) {
-    bottom: 20%;
-  }
-  @media screen and (min-width:2500px) {
-    bottom: 30%;
-  }
+//   @media screen and (min-width: 1400px) and (max-width: 1500px) {
+//     bottom: 5%;
+//   }
+//   @media screen and (min-width: 1500px) and (max-width: 1640px) {
+//     bottom: 10%;
+//   }
+//   @media screen and (min-width: 1900px) and (max-width: 2000px) {
+//     bottom: 5%;
+//   }
+//   @media screen and (min-width: 2000px) and (max-width: 2200px) {
+//     bottom: 10%;
+//   }
+//   @media screen and (min-width: 2200px) and (max-width: 2500px) {
+//     bottom: 20%;
+//   }
+//   @media screen and (min-width: 2500px) {
+//     bottom: 30%;
+//   }
 }
-.view-editview{
-  #vimeo-block iframe{
+
+.view-editview {
+  #vimeo-block iframe {
     z-index: -1;
   }
 }
 
+// #vimeo-block .vimeo-buttons {
+//   color: black;
+//   bottom: 20px;
+//   display: flex;
+//   width: 100%;
+//   justify-content: center;
+//   padding-top: 25px;
+//   padding-bottom: 40px;
+//   @media (min-width: 768px) {
+//     // position: absolute;
+//     padding-top: 0px;
+//     padding-bottom: 0px;
+//   }
 
-#vimeo-block .vimeo-buttons {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  bottom: 20px;
-  padding-top: 25px;
-  padding-bottom: 40px;
-  @media (min-width: 768px){
-    position: absolute;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
+//   a.button {
+//     width: 228px;
+//     padding-top: 17px;
+//     padding-bottom: 12px;
+//     border: 1px solid #282931 !important;
+//     margin: 10px 20px !important;
+//     margin-right: 38px !important;
+//     margin-left: 38px !important;
+//     color: #282931;
+//     font-family: 'FranklinMed', Arial, sans-serif;
+//     font-size: 17px;
+//     letter-spacing: 0.05em;
+//     text-align: center;
+//     text-transform: uppercase;
+//   }
 
+//   a.button:hover {
+//     border: 1px solid #282931 !important;
+//     background-color: #282931 !important;
+//   }
 
-  a.button {
-    padding-top: 17px;
-    padding-bottom: 12px;
-    margin: 10px 20px !important;
-    text-transform: uppercase;
-    color: #282931;
-    width: 228px;
-    font-family: 'FranklinMed', Arial, sans-serif;
-    letter-spacing: 0.05em;
-    font-size: 17px;
-    text-align: center;
-    margin-left: 38px !important;
-    margin-right: 38px !important;
-    border: 1px solid #282931 !important;
-  }
-  a.button:hover {
-    background-color: #282931 !important;
-    border: 1px solid #282931 !important;
-    color: #fff;
-  }
+//   @media (min-width: 768px) {
 
-  @media (min-width: 768px) {
-    a.button {
-      color: #fff;
+//   }
+
+//   @media screen and (max-width: 600px) {
+//     bottom: 270px;
+//     flex-direction: column !important;
+//     align-items: center;
+//   }
+
+//   @media screen and (max-width: 480px) {
+//     bottom: 180px;
+//   }
+// }
+
+.contenttype-lrf{
+  @media screen and (min-width:992){
+    .logo-nav-wrapper{
+      display: none;
     }
-    a.button:hover {
-      background-color: #282931 !important;
-      border: 1px solid #282931 !important;
-    }
-
-    a.button1 {
-      background: transparent;
-      border: 1px solid #fff !important;
-    }
-
-    a.button2 {
-      background: transparent;
-      color: #ffffff;
-      border: 1px solid #ffffff !important;
-    }
-  }
-
-
-  @media screen and (max-width: 600px) {
-    flex-direction: column !important;
-    align-items: center;
-    bottom: 270px;
-  }
-
-  @media screen and (max-width: 480px) {
-    bottom: 180px;
   }
 }

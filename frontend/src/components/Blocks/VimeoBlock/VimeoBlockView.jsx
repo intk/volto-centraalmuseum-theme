@@ -16,19 +16,48 @@ const VimeoBlockView = (props) => {
   return (
     <div id="vimeo-block">
       <div className="video-wrapper">
-        <iframe src={videoLink} frameBorder="0" title="vimeo"></iframe>
+        <div className="first-frame" style={{ width: '100%' }}>
+          <img
+            style={{ width: '100%' }}
+            src={`${props.data.FirstFrame?.[0]?.['@id']}/${props?.data?.FirstFrame?.[0].image_scales?.image?.[0].download}`}
+            alt="homepage-video-screenshot"
+          ></img>
+        </div>
+        <iframe
+          frameborder="0"
+          webkitAllowFullScreen
+          mozallowfullscreen
+          allowfullscreen
+          allow="autoplay; fullscreen;"
+          data-ready="true"
+          src={videoLink}
+          title="video"
+        ></iframe>
       </div>
       <div className="vimeo-buttons">
-        {props.data.button1 && (
-          <a className="button button1" href={props.data.button1link}>
-            {props.data.button1}
-          </a>
-        )}
-        {props.data.button2 && (
-          <a className="button button2" href={props.data.button2link}>
-            {props.data.button2}
-          </a>
-        )}
+        <ul className="arrow-lists">
+          <li>
+            {props.data.button1 && (
+              <a className="link" href={props.data.button1link}>
+                {props.data.button1}
+              </a>
+            )}
+          </li>
+          <li>
+            {props.data.button2 && (
+              <a className="link" href={props.data.button2link}>
+                {props.data.button2}
+              </a>
+            )}
+          </li>
+          <li>
+            {props.data.button3 && (
+              <a className="link" href={props.data.button3link}>
+                {props.data.button3}
+              </a>
+            )}
+          </li>
+        </ul>
       </div>
     </div>
   );
