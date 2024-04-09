@@ -87,6 +87,9 @@
     // margin-left: -40px;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
+    @media screen and (min-width: 992px){
+      padding-left: 24px !important;
+    }
   }
 
   a{
@@ -96,7 +99,7 @@
     font-size: 20px;
     line-height: 1.42857143;
     text-decoration: underline;
-    text-underline-offset: 6.7px;
+    text-underline-offset: 6px;
     text-decoration-thickness: 1px;
     color: #494a51;
     @media screen and (min-width: 992px) and (max-width: 1400px) {
@@ -112,12 +115,18 @@
     margin-bottom: 6px;
     padding-left: 9px;
   }
-  li::marker{
+  
+  li::before{
     font-family: "Font Awesome 6 Free";
     content: "\f105";
     font-weight: 600;
     font-size: 11.3px;
     color: #494a51;
+    padding-right: 9px;
+  }
+
+  li::marker{
+    color: transparent;
   }
 
   @media screen and (min-width: 768px) and (max-width:992px){
@@ -138,7 +147,7 @@
     left: 0px;
     width: 410px;
     padding-left: 20px;
-    padding-bottom: 45px;
+    padding-bottom: 44.5px;
     li {
       margin-bottom: 2px;
       padding-left: 9px;
@@ -146,7 +155,7 @@
   }
   @media screen and (min-width: 1200px) {
     li {
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
   }
 }
