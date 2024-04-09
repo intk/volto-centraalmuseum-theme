@@ -1531,13 +1531,25 @@ body.homepage-view #page-document.ui.container {
     margin-right: 0 !important;
     margin-left: 0 !important;
 }
+body.contenttype-lrf #page-edit .ui.container{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 45px !important;
+    margin-right: 0px !important;
+    padding-right: 100px !important;
+}
+body.contenttype-lrf.has-toolbar #page-edit .ui.container {
+  margin-left: 110px !important;
+}
+body.contenttype-lrf #page-edit .ui.container .invisible>div>div {
+  padding-right: 70px; 
+}
+body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div {
+  padding-right: 450px;
+}
 
 .view-viewview{
   #toolbar .pusher{
     display: none;
   }
-}
-
-#page-edit{
-  max-width: 65vw !important;
 }
