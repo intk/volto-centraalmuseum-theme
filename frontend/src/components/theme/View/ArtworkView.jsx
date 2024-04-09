@@ -501,8 +501,8 @@ export default function ArtworkView(props) {
                         {content.ObjOnDisplay === true ? (
                           <>
                             {intl.formatMessage(messages.nowonview)}
-                            {content.exhibitions_list[0] ? ' in ' : ' '}
-                            {content.exhibitions_list[0] &&
+                            {content.exhibitions_list?.[0] ? ' in ' : ' '}
+                            {content.exhibitions_list?.[0] &&
                               (exhibitionURL[
                                 content.exhibitions_list[0].cm_nummer
                               ] ? (
