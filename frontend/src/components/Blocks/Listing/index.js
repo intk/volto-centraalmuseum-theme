@@ -5,6 +5,7 @@ import AdvancedSearchTemplate from './AdvancedSearchTemplate';
 import CollectionSliderTemplate from './CollectionSliderTemplate';
 import CollectionBrowseTemplate from './CollectionBrowseTemplate';
 import RecommendedTemplate from './RecommendedTemplate';
+import TeaserListingTemplate from './TeaserListingTemplate';
 // import MasonryTemplate from './MasonryTemplate';
 
 export default (config) => {
@@ -91,6 +92,12 @@ export default (config) => {
       isDefault: false,
       title: 'Exhibition Recommended Wiew',
       template: RecommendedTemplate,
+    },
+    {
+      id: 'TeaserListingTemplate',
+      isDefault: false,
+      title: 'Teaser Wiew',
+      template: TeaserListingTemplate,
     },
   ];
 

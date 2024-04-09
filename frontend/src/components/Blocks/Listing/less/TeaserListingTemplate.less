@@ -1,0 +1,426 @@
+#page-document{
+  .TeaserListingTemplate{
+    .buttomline{
+      display: none;
+    }
+
+    // background-color: #fbf9f2;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: auto;
+    padding-top: 40px;
+    padding-bottom: 50px;
+
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+
+    @media screen and (min-width: 768px){
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+      padding-bottom: 20px;
+    }
+    @media screen and (min-width: 992px) {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      padding-top: 77px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+    }
+    .listing-wrapper{
+      padding-left: 30px;
+      padding-right: 30px;
+      @media screen and (min-width: 768px){
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+      @media screen and (min-width: 992px){
+        padding-left: 8%;
+        padding-right: 8%;
+      }
+    }
+    .slick-arrow{
+      z-index: 1;
+    }
+    .slick-prev{
+      left: 5px;
+      height: 35px;
+      width:  58px;
+      top: calc(50% - 8px);
+      @media screen and (min-width: 768px){
+        left: -14px;
+      }
+      @media screen and (min-width: 992px) {
+        // top: calc(50% - 7px);
+      }
+
+
+      &:before{
+        font-family: 'FranklinMed';
+        font-size: 30px !important;
+        color: #282931;
+      }
+      path{
+        color: #4d4d4d !important;
+        font-size: 40px !important;
+      }
+    }
+    .slick-next{
+      right: 5px;
+      height: 35px;
+      width: 58px;
+      top: calc(50% - 8px);
+      @media screen and (min-width: 768px) {
+        right: -14px;
+      }
+      @media screen and (min-width: 992px) {
+        // top: calc(50% - 7px);
+      }
+      &:before {
+        font-family: 'FranklinMed';
+        font-size: 30px !important;
+        color: #282931;
+      }
+      path {
+        color: #4d4d4d !important;
+        font-size: 40px !important;
+      }
+    }
+
+    .plone-item-card{
+      margin-bottom: 75px;
+
+      @media screen and (min-width: 768px){
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+      @media screen and (min-width: 992px){
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+    }
+
+    .plone-item-card-link{
+      .listing-image{
+        width: 100%;
+        display: block;
+        img{
+
+          width: 100%;
+        }
+      }
+    }
+
+    .collection-slider-template{
+
+      .collectie-header{
+        padding-bottom: 0px;
+
+        @media screen and (min-width: 768px){
+          // padding-bottom: 1px;
+        }
+
+        .collectie_online{
+          font-size: 16px;
+          font-family: 'FranklinMed', Arial, sans-serif;
+          letter-spacing: 0.03em;
+          text-align: center;
+          padding-top: 22px;
+          margin-bottom: 0px;
+
+          @media screen and (min-width: 922px){
+            line-height: 16px;
+          }
+        }
+
+        .browse_collection{
+          // width: 100%;
+          display: block;
+          font-size: 45px !important;
+          margin-left: 40px;
+          margin-right: 40px;
+          line-height: 1.0;
+          text-align: center !important;
+          margin-top: 20px;
+          margin-bottom: 33px;
+          font-family: 'FranklinDmCp', Arial, sans-serif;
+          color: #282931;
+          letter-spacing: 0.00em;
+          font-weight: 400;
+          text-transform: none;
+          border-bottom: 0 !important ;
+
+          @media screen and (min-width: 992px){
+            font-size: 80px !important;
+            margin-bottom: 20px;
+          }
+        }
+        .browse_collection:hover {
+          @media screen and (min-width: 992px) {
+            text-decoration: underline;
+          }
+          cursor: pointer;
+        }
+      }
+      .content-wrapper{
+        padding-bottom: 30px;
+        @media screen and (min-width: 768px){
+          display: flex;
+        }
+        @media screen and (min-width: 992px){
+          flex-direction: column;
+          padding-top: 9px;
+          padding-bottom: 5px;
+        }
+
+
+        .image-description-wrapper{
+          position: relative;
+
+          @media screen and (min-width: 992px){
+            display: flex;
+          }
+        }
+        .image-description-wrapper > a{
+          border-bottom: 0 !important;
+        }
+
+        @media screen and (min-width: 992px){
+          .image-description-wrapper.even{
+            .image-link{
+              width: 55%;
+              padding: 15px;
+              padding-left: 55px;
+            }
+            #jaarverslag-title{
+              width: 45%;
+              padding: 40px;
+              padding-right: 75px;
+              padding-top: 5vw;
+              padding-bottom: 25px;
+            }
+          }
+          .image-description-wrapper.odd {
+            flex-direction: row-reverse;
+            .image-link {
+                width: 55%;
+                padding: 15px;
+                padding-right: 55px;
+              }
+
+              #jaarverslag-title {
+                width: 45%;
+                padding: 40px;
+                padding-left: 55px;
+                padding-top: 3vw;
+                padding-bottom: 25px;
+              }
+          }
+        }
+        @media screen and (min-width: 1300px){
+          .image-description-wrapper.even {
+              #jaarverslag-title {
+                padding-top: 60px;
+              }
+            }
+
+            .image-description-wrapper.odd {
+              #jaarverslag-title {
+                padding-top: 40px;
+                padding-left: 56.5px;
+              }
+            }
+        }
+        .slick-slider{
+          position: relative !important;
+        }
+
+        .description p {
+          margin-bottom: 0px;
+          margin-top: 0px;
+          font-size: 17px;
+          @media screen and (min-width: 992px) {
+            // color: white;
+          }
+        }
+
+        .item-description.dash{
+          @media (max-width: 992px){
+            display: none;
+          }
+        }
+        .listing-dates-wrapper{
+          padding-top: 21px;
+          @media screen and (min-width:992px) {
+            padding-top: 16px;
+          }
+        }
+        .hero-dates {
+          color: #282931;
+          font-family: 'FranklinMed', Arial, sans-serif;
+          font-size: 15px;
+          letter-spacing: 0.05em;
+          line-height: 32px;
+          padding-bottom: 10px;
+          padding-top: 14px;
+          text-transform: uppercase;
+          // @media screen and (min-width: 992px){
+          //   padding-bottom: 0px;
+          //   margin-bottom: 0px;
+          // }
+        }
+        .expired .hero-dates {
+          text-decoration: line-through;
+        }
+
+        #jaarverslag-title {
+          cursor: auto;
+          h2 {
+            color: #282931 !important;
+            margin-top: 1.5px !important;
+            border-bottom: 0px !important;
+            margin-bottom: 5px !important;
+            font-size: 32px;
+            line-height: 40px !important;
+            text-decoration: none !important;
+            @media screen and (min-width:992px) {
+              line-height: 37.5px !important;
+              margin-top: 0px !important;
+            }
+            @media screen and (min-width:1300px) {
+              margin-top: -1px !important;
+              margin-bottom: 10px !important;
+            }
+          }
+
+          h2 a:hover {
+            // border-bottom: 2px solid #494a51 !important;
+            text-decoration: underline !important;
+            color: #282931 !important;
+          }
+
+          a {
+            color: #282931 !important;
+            border-bottom: 0px !important;
+            font-family: 'FranklinDmCp', Arial, sans-serif;
+            font-size: 32px;
+            letter-spacing: 0em !important;
+            line-height: 40px !important;
+            text-decoration: none !important;
+            @media screen and (min-width:992px){
+              font-size: 4.5vw;
+              line-height: 0.85 !important;
+            }
+            @media screen and (min-width: 1300px){
+              font-size: 60px;
+            }
+          }
+
+          p {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #494a51;
+            font-family: 'FranklinBook', Arial, sans-serif;
+            font-size: 18.88px;
+            letter-spacing: 0em;
+            line-height: 30px !important;
+
+            @media screen and (min-width:768px){
+              font-size: 19.68px;
+            }
+            @media screen and (min-width:992px) {
+              margin-top: 8px;
+            }
+          }
+          .listing-dates{
+            @media screen and (min-width:992px){
+              padding-left: 3px;
+              padding-bottom: 2px;
+            }
+          }
+        }
+
+      #jaarverslag-title.item-title.private {
+
+        h2,
+        a,
+        p {
+          color: red;
+        }
+      }
+
+      .showmore-button{
+        margin-top: 25px;
+        width: 135px;
+        font-family: 'FranklinMed', Arial, sans-serif;
+        // margin: 0 auto;
+        display: block;
+        padding: 17px;
+        border: 1px solid #282931;
+        border-radius: 0px;
+        text-transform: none;
+        height: auto;
+        color: #282931;
+        letter-spacing: 0.85px;
+        line-height: 24.2857px;
+        font-size: 17px;
+        background-color: #ffffff;
+        letter-spacing: 0.05em;
+        text-shadow: 0px 0px 0px #ffffff;
+        font-weight: 400;
+        // padding-left: 28px;
+        // padding-right: 28px;
+        padding-bottom: 12px;
+        cursor: pointer;
+      }
+      .showmore-button:hover {
+        background-color: #282931;
+        color: white;
+      }
+
+        .plone-item-title{
+          margin-top: 16px !important;
+          margin-bottom: 0px !important;
+          font-size: 1.350em;
+          line-height: 2px;
+          font-family: 'FranklinMed', Arial, sans-serif !important;
+          color: #494A51;
+          letter-spacing: 0.0em;
+          font-weight: 400;
+          text-transform: none;
+          @media screen and (max-width: 992px){
+            padding-top: 0.1px;
+          }
+          p{
+            font-family: 'FranklinMed', Arial, sans-serif !important;
+            border-bottom: 0px !important;
+            font-size: 20px;
+            color: #282931;
+            margin-bottom: 1px !important;
+            margin-top: 8px;
+            line-height: 30px;
+
+            @media screen and (min-width: 992px){
+              // color: white;
+              font-size: 23px;
+            }
+          }
+        }
+        .plone-item-title:hover{
+          p{
+            text-decoration: underline !important;
+            text-underline-offset: 5px !important;
+            text-decoration-thickness: 0.3px !important;
+            // text-decoration-color: #white !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+#page-edit {
+  .collectionbrowseview{
+    // width: 50%;
+  }
+}
