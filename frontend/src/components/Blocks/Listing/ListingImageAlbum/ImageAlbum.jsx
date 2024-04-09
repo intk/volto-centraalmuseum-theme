@@ -6,14 +6,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import './image-album.less';
 import loadable from '@loadable/component';
 import { debounce } from 'lodash'; // Import debounce from lodash
-import { defineMessages, useIntl } from 'react-intl';
-
-const messages = defineMessages({
-  view: {
-    id: 'view',
-    defaultMessage: 'Tes',
-  },
-});
 
 const Slider = loadable(() => import('react-slick'));
 const MAX_THUMBS = 1;
@@ -295,8 +287,6 @@ const ImageAlbum = (props) => {
       setOpen(true);
     }
   };
-
-  const intl = useIntl();
 
   return (
     <div className="listing-image-album">

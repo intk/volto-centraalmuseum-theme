@@ -33,10 +33,8 @@ const Card = ({ item, index, showDescription = true }) => {
       },
     };
   };
-  console.log(item);
 
   const pathname = item['@id'];
-  console.log(pathname);
 
   const slideshowPath = `${pathname}/slideshow`;
   const id = `full-items@${slideshowPath}`;
