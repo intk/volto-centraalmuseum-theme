@@ -42,27 +42,27 @@ const VimeoBlockView = (props) => {
       </UniversalLink>
       <div className="vimeo-buttons">
         <ul className="arrow-lists">
-          <li>
-            {props.data.button1 && (
+          {props.data.button1 && (
+            <li>
               <UniversalLink className="link" href={props.data.button1link}>
                 {props.data.button1}
               </UniversalLink>
-            )}
-          </li>
-          <li>
-            {props.data.button2 && (
+            </li>
+          )}
+          {props.data.button2 && (
+            <li>
               <UniversalLink className="link" href={props.data.button2link}>
                 {props.data.button2}
               </UniversalLink>
-            )}
-          </li>
-          <li>
-            {props.data.button3 && (
+            </li>
+          )}
+          {props.data.button3 && (
+            <li>
               <UniversalLink className="link" href={props.data.button3link}>
                 {props.data.button3}
               </UniversalLink>
-            )}
-          </li>
+            </li>
+          )}
         </ul>
       </div>
     </div>
