@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { injectIntl } from 'react-intl';
 import './css/vimeoblock.less';
+import CMLogo from './logo-vimeo.svg';
+// import { Link } from 'react-router-dom';
+import { UniversalLink } from '@plone/volto/components';
 
 const VimeoBlockView = (props) => {
   const [videoLink, setVideoLink] = useState('');
@@ -34,27 +37,30 @@ const VimeoBlockView = (props) => {
           title="video"
         ></iframe>
       </div>
+      <UniversalLink className="logo-link" href="/">
+        <img className="logo" src={CMLogo} alt="Centraal Museum logo" />
+      </UniversalLink>
       <div className="vimeo-buttons">
         <ul className="arrow-lists">
           <li>
             {props.data.button1 && (
-              <a className="link" href={props.data.button1link}>
+              <UniversalLink className="link" href={props.data.button1link}>
                 {props.data.button1}
-              </a>
+              </UniversalLink>
             )}
           </li>
           <li>
             {props.data.button2 && (
-              <a className="link" href={props.data.button2link}>
+              <UniversalLink className="link" href={props.data.button2link}>
                 {props.data.button2}
-              </a>
+              </UniversalLink>
             )}
           </li>
           <li>
             {props.data.button3 && (
-              <a className="link" href={props.data.button3link}>
+              <UniversalLink className="link" href={props.data.button3link}>
                 {props.data.button3}
-              </a>
+              </UniversalLink>
             )}
           </li>
         </ul>
