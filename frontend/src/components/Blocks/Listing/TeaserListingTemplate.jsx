@@ -99,7 +99,7 @@ const Card = ({ item, index, showDescription = true }) => {
                   className="ui image"
                 />
               </UniversalLink>
-            ) : item['@type'] === 'exhibition' &&
+            ) : (item['@type'] === 'exhibition' || item['@type'] === 'Event') &&
               item.hasFallbackImage === true ? (
               <div className="image-link">
                 {albumItems.length > 1 && (

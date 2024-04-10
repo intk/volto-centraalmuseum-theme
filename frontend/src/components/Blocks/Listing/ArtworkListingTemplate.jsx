@@ -91,7 +91,8 @@ const ArtworkListingTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                           className="ui image"
                         />
                       </UniversalLink>
-                    ) : item['@type'] === 'exhibition' &&
+                    ) : (item['@type'] === 'exhibition' ||
+                        item['@type'] === 'Event') &&
                       item.hasFallbackImage === true ? (
                       <UniversalLink item={item}>
                         <PreviewImage
