@@ -443,6 +443,12 @@ msgstr ""
 msgid "objects"
 msgstr ""
 
+#: components/theme/Header/HeroSection
+#: components/theme/View/ExhibitionView
+# defaultMessage: VASTE COLLECTIE
+msgid "permanent"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Fysieke beschrijving
 msgid "physicaldescription"
