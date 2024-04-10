@@ -11,11 +11,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 import { isCmsUi } from '@plone/volto/helpers';
 
-const getDateRangeDescription = (lang, start, end) => {
+const messages = defineMessages({
+  permanent: {
+    id: 'permanent',
+    defaultMessage: 'VASTE COLLECTIE',
+  },
+});
+
+const getDateRangeDescription = (intl, start, end) => {
   const format = (date, options) =>
-    new Intl.DateTimeFormat(lang, options).format(date);
+    new Intl.DateTimeFormat(intl.locale, options).format(date);
   const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' };
   const dayOptions = { day: 'numeric' };
+  if (end?.getFullYear() === 2100) {
+    return intl.formatMessage(messages.permanent);
+  }
 
   if (
     !end ||
@@ -194,16 +204,21 @@ function HeroSection(props) {
           </div>
         </div>
       </div>
-      {title && !image_url && (
+      {/* {title && albumItems?.length === 0 && (
         <Container>
           <h1 className="documentFirstHeading">{title}</h1>
           {startDate && isEvent && (
             <p className="hero-dates">
-              {getDateRangeDescription(intl.locale, startDate, endDate)}
+              <When
+                start={content.start}
+                end={content.end}
+                whole_day={content.whole_day}
+                open_end={content.open_end}
+              />
             </p>
           )}
         </Container>
-      )}
+      )} */}
     </div>
   );
 }

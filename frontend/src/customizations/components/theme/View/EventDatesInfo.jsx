@@ -5,13 +5,23 @@ import { List } from 'semantic-ui-react';
 import { toBackendLang } from '@plone/volto/helpers';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import { useSelector } from 'react-redux';
-import { useIntl } from 'react-intl';
+import { useIntl, defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  permanent: {
+    id: 'permanent',
+    defaultMessage: 'VASTE COLLECTIE',
+  },
+});
 
 const getDateRangeDescription = (lang, start, end) => {
   const format = (date, options) =>
-    new Intl.DateTimeFormat(lang, options).format(date);
+    new Intl.DateTimeFormat(lang.locale, options).format(date);
   const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' };
   // const dayOptions = { day: 'numeric' };
+  if (end?.getFullYear() === 2100) {
+    return lang.formatMessage(messages.permanent);
+  }
 
   if (
     !end ||
@@ -110,12 +120,12 @@ const When_ = ({ start, end, whole_day, open_end, moment: momentlib }) => {
     >
       {start && !open_end ? (
         <span className="hero-dates">
-          {getDateRangeDescription(intl.locale, startDate, endDate)}
+          {getDateRangeDescription(intl, startDate, endDate)}
         </span>
       ) : (
         start && (
           <span className="hero-dates">
-            {getDateRangeDescription(intl.locale, startDate)}
+            {getDateRangeDescription(intl, startDate)}
           </span>
         )
       )}

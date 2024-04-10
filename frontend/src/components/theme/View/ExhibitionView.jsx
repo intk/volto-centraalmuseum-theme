@@ -100,6 +100,10 @@ const messages = defineMessages({
     id: 'showless',
     defaultMessage: 'Toon minder',
   },
+  permanent: {
+    id: 'permanent',
+    defaultMessage: 'VASTE COLLECTIE',
+  },
 });
 
 const translations = {
@@ -126,9 +130,13 @@ function filterBlocks(content, types) {
 
 const getDateRangeDescription = (lang, start, end) => {
   const format = (date, options) =>
-    new Intl.DateTimeFormat(lang, options).format(date);
+    new Intl.DateTimeFormat(lang.locale, options).format(date);
   const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' };
   const dayOptions = { day: 'numeric' };
+
+  if (end?.getFullYear() === 2100) {
+    return lang.formatMessage(messages.permanent);
+  }
 
   if (
     !end ||
@@ -272,7 +280,7 @@ const ExhibitionView = (props) => {
           <>
             {startDate && (
               <div className="block-date hero-dates">
-                {getDateRangeDescription(intl.locale, startDate, endDate)}
+                {getDateRangeDescription(intl, startDate, endDate)}
               </div>
             )}
             <RenderBlocks {...props} content={filteredContent} />
@@ -281,7 +289,7 @@ const ExhibitionView = (props) => {
           <>
             {startDate && (
               <div className="block-date hero-dates">
-                {getDateRangeDescription(intl.locale, startDate, endDate)}
+                {getDateRangeDescription(intl, startDate, endDate)}
               </div>
             )}
             <h1 className="documentFirstHeading">{content.title}</h1>
