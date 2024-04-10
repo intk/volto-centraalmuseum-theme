@@ -7,7 +7,7 @@
 
   .message {
     width: 40%;
-    padding-top: 15px;
+    padding-top: 5px;
     margin-right: auto;
     margin-left: auto;
     color: blue;
@@ -15,7 +15,55 @@
     font-size: 1.23em;
     letter-spacing: 0em;
     line-height: 36px;
-    text-align: center;
+    text-align: left;
+
+    @media screen and (max-width: 992px){
+      width: 90%;
+      margin-right: 40px;
+      margin-left: 60px;
+      padding-right: 20px;
+      font-size: 1.180em;
+    }
+    @media screen and (max-width: 768px) {
+      margin-left: 30px;
+    }
+
+    @media screen and (min-width: 992px) and (max-width: 1220px) {
+      width: 50%;
+    }
+  }
+  .privacy-statement{
+    width: 40%;
+    padding-top: 3px;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media screen and (max-width: 992px){
+      width: 100%;
+      margin-right: unset;
+      margin-left: 60px;
+    }
+
+    @media screen and (max-width: 768px){
+      margin-left: 30px;
+    }
+
+    @media screen and (min-width: 992px) and (max-width: 1220px) {
+      width: 50%;
+    }
+
+    a {
+      font-family: 'FranklinBook', Arial, sans-serif;
+      font-size: 16px;
+      letter-spacing: 0em;
+      line-height: 36px;
+      text-align: left;
+      border-bottom: 1px solid #494a51;
+      color: #494a51;
+      &:hover{
+        border-bottom: 0px;
+      }
+    }
   }
 
   .Header {
@@ -47,7 +95,7 @@
       background: white;
 
       #form-widgets-email {
-        width: 98%;
+        width: 100%;
         padding: 16.5px 20px 13.5px;
         border: 0px;
         color: #848484;

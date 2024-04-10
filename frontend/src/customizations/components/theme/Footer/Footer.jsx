@@ -26,20 +26,20 @@ const messages = defineMessages({
   },
   newsletter: {
     id: 'Newsletter',
-    defaultMessage: 'Nieuws over Rietveld in je mail',
+    defaultMessage: 'Nieuwsbrief ontvangen?',
   },
   approve: {
     id: 'Approve',
     defaultMessage:
-      'Thank you for registering. You will receive an email confirming your registration.',
+      'Bedankt voor je aanmelding. Je ontvangt een e-mail die je inschrijving bevestigt',
   },
   unable: {
     id: 'Unable',
-    defaultMessage: 'Unable to subscribe to newsletter.',
+    defaultMessage: 'Aanmelden op nieuwsbrief mislukt.',
   },
   error: {
     id: 'Error',
-    defaultMessage: 'An error occurred. Please try again.',
+    defaultMessage: 'Aanmelden op nieuwsbrief mislukt.',
   },
 });
 
@@ -79,7 +79,7 @@ const MailChimpForm = ({ status, message, onValidated }) => {
             id="form-widgets-email"
             ref={(node) => (email = node)}
             type="email"
-            placeholder="Je emailadres"
+            placeholder="Mijn e-mail"
           />
           <br />
         </div>
@@ -90,7 +90,7 @@ const MailChimpForm = ({ status, message, onValidated }) => {
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <div className="message">
           {status === 'sending' && <div style={{ color: 'blue' }}>...</div>}
           {status === 'error' && (
@@ -107,7 +107,7 @@ const MailChimpForm = ({ status, message, onValidated }) => {
             />
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
@@ -122,7 +122,7 @@ const MailChimpForm = ({ status, message, onValidated }) => {
 const Footer = ({ intl }) => {
   const siteDataContent = useSiteDataContent();
   const mailchimp_url =
-    'https://centraalmuseum.us2.list-manage.com/subscribe/post?u=c04600e3ceefae8c502cbabec&amp;id=42702e9770&group%5B15893%5D%5B1%5D=1';
+    'https://centraalmuseum.us2.list-manage.com/subscribe/post?u=c04600e3ceefae8c502cbabec&id=f30ce644bb&group%5B15905%5D%5B16%5D=1';
 
   const content = {
     blocks: siteDataContent.blocks,
@@ -142,6 +142,8 @@ const Footer = ({ intl }) => {
   const [message, setMessage] = useState(null);
   const history = useHistory();
 
+  const [status, setStatus] = useState(undefined);
+
   useEffect(() => {
     return history.listen(() => {
       setMessage(null); // Clear the message when route changes
@@ -150,19 +152,44 @@ const Footer = ({ intl }) => {
 
   return (
     <Container id="Footer-wrapper">
-      <div id="Newsletter">
-        <h3 className="Header">{intl.formatMessage(messages.newsletter)}</h3>
-        <MailchimpSubscribe
-          url={mailchimp_url}
-          render={({ subscribe, status, message }) => (
-            <MailChimpForm
-              status={status}
-              message={message}
-              onValidated={(formData) => subscribe(formData)}
-            />
-          )}
-        />
-      </div>
+      {intl.locale === 'nl' && (
+        <div id="Newsletter">
+          <h3 className="Header">{intl.formatMessage(messages.newsletter)}</h3>
+          <MailchimpSubscribe
+            url={mailchimp_url}
+            render={({ subscribe, status, message }) => (
+              <>
+                {setStatus(status)}
+                <MailChimpForm
+                  status={status}
+                  message={message}
+                  onValidated={(formData) => subscribe(formData)}
+                />
+              </>
+            )}
+          />
+          <div className="privacy-statement">
+            <a href="https://www.centraalmuseum.nl/nl/over-het-museum/voorwaarden/privacy/privacyreglement_stichting_centraal_museum.pdf">
+              Privacy statement
+            </a>
+          </div>
+          <div className="message-wrapper">
+            <div className="message">
+              {status === 'sending' && <div style={{ color: 'blue' }}>...</div>}
+              {status === 'error' && (
+                <div style={{ color: 'red' }}>
+                  <p> {intl.formatMessage(messages.error)}</p>
+                </div>
+              )}
+              {status === 'success' && (
+                <div className="success-msg" style={{ color: 'blue' }}>
+                  <p> {intl.formatMessage(messages.approve)}</p>{' '}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
       <div id="view">
         <Container id="page-document" className="Footer">
           <RenderBlocks content={siteDataContent} path={path} intl={intl} />
