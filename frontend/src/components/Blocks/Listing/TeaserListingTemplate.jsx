@@ -34,6 +34,8 @@ const Card = ({ item, index, showDescription = true }) => {
     };
   };
 
+  const isEvent =
+    item?.['@type'] === 'Event' || item?.['@type'] === 'exhibition';
   const pathname = item['@id'];
 
   const slideshowPath = `${pathname}/slideshow`;
@@ -74,10 +76,10 @@ const Card = ({ item, index, showDescription = true }) => {
         }
       } catch (error) {}
     };
-    if (item?.['@type'] === 'exhibition' && !cmsView) {
+    if (isEvent && !cmsView) {
       fetchContent();
     }
-  }, [dispatch, id, slideshowPath, pathname, item, cmsView]);
+  }, [dispatch, id, slideshowPath, pathname, item, cmsView, isEvent]);
 
   const intl = useIntl();
   return (
