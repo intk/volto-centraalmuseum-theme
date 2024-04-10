@@ -10,8 +10,8 @@
     margin-left: 0px;
     margin-right: 0px;
     height: auto;
-    padding-top: 43px;
-    padding-bottom: 0px;
+    padding-top: 17px;
+    padding-bottom: 10px;
 
     padding-left: 15px !important;
     padding-right: 15px !important;
@@ -22,9 +22,9 @@
       padding-bottom: 20px;
     }
     @media screen and (min-width: 992px) {
-      padding-left: 15px !important;
-      padding-right: 15px !important;
-      padding-top: 77px;
+      padding-left: 0% !important;
+      padding-right: 0% !important;
+      padding-top: 0px;
       padding-bottom: 0px;
       margin-bottom: 0px;
     }
@@ -90,7 +90,7 @@
     }
 
     .plone-item-card{
-      margin-bottom: 75px;
+      margin-bottom: 40px;
 
       @media screen and (min-width: 768px){
         margin-left: 15px;
@@ -174,7 +174,7 @@
         @media screen and (min-width: 992px){
           flex-direction: column;
           padding-top: 9px;
-          padding-bottom: 5px;
+          padding-bottom: 15px;
         }
 
 
@@ -193,16 +193,17 @@
         @media screen and (min-width: 992px){
           .image-description-wrapper.even{
             .image-link{
-              width: 55%;
+              width: 60%;
               padding: 15px;
-              padding-left: 55px;
+              padding-right: 70px;
             }
             #jaarverslag-title{
-              width: 45%;
+              width: 40%;
               padding: 50px;
-              padding-right: 75px;
-              padding-top: 5vw;
-              padding-bottom: 20px;
+              padding-left: 82px;
+              padding-top: 3vw;
+              padding-bottom: 30px;
+              max-width: 550px;
             }
           }
           .image-description-wrapper.odd {
@@ -224,8 +225,11 @@
         }
         @media screen and (min-width: 1300px){
           .image-description-wrapper.even {
+              .image-link{
+                padding-top: 12.5px
+              }
               #jaarverslag-title {
-                padding-top: 70px;
+                padding-top: 62px;
               }
             }
 
@@ -255,14 +259,15 @@
           }
         }
         .listing-dates-wrapper{
-          padding-top: 11px;
+          padding-top: 21px;
           @media screen and (min-width:992px) {
             padding-top: 16px;
             padding-bottom: 3px;
           }
           @media screen and (min-width:1200px) {
             padding-top: 16px;
-            padding-bottom: 3px;
+            padding-bottom: 0px;
+            line-height: 15px;
           }
         }
         .hero-dates {
@@ -274,10 +279,12 @@
           padding-bottom: 12px;
           padding-top: 14px;
           text-transform: uppercase;
-          // @media screen and (min-width: 992px){
-          //   padding-bottom: 0px;
-          //   margin-bottom: 0px;
-          // }
+          @media screen and (min-width: 992px){
+            line-height: 25px;
+          } 
+          @media screen and (min-width: 1300px){
+            line-height: 21px;
+          } 
         }
         .expired .hero-dates {
           text-decoration: line-through;
@@ -299,7 +306,7 @@
             }
             @media screen and (min-width:1300px) {
               margin-top: -1px !important;
-              margin-bottom: 10px !important;
+              margin-bottom: 5px !important;
             }
           }
 
@@ -319,7 +326,7 @@
             text-decoration: none !important;
             @media screen and (min-width:992px){
               font-size: 5.5vw;
-              line-height: 0.85 !important;
+              line-height: 5vw !important;
             }
             @media screen and (min-width: 1300px){
               font-size: 70px;
@@ -339,13 +346,19 @@
               font-size: 19.68px;
             }
             @media screen and (min-width:992px) {
-              margin-top: 13px;
+              margin-top: 10px;
+            }
+            @media screen and (min-width:1300px) {
+              margin-top: 5px;
             }
           }
           .listing-dates{
             @media screen and (min-width:992px){
               padding-left: 3px;
               padding-bottom: 2px;
+            }
+            @media screen and (min-width:992px){
+              padding-bottom: 3px;
             }
           }
         }
