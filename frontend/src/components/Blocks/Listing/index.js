@@ -6,6 +6,7 @@ import CollectionSliderTemplate from './CollectionSliderTemplate';
 import CollectionBrowseTemplate from './CollectionBrowseTemplate';
 import RecommendedTemplate from './RecommendedTemplate';
 import TeaserListingTemplate from './TeaserListingTemplate';
+import TeaserListingSecondTemplate from './TeaserListingSecondTemplate';
 // import MasonryTemplate from './MasonryTemplate';
 
 export default (config) => {
@@ -98,6 +99,12 @@ export default (config) => {
       isDefault: false,
       title: 'Teaser Wiew',
       template: TeaserListingTemplate,
+    },
+    {
+      id: 'TeaserListingSecondTemplate',
+      isDefault: false,
+      title: 'Teaser Second Wiew',
+      template: TeaserListingSecondTemplate,
     },
   ];
 
