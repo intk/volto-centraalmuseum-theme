@@ -10,58 +10,60 @@ import ImageAlbum from '../../theme/ImageAlbum/ImageAlbum';
 import { useDispatch, useSelector } from 'react-redux';
 import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 import { isCmsUi } from '@plone/volto/helpers';
+import { UniversalLink } from '@plone/volto/components';
 
-const messages = defineMessages({
-  permanent: {
-    id: 'permanent',
-    defaultMessage: 'VASTE COLLECTIE',
-  },
-});
+// const messages = defineMessages({
+//   permanent: {
+//     id: 'permanent',
+//     defaultMessage: 'VASTE COLLECTIE',
+//   },
+// });
 
-const getDateRangeDescription = (intl, start, end) => {
-  const format = (date, options) =>
-    new Intl.DateTimeFormat(intl.locale, options).format(date);
-  const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' };
-  const dayOptions = { day: 'numeric' };
-  if (end?.getFullYear() === 2100) {
-    return intl.formatMessage(messages.permanent);
-  }
+// const getDateRangeDescription = (intl, start, end) => {
+//   const format = (date, options) =>
+//     new Intl.DateTimeFormat(intl.locale, options).format(date);
+//   const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+//   const dayOptions = { day: 'numeric' };
+//   if end?.getFullYear() === 2100) {
+//     return intl.formatMessage(messages.permanent);
+//   }
 
-  if (
-    !end ||
-    (start.getDate() === end.getDate() &&
-      start.getMonth() === end.getMonth() &&
-      start.getFullYear() === end.getFullYear())
-  ) {
-    return format(start, defaultOptions);
-  }
+//   if (
+//     !end ||
+//     (start.getDate() === end.getDate() &&
+//       start.getMonth() === end.getMonth() &&
+//       start.getFullYear() === end.getFullYear())
+//   ) {
+//     return format(start, defaultOptions);
+//   }
 
-  if (
-    start.getMonth() === end.getMonth() &&
-    start.getFullYear() === end.getFullYear()
-  ) {
-    return `${format(start, dayOptions)} — ${format(end, defaultOptions)}`;
-  }
+//   if (
+//     start.getMonth() === end.getMonth() &&
+//     start.getFullYear() === end.getFullYear()
+//   ) {
+//     return `${format(start, dayOptions)} — ${format(end, defaultOptions)}`;
+//   }
 
-  return `${format(start, defaultOptions)} — ${format(end, defaultOptions)}`;
-};
+//   return `${format(start, defaultOptions)} — ${format(end, defaultOptions)}`;
+// };
 
 function HeroSection(props) {
   const intl = useIntl();
+  // eslint-disable-next-line no-unused-vars
   const { image_url, content } = props;
   const {
     title,
     description,
     preview_caption,
     multiple_content_view,
-    start,
-    end,
+    // start,
+    // end,
   } = content || {};
 
   const isEvent =
     content?.['@type'] === 'Event' || content?.['@type'] === 'exhibition';
-  const endDate = new Date(end || Date.now());
-  const startDate = new Date(start || Date.now());
+  // const endDate = new Date(end || Date.now());
+  // const startDate = new Date(start || Date.now());
   const fallback_image =
     content &&
     flattenToAppURL(content['@id'] + '/@@fallback-image/images/great');
@@ -81,6 +83,8 @@ function HeroSection(props) {
     };
   };
 
+  const end = new Date(content?.end);
+  const isPermanent = end?.getFullYear() === 2100;
   const pathname = useSelector((state) => state.router.location.pathname);
   const slideshowPath = `${pathname}/slideshow`;
   const id = `full-items@${slideshowPath}`;
@@ -120,10 +124,10 @@ function HeroSection(props) {
         }
       } catch (error) {}
     };
-    if (content?.['@type'] === 'exhibition' && !cmsView) {
+    if (isEvent && !cmsView) {
       fetchContent();
     }
-  }, [dispatch, id, slideshowPath, pathname, content, cmsView]);
+  }, [dispatch, id, slideshowPath, pathname, content, cmsView, isEvent]);
 
   return (
     <div className="herosection">
@@ -146,7 +150,7 @@ function HeroSection(props) {
               )}
             </figure>
           </>
-        ) : albumItems.length > 0 && content?.['@type'] === 'exhibition' ? (
+        ) : albumItems.length > 0 && isEvent ? (
           <>
             <BodyClass className="has-hero-image" />
             <figure className="herosection-content-image document-image">
@@ -172,9 +176,7 @@ function HeroSection(props) {
 
         <div className="header-title-dates">
           <div className="hero-dates-wrapper">
-            {content &&
-            (content['@type'] === 'Event' ||
-              content['@type'] === 'exhibition') ? (
+            {content && isEvent ? (
               <div className="hero-dates">
                 <When
                   start={content.start}
@@ -189,15 +191,24 @@ function HeroSection(props) {
           </div>
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
-            {albumItems.length > 1 && (
-              <ImageAlbum
-                items={albumItems}
-                itemTitle={props.content?.objectTitle}
-                image="false"
-              />
-            )}
+            <div className="buttons">
+              {isPermanent && (
+                <UniversalLink
+                  href={`https://tickets.centraalmuseum.nl/${intl.locale}/tickets`}
+                >
+                  <button className={`ticket-button`}>TICKETS</button>
+                </UniversalLink>
+              )}
+              {albumItems.length > 1 && (
+                <ImageAlbum
+                  items={albumItems}
+                  itemTitle={props.content?.objectTitle}
+                  image="false"
+                />
+              )}
+            </div>
             <Container>
-              {description && (
+              {description && !isPermanent && (
                 <p className="content-description">{description}</p>
               )}
             </Container>
