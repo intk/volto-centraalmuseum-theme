@@ -16,6 +16,7 @@ import {
 import { Container, Segment, Grid, Label } from 'semantic-ui-react';
 import RenderBlocks from './RenderBlocks';
 import MailchimpSubscribe from 'react-mailchimp-subscribe';
+import { Link } from 'react-router-dom';
 
 import { useSiteDataContent } from '@package/helpers';
 
@@ -169,9 +170,9 @@ const Footer = ({ intl }) => {
             )}
           />
           <div className="privacy-statement">
-            <a href="https://www.centraalmuseum.nl/nl/over-het-museum/voorwaarden/privacy/privacyreglement_stichting_centraal_museum.pdf">
+            <Link to="/nl/over-het-museum/voorwaarden/privacy/privacyreglement_stichting_centraal_museum.pdf/@@display-file/file">
               Privacy statement
-            </a>
+            </Link>
           </div>
           <div className="message-wrapper">
             <div className="message">
