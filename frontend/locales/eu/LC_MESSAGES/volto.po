@@ -401,6 +401,7 @@ msgid "materialTechnique"
 msgstr ""
 
 #: components/Blocks/Listing/RecommendedTemplate
+#: components/Blocks/Listing/TeaserListingSecondTemplate
 #: components/Blocks/Listing/TeaserListingTemplate
 # defaultMessage: More info
 msgid "moreInfo"
