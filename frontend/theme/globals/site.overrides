@@ -202,9 +202,9 @@ p {
   .documentDescription:not(:empty) {
     display: block;
     max-width: 100%;
-    margin-top: 77px;
+    margin-top: 78px;
     margin-right: auto;
-    margin-bottom: 40px;
+    margin-bottom: 55px;
     margin-left: auto;
     color: #282931;
     font-family: 'FranklinBook', Arial, sans-serif;
@@ -570,6 +570,13 @@ p#photo-credit {
 
 // Hero section
 
+.view-viewview.contenttype-event.has-hero-image{
+  .ui.segment {
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+  } 
+}
+
 //hide title
 .view-viewview.hide-title {
   .header-bg {
@@ -709,6 +716,49 @@ p#photo-credit {
 
 .herosection-content-wrapper {
   position: relative;
+
+  .buttons{
+    display: flex;
+    padding-bottom: 10px;
+    justify-content: center;
+  }
+
+  .ticket-button {
+    width: auto;
+    padding-top: 19px;
+    padding-bottom: 15px;
+    padding-right: 28px;
+    padding-left: 28px;
+    border: 1px solid #ffffff !important;
+    // margin: 10px 20px !important;
+    margin-right: 2.5px !important;
+    margin-left: 2.5px !important;
+    color: #ffffff !important;
+    font-family: 'FranklinMed', Arial, sans-serif;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: transparent !important;
+  }
+
+  .ticket-button:hover {
+    border: 1px solid #282931 !important;
+    background-color: #282931 !important;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  @media (min-width: 992px) {
+    .ticket-button {
+      color: #000000;
+    }
+
+    .ticket-button:hover {
+      border: 1px solid #282931 !important;
+      background-color: #282931 !important;
+    }
+  }
 }
 
 .header-title-dates {
@@ -739,12 +789,12 @@ p#photo-credit {
   z-index: 3;
   width: 100%;
   max-width: 100%;
-  margin-top: 0px;
+  margin-top: 15px;
   margin-bottom: 0px;
   color: #ffffff;
   font-family: 'FranklinDmCp', Arial, sans-serif;
   font-size: 76px;
-  line-height: 85px;
+  line-height: 70px;
   text-align: center !important;
 
   @media (max-width: 991px) {
