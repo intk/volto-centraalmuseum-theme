@@ -155,7 +155,9 @@ const Image = ({
     <>
       <BodyClass
         className={
-          orientationClass === 'portrait' ? 'top-image-align-right' : ''
+          orientationClass === 'portrait'
+            ? 'top-image-align-right'
+            : 'vertical-image'
         }
       />
       <picture className={pictureClassName}>
