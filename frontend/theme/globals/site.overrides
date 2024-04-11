@@ -1132,6 +1132,7 @@ p#photo-credit {
       // font-family: 'UniversLightCn';
       font-size: 22px;
       text-decoration: none !important;
+      margin-bottom: 4px;
     }
 
     .hero-dates {
