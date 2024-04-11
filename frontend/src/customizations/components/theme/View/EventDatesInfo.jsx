@@ -97,8 +97,10 @@ const When_ = ({
   const datesInfo = datesForDisplay(start, end, moment);
   if (!datesInfo) {
     return type === 'News Item' ? (
-      <div className='hero-dates"'>
-        {getDateRangeDescription(intl, created)}
+      <div>
+        <span className="hero-dates">
+          {getDateRangeDescription(intl, created)}
+        </span>
       </div>
     ) : (
       ''
