@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { PreviewImage } from '@plone/volto/components';
 import { ConditionalLink, UniversalLink } from '@plone/volto/components';
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
+import { useSelector } from 'react-redux';
 
 const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   let link = null;
@@ -19,43 +20,94 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   } else if (href) {
     link = <UniversalLink href={href}>{linkTitle || href}</UniversalLink>;
   }
+
+  const pathname = useSelector((state) => state.router.location.pathname);
+  const [updatedItems, setUpdatedItems] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchHasFallbackImage = async (item) => {
+      try {
+        const response = await fetch(
+          `/++api++/${item['@id']}/@@has_fallback_image`,
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return { ...item, hasFallbackImage: data.hasFallbackImage };
+      } catch (error) {
+        return { ...item, hasFallbackImage: false };
+      }
+    };
+
+    const fetchAllFallbackImages = async () => {
+      const promises = items.map((item) => fetchHasFallbackImage(item));
+      const results = await Promise.all(promises);
+      if (isMounted) {
+        setUpdatedItems(results);
+      }
+    };
+
+    fetchAllFallbackImages();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname, items]);
+
   return (
     <>
       <div id="page-listing">
         <section id="content-core">
-          {items.map((item) => (
+          {updatedItems.map((item) => (
             <div key={item.url} className="listing-items">
-              {item.image_field && (
+              {item.image_field ? (
                 <UniversalLink item={item}>
                   <PreviewImage
                     item={item}
-                    size="preview"
+                    size="large"
                     alt={item.image_caption ? item.image_caption : item.title}
                     className="ui image"
                   />
                 </UniversalLink>
-              )}
-
+              ) : (item['@type'] === 'exhibition' ||
+                  item['@type'] === 'Event' ||
+                  item['@type'] === 'News Item') &&
+                item.hasFallbackImage === true ? (
+                <UniversalLink item={item}>
+                  <PreviewImage
+                    item={item}
+                    size="large"
+                    alt={item.image_caption ? item.image_caption : item.title}
+                    className="ui image"
+                    isFallback={true}
+                  />
+                </UniversalLink>
+              ) : null}
               <div
                 id="jaarverslag-title"
                 className={`item-title ${
                   item.review_state === 'private' ? 'private' : ''
                 }`}
               >
-                {item['@type'] === 'Event' || item['@type'] === 'Exhibition' ? (
+                {item['@type'] === 'Event' ||
+                item['@type'] === 'Exhibition' ||
+                item['@type'] === 'News Item' ? (
                   <div className="listing-dates">
                     <div className={`listing-dates-wrapper`}>
                       <When
-                        start={item.start}
-                        end={item.end}
-                        whole_day={item.whole_day}
-                        open_end={item.open_end}
+                        start={item?.start}
+                        end={item?.end}
+                        whole_day={item?.whole_day}
+                        open_end={item?.open_end}
+                        type={item?.['@type']}
+                        published={item?.effective || item?.created}
                       />
                     </div>
                   </div>
-                ) : (
-                  ''
-                )}
+                ) : null}
                 <h2>
                   <UniversalLink item={item}>{item.title}</UniversalLink>
                 </h2>
