@@ -35,7 +35,9 @@ const Card = ({ item, index, showDescription = true }) => {
   };
 
   const isEvent =
-    item?.['@type'] === 'Event' || item?.['@type'] === 'exhibition';
+    item?.['@type'] === 'Event' ||
+    item?.['@type'] === 'exhibition' ||
+    item['@type'] === 'News Item';
   const pathname = item['@id'];
 
   const slideshowPath = `${pathname}/slideshow`;

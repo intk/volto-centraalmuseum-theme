@@ -35,7 +35,9 @@ const Card = ({ item, index, showDescription = true }) => {
                   className="ui image"
                 />
               </UniversalLink>
-            ) : (item['@type'] === 'exhibition' || item['@type'] === 'Event') &&
+            ) : (item['@type'] === 'exhibition' ||
+                item['@type'] === 'Event' ||
+                item['@type'] === 'News Item') &&
               item.hasFallbackImage === true ? (
               <UniversalLink item={item} className="image-link">
                 <PreviewImage

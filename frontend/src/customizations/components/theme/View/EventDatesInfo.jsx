@@ -78,16 +78,31 @@ export const datesForDisplay = (start, end, moment) => {
   };
 };
 
-const When_ = ({ start, end, whole_day, open_end, moment: momentlib }) => {
+const When_ = ({
+  start,
+  end,
+  whole_day,
+  open_end,
+  type,
+  published,
+  moment: momentlib,
+}) => {
   const lang = useSelector((state) => state.intl.locale);
   const intl = useIntl();
+  const created = new Date(published);
 
   const moment = momentlib.default;
   moment.locale(toBackendLang(lang));
 
   const datesInfo = datesForDisplay(start, end, moment);
   if (!datesInfo) {
-    return;
+    return type === 'News Item' ? (
+      <div className='hero-dates"'>
+        {getDateRangeDescription(intl, created)}
+      </div>
+    ) : (
+      ''
+    );
   }
 
   const startDate = new Date(datesInfo.startDate);
@@ -122,12 +137,14 @@ const When_ = ({ start, end, whole_day, open_end, moment: momentlib }) => {
         <span className="hero-dates">
           {getDateRangeDescription(intl, startDate, endDate)}
         </span>
+      ) : start ? (
+        <span className="hero-dates">
+          {getDateRangeDescription(intl, startDate)}
+        </span>
+      ) : type === 'News Item' ? (
+        getDateRangeDescription(intl, created)
       ) : (
-        start && (
-          <span className="hero-dates">
-            {getDateRangeDescription(intl, startDate)}
-          </span>
-        )
+        ''
       )}
       {start && !whole_day && (
         <span className="hero-dates">

@@ -309,7 +309,9 @@ const ImageAlbum = (props) => {
       >
         {props.image === 'false' ? (
           <button onClick={() => setOpen(true)} className={`button button1`}>
-            {intl.formatMessage(messages.view)}
+            {props?.['item-type'] === 'News Item'
+              ? `FOTO'S`
+              : intl.formatMessage(messages.view)}
           </button>
         ) : (
           <div className="imagethumb" style={{ position: 'relative' }}>

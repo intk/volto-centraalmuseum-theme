@@ -61,7 +61,9 @@ function HeroSection(props) {
   } = content || {};
 
   const isEvent =
-    content?.['@type'] === 'Event' || content?.['@type'] === 'exhibition';
+    content?.['@type'] === 'Event' ||
+    content?.['@type'] === 'exhibition' ||
+    content?.['@type'] === 'News Item';
   // const endDate = new Date(end || Date.now());
   // const startDate = new Date(start || Date.now());
   const fallback_image =
@@ -183,6 +185,8 @@ function HeroSection(props) {
                   end={content.end}
                   whole_day={content.whole_day}
                   open_end={content.open_end}
+                  type={content?.['@type']}
+                  published={content?.effective || content?.created}
                 />
               </div>
             ) : (
@@ -204,6 +208,7 @@ function HeroSection(props) {
                   items={albumItems}
                   itemTitle={props.content?.objectTitle}
                   image="false"
+                  item-type={content?.['@type']}
                 />
               )}
             </div>

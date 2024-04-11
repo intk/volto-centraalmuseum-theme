@@ -92,7 +92,8 @@ const ArtworkListingTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                         />
                       </UniversalLink>
                     ) : (item['@type'] === 'exhibition' ||
-                        item['@type'] === 'Event') &&
+                        item['@type'] === 'Event' ||
+                        item['@type'] === 'News Item') &&
                       item.hasFallbackImage === true ? (
                       <UniversalLink item={item}>
                         <PreviewImage
@@ -113,14 +114,17 @@ const ArtworkListingTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                       }`}
                     >
                       {item['@type'] === 'Event' ||
-                      item['@type'] === 'Exhibition' ? (
+                      item['@type'] === 'Exhibition' ||
+                      item['@type'] === 'News Item' ? (
                         <div className="listing-dates">
                           <div className={`listing-dates-wrapper`}>
                             <When
-                              start={item.start}
-                              end={item.end}
-                              whole_day={item.whole_day}
-                              open_end={item.open_end}
+                              start={item?.start}
+                              end={item?.end}
+                              whole_day={item?.whole_day}
+                              open_end={item?.open_end}
+                              type={item?.['@type']}
+                              published={item?.effective || item?.created}
                             />
                           </div>
                         </div>
