@@ -1650,6 +1650,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     }
   }
   .documentDescription{
-    margin-bottom: 13px;
+    margin-bottom: 13px !important;
+    margin-top: 52px !important;
   }
 }
