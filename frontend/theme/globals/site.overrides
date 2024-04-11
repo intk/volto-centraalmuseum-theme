@@ -574,7 +574,7 @@ p#photo-credit {
   .ui.segment {
     padding-top: 0px !important;
     margin-top: 0px !important;
-  } 
+  }
 }
 
 //hide title
@@ -709,9 +709,9 @@ p#photo-credit {
       margin-top: 5px;
     }
   }
-  @media (max-width: 768px) {
-    display: none;
-  }
+  // @media (max-width: 768px) {
+  //   display: none;
+  // }
 }
 
 .herosection-content-wrapper {
@@ -774,7 +774,7 @@ p#photo-credit {
     padding-left: 15vw;
 
     .description-container {
-      width: 563px;
+      // width: 563px;
       // max-width: 80% !important;
     }
   }
@@ -789,12 +789,12 @@ p#photo-credit {
   z-index: 3;
   width: 100%;
   max-width: 100%;
-  margin-top: 15px;
+  margin-top: 15px !important;
   margin-bottom: 0px;
   color: #ffffff;
   font-family: 'FranklinDmCp', Arial, sans-serif;
   font-size: 76px;
-  line-height: 70px;
+  line-height: 70px !important;
   text-align: center !important;
 
   @media (max-width: 991px) {
@@ -1464,7 +1464,7 @@ body.artwork-listing-page{
   }
 }
 
-.contenttype-exhibition{
+.contenttype-exhibition, .contenttype-event, .contenttype-news-item{
   .hero-title-floating {
       z-index: 3;
       width: 100%;
@@ -1592,7 +1592,7 @@ body.contenttype-lrf.has-toolbar #page-edit .ui.container {
   margin-left: 110px !important;
 }
 body.contenttype-lrf #page-edit .ui.container .invisible>div>div {
-  padding-right: 70px; 
+  padding-right: 70px;
 }
 body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div {
   padding-right: 450px;
@@ -1603,6 +1603,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     display: none;
   }
 }
+
 .view-viewview.contenttype-news-item.vertical-image{
   .header-title-dates {
     // @media screen and (min-width: 1200px){
@@ -1635,7 +1636,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 
 .view-viewview.contenttype-news-item{
   @media screen and (min-width: 1200px) {
-    #view > #page-document {
+    .content-area #view > #page-document {
       // // margin-right: calc(17% + 51px) !important;
       // width: calc(750px - 100px) !important;
       width: 1170px !important;
@@ -1643,7 +1644,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
       margin-left: auto !important;
     }
 
-    #page-document > *{
+    .content-area #page-document > *{
       margin-right: calc(17% + 10px) !important;
       margin-left: auto !important;
       width: calc(750px - 100px) !important;
