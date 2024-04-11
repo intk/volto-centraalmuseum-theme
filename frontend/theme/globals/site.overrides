@@ -1013,7 +1013,7 @@ p#photo-credit {
   right: 50%;
   left: 50%;
   width: 100vw;
-  padding: 60px 93px 0px 107px;
+  padding: 61px 93px 0px 107px;
   // margin-top: 60px;
   margin-right: -50vw !important;
   margin-left: -50vw !important;
@@ -1052,7 +1052,7 @@ p#photo-credit {
       justify-content: flex-start;
       padding-top: 0px !important;
       padding-right: 25px !important;
-      padding-bottom: 51px !important;
+      padding-bottom: 44px !important;
       padding-left: 25px !important;
       border: none !important;
       margin-top: 0%;
@@ -1075,6 +1075,7 @@ p#photo-credit {
           font-size: 32px;
           line-height: 40px !important;
           text-decoration: none !important;
+          margin-top: 1px !important
           // text-transform: none !important;
         }
 
@@ -1132,7 +1133,7 @@ p#photo-credit {
       // font-family: 'UniversLightCn';
       font-size: 22px;
       text-decoration: none !important;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .hero-dates {
