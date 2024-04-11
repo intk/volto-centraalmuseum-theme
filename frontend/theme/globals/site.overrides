@@ -624,8 +624,9 @@ p#photo-credit {
 
   .documentFirstHeading {
     padding-top: 20px;
-    margin-bottom: 16px !important;
     font-size: 60px !important;
+    padding-top: 43px !important;
+    margin-bottom: 17px !important;
   }
 
   .documentDescription {
