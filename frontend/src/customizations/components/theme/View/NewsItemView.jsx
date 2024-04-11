@@ -24,7 +24,6 @@ const NewsItemView = ({ content }) => {
   const Container =
     config.getComponent({ name: 'Container' }).component || SemanticContainer;
 
-
   return hasBlocksData(content) ? (
     <Container id="page-document" className="view-wrapper newsitem-view">
       <RenderBlocks content={content} />
