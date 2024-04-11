@@ -1649,4 +1649,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
       width: calc(750px - 100px) !important;
     }
   }
+  .documentDescription{
+    margin-bottom: 13px;
+  }
 }
