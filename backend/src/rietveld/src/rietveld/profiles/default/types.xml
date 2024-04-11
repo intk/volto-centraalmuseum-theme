@@ -3,6 +3,9 @@
         name="portal_types"
 >
   <object meta_type="Dexterity FTI"
+          name="blogwriter"
+  />
+  <object meta_type="Dexterity FTI"
           name="exhibition"
   />
   <object meta_type="Dexterity FTI"
