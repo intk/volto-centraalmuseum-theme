@@ -1005,8 +1005,8 @@ p#photo-credit {
 }
 
 // listing default
-#view #page-document .block.listing.default #page-listing,
-#page-edit .block.listing.default #page-listing,
+#view #page-document .block.listing.Default #page-listing,
+#page-edit .block.listing.Default #page-listing,
 #view #page-document .block.listing.Artwork #page-listing{
   position: relative;
   right: 50%;
