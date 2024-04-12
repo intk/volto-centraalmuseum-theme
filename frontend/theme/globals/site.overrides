@@ -1658,6 +1658,10 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     margin-bottom: 13px !important;
     margin-top: 52px !important;
   }
+  #Newsletter{
+    padding-top: 27px !important;
+    padding-bottom: 60px !important;
+  }
 }
 
 #main{
