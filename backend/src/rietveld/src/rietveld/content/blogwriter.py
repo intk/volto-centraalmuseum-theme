@@ -25,7 +25,6 @@ from zope.schema import TextLine
 from zope.schema.interfaces import IContextAwareDefaultFactory
 
 
-
 class IBlogwriter(model.Schema):
     """Schema for Exhibition content type."""
 
@@ -33,8 +32,6 @@ class IBlogwriter(model.Schema):
     #     title="Title",
     #     required=False,
     # )
-
-
 
     # searchable(
     #     "priref",
