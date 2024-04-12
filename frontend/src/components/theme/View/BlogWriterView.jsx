@@ -15,9 +15,11 @@ export default function BlogWriterView(props) {
       {props.content.title && (
         <div className="description-wrapper">
           <p className="documentDescription author">
-            <div className="writer-image-wrapper">
-              <img src={src} alt="writer"></img>
-            </div>
+            {props.content.preview_image && (
+              <div className="writer-image-wrapper">
+                <img src={src} alt="writer"></img>
+              </div>
+            )}
             {props.content.title}
           </p>
           {props.content.description && (
