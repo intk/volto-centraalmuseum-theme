@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
 import { Container } from 'semantic-ui-react';
@@ -16,32 +16,27 @@ const messages = defineMessages({
 });
 
 const Search = (props) => {
-  const { content, searchContent } = props;
+  const { content, searchContent, items, location } = props;
   const intl = useIntl();
 
+  const authors = useMemo(() => {
+    if (content['@type'] === 'author') {
+      return [content.title];
+    } else if (content['@type'] === 'artwork') {
+      return (
+        content.authors?.map((author) => author.title.split('(')[0].trim()) ||
+        []
+      );
+    }
+    return [];
+  }, [content]);
+
+  const authorQueryString = useMemo(
+    () => authors.map((author) => `"${author}"`).join(' || '),
+    [authors],
+  );
+
   useEffect(() => {
-    doSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.searchableText]);
-
-  const sortedItems = props.items
-    .slice(0, 20) // Assuming you still want to limit to 20 items
-    .sort((a, b) => a.title.localeCompare(b.title)); // Sorting logic
-
-  let authors = [];
-  if (content['@type'] === 'author') {
-    const authorTitle = content.title;
-    authors = [authorTitle];
-  } else if (content['@type'] === 'artwork') {
-    authors =
-      content.authors?.map((author) => author.title.split('(')[0].trim()) || [];
-  }
-
-  let authorQueryString = authors.length
-    ? authors.map((author) => `"${author}"`).join(' || ')
-    : undefined;
-
-  const doSearch = () => {
     const currentPath = intl.locale;
     const options = {
       portal_type: 'artwork',
@@ -50,7 +45,12 @@ const Search = (props) => {
       metadata_fields: ['dating'],
     };
     searchContent('', options);
-  };
+  }, [searchContent, authorQueryString, intl.locale]);
+
+  const sortedItems = useMemo(() => {
+    return items.sort((a, b) => a.title.localeCompare(b.title)).slice(0, 20);
+  }, [items]);
+
   const authors_text = authors.join(', ');
 
   const breakpointColumnsObj = {
@@ -75,9 +75,9 @@ const Search = (props) => {
         style={{ display: 'flex' }}
       >
         {authors.length !== 0 &&
-          sortedItems.slice(0, 20).map(
+          sortedItems.map(
             (item) =>
-              props.location.pathname !== item['@id'] && (
+              location.pathname !== item['@id'] && (
                 <div className="SeeMoreItem" key={item['@id']}>
                   <ArtworkPreview {...item} />
                   <UniversalLink item={item}>
