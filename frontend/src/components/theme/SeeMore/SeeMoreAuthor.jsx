@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
-import { Container, Button } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { searchContent } from '@plone/volto/actions';
 import qs from 'query-string';
 import { defineMessages, useIntl } from 'react-intl';
@@ -16,55 +16,42 @@ const messages = defineMessages({
 });
 
 const Search = (props) => {
-  const { content, searchContent, items, location } = props;
+  const { content, searchContent } = props;
   const intl = useIntl();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
-  const itemsPerPage = 20;
-
-  const authors = useMemo(() => {
-    if (content['@type'] === 'author') {
-      return [content.title];
-    } else if (content['@type'] === 'artwork') {
-      return (
-        content.authors?.map((author) => author.title.split('(')[0].trim()) ||
-        []
-      );
-    }
-    return [];
-  }, [content]);
-
-  const authorQueryString = useMemo(
-    () => authors.map((author) => `"${author}"`).join(' || '),
-    [authors],
-  );
-
   useEffect(() => {
+    doSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.searchableText]);
+
+  const sortedItems = props.items
+    .slice(0, 20) // Assuming you still want to limit to 20 items
+    .sort((a, b) => a.title.localeCompare(b.title)); // Sorting logic
+
+  let authors = [];
+  if (content['@type'] === 'author') {
+    const authorTitle = content.title;
+    authors = [authorTitle];
+  } else if (content['@type'] === 'artwork') {
+    authors =
+      content.authors?.map((author) => author.title.split('(')[0].trim()) || [];
+  }
+
+  let authorQueryString = authors.length
+    ? authors.map((author) => `"${author}"`).join(' || ')
+    : undefined;
+
+  const doSearch = () => {
     const currentPath = intl.locale;
-    const start = (currentPage - 1) * itemsPerPage;
     const options = {
       portal_type: 'artwork',
       artwork_author: authorQueryString,
       path: currentPath,
       metadata_fields: ['dating'],
-      b_start: start,
-      b_size: itemsPerPage,
+      b_size: 1000,
     };
     searchContent('', options);
-  }, [searchContent, authorQueryString, intl.locale, currentPage]);
-
-  useEffect(() => {
-    if (items && items.length > 0) {
-      setTotalItems(items[0].total);
-    }
-  }, [items]);
-
-  const changePage = (page) => {
-    setCurrentPage(page);
   };
-
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
   const authors_text = authors.join(', ');
 
   const breakpointColumnsObj = {
@@ -89,9 +76,9 @@ const Search = (props) => {
         style={{ display: 'flex' }}
       >
         {authors.length !== 0 &&
-          items.map(
+          sortedItems.slice(0, 20).map(
             (item) =>
-              location.pathname !== item['@id'] && (
+              props.location.pathname !== item['@id'] && (
                 <div className="SeeMoreItem" key={item['@id']}>
                   <ArtworkPreview {...item} />
                   <UniversalLink item={item}>
@@ -116,26 +103,6 @@ const Search = (props) => {
               ),
           )}
       </Masonry>
-
-      <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
-      >
-        <Button
-          onClick={() => changePage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span style={{ margin: '0 10px' }}>
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button
-          onClick={() => changePage(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-        >
-          Next
-        </Button>
-      </div>
     </Container>
   );
 };
