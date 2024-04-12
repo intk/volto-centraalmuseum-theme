@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
-import { Container } from 'semantic-ui-react';
+import { Container, Button } from 'semantic-ui-react';
 import { searchContent } from '@plone/volto/actions';
 import qs from 'query-string';
 import { defineMessages, useIntl } from 'react-intl';
@@ -18,6 +18,10 @@ const messages = defineMessages({
 const Search = (props) => {
   const { content, searchContent, items, location } = props;
   const intl = useIntl();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const itemsPerPage = 20;
 
   const authors = useMemo(() => {
     if (content['@type'] === 'author') {
@@ -38,19 +42,29 @@ const Search = (props) => {
 
   useEffect(() => {
     const currentPath = intl.locale;
+    const start = (currentPage - 1) * itemsPerPage;
     const options = {
       portal_type: 'artwork',
       artwork_author: authorQueryString,
       path: currentPath,
       metadata_fields: ['dating'],
+      b_start: start,
+      b_size: itemsPerPage,
     };
     searchContent('', options);
-  }, [searchContent, authorQueryString, intl.locale]);
+  }, [searchContent, authorQueryString, intl.locale, currentPage]);
 
-  const sortedItems = useMemo(() => {
-    return items.sort((a, b) => a.title.localeCompare(b.title)).slice(0, 20);
+  useEffect(() => {
+    if (items && items.length > 0) {
+      setTotalItems(items[0].total);
+    }
   }, [items]);
 
+  const changePage = (page) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
   const authors_text = authors.join(', ');
 
   const breakpointColumnsObj = {
@@ -75,7 +89,7 @@ const Search = (props) => {
         style={{ display: 'flex' }}
       >
         {authors.length !== 0 &&
-          sortedItems.map(
+          items.map(
             (item) =>
               location.pathname !== item['@id'] && (
                 <div className="SeeMoreItem" key={item['@id']}>
@@ -102,6 +116,26 @@ const Search = (props) => {
               ),
           )}
       </Masonry>
+
+      <div
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
+      >
+        <Button
+          onClick={() => changePage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+        <span style={{ margin: '0 10px' }}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          onClick={() => changePage(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+        >
+          Next
+        </Button>
+      </div>
     </Container>
   );
 };
