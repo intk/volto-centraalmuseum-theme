@@ -20,6 +20,7 @@ import installFooter from './footer';
 import installBlocks from './components/Blocks';
 import ArtworkView from './components/theme/View/ArtworkView';
 import AuthorView from './components/theme/View/AuthorView';
+import BlogWriterView from './components/theme/View/BlogWriterView';
 import ExhibitionView from './components/theme/View/ExhibitionView';
 import installExpressMiddleware from './express-middleware';
 
@@ -69,6 +70,10 @@ export default function applyConfig(config) {
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     author: AuthorView,
+  };
+  config.views.contentTypesViews = {
+    ...config.views.contentTypesViews,
+    blogwriter: BlogWriterView,
   };
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
