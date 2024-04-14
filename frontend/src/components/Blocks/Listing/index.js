@@ -1,6 +1,7 @@
 import ArtworkTemplate from './ArtworkTemplate';
 import ArtworkListingTemplate from './ArtworkListingTemplate';
 import DefaultTemplate from './DefaultTemplate';
+import NewsItemsTemplate from './NewsItemsTemplate';
 import AdvancedSearchTemplate from './AdvancedSearchTemplate';
 import CollectionSliderTemplate from './CollectionSliderTemplate';
 import CollectionBrowseTemplate from './CollectionBrowseTemplate';
@@ -105,6 +106,12 @@ export default (config) => {
       isDefault: false,
       title: 'Teaser Second Wiew',
       template: TeaserListingSecondTemplate,
+    },
+    {
+      id: 'NewsItemsTemplate',
+      isDefault: false,
+      title: 'NewsItems Template ',
+      template: NewsItemsTemplate,
     },
   ];
 
