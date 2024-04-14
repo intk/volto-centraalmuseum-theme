@@ -28,13 +28,11 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 class IBlogwriter(model.Schema):
     """Schema for Exhibition content type."""
 
-    # title = TextLine(
-    #     title="Title",
-    #     required=False,
-    # )
+    blogWriterID = TextLine(
+        title="Blog writer's ID",
+        required=False,
+    )
 
-    # searchable(
-    #     "priref",
-    #     "cm_nummer",
-    #     "objects",
-    # )
+    searchable(
+        "blogWriterID",
+    )
