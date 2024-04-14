@@ -524,6 +524,7 @@ msgstr ""
 
 #: components/theme/SeeMore/SeeMore
 #: components/theme/SeeMore/SeeMoreAuthor
+#: components/theme/SeeMore/SeeMoreNewsItem
 # defaultMessage: Kijk verder
 msgid "seemore"
 msgstr ""
