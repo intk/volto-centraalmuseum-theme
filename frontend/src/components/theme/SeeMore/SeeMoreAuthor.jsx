@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
-import { Container } from 'semantic-ui-react';
+// eslint-disable-next-line no-unused-vars
+import { Container, Button } from 'semantic-ui-react';
 import { searchContent } from '@plone/volto/actions';
 import qs from 'query-string';
 import { defineMessages, useIntl } from 'react-intl';
@@ -16,19 +18,53 @@ const messages = defineMessages({
 });
 
 const Search = (props) => {
-  const { content, searchContent } = props;
+  // eslint-disable-next-line no-unused-vars
+  const { content, searchContent, items } = props;
   const intl = useIntl();
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [totalItems, setTotalItems] = useState(0);
+  let authors = [];
+
+  let authorQueryString = authors.length
+    ? authors.map((author) => `"${author}"`).join(' || ')
+    : undefined;
 
   useEffect(() => {
-    doSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.searchableText]);
+    let isMounted = true;
+
+    const doSearch = () => {
+      const currentPath = intl.locale;
+      const options = {
+        portal_type: 'artwork',
+        artwork_author: authorQueryString,
+        path: currentPath,
+        metadata_fields: ['dating'],
+        b_size: 20,
+        // b_start: (currentPage - 1) * 20,
+      };
+      searchContent('', options);
+    };
+
+    if (isMounted) {
+      doSearch();
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [
+    props.searchableText,
+    // currentPage,
+    content,
+    authorQueryString,
+    intl,
+    searchContent,
+  ]);
 
   const sortedItems = props.items
-    .slice(0, 20) // Assuming you still want to limit to 20 items
-    .sort((a, b) => a.title.localeCompare(b.title)); // Sorting logic
+    .slice(0, 20)
+    .sort((a, b) => a.title.localeCompare(b.title));
 
-  let authors = [];
   if (content['@type'] === 'author') {
     const authorTitle = content.title;
     authors = [authorTitle];
@@ -37,21 +73,6 @@ const Search = (props) => {
       content.authors?.map((author) => author.title.split('(')[0].trim()) || [];
   }
 
-  let authorQueryString = authors.length
-    ? authors.map((author) => `"${author}"`).join(' || ')
-    : undefined;
-
-  const doSearch = () => {
-    const currentPath = intl.locale;
-    const options = {
-      portal_type: 'artwork',
-      artwork_author: authorQueryString,
-      path: currentPath,
-      metadata_fields: ['dating'],
-      b_size: 20,
-    };
-    searchContent('', options);
-  };
   const authors_text = authors.join(', ');
 
   const breakpointColumnsObj = {
