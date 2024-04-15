@@ -36,8 +36,8 @@ const Search = (props) => {
         Creator: content?.blogWriterID || content?.title?.toLowerCase(),
         path: currentPath,
         metadata_fields: ['effective', 'created'],
-        b_size: 2,
-        b_start: (currentPage - 1) * 2,
+        b_size: 20,
+        b_start: (currentPage - 1) * 20,
       };
       searchContent('', options);
     };
@@ -65,7 +65,7 @@ const Search = (props) => {
   }
 
   // const authors_text = authors.join(', ');
-  const totalPages = Math.ceil(items_total / 2);
+  const totalPages = Math.ceil(items_total / 20);
 
   const breakpointColumnsObj = {
     default: 3,
