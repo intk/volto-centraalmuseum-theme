@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
 import './css/authorview.less';
-import { SeeMoreAuthor } from '../../index';
+// import { SeeMoreAuthor } from '../../index';
 import { defineMessages, useIntl } from 'react-intl';
 
 const messages = defineMessages({
@@ -31,9 +31,7 @@ export default function AuthorView(props) {
           )}
         </div>
       )}
-      <Container>
-        <SeeMoreAuthor {...props} />
-      </Container>
+      <Container>{/* <SeeMoreAuthor {...props} /> */}</Container>
     </div>
   );
 }
