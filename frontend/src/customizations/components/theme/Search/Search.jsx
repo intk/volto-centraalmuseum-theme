@@ -342,15 +342,6 @@ class Search extends Component {
     const { intl } = this.props;
     return (
       <>
-        {/* <label>
-          <input
-            type="checkbox"
-            checked={this.state.hasPreviewImage}
-            onChange={() => this.handleCheckboxChange('hasPreviewImage')}
-            className="artwork-checkbox"
-          />
-          <span className="label">{translations.hasImage[intl.locale]}</span>
-        </label> */}
         <label>
           <input
             type="radio"
@@ -373,8 +364,16 @@ class Search extends Component {
             {translations.excludeArtworks[intl.locale]}
           </span>
         </label>
-
-        {/* <label>
+        <label>
+          <input
+            type="checkbox"
+            checked={this.state.hasPreviewImage}
+            onChange={() => this.handleCheckboxChange('hasPreviewImage')}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.hasImage[intl.locale]}</span>
+        </label>
+        <label>
           <input
             type="checkbox"
             checked={this.state.ObjOnDisplay}
@@ -382,7 +381,7 @@ class Search extends Component {
             className="artwork-checkbox"
           />
           <span className="label">{translations.onDisplay[intl.locale]}</span>
-        </label> */}
+        </label>
       </>
     );
   };
