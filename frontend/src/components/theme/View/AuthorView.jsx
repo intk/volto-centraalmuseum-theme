@@ -16,11 +16,11 @@ export default function AuthorView(props) {
   const intl = useIntl();
   return (
     <div id="object-block">
-      {props.content.title && (
+      {props?.content?.title && (
         <div className="description-wrapper">
-          <p className="documentDescription author">{props.content.title}</p>
+          <p className="documentDescription author">{props?.content?.title}</p>
 
-          {props.content.authorURL && (
+          {props?.content?.authorURL && (
             <p className="author_url">
               {intl.formatMessage(messages.authorUrl)}{' '}
               <a href={props.content.authorURL}>{props.content.authorURL}</a>{' '}
