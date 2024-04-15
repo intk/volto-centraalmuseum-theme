@@ -69,19 +69,18 @@ const Search = (props) => {
     searchContent,
   ]);
 
+  // useEffect(() => {
+  //   if (items && items.length > 0) {
+  //     setTotalItems(items[0].total);
+  //   }
+  // }, [items]);
+
   const sortedItems = props.items
     .slice(0, 20)
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  if (content['@type'] === 'author') {
-    const authorTitle = content.title;
-    authors = [authorTitle];
-  } else if (content['@type'] === 'artwork') {
-    authors =
-      content.authors?.map((author) => author.title.split('(')[0].trim()) || [];
-  }
-
   const authors_text = authors.join(', ');
+  // const totalPages = Math.ceil(totalItems / 5);
 
   const breakpointColumnsObj = {
     default: 3,
@@ -89,6 +88,10 @@ const Search = (props) => {
     992: 2,
     768: 1,
   };
+
+  // const changePage = (page) => {
+  //   setCurrentPage(page);
+  // };
 
   return (
     <Container id="page-search-artwork">
@@ -132,6 +135,25 @@ const Search = (props) => {
               ),
           )}
       </Masonry>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
+      >
+        {/* <Button
+          onClick={() => changePage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+        <span style={{ margin: '0 10px' }}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          onClick={() => changePage(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+        >
+          Next
+        </Button> */}
+      </div>
     </Container>
   );
 };
