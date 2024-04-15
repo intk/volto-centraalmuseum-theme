@@ -60,16 +60,16 @@ const translations = {
     nl: 'Alleen in de collectie',
   },
   excludeArtworks: {
-    en: 'Collection now on view',
-    nl: 'Collectie nu te zien',
+    en: 'Only in the website',
+    nl: 'Alleen in de website',
   },
   hasImage: {
     nl: 'Met beeld',
-    en: 'With Images',
+    en: 'With image',
   },
   onDisplay: {
-    en: 'Now on view',
-    nl: 'Nu te zien',
+    en: 'Collection now on view',
+    nl: 'Collectie nu te zien',
   },
   filterheading: {
     nl: 'Filter »',
