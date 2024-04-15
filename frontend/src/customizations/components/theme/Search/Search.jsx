@@ -50,6 +50,30 @@ const translations = {
     nl: 'voor',
     de: 'für',
   },
+  advancedsearch: {
+    en: 'Advanced search',
+    nl: 'Geavanceerd zoeken',
+  },
+  filterArtworks: {
+    en: 'Only in the collection',
+    nl: 'Alleen in de collectie',
+  },
+  excludeArtworks: {
+    en: 'Only in the website',
+    nl: 'Alleen in de website',
+  },
+  hasImage: {
+    nl: 'Alleen met beeld',
+    en: 'Only Images',
+  },
+  onDisplay: {
+    en: 'Now on view',
+    nl: 'Nu te zien',
+  },
+  filterheading: {
+    nl: 'Filter »',
+    en: 'Filter »',
+  },
 };
 
 function truncate(str, num) {
@@ -110,6 +134,12 @@ class Search extends Component {
       isClient: false,
       active: 'relevance',
       updatedItems: [],
+      onlyArtworks: false,
+      excludeArtworks: false,
+      objOnDisplay: false,
+      hasPreviewImage: false,
+      ObjOnDisplay: false,
+      filtersDisplay: false,
     };
     this.isMountedFlag = false;
   }
@@ -175,6 +205,77 @@ class Search extends Component {
     }
   };
 
+  handleCheckboxChange = (checkboxType) => {
+    const { history, location } = this.props;
+    let currentUrlParams = new URLSearchParams(location.search);
+
+    // Initialize updates based on checkboxType
+    let updates = {};
+
+    switch (checkboxType) {
+      case 'onlyArtworks':
+        updates = {
+          onlyArtworks: !this.state.onlyArtworks,
+          // Turn off excludeArtworks if onlyArtworks is being turned on
+          excludeArtworks: this.state.onlyArtworks
+            ? this.state.excludeArtworks
+            : false,
+        };
+        break;
+      case 'excludeArtworks':
+        updates = {
+          excludeArtworks: !this.state.excludeArtworks,
+          // Turn off onlyArtworks if excludeArtworks is being turned on
+          onlyArtworks: this.state.excludeArtworks
+            ? this.state.onlyArtworks
+            : false,
+        };
+        break;
+      case 'hasPreviewImage':
+        updates = { hasPreviewImage: !this.state.hasPreviewImage };
+        break;
+      case 'ObjOnDisplay':
+        updates = { ObjOnDisplay: !this.state.ObjOnDisplay };
+        break;
+      default:
+        break;
+    }
+
+    // Update state with the changes
+    this.setState(updates, () => {
+      // After state update, adjust URL parameters
+      currentUrlParams.delete('portal_type');
+      currentUrlParams.delete('portal_type:list');
+      currentUrlParams.delete('hasPreviewImage');
+      currentUrlParams.delete('ObjOnDisplay');
+
+      if (this.state.onlyArtworks) {
+        currentUrlParams.set('portal_type', 'artwork');
+      }
+      if (this.state.excludeArtworks) {
+        const includeTypes = [
+          'Document',
+          'Event',
+          'News Item',
+          'author',
+          'Link',
+        ];
+        includeTypes.forEach((type) =>
+          currentUrlParams.append('portal_type:list', type),
+        );
+      }
+      if (this.state.hasPreviewImage) {
+        currentUrlParams.set('hasPreviewImage', 'true');
+      }
+      if (this.state.ObjOnDisplay) {
+        currentUrlParams.set('ObjOnDisplay', 'true');
+      }
+
+      history.push(`${location.pathname}?${currentUrlParams.toString()}`);
+      this.doSearch();
+    });
+  };
+
   /**
    * Search based on the given searchableText, subject and path.
    * @method doSearch
@@ -186,9 +287,22 @@ class Search extends Component {
 
   doSearch = () => {
     const options = qs.parse(this.props.history.location.search);
+    if (this.state.onlyArtworks) {
+      options.portal_type = 'artwork';
+    } else if (this.state.excludeArtworks) {
+      options.excludeArtworks = 'true';
+    } else if (this.state.hasPreviewImage) {
+      options.hasPreviewImage = 'true';
+    } else if (this.state.ObjOnDisplay) {
+      options.hasPreviewImage = 'true';
+    } else {
+      delete options.portal_type;
+      delete options.excludeArtworks;
+      delete options.hasPreviewImage;
+    }
     this.setState({ currentPage: 1 });
     options['use_site_search_settings'] = 1;
-    options['metadata_fields'] = ['start', 'end', 'whole_day', 'open_end']; // Add this line
+    options['metadata_fields'] = ['start', 'end', 'whole_day', 'open_end'];
     this.props.searchContent('', options);
   };
 
@@ -221,6 +335,55 @@ class Search extends Component {
         search: searchParams,
       });
     });
+  };
+
+  renderFilterButtons = () => {
+    const { intl } = this.props;
+    return (
+      <>
+        {/* <label>
+          <input
+            type="checkbox"
+            checked={this.state.hasPreviewImage}
+            onChange={() => this.handleCheckboxChange('hasPreviewImage')}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.hasImage[intl.locale]}</span>
+        </label> */}
+        <label>
+          <input
+            type="radio"
+            checked={this.state.onlyArtworks}
+            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            className="artwork-checkbox"
+          />
+          <span className="label">
+            {translations.filterArtworks[intl.locale]}
+          </span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            checked={this.state.excludeArtworks}
+            onChange={() => this.handleCheckboxChange('excludeArtworks')}
+            className="artwork-checkbox"
+          />
+          <span className="label">
+            {translations.excludeArtworks[intl.locale]}
+          </span>
+        </label>
+
+        {/* <label>
+          <input
+            type="checkbox"
+            checked={this.state.ObjOnDisplay}
+            onChange={() => this.handleCheckboxChange('ObjOnDisplay')}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.onDisplay[intl.locale]}</span>
+        </label> */}
+      </>
+    );
   };
 
   /**
@@ -256,11 +419,29 @@ class Search extends Component {
                 {translations.searchresults[intl.locale]}{' '}
                 {translations.for[intl.locale]} {this.props.searchableText}
               </h1>
-
               {/* <SearchTags /> */}
               <div className="search">
                 <SearchBar />
               </div>
+              <div id="filter-section" className="artwork-search-check button">
+                <button
+                  className="filter-button text-button btn-block"
+                  onClick={() =>
+                    this.setState({
+                      filtersDisplay: !this.state.filtersDisplay,
+                    })
+                  }
+                >
+                  {translations.filterheading[intl.locale]}
+                </button>
+                {this.state.filtersDisplay && this.renderFilterButtons()}
+              </div>
+              {/* <div className="artwork-search-check heading">
+                <h3 className="search-heading"> */}
+              {/* {translations.filterheading[intl.locale]} */}
+              {/* </h3>
+                {this.renderFilterButtons()}
+              </div> */}
               {this.props.search?.items_total > 0 ? (
                 <>
                   <div className="items_total">
@@ -271,7 +452,7 @@ class Search extends Component {
                     /> */}
                     {translations.results[intl.locale]}
                   </div>
-                  <Header>
+                  {/* <Header>
                     <Header.Content className="header-content">
                       <div className="sort-by">
                         <FormattedMessage
@@ -326,7 +507,7 @@ class Search extends Component {
                         />
                       </Button>
                     </Header.Content>
-                  </Header>
+                  </Header> */}
                 </>
               ) : (
                 <div>
@@ -338,60 +519,71 @@ class Search extends Component {
               )}
             </header>
             <section id="content-core">
-              {this.state.updatedItems?.map((item) => (
-                <article className="tileItem" key={item['@id']}>
-                  {item.image_field ? (
-                    <PreviewImage
-                      item={item}
-                      size="preview"
-                      alt={item.image_caption ? item.image_caption : item.title}
-                      className="ui image"
-                    />
-                  ) : item['@type'] === 'exhibition' &&
-                    item.hasFallbackImage === true ? (
-                    <PreviewImage
-                      item={item}
-                      size="large"
-                      alt={item.image_caption ? item.image_caption : item.title}
-                      className="ui image"
-                      isFallback={true}
-                    />
-                  ) : (
-                    <div className="image-placeholder"></div>
-                  )}
-
-                  <div className="search-text-wrapper">
-                    <h2 className="tileHeadline">
-                      <UniversalLink
+              <div className="artwork-search-check heading">
+                <h3 className="search-heading">
+                  {/* {translations.filterheading[intl.locale]} */}
+                </h3>
+                {this.renderFilterButtons()}
+              </div>
+              <div className="search-results-wrapper">
+                {this.state.updatedItems?.map((item) => (
+                  <article className="tileItem" key={item['@id']}>
+                    {item.image_field ? (
+                      <PreviewImage
                         item={item}
-                        className="summary url"
-                        title={item['@type']}
-                      >
-                        {item.title}
-                      </UniversalLink>
-                    </h2>
-                    {item['@type'] === 'Event' ? (
-                      <div className="listing-dates">
-                        <div className={`listing-dates-wrapper`}>
-                          <When
-                            start={item.start}
-                            end={item.end}
-                            whole_day={item.whole_day}
-                            open_end={item.open_end}
-                          />
-                        </div>
-                      </div>
+                        size="preview"
+                        alt={
+                          item.image_caption ? item.image_caption : item.title
+                        }
+                        className="ui image"
+                      />
+                    ) : item['@type'] === 'exhibition' &&
+                      item.hasFallbackImage === true ? (
+                      <PreviewImage
+                        item={item}
+                        size="large"
+                        alt={
+                          item.image_caption ? item.image_caption : item.title
+                        }
+                        className="ui image"
+                        isFallback={true}
+                      />
                     ) : (
-                      ''
+                      <div className="image-placeholder"></div>
                     )}
-                    {item.description && (
-                      <div className="tileBody">
-                        <span className="description">
-                          {truncate(item.description, 155)}
-                        </span>
-                      </div>
-                    )}
-                    {/* <div className="tileFooter">
+
+                    <div className="search-text-wrapper">
+                      <h2 className="tileHeadline">
+                        <UniversalLink
+                          item={item}
+                          className="summary url"
+                          title={item['@type']}
+                        >
+                          {item.title}
+                        </UniversalLink>
+                      </h2>
+                      {item['@type'] === 'Event' ? (
+                        <div className="listing-dates">
+                          <div className={`listing-dates-wrapper`}>
+                            <When
+                              start={item.start}
+                              end={item.end}
+                              whole_day={item.whole_day}
+                              open_end={item.open_end}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                      {item.description && (
+                        <div className="tileBody">
+                          <span className="description">
+                            {truncate(item.description, 155)}
+                          </span>
+                        </div>
+                      )}
+                      {/* <div className="tileFooter">
                       <UniversalLink item={item}>
                         <FormattedMessage
                           id="Read More…"
@@ -399,40 +591,42 @@ class Search extends Component {
                         />
                       </UniversalLink>
                     </div> */}
-                    <div className="visualClear" />
-                  </div>
-                </article>
-              ))}
+                      <div className="visualClear" />
+                    </div>
+                  </article>
+                ))}
 
-              {this.props.search?.batching && (
-                <div className="pagination-wrapper">
-                  <Pagination
-                    activePage={this.state.currentPage}
-                    totalPages={Math.ceil(
-                      this.props.search.items_total / settings.defaultPageSize,
-                    )}
-                    onPageChange={this.handleQueryPaginationChange}
-                    firstItem={null}
-                    lastItem={null}
-                    prevItem={{
-                      content: <HiMiniArrowLongLeft />,
-                      icon: true,
-                      'aria-disabled': !this.props.search.batching.prev,
-                      className: !this.props.search.batching.prev
-                        ? 'disabled'
-                        : null,
-                    }}
-                    nextItem={{
-                      content: <HiMiniArrowLongRight />,
-                      icon: true,
-                      'aria-disabled': !this.props.search.batching.next,
-                      className: !this.props.search.batching.next
-                        ? 'disabled'
-                        : null,
-                    }}
-                  />
-                </div>
-              )}
+                {this.props.search?.batching && (
+                  <div className="pagination-wrapper">
+                    <Pagination
+                      activePage={this.state.currentPage}
+                      totalPages={Math.ceil(
+                        this.props.search.items_total /
+                          settings.defaultPageSize,
+                      )}
+                      onPageChange={this.handleQueryPaginationChange}
+                      firstItem={null}
+                      lastItem={null}
+                      prevItem={{
+                        content: <HiMiniArrowLongLeft />,
+                        icon: true,
+                        'aria-disabled': !this.props.search.batching.prev,
+                        className: !this.props.search.batching.prev
+                          ? 'disabled'
+                          : null,
+                      }}
+                      nextItem={{
+                        content: <HiMiniArrowLongRight />,
+                        icon: true,
+                        'aria-disabled': !this.props.search.batching.next,
+                        className: !this.props.search.batching.next
+                          ? 'disabled'
+                          : null,
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
             </section>
           </article>
         </div>
