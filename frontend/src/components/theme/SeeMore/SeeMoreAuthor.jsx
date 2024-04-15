@@ -25,6 +25,14 @@ const Search = (props) => {
   // const [totalItems, setTotalItems] = useState(0);
   let authors = [];
 
+  if (content['@type'] === 'author') {
+    const authorTitle = content.title;
+    authors = [authorTitle];
+  } else if (content['@type'] === 'artwork') {
+    authors =
+      content.authors?.map((author) => author.title.split('(')[0].trim()) || [];
+  }
+
   let authorQueryString = authors.length
     ? authors.map((author) => `"${author}"`).join(' || ')
     : undefined;
