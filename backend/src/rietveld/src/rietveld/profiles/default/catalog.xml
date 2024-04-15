@@ -149,6 +149,18 @@
     <indexed_attr value="hasImage" />
   </index>
 
+  <index meta_type="BooleanIndex"
+         name="ObjOnDisplay"
+  >
+    <indexed_attr value="ObjOnDisplay" />
+  </index>
+
+  <index meta_type="BooleanIndex"
+         name="hasPreviewImage"
+  >
+    <indexed_attr value="hasPreviewImage" />
+  </index>
+
 
   <column value="artwork_date" />
   <column value="dating" />
