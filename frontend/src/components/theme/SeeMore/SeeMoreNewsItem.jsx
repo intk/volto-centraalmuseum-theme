@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createRef } from 'react';
 import { connect } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
-import { Container, Button } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { searchContent } from '@plone/volto/actions';
 import qs from 'query-string';
 import { defineMessages, useIntl } from 'react-intl';
-// import ArtworkPreview from '../ArtworkPreview/ArtworkPreview';
 import { PreviewImage } from '@plone/volto/components';
 import Masonry from 'react-masonry-css';
 import { useSelector } from 'react-redux';
-// import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
-// import { isCmsUi } from '@plone/volto/helpers';
+import { HiMiniArrowLongLeft } from 'react-icons/hi2';
+import { HiMiniArrowLongRight } from 'react-icons/hi2';
+import { Pagination } from 'semantic-ui-react';
+import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 
 const messages = defineMessages({
   seemore: {
@@ -20,21 +21,35 @@ const messages = defineMessages({
 });
 
 const Search = (props) => {
-  const { content, searchContent, items } = props;
+  const { content, searchContent, items, items_total } = props;
   const intl = useIntl();
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
+  // const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
-    doSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.searchableText, currentPage]);
+    let isMounted = true;
 
-  useEffect(() => {
-    if (items && items.length > 0) {
-      setTotalItems(items[0].total);
+    const doSearch = () => {
+      const currentPath = intl.locale;
+      const options = {
+        portal_type: 'News Item',
+        Creator: content?.blogWriterID || content?.title?.toLowerCase(),
+        path: currentPath,
+        metadata_fields: ['effective', 'created'],
+        b_size: 2,
+        b_start: (currentPage - 1) * 2,
+      };
+      searchContent('', options);
+    };
+
+    if (isMounted) {
+      doSearch();
     }
-  }, [items]);
+    return () => {
+      isMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.searchableText, currentPage, content, searchContent, intl.locale]);
 
   const sortedItems = props.items
     .slice(0, 20)
@@ -49,30 +64,14 @@ const Search = (props) => {
       content.authors?.map((author) => author.title.split('(')[0].trim()) || [];
   }
 
-  const doSearch = () => {
-    const currentPath = intl.locale;
-    const options = {
-      portal_type: 'News Item',
-      Creator: content?.blogWriterID || content?.title?.toLowerCase(),
-      path: currentPath,
-      metadata_fields: ['dating'],
-      b_size: 5,
-      b_start: (currentPage - 1) * 5,
-    };
-    searchContent('', options);
-  };
-  const authors_text = authors.join(', ');
-  const totalPages = Math.ceil(totalItems / 5);
+  // const authors_text = authors.join(', ');
+  const totalPages = Math.ceil(items_total / 2);
 
   const breakpointColumnsObj = {
     default: 3,
     1200: 3,
     992: 2,
     768: 1,
-  };
-
-  const changePage = (page) => {
-    setCurrentPage(page);
   };
 
   const pathname = useSelector((state) => state.router.location.pathname);
@@ -109,7 +108,10 @@ const Search = (props) => {
     return () => {
       isMounted = false;
     };
-  }, [pathname, items, sortedItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, items]);
+
+  const listingRef = createRef();
 
   return (
     <Container id="page-search-artwork">
@@ -129,7 +131,7 @@ const Search = (props) => {
           updatedItems.slice(0, 20).map(
             (item) =>
               props.location.pathname !== item['@id'] && (
-                <div className="SeeMoreItem" key={item['@id']}>
+                <div className="SeeMoreItem" key={item['@id']} ref={listingRef}>
                   {item.image_field ? (
                     <UniversalLink item={item}>
                       <PreviewImage
@@ -160,7 +162,7 @@ const Search = (props) => {
                   <UniversalLink item={item}>
                     <div className="item_title">{item.title}</div>
                   </UniversalLink>
-                  <div className="description">
+                  {/* <div className="description">
                     <p>
                       {authors_text && (
                         <span className="item-description">{authors_text}</span>
@@ -174,12 +176,26 @@ const Search = (props) => {
                         </span>
                       )}
                     </p>
+                  </div> */}
+                  <div className={`listing-dates-wrapper`}>
+                    <When
+                      start={item?.start}
+                      end={item?.end}
+                      whole_day={item?.whole_day}
+                      open_end={item?.open_end}
+                      type={item?.['@type']}
+                      published={
+                        item?.effective !== '1969-12-30T22:00:00+00:00'
+                          ? item?.effective
+                          : item?.created
+                      }
+                    />
                   </div>
                 </div>
               ),
           )}
       </Masonry>
-      <div
+      {/* <div
         style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
       >
         <Button
@@ -197,7 +213,33 @@ const Search = (props) => {
         >
           Next
         </Button>
-      </div>
+      </div> */}
+      {totalPages > 1 && (
+        <div className="pagination-wrapper">
+          <Pagination
+            activePage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(e, { activePage }) => {
+              listingRef.current.scrollIntoView({ behavior: 'smooth' });
+              setCurrentPage(activePage);
+            }}
+            firstItem={null}
+            lastItem={null}
+            prevItem={{
+              content: <HiMiniArrowLongLeft />,
+              icon: true,
+              'aria-disabled': currentPage === 1,
+              className: currentPage === 1 ? 'disabled' : null,
+            }}
+            nextItem={{
+              content: <HiMiniArrowLongRight />,
+              icon: true,
+              'aria-disabled': currentPage === totalPages,
+              className: currentPage === totalPages ? 'disabled' : null,
+            }}
+          />
+        </div>
+      )}
     </Container>
   );
 };
@@ -206,6 +248,7 @@ const mapStateToProps = (state, ownProps) => {
   const locationSearch = ownProps.location?.search || '';
   return {
     items: state.search.items,
+    items_total: state.search.total,
     searchableText: qs.parse(locationSearch).SearchableText,
   };
 };
