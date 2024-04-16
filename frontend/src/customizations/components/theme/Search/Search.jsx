@@ -582,13 +582,24 @@ class Search extends Component {
                       ) : (
                         ''
                       )}
-                      {item.description && (
-                        <div className="tileBody">
-                          <span className="description">
-                            {truncate(item.description, 155)}
-                          </span>
-                        </div>
-                      )}
+                      {item?.['@type'] !== 'artwork'
+                        ? item.description && (
+                            <div className="tileBody">
+                              <span className="description">
+                                {truncate(item.description, 155)}
+                              </span>
+                            </div>
+                          )
+                        : item.description && (
+                            <div className="tileBody">
+                              <span
+                                className={`description`}
+                                dangerouslySetInnerHTML={{
+                                  __html: truncate(item.description, 155),
+                                }}
+                              />
+                            </div>
+                          )}
                       {/* <div className="tileFooter">
                       <UniversalLink item={item}>
                         <FormattedMessage
