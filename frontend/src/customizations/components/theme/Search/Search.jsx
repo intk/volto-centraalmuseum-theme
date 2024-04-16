@@ -81,6 +81,14 @@ const translations = {
     en: 'Filter »',
     de: 'Filter »',
   },
+  description: {
+    nl:
+      'Wegens werkzaamheden aan de website is de collectie online momenteel beperkt raadpleegbaar.',
+    en:
+      'Due to maintenance work the online collection is only accessible to a limited extent.',
+    de:
+      'Vanwege onderhoudswerkzaamheden is de online collectie slechts beperkt toegankelijk.',
+  },
 };
 
 function truncate(str, num) {
@@ -422,9 +430,12 @@ class Search extends Component {
                     defaultMessage="Search results"
                   />
                 )} */}
-                {translations.searchresults[intl.locale]}{' '}
-                {translations.for[intl.locale]} {this.props.searchableText}
+                {translations.searchresults[intl.locale]}
+                {/* {translations.for[intl.locale]} {this.props.searchableText} */}
               </h1>
+              <h2 className="subheading">
+                {translations.description[intl.locale]}
+              </h2>
               {/* <SearchTags /> */}
               <div className="search">
                 <SearchBar />
