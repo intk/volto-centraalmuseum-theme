@@ -83,6 +83,31 @@ const translations = {
     en: 'Filter »',
     de: 'Filter »',
   },
+  filter: {
+    nl: 'Filter de resultaten',
+    en: 'Filter the results',
+    de: 'Filtern Sie die Ergebnisse',
+  },
+  showFilters: {
+    nl: 'showFilters',
+    en: 'showFilters',
+    de: 'showFilters',
+  },
+  hideFilters: {
+    nl: 'Verberg filters',
+    en: 'Hide Filters',
+    de: 'Filter ausblenden',
+  },
+  deleteEverything: {
+    nl: 'Verwijder alles',
+    en: 'Clear all',
+    de: 'Alles löschen',
+  },
+  total: {
+    nl: 'Totaal',
+    en: 'Total',
+    de: 'Gesamt',
+  },
   description: {
     nl:
       'Wegens werkzaamheden aan de website is de collectie online momenteel beperkt raadpleegbaar.',
@@ -153,10 +178,11 @@ class Search extends Component {
       updatedItems: [],
       onlyArtworks: false,
       excludeArtworks: false,
-      objOnDisplay: false,
+      // ObjOnDisplay: false,
       hasPreviewImage: false,
       ObjOnDisplay: false,
       filtersDisplay: false,
+      showFilters: true,
     };
     this.isMountedFlag = false;
   }
@@ -253,6 +279,9 @@ class Search extends Component {
         break;
       case 'ObjOnDisplay':
         updates = { ObjOnDisplay: !this.state.ObjOnDisplay };
+        break;
+      case 'showFilters':
+        updates = { showFilters: !this.state.showFilters };
         break;
       default:
         break;
@@ -521,27 +550,225 @@ class Search extends Component {
                 renderPreviewimagebutton={this.renderPreviewimagebutton()}
                 renderOndisplaybutton={this.renderOndisplaybutton()}
               />
-              {this.props.search?.items_total > 0 ? (
-                <>
-                  <div className="items_total">
-                    <strong>{this.props.search.items_total}</strong>
-                    {translations.results[intl.locale]}
+              <div className="result-count">
+                {this.props.search?.items_total > 0 ? (
+                  <>
+                    <div className="items_total">
+                      <strong>{this.props.search.items_total}</strong>
+                      {translations.results[intl.locale]}
+                    </div>
+                  </>
+                ) : (
+                  <div>
+                    <FormattedMessage
+                      id="No results found"
+                      defaultMessage="No results found"
+                    />
                   </div>
-                </>
-              ) : (
-                <div>
-                  <FormattedMessage
-                    id="No results found"
-                    defaultMessage="No results found"
-                  />
-                </div>
-              )}
+                )}
+              </div>
             </header>
             <section id="content-core">
               <div className="artwork-search-check heading">
                 {this.renderFilterButtons()}
               </div>
               <div className="search-results-wrapper">
+                <div className="filter-summary">
+                  <div className="filter-summary-title">
+                    <h5>Huidige zoekopdracht</h5>
+                  </div>
+
+                  <div
+                    className={`filter-summary-list-wrapper ${
+                      this.state.showFilters ? 'show' : 'hide'
+                    }`}
+                  >
+                    {(this.state.onlyArtworks ||
+                      this.state.excludeArtworks) && (
+                      <>
+                        <div className="filter-summary-subtitle">
+                          <button
+                            onClick={() =>
+                              this.state.onlyArtworks
+                                ? this.handleCheckboxChange('onlyArtworks')
+                                : this.handleCheckboxChange('excludeArtworks')
+                            }
+                            className="filter-cancel-button"
+                          >
+                            [X]
+                          </button>
+                          {translations.filter[intl.locale]}
+                        </div>
+                        <div className="filter-summary-display">
+                          {this.state.onlyArtworks && (
+                            <>
+                              <button
+                                onClick={() =>
+                                  this.handleCheckboxChange('onlyArtworks')
+                                }
+                                className="filter-cancel-button"
+                              >
+                                [X]
+                              </button>
+                              {translations.filterArtworks[intl.locale]}
+                            </>
+                          )}
+                          {this.state.excludeArtworks && (
+                            <>
+                              <button
+                                onClick={() =>
+                                  this.handleCheckboxChange('excludeArtworks')
+                                }
+                                className="filter-cancel-button"
+                              >
+                                [X]
+                              </button>
+                              {translations.excludeArtworks[intl.locale]}
+                            </>
+                          )}
+                        </div>
+                      </>
+                    )}{' '}
+                    {!this.state.onlyArtworks && !this.state.excludeArtworks && (
+                      <>
+                        <div className="filter-summary-subtitle">
+                          <button
+                            onClick={() =>
+                              this.handleCheckboxChange('showFilters')
+                            }
+                            className="filter-cancel-button"
+                          >
+                            [X]
+                          </button>
+                          {translations.filter[intl.locale]}
+                        </div>
+                        <div className="filter-summary-display">
+                          <button
+                            onClick={() =>
+                              this.handleCheckboxChange('showFilters')
+                            }
+                            className="filter-cancel-button"
+                          >
+                            [X]
+                          </button>
+                          {translations.total[intl.locale]}
+                        </div>
+                      </>
+                    )}
+                    {this.state.hasPreviewImage && (
+                      <>
+                        <div className="filter-summary-subtitle">
+                          <button
+                            onClick={() =>
+                              this.handleCheckboxChange('hasPreviewImage')
+                            }
+                            className="filter-cancel-button"
+                          >
+                            [X]
+                          </button>
+                          {translations.hasImage[intl.locale]}
+                        </div>
+                        <div className="filter-summary-display">
+                          <>
+                            <button
+                              onClick={() =>
+                                this.handleCheckboxChange('hasPreviewImage')
+                              }
+                              className="filter-cancel-button"
+                            >
+                              [X]
+                            </button>
+                            {translations.hasImage[intl.locale]}
+                          </>
+                        </div>
+                      </>
+                    )}
+                    {this.state.ObjOnDisplay && (
+                      <>
+                        <div className="filter-summary-subtitle">
+                          <button
+                            onClick={() =>
+                              this.handleCheckboxChange('ObjOnDisplay')
+                            }
+                            className="filter-cancel-button"
+                          >
+                            [X]
+                          </button>
+                          {translations.onDisplay[intl.locale]}
+                        </div>
+                        <div className="filter-summary-display">
+                          <>
+                            <button
+                              onClick={() =>
+                                this.handleCheckboxChange('ObjOnDisplay')
+                              }
+                              className="filter-cancel-button"
+                            >
+                              [X]
+                            </button>
+                            {translations.onDisplay[intl.locale]}
+                          </>
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  <div className="filter-summary-end-buttons">
+                    <div className="filter-summary-display">
+                      <>
+                        <button
+                          onClick={() =>
+                            this.handleCheckboxChange('showFilters')
+                          }
+                          className="filter-cancel-button"
+                        >
+                          {this.state.showFilters ? 'Δ' : '∇'}
+                        </button>
+                        {/* {translations.onDisplay[intl.locale]} */}
+                        {this.state.showFilters
+                          ? translations.hideFilters[intl.locale]
+                          : translations.showFilters[intl.locale]}
+                      </>
+                    </div>
+                    <div className="filter-summary-display">
+                      <>
+                        <button
+                          onClick={() => {
+                            this.state.onlyArtworks &&
+                              this.handleCheckboxChange('onlyArtworks');
+                            this.state.excludeArtworks &&
+                              this.handleCheckboxChange('excludeArtworks');
+                            this.state.hasPreviewImage &&
+                              this.handleCheckboxChange('hasPreviewImage');
+                            this.state.ObjOnDisplay &&
+                              this.handleCheckboxChange('ObjOnDisplay');
+                          }}
+                          className="filter-cancel-button"
+                        >
+                          [X]
+                        </button>
+                        {translations.deleteEverything[intl.locale]}
+                      </>
+                    </div>
+                  </div>
+                </div>
+                <div className="result-count-filter">
+                  {this.props.search?.items_total > 0 ? (
+                    <>
+                      <div className="items_total">
+                        <strong>{this.props.search.items_total}</strong>
+                        {translations.results[intl.locale]}
+                      </div>
+                    </>
+                  ) : (
+                    <div>
+                      <FormattedMessage
+                        id="No results found"
+                        defaultMessage="No results found"
+                      />
+                    </div>
+                  )}
+                </div>
                 {this.props.search?.batching && (
                   <div className="pagination-wrapper top">
                     <Pagination
@@ -558,7 +785,7 @@ class Search extends Component {
                         icon: true,
                         'aria-disabled': !this.props.search.batching.prev,
                         className: !this.props.search.batching.prev
-                          ? 'disabled'
+                          ? 'disabledthis.state'
                           : null,
                       }}
                       nextItem={{
