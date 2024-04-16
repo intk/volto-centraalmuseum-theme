@@ -242,4 +242,5 @@ class IArtwork(model.Schema):
         "priref",
         "dating",
         "authors",
+        "inventoryNumber",
     )
