@@ -24,6 +24,7 @@ import { SearchTags, Toolbar, Icon } from '@plone/volto/components';
 import { PreviewImage } from '@plone/volto/components';
 import SearchBar from '@package/components/theme/Search/SearchBar';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
+import { Link } from 'react-router-dom';
 
 import { HiMiniArrowLongLeft } from 'react-icons/hi2';
 import { HiMiniArrowLongRight } from 'react-icons/hi2';
@@ -445,24 +446,17 @@ class Search extends Component {
                 className="artwork-search-check button advancedsearch-button"
               >
                 {' '}
-                <a
-                  href={
+                <Link
+                  to={
                     intl.locale !== 'de'
                       ? `/${intl.locale}/advancedsearch`
                       : `/en/advancedsearch`
                   }
                 >
-                  <button
-                    className="filter-button text-button btn-block advancedsearch"
-                    onClick={() =>
-                      this.setState({
-                        filtersDisplay: !this.state.filtersDisplay,
-                      })
-                    }
-                  >
+                  <button className="filter-button text-button btn-block advancedsearch">
                     {translations.advancedsearch[intl.locale]}
                   </button>
-                </a>
+                </Link>
               </div>
               <div id="filter-section" className="artwork-search-check button">
                 <button
