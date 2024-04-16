@@ -23,6 +23,7 @@ import { searchContent } from '@plone/volto/actions';
 import { SearchTags, Toolbar, Icon } from '@plone/volto/components';
 import { PreviewImage } from '@plone/volto/components';
 import SearchBar from '@package/components/theme/Search/SearchBar';
+import FilterMenu from '@package/components/theme/Search/FilterMenu';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 import { Link } from 'react-router-dom';
 
@@ -401,6 +402,76 @@ class Search extends Component {
     );
   };
 
+  renderOnlyartworksbutton = () => {
+    const { intl } = this.props;
+    return (
+      <>
+        <label>
+          <input
+            type="radio"
+            checked={this.state.onlyArtworks}
+            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            className="artwork-checkbox"
+          />
+          <span className="label">
+            {translations.filterArtworks[intl.locale]}
+          </span>
+        </label>
+      </>
+    );
+  };
+
+  renderExcludeartworksbutton = () => {
+    const { intl } = this.props;
+    return (
+      <>
+        <label>
+          <input
+            type="radio"
+            checked={this.state.onlyArtworks}
+            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            className="artwork-checkbox"
+          />
+          <span className="label">
+            {translations.excludeArtworks[intl.locale]}
+          </span>
+        </label>
+      </>
+    );
+  };
+  renderPreviewimagebutton = () => {
+    const { intl } = this.props;
+    return (
+      <>
+        <label>
+          <input
+            type="radio"
+            checked={this.state.onlyArtworks}
+            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.hasImage[intl.locale]}</span>
+        </label>
+      </>
+    );
+  };
+  renderOndisplaybutton = () => {
+    const { intl } = this.props;
+    return (
+      <>
+        <label>
+          <input
+            type="radio"
+            checked={this.state.onlyArtworks}
+            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.onDisplay[intl.locale]}</span>
+        </label>
+      </>
+    );
+  };
+
   /**
    * Render method.
    * @method render
@@ -458,7 +529,7 @@ class Search extends Component {
                   </button>
                 </Link>
               </div>
-              <div id="filter-section" className="artwork-search-check button">
+              {/* <div id="filter-section" className="artwork-search-check button">
                 <button
                   className="filter-button text-button btn-block"
                   onClick={() =>
@@ -470,7 +541,13 @@ class Search extends Component {
                   {translations.filterheading[intl.locale]}
                 </button>
                 {this.state.filtersDisplay && this.renderFilterButtons()}
-              </div>
+              </div> */}
+              <FilterMenu
+                renderOnlyartworksbutton={this.renderOnlyartworksbutton}
+                renderExcludeartworksbutton={this.renderExcludeartworksbutton}
+                renderPreviewimagebutton={this.renderPreviewimagebutton}
+                renderOndisplaybutton={this.renderOndisplaybutton}
+              />
 
               {/* <div className="artwork-search-check heading">
                 <h3 className="search-heading"> */}
@@ -482,68 +559,8 @@ class Search extends Component {
                 <>
                   <div className="items_total">
                     <strong>{this.props.search.items_total}</strong>
-                    {/* <FormattedMessage
-                      id="results found"
-                      defaultMessage="results"
-                    /> */}
                     {translations.results[intl.locale]}
                   </div>
-                  {/* <Header>
-                    <Header.Content className="header-content">
-                      <div className="sort-by">
-                        <FormattedMessage
-                          id="Sort By:"
-                          defaultMessage="Sort by:"
-                        />
-                      </div>
-                      <Button
-                        onClick={(event) => {
-                          this.onSortChange(event);
-                        }}
-                        name="relevance"
-                        size="tiny"
-                        className={classNames('button-sort', {
-                          'button-active': this.state.active === 'relevance',
-                        })}
-                      >
-                        <FormattedMessage
-                          id="Relevance"
-                          defaultMessage="Relevance"
-                        />
-                      </Button>
-                      <Button
-                        onClick={(event) => {
-                          this.onSortChange(event);
-                        }}
-                        name="sortable_title"
-                        size="tiny"
-                        className={classNames('button-sort', {
-                          'button-active':
-                            this.state.active === 'sortable_title',
-                        })}
-                      >
-                        <FormattedMessage
-                          id="Alphabetically"
-                          defaultMessage="Alphabetically"
-                        />
-                      </Button>
-                      <Button
-                        onClick={(event) => {
-                          this.onSortChange(event, 'reverse');
-                        }}
-                        name="effective"
-                        size="tiny"
-                        className={classNames('button-sort', {
-                          'button-active': this.state.active === 'effective',
-                        })}
-                      >
-                        <FormattedMessage
-                          id="Date (newest first)"
-                          defaultMessage="Date (newest first)"
-                        />
-                      </Button>
-                    </Header.Content>
-                  </Header> */}
                 </>
               ) : (
                 <div>
@@ -556,9 +573,6 @@ class Search extends Component {
             </header>
             <section id="content-core">
               <div className="artwork-search-check heading">
-                <h3 className="search-heading">
-                  {/* {translations.filterheading[intl.locale]} */}
-                </h3>
                 {this.renderFilterButtons()}
               </div>
               <div className="search-results-wrapper">

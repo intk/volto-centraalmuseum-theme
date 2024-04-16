@@ -160,6 +160,8 @@
     "@kitconcept/volto-button-block": "*",
     "@kitconcept/volto-carousel-block": "1.1.0",
     "@kitconcept/volto-slider-block": "*",
+    "@mui/icons-material": "5.15.15",
+    "@mui/material": "5.15.15",
     "@plone/volto": "16.21.3",
     "add": "2.0.6",
     "fast-xml-parser": "4.2.7",
