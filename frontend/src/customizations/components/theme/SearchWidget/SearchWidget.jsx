@@ -30,6 +30,10 @@ const SearchWidget = ({ onClose }) => {
   const [visible, setVisible] = React.useState(false);
   const history = useHistory();
   const intl = useIntl();
+  let locale = intl.locale;
+  if (locale === 'de') {
+    locale = 'en';
+  }
   const ref = useDetectClickOutside({
     onTriggered: () => {
       setText('');
@@ -48,7 +52,7 @@ const SearchWidget = ({ onClose }) => {
     history.push(
       `/${intl.locale}/search?SearchableText=${encodeURIComponent(
         text,
-      )}&Language=${intl.locale}`,
+      )}&Language=${locale}`,
     );
     // reset input value
     setText('');
