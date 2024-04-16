@@ -223,6 +223,8 @@
           padding-left: 15px;
         }
         @media (min-width: 1200px){
+          padding-right: 14px;
+          padding-left: 14px;
           margin-bottom: 0px;
           width: 100%;
         }
@@ -365,6 +367,7 @@
         opacity: 1;
 
         #input::placeholder {
+          content: '' !important;
           color: #848484;
           font-family: 'FranklinBook', Arial, sans-serif;
           letter-spacing: 0.8px;
@@ -528,7 +531,9 @@
   }
   #filter-section.artwork-search-check.button.advancedsearch-button{
     display: block !important;
-    margin-top: 10px !important;
+    margin-top: 15px !important;
+    margin-bottom: 10px !important;
+    text-underline-offset: 6px;
     // margin-bottom: 5px !important;
     @media screen and (min-width:992px) {
       display: block !important;
@@ -763,6 +768,7 @@ body.has-toolbar {
     button{
       cursor: pointer;
       padding-left: 0px;
+      padding-right: 3px;
     }
 
     h5{
@@ -788,6 +794,7 @@ body.has-toolbar {
   .filter-cancel-button{
     background-color: transparent;
     border: 0px;
+    letter-spacing: 0.8px !important;
   }
   .filter-summary-display{
     margin-top: -4px;
@@ -797,6 +804,10 @@ body.has-toolbar {
     line-height: 21.4286px;
     letter-spacing: 0.8px;
     font-weight: 500;
+    .filter-cancel-button{
+      padding-right: 3.5px !important;
+      letter-spacing: 0.2px !important;
+    }
   }
   .filter-summary-end-buttons{
     margin-top: 21px;
@@ -804,6 +815,9 @@ body.has-toolbar {
     .filter-summary-display{
       padding-left: 0px;
       padding-right: 15px;
+    }
+    .filter-cancel-button{
+      padding-right: 5.5px !important;
     }
   }
   .filter-summary-list-wrapper {
@@ -821,6 +835,7 @@ body.has-toolbar {
   .result-count-filter{
     padding-left: 0px;
     margin-top: 16px;
+    margin-left: -2px;
     display: none;
     @media (min-width:992px) {
       display: block;

@@ -72,7 +72,7 @@ const SearchBar = ({ onClose }) => {
             value={text}
             transparent
             autoComplete="off"
-            placeholder={intl.formatMessage(messages.searchSite)}
+            // placeholder={intl.formatMessage(messages.searchSite)}
             title={intl.formatMessage(messages.search)}
           />
           <button
