@@ -404,13 +404,14 @@
     button.text-button.btn-block.filter-button {
       background-color: transparent !important;
       border: 0px !important;
-      margin-top: 20px !important;
+      // margin-top: 20px !important;
       margin-bottom: 15px !important;
       color: #282931;
       text-decoration: underline !important;
       font-size: 16px;
       font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       letter-spacing: 0.8px;
+      display: block;
 
       &:active,
       &:hover {
@@ -421,6 +422,14 @@
 
     @media screen and (min-width:992px) {
       display: none !important;
+    }
+  }
+  #filter-section.artwork-search-check.button.advancedsearch-button{
+    display: block !important;
+    margin-top: 10px !important;
+    // margin-bottom: 5px !important;
+    @media screen and (min-width:992px) {
+      display: block !important;
     }
   }
 }

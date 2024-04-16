@@ -440,6 +440,30 @@ class Search extends Component {
               <div className="search">
                 <SearchBar />
               </div>
+              <div
+                id="filter-section"
+                className="artwork-search-check button advancedsearch-button"
+              >
+                {' '}
+                <a
+                  href={
+                    intl.locale !== 'de'
+                      ? `/${intl.locale}/advancedsearch`
+                      : `/en/advancedsearch`
+                  }
+                >
+                  <button
+                    className="filter-button text-button btn-block advancedsearch"
+                    onClick={() =>
+                      this.setState({
+                        filtersDisplay: !this.state.filtersDisplay,
+                      })
+                    }
+                  >
+                    {translations.advancedsearch[intl.locale]}
+                  </button>
+                </a>
+              </div>
               <div id="filter-section" className="artwork-search-check button">
                 <button
                   className="filter-button text-button btn-block"
@@ -453,6 +477,7 @@ class Search extends Component {
                 </button>
                 {this.state.filtersDisplay && this.renderFilterButtons()}
               </div>
+
               {/* <div className="artwork-search-check heading">
                 <h3 className="search-heading"> */}
               {/* {translations.filterheading[intl.locale]} */}
