@@ -428,8 +428,8 @@ class Search extends Component {
         <label>
           <input
             type="radio"
-            checked={this.state.onlyArtworks}
-            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            checked={this.state.excludeArtworks}
+            onChange={() => this.handleCheckboxChange('excludeArtworks')}
             className="artwork-checkbox"
           />
           <span className="label">
@@ -445,9 +445,9 @@ class Search extends Component {
       <>
         <label>
           <input
-            type="radio"
-            checked={this.state.onlyArtworks}
-            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            type="checkbox"
+            checked={this.state.hasPreviewImage}
+            onChange={() => this.handleCheckboxChange('hasPreviewImage')}
             className="artwork-checkbox"
           />
           <span className="label">{translations.hasImage[intl.locale]}</span>
@@ -461,9 +461,9 @@ class Search extends Component {
       <>
         <label>
           <input
-            type="radio"
-            checked={this.state.onlyArtworks}
-            onChange={() => this.handleCheckboxChange('onlyArtworks')}
+            type="checkbox"
+            checked={this.state.ObjOnDisplay}
+            onChange={() => this.handleCheckboxChange('ObjOnDisplay')}
             className="artwork-checkbox"
           />
           <span className="label">{translations.onDisplay[intl.locale]}</span>
@@ -480,6 +480,7 @@ class Search extends Component {
   render() {
     const { settings } = config;
     const { intl } = this.props;
+    console.log('Rendering with state:', this.state);
 
     return (
       <Container id="page-search">
@@ -488,20 +489,6 @@ class Search extends Component {
           <article id="content">
             <header>
               <h1 className="documentFirstHeading">
-                {/* {this.props.searchableText ? (
-                  <FormattedMessage
-                    id="Search results for {term}"
-                    defaultMessage="Search results for {term}"
-                    values={{
-                      term: <q>{this.props.searchableText}</q>,
-                    }}
-                  />
-                ) : (
-                  <FormattedMessage
-                    id="Search results"
-                    defaultMessage="Search results"
-                  />
-                )} */}
                 {translations.searchresults[intl.locale]}
                 {/* {translations.for[intl.locale]} {this.props.searchableText} */}
               </h1>
@@ -529,32 +516,12 @@ class Search extends Component {
                   </button>
                 </Link>
               </div>
-              {/* <div id="filter-section" className="artwork-search-check button">
-                <button
-                  className="filter-button text-button btn-block"
-                  onClick={() =>
-                    this.setState({
-                      filtersDisplay: !this.state.filtersDisplay,
-                    })
-                  }
-                >
-                  {translations.filterheading[intl.locale]}
-                </button>
-                {this.state.filtersDisplay && this.renderFilterButtons()}
-              </div> */}
               <FilterMenu
-                renderOnlyartworksbutton={this.renderOnlyartworksbutton}
-                renderExcludeartworksbutton={this.renderExcludeartworksbutton}
-                renderPreviewimagebutton={this.renderPreviewimagebutton}
-                renderOndisplaybutton={this.renderOndisplaybutton}
+                renderOnlyartworksbutton={this.renderOnlyartworksbutton()}
+                renderExcludeartworksbutton={this.renderExcludeartworksbutton()}
+                renderPreviewimagebutton={this.renderPreviewimagebutton()}
+                renderOndisplaybutton={this.renderOndisplaybutton()}
               />
-
-              {/* <div className="artwork-search-check heading">
-                <h3 className="search-heading"> */}
-              {/* {translations.filterheading[intl.locale]} */}
-              {/* </h3>
-                {this.renderFilterButtons()}
-              </div> */}
               {this.props.search?.items_total > 0 ? (
                 <>
                   <div className="items_total">
@@ -644,14 +611,6 @@ class Search extends Component {
                               />
                             </div>
                           )}
-                      {/* <div className="tileFooter">
-                      <UniversalLink item={item}>
-                        <FormattedMessage
-                          id="Read More…"
-                          defaultMessage="Read More…"
-                        />
-                      </UniversalLink>
-                    </div> */}
                       <div className="visualClear" />
                     </div>
                   </article>

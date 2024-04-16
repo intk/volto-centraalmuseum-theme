@@ -236,8 +236,8 @@ class FilterMenu extends Component {
                       {translations.filter[intl.locale]}
                     </AccordionSummary>
                     <AccordionDetails>
-                      <div>{this.props.renderOnlyartworksbutton()}</div>
-                      <div>{this.props.renderExcludeartworksbutton()}</div>
+                      <div>{this.props.renderOnlyartworksbutton}</div>
+                      <div>{this.props.renderExcludeartworksbutton}</div>
                     </AccordionDetails>
                   </Accordion>
                   <Accordion>
@@ -249,7 +249,7 @@ class FilterMenu extends Component {
                       {translations.hasImage[intl.locale]}
                     </AccordionSummary>
                     <AccordionDetails>
-                      {this.props.renderPreviewimagebutton()}
+                      {this.props.renderPreviewimagebutton}
                     </AccordionDetails>
                   </Accordion>
                   <Accordion>
@@ -261,7 +261,7 @@ class FilterMenu extends Component {
                       {translations.onDisplay[intl.locale]}
                     </AccordionSummary>
                     <AccordionDetails>
-                      {this.props.renderOndisplaybutton()}
+                      {this.props.renderOndisplaybutton}
                     </AccordionDetails>
                   </Accordion>
                 </Container>
