@@ -46,6 +46,11 @@ msgstr ""
 msgid "Clear filters"
 msgstr ""
 
+#: components/theme/Search/FilterMenu
+# defaultMessage: Close menu
+msgid "Close menu"
+msgstr ""
+
 #: components/Blocks/SiteData/schema
 # defaultMessage: Image of the first column
 msgid "Column One Image"
@@ -169,6 +174,11 @@ msgstr ""
 #: components/Blocks/Search/SortOn
 # defaultMessage: No selection
 msgid "No selection"
+msgstr ""
+
+#: components/theme/Search/FilterMenu
+# defaultMessage: Open menu
+msgid "Open menu"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
