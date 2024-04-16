@@ -31,7 +31,7 @@ const SearchBar = ({ onClose }) => {
   const history = useHistory();
   const intl = useIntl();
   let locale = intl.locale;
-  if ((locale = 'de')) {
+  if (locale === 'de') {
     locale = 'en';
   }
   const ref = useDetectClickOutside({
