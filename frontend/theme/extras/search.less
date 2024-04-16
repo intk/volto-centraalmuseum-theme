@@ -566,7 +566,7 @@ body.section-search .filter-menu {
   width: 100vw;
   top: 0px;
   left: 0px;
-  z-index: 1000;
+  z-index: 10000;
   border: 0px;
 
   .nav-seach-wrapper{
@@ -685,6 +685,16 @@ body.section-search .filter-menu {
     100% {
       transform: translateX(0) !important;
     }
+  }
+}
+
+body.filter-menu-opening{
+  overflow: hidden;
+  #page-search {
+    min-height: 100vh;
+  }
+  .logo a {
+    pointer-events: none !important;
   }
 }
 
