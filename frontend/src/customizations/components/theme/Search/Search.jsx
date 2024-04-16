@@ -54,26 +54,32 @@ const translations = {
   advancedsearch: {
     en: 'Advanced search',
     nl: 'Geavanceerd zoeken',
+    de: 'Erweiterte Suche',
   },
   filterArtworks: {
     en: 'Only in the collection',
     nl: 'Alleen in de collectie',
+    de: 'Nur in der Sammlung',
   },
   excludeArtworks: {
     en: 'Only in the website',
     nl: 'Alleen in de website',
+    de: 'Nur auf der Website',
   },
   hasImage: {
     nl: 'Met beeld',
     en: 'With image',
+    de: 'Mit Bild',
   },
   onDisplay: {
     en: 'Collection now on view',
     nl: 'Collectie nu te zien',
+    de: 'Sammlung jetzt zu sehen',
   },
   filterheading: {
     nl: 'Filter »',
     en: 'Filter »',
+    de: 'Filter »',
   },
 };
 
