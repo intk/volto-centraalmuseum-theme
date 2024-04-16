@@ -480,7 +480,6 @@ class Search extends Component {
   render() {
     const { settings } = config;
     const { intl } = this.props;
-    console.log('Rendering with state:', this.state);
 
     return (
       <Container id="page-search">
@@ -543,6 +542,36 @@ class Search extends Component {
                 {this.renderFilterButtons()}
               </div>
               <div className="search-results-wrapper">
+                {this.props.search?.batching && (
+                  <div className="pagination-wrapper top">
+                    <Pagination
+                      activePage={this.state.currentPage}
+                      totalPages={Math.ceil(
+                        this.props.search.items_total /
+                          settings.defaultPageSize,
+                      )}
+                      onPageChange={this.handleQueryPaginationChange}
+                      firstItem={null}
+                      lastItem={null}
+                      prevItem={{
+                        content: <HiMiniArrowLongLeft />,
+                        icon: true,
+                        'aria-disabled': !this.props.search.batching.prev,
+                        className: !this.props.search.batching.prev
+                          ? 'disabled'
+                          : null,
+                      }}
+                      nextItem={{
+                        content: <HiMiniArrowLongRight />,
+                        icon: true,
+                        'aria-disabled': !this.props.search.batching.next,
+                        className: !this.props.search.batching.next
+                          ? 'disabled'
+                          : null,
+                      }}
+                    />
+                  </div>
+                )}
                 {this.state.updatedItems?.map((item) => (
                   <article className="tileItem" key={item['@id']}>
                     {item.image_field ? (
@@ -615,7 +644,6 @@ class Search extends Component {
                     </div>
                   </article>
                 ))}
-
                 {this.props.search?.batching && (
                   <div className="pagination-wrapper">
                     <Pagination
