@@ -108,6 +108,11 @@ const translations = {
     en: 'Total',
     de: 'Gesamt',
   },
+  currentSearch: {
+    nl: 'Huidige zoekopdracht',
+    en: 'Current search',
+    de: 'Aktuelle Suche',
+  },
   description: {
     nl:
       'Wegens werkzaamheden aan de website is de collectie online momenteel beperkt raadpleegbaar.',
@@ -575,7 +580,7 @@ class Search extends Component {
               <div className="search-results-wrapper">
                 <div className="filter-summary">
                   <div className="filter-summary-title">
-                    <h5>Huidige zoekopdracht</h5>
+                    <h5>{translations.currentSearch[intl.locale]}</h5>
                   </div>
 
                   <div
