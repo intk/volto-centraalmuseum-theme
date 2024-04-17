@@ -1689,6 +1689,11 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     a {
       border-bottom: 0px !important;
     }
+    max-width: 200px;
+
+    .writer-title:hover {
+      text-decoration: underline;
+    }
 
     @media screen and (max-width: 1200px){
       margin-top: 35px;
