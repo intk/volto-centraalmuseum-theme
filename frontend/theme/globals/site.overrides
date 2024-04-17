@@ -1689,7 +1689,15 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     a {
       border-bottom: 0px !important;
     }
-    max-width: 200px;
+    width: auto !important;
+
+
+    @media (min-width: 1200px){
+      max-width: 200px;
+      .writer-description{
+        text-wrap: wrap !important;
+      }
+    }
 
     .writer-title:hover {
       text-decoration: underline;
@@ -1756,7 +1764,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
       // transform: translateY(1.52px);
       color: rgba(0, 0, 0, 0.54) !important;
       fill: rgba(0, 0, 0, 0.54) !important;
-      white-space: nowrap !important;
+      // white-space: nowrap !important;
 
       @media screen and (max-width: 1105px){
         margin-top: 1px !important;
