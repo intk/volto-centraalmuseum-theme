@@ -26,6 +26,11 @@ import { Link } from 'react-router-dom';
  */
 const NewsItemView = ({ content }) => {
   const [blogWriter, setBlogWriter] = useState();
+  const [tooltip, setTooltip] = useState({
+    display: 'none',
+    top: 0,
+    left: 0,
+  });
   const dispatch = useDispatch();
   const intl = useIntl();
   const Container =
@@ -56,10 +61,31 @@ const NewsItemView = ({ content }) => {
     doSearch();
   }, [content, dispatch, intl]);
 
+  const showTooltip = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setTooltip({
+      display: 'block',
+      top: event.clientY - rect.top + 15,
+      left: event.clientX - rect.left,
+    });
+  };
+
+  const hideTooltip = () => {
+    setTooltip({ display: 'none', top: 0, left: 0 });
+  };
+
   return hasBlocksData(content) ? (
     <Container id="page-document" className="view-wrapper newsitem-view">
       {blogWriter && (
-        <div className="blog-writer" key={blogWriter['@id']}>
+        <div
+          className="blog-writer"
+          onMouseOver={(e) => showTooltip(e)}
+          onMouseMove={(e) => showTooltip(e)}
+          onMouseOut={hideTooltip}
+          onFocus={(e) => showTooltip(e)}
+          onBlur={hideTooltip}
+          key={blogWriter['@id']}
+        >
           {blogWriter.image_field && (
             <div className="writer-image-wrapper">
               <Link to={flattenToAppURL(blogWriter?.['@id'])}>
@@ -74,7 +100,31 @@ const NewsItemView = ({ content }) => {
             <h1 className="writer-title">{blogWriter?.title}</h1>
           </Link>
           {blogWriter?.description && (
-            <p className="writer-description">{blogWriter.description}</p>
+            <p className="writer-description">
+              {blogWriter.description}{' '}
+              <span
+                className="writer-description-tooltip"
+                style={{
+                  display: tooltip.display,
+                  position: 'absolute',
+                  left: `${tooltip.left}px`,
+                  top: `${tooltip.top}px`,
+                  backgroundColor: '#282931',
+                  opacity: '85%',
+                  width: 'auto',
+                  color: 'white',
+                  padding: '5px',
+                  lineHeight: '12px',
+                  fontSize: '12px',
+                  textWrap: 'nowrap',
+                  // borderRadius: '5px',
+                  pointerEvents: 'none',
+                  zIndex: 1000,
+                }}
+              >
+                {blogWriter.description}
+              </span>
+            </p>
           )}
         </div>
       )}
