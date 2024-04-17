@@ -84,6 +84,10 @@ export default function applyConfig(config) {
     exhibition: ExhibitionView,
   };
 
+  config.settings.nonContentRoutes = [
+    ...config.settings.nonContentRoutes.filter((p) => p !== '/search'),
+  ];
+
   config.settings.asyncPropsExtenders = [
     ...config.settings.asyncPropsExtenders,
     {

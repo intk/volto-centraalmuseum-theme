@@ -22,5 +22,8 @@ const routes = [
     ],
   },
 ];
+routes[0].routes = routes[0].routes
+  .filter((r) => r.path !== '/search')
+  .filter((r) => r.path !== '/(nl|en|de)/search');
 
 export default routes;
