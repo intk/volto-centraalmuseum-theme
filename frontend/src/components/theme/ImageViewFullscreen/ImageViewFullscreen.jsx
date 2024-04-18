@@ -92,23 +92,30 @@ class ImageViewFullscreen extends Component {
     const imagepath = `${this.props.pathname
       .split('/')
       .slice(0, -1)
-      .join('/')}/@@images/preview_image/great`;
-
+      .join('/')}/@@images/preview_image/`;
     return (
       <Container id="page-search">
         <div className="home-link">
           <Link to={`/${intl.locale}`}>Home</Link>
         </div>
         <p>
-          {this.props.intl.formatMessage(messages.imagepurpose)}{' '}
-          {this.props.intl.formatMessage(messages.bestelformulier)}
+          {intl.formatMessage(messages.imagepurpose)}{' '}
+          {intl.formatMessage(messages.bestelformulier)}
         </p>
         <p>
-          {this.props.intl.formatMessage(messages.include)}{' '}
-          <i>{this.props.intl.formatMessage(messages.mercis)}</i>
+          {intl.formatMessage(messages.include)}{' '}
+          <i>{intl.formatMessage(messages.mercis)}</i>
         </p>
         <div className="image-section">
-          <img src={imagepath} alt="artwork"></img>
+          <a
+            className="button"
+            href={imagepath}
+            role="button"
+            aria-label="download button"
+            download
+          >
+            <img src={imagepath} alt="artwork"></img>
+          </a>
         </div>
       </Container>
     );

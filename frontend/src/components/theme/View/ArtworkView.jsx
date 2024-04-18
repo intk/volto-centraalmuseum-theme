@@ -193,7 +193,8 @@ export default function ArtworkView(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dataExpand, setDataExpand] = useState(false);
   const currentImageUrl = props.content?.items[currentIndex]?.url;
-  const downloadLink = `${currentImageUrl}/@@images/image`;
+  // const downloadLink = `${currentImageUrl}/@@images/image`;
+  const downloadLink = `${currentImageUrl}/image_view_fullscreen`;
 
   const [popupVisible, setPopupVisible] = useState(false);
   const zoomUtilsRefs = useRef([]);
@@ -343,12 +344,12 @@ export default function ArtworkView(props) {
           </div>
         )}
       </button>
-      <a
+      <Link
         className="button"
-        href={downloadLink}
+        to={downloadLink}
         role="button"
         aria-label="download button"
-        download
+        // download
       >
         <GoDownload
           icon
@@ -357,7 +358,7 @@ export default function ArtworkView(props) {
           height="2em"
         />
         {/* <Icon name={downloadbutton} size="18px" />{' '} */}
-      </a>
+      </Link>
       <button
         className="button zoomplus"
         onClick={() => zoomUtilsRefs.current[currentIndex]?.zoomIn()}
