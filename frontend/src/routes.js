@@ -5,6 +5,8 @@
 
 import { defaultRoutes } from '@plone/volto/routes';
 import config from '@plone/volto/registry';
+import ImageViewFullscreen from '@package/components/theme/ImageViewFullscreen/ImageViewFullscreen';
+// import { Search } from '@plone/volto/components';
 
 /**
  * Routes array.
@@ -14,8 +16,13 @@ import config from '@plone/volto/registry';
 const routes = [
   {
     path: '/',
-    component: config.getComponent('App').component, // Change this if you want a different component
+    component: config.getComponent('App').component,
     routes: [
+      {
+        path: '/*.(jpg|jpeg|tif)/image_view_fullscreen',
+        // path: '/**/image_view_fullscreen',
+        component: ImageViewFullscreen,
+      },
       // Add your routes here
       ...(config.addonRoutes || []),
       ...defaultRoutes,

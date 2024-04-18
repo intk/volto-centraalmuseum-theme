@@ -304,6 +304,11 @@ msgstr ""
 msgid "availableViews"
 msgstr ""
 
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Bestelformulier
+msgid "bestelformulier"
+msgstr ""
+
 #: components/Blocks/Listing/CollectionSliderTemplate
 # defaultMessage: Blader door de collectie
 msgid "browse_collection"
@@ -384,6 +389,16 @@ msgstr ""
 msgid "exhibitions"
 msgstr ""
 
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie:
+msgid "imagepurpose"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Bij gebruik deze gegevens vermelden:
+msgid "include"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Opschriften / merken
 msgid "inscriptions"
@@ -408,6 +423,11 @@ msgstr ""
 #: components/theme/View/ArtworkView
 # defaultMessage: Materiaal / Techniek
 msgid "materialTechnique"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Mercis Publishing/Centraal Museum, Utrecht
+msgid "mercis"
 msgstr ""
 
 #: components/Blocks/Listing/RecommendedTemplate

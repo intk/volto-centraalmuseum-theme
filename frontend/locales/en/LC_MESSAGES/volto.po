@@ -299,6 +299,11 @@ msgstr "View all art works by {authorName} in the Centraal Museum collection. Fo
 msgid "availableViews"
 msgstr ""
 
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Bestelformulier
+msgid "bestelformulier"
+msgstr "Order form"
+
 #: components/Blocks/Listing/CollectionSliderTemplate
 # defaultMessage: Blader door de collectie
 msgid "browse_collection"
@@ -379,6 +384,16 @@ msgstr "To refer to this object please use the following persistent URL:"
 msgid "exhibitions"
 msgstr "Exhibitions"
 
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie:
+msgid "imagepurpose"
+msgstr "Use for study or private purposes. Image copyright applies. Request conditions for copyright and / or higher resolution:"
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Bij gebruik deze gegevens vermelden:
+msgid "include"
+msgstr "When using this information please state:"
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Opschriften / merken
 msgid "inscriptions"
@@ -404,6 +419,11 @@ msgstr "Location"
 # defaultMessage: Materiaal / Techniek
 msgid "materialTechnique"
 msgstr "Material and technique"
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Mercis Publishing/Centraal Museum, Utrecht
+msgid "mercis"
+msgstr "Mercis Publishing/Centraal Museum, Utrecht"
 
 #: components/Blocks/Listing/RecommendedTemplate
 #: components/Blocks/Listing/TeaserListingSecondTemplate
