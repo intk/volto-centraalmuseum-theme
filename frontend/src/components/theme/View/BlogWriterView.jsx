@@ -4,11 +4,33 @@ import './css/blogwriterview.less';
 import { BodyClass } from '@plone/volto/helpers';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { SeeMoreNewsItem } from '../../index';
+import {
+  hasBlocksData,
+  // flattenHTMLToAppURL,
+  // getBaseUrl,
+} from '@plone/volto/helpers';
+import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
+
+function filterBlocks(content, types) {
+  if (!(content.blocks && content.blocks_layout?.items)) return content;
+
+  return {
+    ...content,
+    blocks_layout: {
+      ...content.blocks_layout,
+      items: content.blocks_layout.items.filter(
+        (id) => types.indexOf(content.blocks[id]?.['@type']) === -1,
+      ),
+    },
+  };
+}
 
 export default function BlogWriterView(props) {
   const src = props.content.preview_image
     ? flattenToAppURL(`${props.content.preview_image.download}`)
     : '';
+
+  const filteredContent = filterBlocks(props.content, ['title', 'description']);
 
   return (
     <div id="object-block">
@@ -28,6 +50,16 @@ export default function BlogWriterView(props) {
           )}
         </div>
       )}
+      <article className="blog-writer-body">
+        {hasBlocksData(props.content) &&
+        props.content.blocks_layout.items.length > 0 ? (
+          <Container>
+            <RenderBlocks {...props} content={filteredContent} />
+          </Container>
+        ) : (
+          ''
+        )}
+      </article>
       <Container>
         <SeeMoreNewsItem {...props} />
       </Container>
