@@ -50,7 +50,7 @@ export default function BlogWriterView(props) {
           )}
         </div>
       )}
-      <article className="blog-writer-body">
+      <div className="blog-writer-body">
         {hasBlocksData(props.content) &&
         props.content.blocks_layout.items.length > 0 ? (
           <Container>
@@ -59,7 +59,7 @@ export default function BlogWriterView(props) {
         ) : (
           ''
         )}
-      </article>
+      </div>
       <Container>
         <SeeMoreNewsItem {...props} />
       </Container>
