@@ -50,17 +50,17 @@ export default function BlogWriterView(props) {
           )}
         </div>
       )}
-      <div className="blog-writer-body">
-        {hasBlocksData(props.content) &&
-        props.content.blocks_layout.items.length > 0 ? (
-          <Container>
-            <RenderBlocks {...props} content={filteredContent} />
-          </Container>
-        ) : (
-          ''
-        )}
-      </div>
-      <Container>
+      {/* <div className="blog-writer-body"> */}
+      {hasBlocksData(props.content) &&
+      props.content.blocks_layout.items.length > 0 ? (
+        <Container id="page-document">
+          <RenderBlocks {...props} content={filteredContent} />
+        </Container>
+      ) : (
+        ''
+      )}
+      {/* </div> */}
+      <Container id="seemorenews">
         <SeeMoreNewsItem {...props} />
       </Container>
     </div>
