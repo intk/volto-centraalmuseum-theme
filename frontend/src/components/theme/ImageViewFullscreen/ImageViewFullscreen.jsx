@@ -89,7 +89,7 @@ class ImageViewFullscreen extends Component {
    */
   render() {
     const { intl } = this.props;
-    const imagepath = `${this.props.pathname
+    const imagepath = `${this.props?.pathname
       .split('/')
       .slice(0, -1)
       .join('/')}/@@images/preview_image/`;
@@ -100,7 +100,11 @@ class ImageViewFullscreen extends Component {
         </div>
         <p>
           {intl.formatMessage(messages.imagepurpose)}{' '}
-          {intl.formatMessage(messages.bestelformulier)}
+          <Link
+            to={intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'}
+          >
+            {intl.formatMessage(messages.bestelformulier)}
+          </Link>
         </p>
         <p>
           {intl.formatMessage(messages.include)}{' '}
