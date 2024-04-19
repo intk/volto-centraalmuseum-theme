@@ -1823,3 +1823,19 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 #main{
   min-height: 100%;
 }
+
+.view-editview{
+  #main > .content-area{
+    z-index: 1;
+  }
+}
+
+.view-editview.has-sidebar {
+  #page-edit>.ui.container {
+    @media (min-width: 1200px) {
+      padding-right: 200px;
+      width: 923px !important;
+    }
+  }
+}
+

@@ -1,135 +1,303 @@
-.block.form{
-  .ui.segment{
-    border: 0px;
-    box-shadow: none;
-    margin-top: 0px;
-    padding-top: 0px;
-    padding-left: 14px;
-    margin-top: 2.2rem !important;
-    .column{
-      padding-left: 0px;
-      padding-right: 0px;
+#view{
+  .block.form {
+    .public-ui{
+      padding-top: 5px;
+    }
+    .ui.segment {
+      border: 0px;
+      box-shadow: none;
+      padding-top: 0px;
+      padding-left: 12px;
+      margin-top: 0px !important;
+      padding-right: 9px;
 
-      .stretched.row {
-        padding-bottom: 0% !important;
+      .column {
+        padding-left: 0px;
+        padding-right: 0px;
+
+        .stretched.row {
+          padding-bottom: 0% !important;
+        }
       }
     }
-  }
-  .inline.field .wrapper{
-    border-bottom: 0px;
-  }
-  .ui.form .ui.input input, .css-1ard45z-control, .css-t95vk8-control, textarea{
-    border: 1px solid #c3c3c3 !important;
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
 
+    .inline.field .wrapper {
+      border-bottom: 0px;
+    }
 
-  }
-  .checkbox-group, .radio-group{
-    display: flex;
-    .checkbox-item, .radio-button{
-      padding-right: 10px;
+    .ui.form .ui.input input,
+    .css-1ard45z-control,
+    .css-t95vk8-control,
+    textarea {
+      border: 1px solid #c3c3c3 !important;
+      // padding-top: 0px !important;
+      // padding-bottom: 0px !important;
+      padding-top: 16px !important;
+      padding-bottom: 13px !important
     }
-  }
 
-  h3{
-    border-bottom: 1px solid #C7D5D8;
-    margin-top: 0px !important;
-    font-size: 21px !important;
-    font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif !important;
-    font-weight: 100;
-    margin-bottom: 18px !important;
-    @media (max-width: 768px) {
-      margin-bottom: 24px !important;
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+
+      // @media (max-width: 768px){
+        flex-direction: column;
+      // }
+
+      .checkbox-item,
+      .radio-button {
+        padding-right: 10px;
+      }
     }
-  }
-  p em {
-    font-size: 14px;
-    color: #666666;
-  }
-  .row{
-    padding-bottom: 13.5px !important;
-  }
-  .row:first-child{
-    padding-bottom: 18px !important;
-    @media(max-width:768px){
-      padding-bottom: 7px !important;
+
+    h3 {
+      border-bottom: 1px solid #C7D5D8;
+      margin-top: 0px !important;
+      font-size: 21px !important;
+      line-height: 30px !important;
+      font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif !important;
+      font-weight: 100;
+      margin-bottom: 18px !important;
+
+      @media (max-width: 768px) {
+        margin-bottom: 30px !important;
+      }
     }
-  }
-  label{
-    font-size: 18px !important;
-  }
-  label::after{
-    background-color: transparent !important;
-  }
-  input, .react-select__value-container {
-    padding-left: 10px !important;
-    height: 53px !important;
-  }
-  textarea {
-    padding-left: 10px !important;
-    padding-top: 10px !important;
-    min-height: 145px !important;
-  }
-  .center.aligned.column{
-    text-align: end !important;
-  }
-  .static-text{
-    margin-bottom: 0rem !important;
-    p {
+
+    p em {
+      font-size: 14px;
+      color: #666666;
+    }
+
+    .row {
+      padding-bottom: 13.5px !important;
+      @media (max-width: 768px){
+        padding-bottom: 4px !important;
+      }
+    }
+
+    .row:first-child {
+      padding-bottom: 18px !important;
+
+      @media(max-width:768px) {
+        padding-bottom: 4px !important;
+      }
+    }
+
+    .checkbox-item{
+      @media (max-width: 768px) {
+        margin: 3px 0px !important;
+      }
+    }
+    .eight.wide.column label {
+      font-size: 18px !important;
+      @media (max-width: 768px) {
+        letter-spacing: 0.0em !important;
+        color: #494a51 !important;
+        margin-left: 4px !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        line-height: 16px !important;
+        padding-left: 5px !important;
+      }
+    }
+
+    label::after {
+      background-color: transparent !important;
+    }
+
+    input,
+    .react-select__value-container {
+      padding-left: 20px !important;
+      max-height: 53.95px !important;
+      line-height:  22.852px !important;
+      padding-top: 16px !important;
+      padding-bottom: 13px !important;
+    }
+
+    textarea {
+      padding-left: 10px !important;
+      padding-top: 10px !important;
+      min-height: 145px !important;
+    }
+
+    .center.aligned.column {
+      text-align: end !important;
+    }
+
+    .static-text {
+      margin-bottom: 0rem !important;
+
+      p {
         line-height: 20px !important;
       }
+    }
+
+    ul.DayPicker_weekHeader_ul {
+      padding-left: 0px !important;
+    }
+
+    .ui.checkbox {
+      // @media (min-width: 768px) {
+        // padding-left: 40%;
+      // }
+    }
+
+    button {
+      background-color: white !important;
+      height: 55px;
+      color: black !important;
+      border: 1px solid black;
+      padding-top: 17px;
+      padding-bottom: 12px;
+      margin: 10px 20px !important;
+      font-family: 'FranklinMed', Arial, sans-serif !important;
+      letter-spacing: 0.05em;
+      font-size: 17px !important;
+      text-align: center;
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+      border-radius: 0%;
+      font-weight: lighter;
+    }
+
+    button:hover {
+      background-color: #282931 !important;
+      border: #282931 !important;
+      color: white !important;
+    }
+
+    // .react-select-container .react-select__control{
+    //   width: 130px;
+    // }
+
+    .ui.grid>.row>.eight.wide.column {
+      padding-left: 2px;
+    }
+    @media (min-width: 992px){
+      .ui.grid>.row>.four.wide.column {
+        width: 40% !important;
+      }
+
+      .ui.grid>.row>.eight.wide.column {
+        width: 60% !important;
+      }
+    }
+
+    .ui.form input[type=text],
+    textarea,
+    .react-select__placeholder,
+    input {
+      font-size: 16px !important;
+      color: #727276 !important;
+      font-family: 'FranklinBook', Arial, sans-serif !important;
+      letter-spacing: 0.8px
+    }
+
+    label {
+      font-size: 18px;
+      margin-left: 0px;
+      line-height: 24px;
+    }
   }
-  ul.DayPicker_weekHeader_ul{
-    padding-left: 0px !important;
-  }
-  .ui.checkbox{
-    padding-left: 40%;
+}
+
+.DateInput,
+.date-input input,
+#subblock-select .eight.wide.column {
+  width: 187px !important;
+}
+
+.row#subblock-select .react-select__control {
+  min-height: 44px !important;
+  height: 44px !important;
+}
+
+.block.form .field .static-text {
+  margin-top: 45px !important;
+}
+
+.block.form input::placeholder {
+  color: #282931 !important;
+  opacity: 0.8;
+  font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif !important;
+}
+
+@media screen and (max-width: 992px) {
+  .block.form .row {
+    padding-bottom: 6px !important;
   }
 
-  button {
-    background-color: white !important;
-    height: 55px;
-    color: black !important;
-    border: 1px solid black;
-    padding-top: 17px;
-    padding-bottom: 12px;
-    margin: 10px 20px !important;
-    font-family: 'FranklinMed', Arial, sans-serif !important;
-    letter-spacing: 0.05em;
-    font-size: 17px !important;
-    text-align: center;
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-    border-radius: 0% ;
-    font-weight: lighter;
+  #subblock-textarea textarea,
+  #subblock-textarea .wrapper {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
   }
 
-  button:hover {
-    background-color: #282931 !important;
-    border: #282931 !important;
-    color: white !important;
-  }
-  // .react-select-container .react-select__control{
-  //   width: 130px;
-  // }
-
-  .ui.grid > .row > .four.wide.column{
-    width: 40% !important;
-  }
-  .ui.grid > .row > .eight.wide.column{
-    width: 60% !important;
-    padding-left: 2px;
+  .centered.row.row-padded-top {
+    button {
+      width: 100%;
+    }
+    padding-top: 101px !important;
+    padding-bottom: 101px !important;
   }
 
-  .ui.form input[type=text], textarea, .react-select__placeholder, input{
-    font-size: 16px !important;
-    color: #727276 !important;
-    font-family: 'FranklinBook', Arial, sans-serif !important;
+  .block.form .ui.segment .column .stretched.row {
+    flex-direction: column;
+    @media (max-width: 992px){
+      .column{
+        width: 100% !important;
+      }
+    }
   }
-  label{
-    font-size: 18px;
-    margin-left: 0px;
-    line-height: 24px;
+
+  .block.form .column.grid .row {
+    .inline.field.text label, .inline.field.textarea label {
+      visibility: hidden;
+    }
+    .inline.field:not(.text, .textarea) .four.wide.column label{
+      // margin-top: 37px;
+      margin-top: 0px;
+      // margin-bottom: 11px;
+      margin-bottom: 3px;
+      padding-left: 2px;
+    }
+
+    .inline.field.textarea {
+      .four.wide.column .wrapper{
+        margin-top: -10px !important;
+        align-items: start !important;
+      }
+    }
+  }
+
+  .block.form .column.grid {
+
+    .row#subblock-date,
+    .row#subblock-select,
+    .row#subblock-checkbox {
+      label {
+        visibility: visible;
+      }
+    }
+
+    .row#subblock-checkbox .ui.checkbox {
+      padding-left: 0px;
+    }
+    .ui.checkbox label:before{
+      // @media (max-width: 768px){
+        left: -16px !important;
+        height: 13px !important;
+        width: 13px !important;
+      // }
+    }
+  }
+
+  .block.form .inline.field .wrapper {
+    min-height: 50px;
+  }
+
+  .block.form .ui.grid>.row>.eight.wide.column {
+    width: 100% !important;
   }
 }
