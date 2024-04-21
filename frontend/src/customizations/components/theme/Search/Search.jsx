@@ -512,7 +512,6 @@ class Search extends Component {
           {' '}
           <h5>{translations.periods[intl.locale]}</h5>
         </div>
-        {console.log(this.state.datingFilters)}
         {Object.keys(this.state.datingFilters).map((period) => (
           <label key={period}>
             <input
