@@ -271,10 +271,11 @@ class Search extends Component {
   };
 
   fetchDatingFilters = async () => {
-    const { intl } = this.props;
+    const { history, intl } = this.props;
+    const queryParams = qs.parse(history.location.search);
     try {
       const response = await fetch(
-        `/++api++/${intl.locale}/@@search_facets?SearchableText=${this.props.searchableText}&Language=${intl.locale}`,
+        `/++api++/${intl.locale}/@@search_facets?SearchableText=${queryParams.SearchableText}&Language=${intl.locale}`,
       );
 
       if (!response.ok) {
@@ -511,6 +512,7 @@ class Search extends Component {
           {' '}
           <h5>{translations.periods[intl.locale]}</h5>
         </div>
+        {console.log(this.state.datingFilters)}
         {Object.keys(this.state.datingFilters).map((period) => (
           <label key={period}>
             <input
