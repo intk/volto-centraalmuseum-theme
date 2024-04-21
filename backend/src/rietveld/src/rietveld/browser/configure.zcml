@@ -48,4 +48,11 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="search_facets"
+      for="*"
+      class=".search.SearchArtworks"
+      permission="zope2.View"
+      />
+
 </configure>

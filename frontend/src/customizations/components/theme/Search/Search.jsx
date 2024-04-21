@@ -121,6 +121,16 @@ const translations = {
     de:
       'Vanwege onderhoudswerkzaamheden is de online collectie slechts beperkt toegankelijk.',
   },
+  periods: {
+    nl: 'Periode',
+    en: 'Period',
+    de: 'Zeitraum',
+  },
+  century: {
+    nl: 'e Eeuw',
+    en: '. century',
+    de: '. Jahrhundert',
+  },
 };
 
 function truncate(str, num) {
@@ -188,6 +198,9 @@ class Search extends Component {
       ObjOnDisplay: false,
       filtersDisplay: false,
       showFilters: true,
+      artworkDates: [],
+      datingFilters: [],
+      choosenPeriodFilters: [],
     };
     this.isMountedFlag = false;
   }
@@ -202,6 +215,8 @@ class Search extends Component {
     this.setState({ isClient: true });
     this.isMountedFlag = true;
     this.fetchAllFallbackImages();
+    this.fetchArtworkDates();
+    this.fetchDatingFilters();
   }
 
   componentDidUpdate(prevProps) {
@@ -210,12 +225,35 @@ class Search extends Component {
       prevProps.items !== this.props.items
     ) {
       this.fetchAllFallbackImages();
+      this.fetchArtworkDates();
+      this.fetchDatingFilters();
     }
   }
 
   componentWillUnmount() {
     this.isMountedFlag = false;
   }
+
+  fetchArtworkDates = async () => {
+    const { history, intl } = this.props;
+    const queryParams = qs.parse(history.location.search);
+    try {
+      const response = await fetch(
+        `/++api++${history.location.pathname}/@@SearchArtworks?SearchableText=${queryParams.SearchableText}&Language=${intl.locale}`,
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (this.isMountedFlag) {
+        this.setState({ artworkDates: data.results || [] });
+      }
+    } catch (error) {
+      if (this.isMountedFlag) {
+        this.setState({ artworkDates: [] });
+      }
+    }
+  };
 
   fetchHasFallbackImage = async (item) => {
     try {
@@ -229,6 +267,23 @@ class Search extends Component {
       return { ...item, hasFallbackImage: data.hasFallbackImage };
     } catch (error) {
       return { ...item, hasFallbackImage: false };
+    }
+  };
+
+  fetchDatingFilters = async () => {
+    const { intl } = this.props;
+    try {
+      const response = await fetch(
+        `/++api++/${intl.locale}/@@search_facets?SearchableText=${this.props.searchableText}&Language=${intl.locale}`,
+      );
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      this.setState({ datingFilters: data.centuries });
+    } catch (error) {
+      this.setState({ datingFilters: {} });
     }
   };
 
@@ -253,7 +308,7 @@ class Search extends Component {
     }
   };
 
-  handleCheckboxChange = (checkboxType) => {
+  handleCheckboxChange = (checkboxType, filters) => {
     const { history, location } = this.props;
     let currentUrlParams = new URLSearchParams(location.search);
 
@@ -288,6 +343,11 @@ class Search extends Component {
       case 'showFilters':
         updates = { showFilters: !this.state.showFilters };
         break;
+      case 'Period':
+        updates = {
+          choosenPeriodFilters: this.state.datingFilters[filters],
+        };
+        break;
       default:
         break;
     }
@@ -299,6 +359,7 @@ class Search extends Component {
       currentUrlParams.delete('portal_type:list');
       currentUrlParams.delete('hasPreviewImage');
       currentUrlParams.delete('ObjOnDisplay');
+      currentUrlParams.delete('dating');
 
       if (this.state.onlyArtworks) {
         currentUrlParams.set('portal_type', 'artwork');
@@ -320,6 +381,12 @@ class Search extends Component {
       }
       if (this.state.ObjOnDisplay) {
         currentUrlParams.set('ObjOnDisplay', 'true');
+      }
+
+      if (this.state.choosenPeriodFilters.length > 0) {
+        this.state.choosenPeriodFilters.forEach((period) => {
+          currentUrlParams.set('dating', period);
+        });
       }
 
       history.push(`${location.pathname}?${currentUrlParams.toString()}`);
@@ -433,6 +500,31 @@ class Search extends Component {
           <span className="label">{translations.onDisplay[intl.locale]}</span>
         </label>
       </>
+    );
+  };
+
+  renderPeriodButtons = () => {
+    const { intl } = this.props;
+    return (
+      <div className="filter-summary">
+        <div className="filter-summary-title side">
+          {' '}
+          <h5>{translations.periods[intl.locale]}</h5>
+        </div>
+        {Object.keys(this.state.datingFilters).map((period) => (
+          <label key={period}>
+            <input
+              type="checkbox"
+              className="artwork-checkbox"
+              onChange={() => this.handleCheckboxChange('Period', period)}
+            />
+            <span className="label">
+              {period}
+              {translations.century[intl.locale]}
+            </span>
+          </label>
+        ))}
+      </div>
     );
   };
 
@@ -576,6 +668,8 @@ class Search extends Component {
             <section id="content-core">
               <div className="artwork-search-check heading">
                 {this.renderFilterButtons()}
+                {/* this will be the next filters */}
+                {this.renderPeriodButtons()}
               </div>
               <div className="search-results-wrapper">
                 <div className="filter-summary">
