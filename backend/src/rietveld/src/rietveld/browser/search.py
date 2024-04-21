@@ -22,7 +22,7 @@ class SearchArtworks(BrowserView):
             "Language", "nl"
         )  # Use a default language if not specified
 
-        if not searchable_text:
+        if searchable_text == "null" or searchable_text == "undefined":
             results = api.content.find(
                 Language=language, sort_on="sortable_title", sort_order="ascending"
             )
