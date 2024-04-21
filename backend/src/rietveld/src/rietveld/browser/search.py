@@ -1,6 +1,8 @@
 from plone import api
 from Products.Five.browser import BrowserView
+
 import json
+
 
 def find_century(year):
     if year < 0:
@@ -12,30 +14,31 @@ def find_century(year):
     else:
         return "%s" % (str(int(year / 100) + 1))
 
+
 class SearchArtworks(BrowserView):
     def __call__(self):
         searchable_text = self.request.get("SearchableText")
-        language = self.request.get("Language", "nl")  # Use a default language if not specified
+        language = self.request.get(
+            "Language", "nl"
+        )  # Use a default language if not specified
 
         if not searchable_text:
             results = api.content.find(
-                Language=language,
-                sort_on='sortable_title',
-                sort_order='ascending'
+                Language=language, sort_on="sortable_title", sort_order="ascending"
             )
         else:
             results = api.content.find(
                 SearchableText=searchable_text,
                 # portal_type='artwork',
                 Language=language,
-                sort_on='sortable_title',
-                sort_order='ascending'
+                sort_on="sortable_title",
+                sort_order="ascending",
             )
 
         centuries = {}
         for brain in results:
             artwork = brain.getObject()
-            dating = getattr(artwork, 'dating', None)
+            dating = getattr(artwork, "dating", None)
             if dating:
                 try:
                     # Assume dating is a year integer, adjust parsing logic as needed
@@ -48,4 +51,4 @@ class SearchArtworks(BrowserView):
                 except ValueError:
                     continue  # Skip entries that do not contain valid integer years
 
-        return json.dumps({'centuries': centuries})
+        return json.dumps({"centuries": centuries})
