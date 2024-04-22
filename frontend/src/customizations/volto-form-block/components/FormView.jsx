@@ -13,6 +13,7 @@ import { getFieldName } from 'volto-form-block/components/utils';
 import Field from 'volto-form-block/components/Field';
 import config from '@plone/volto/registry';
 import { useSelector } from 'react-redux';
+import { BodyClass } from '@plone/volto/helpers';
 
 /* Style */
 import 'volto-form-block/components/FormView.css';
@@ -101,6 +102,7 @@ const FormView = ({
 
   return (
     <div className="block form">
+      <BodyClass className="section-form" />
       <div className="public-ui">
         <Segment style={{ margin: '2rem 0' }} padded>
           {data.title && <h2>{data.title}</h2>}

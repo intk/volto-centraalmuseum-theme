@@ -1391,7 +1391,8 @@ body.artwork-listing-page{
   }
 }
 
-.section-groepsrondleiding, .section-beeldaanvraag, .section-orderimage {
+.section-groepsrondleiding, .section-beeldaanvraag, .section-orderimage,
+.section-form {
   h1.documentFirstHeading {
     padding-bottom: 0px;
     margin-top: 12px !important;
