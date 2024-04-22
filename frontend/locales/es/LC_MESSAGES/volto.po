@@ -447,6 +447,11 @@ msgstr ""
 msgid "motifs"
 msgstr ""
 
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Niet wat u zocht?
+msgid "niet"
+msgstr ""
+
 #: components/theme/View/ExhibitionView
 # defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
 msgid "noObjects"
@@ -579,6 +584,11 @@ msgstr ""
 #: components/theme/View/ExhibitionView
 # defaultMessage: Toon alles
 msgid "showmore"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Terug naar de website
+msgid "terug"
 msgstr ""
 
 #: components/theme/View/ArtworkView
