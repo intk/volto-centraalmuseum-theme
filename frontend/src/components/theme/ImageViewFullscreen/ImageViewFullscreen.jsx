@@ -16,12 +16,14 @@ import { searchContent } from '@plone/volto/actions';
 import { SearchTags, Toolbar, Icon } from '@plone/volto/components';
 import { Link } from 'react-router-dom';
 import './css/ImageViewFullscreen.less';
+import { asyncConnect } from '@plone/volto/helpers';
+import qs from 'query-string';
 
 const messages = defineMessages({
   imagepurpose: {
     id: 'imagepurpose',
     defaultMessage:
-      'Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie:',
+      'Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie: ',
   },
   include: {
     id: 'include',
@@ -34,6 +36,14 @@ const messages = defineMessages({
   bestelformulier: {
     id: 'bestelformulier',
     defaultMessage: 'Bestelformulier',
+  },
+  terug: {
+    id: 'terug',
+    defaultMessage: 'Terug naar de website',
+  },
+  niet: {
+    id: 'niet',
+    defaultMessage: 'Niet wat u zocht? ',
   },
 });
 
@@ -79,8 +89,43 @@ class ImageViewFullscreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      parentData: null,
+    };
   }
+
+  componentDidMount() {
+    this.doSearch();
+  }
+  // componentDidUpdate(prevProps) {
+  //   this.doSearch();
+  // }
+
+  doSearch = () => {
+    const parentpath = this.props?.pathname.split('/').slice(0, -2).join('/');
+    const options = {
+      portal_type: 'artwork',
+      path: parentpath,
+      metadata_fields: ['freeofcopyright', 'rights'],
+    };
+
+    this.props
+      .searchContent('', options)
+      .then((response) => {
+        // Assuming the action is correctly configured to return a promise
+        this.setState({ parentData: response }); // Update the state with the search results
+      })
+      .catch((error) => {});
+  };
+
+  removeFirstWords = (fullString) => {
+    const parts = fullString.split('/');
+    const modifiedParts = parts.map((part) => {
+      const words = part.trim().split(' ');
+      return words.slice(1).join(' ');
+    });
+    return modifiedParts.join(' / ');
+  };
 
   /**
    * Render method.
@@ -89,17 +134,32 @@ class ImageViewFullscreen extends Component {
    */
   render() {
     const { intl } = this.props;
+    const copyright = this.state.parentData?.items?.[0]?.freeofcopyright;
+    const rights = this.state.parentData?.items?.[0]?.rights;
+    const modifiedRights = rights ? this.removeFirstWords(rights) : '';
+
     const imagepath = `${this.props?.pathname
       .split('/')
       .slice(0, -1)
       .join('/')}/@@images/preview_image/`;
+    const parentpath = `${this.props?.pathname
+      .split('/')
+      .slice(0, -2)
+      .join('/')}`;
     return (
       <Container id="page-search">
         <div className="home-link">
-          <Link to={`/${intl.locale}`}>Home</Link>
+          {copyright ? (
+            <Link to={parentpath}>{intl.formatMessage(messages.terug)}</Link>
+          ) : (
+            <Link to={`/${intl.locale}`}>Home</Link>
+          )}
         </div>
         <p>
-          {intl.formatMessage(messages.imagepurpose)}{' '}
+          {copyright
+            ? intl.formatMessage(messages.niet)
+            : intl.formatMessage(messages.imagepurpose)}
+          {/* {intl.formatMessage(messages.imagepurpose)}{' '} */}
           <Link
             to={intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'}
           >
@@ -108,7 +168,8 @@ class ImageViewFullscreen extends Component {
         </p>
         <p>
           {intl.formatMessage(messages.include)}{' '}
-          <i>{intl.formatMessage(messages.mercis)}</i>
+          {/* <i>{intl.formatMessage(messages.mercis)}</i> */}
+          <i>{modifiedRights && `© ${modifiedRights}`}</i>
         </p>
         <div className="image-section">
           <a
@@ -130,6 +191,7 @@ export const __test__ = compose(
   injectIntl,
   connect(
     (state, props) => ({
+      items: state.search.items,
       pathname: props.history.location.pathname,
     }),
     { searchContent },
@@ -141,9 +203,22 @@ export default compose(
   connect(
     (state, props) => ({
       items: state.search.items,
+      searchableText: qs.parse(props.history.location.search).SearchableText,
       pathname: props.location.pathname,
       currentLang: state.intl?.locale,
     }),
     { searchContent },
   ),
+  asyncConnect([
+    {
+      key: 'search',
+      promise: ({ location, store: { dispatch } }) =>
+        dispatch(
+          searchContent('', {
+            ...qs.parse(location.search),
+            use_site_search_settings: 1,
+          }),
+        ),
+    },
+  ]),
 )(ImageViewFullscreen);
