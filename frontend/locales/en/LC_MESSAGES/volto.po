@@ -440,7 +440,7 @@ msgstr "More of the same motif"
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
 # defaultMessage: Niet wat u zocht?
 msgid "niet"
-msgstr ""
+msgstr "Not what you are looking for?"
 
 #: components/theme/View/ExhibitionView
 # defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
@@ -579,7 +579,7 @@ msgstr "Show more"
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
 # defaultMessage: Terug naar de website
 msgid "terug"
-msgstr ""
+msgstr "Back to site"
 
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
