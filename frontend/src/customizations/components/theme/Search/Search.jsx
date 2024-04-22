@@ -199,8 +199,8 @@ class Search extends Component {
       filtersDisplay: false,
       showFilters: true,
       artworkDates: [],
-      datingFilters: [],
-      choosenPeriodFilters: [],
+      // datingFilters: [],
+      // choosenPeriodFilters: [],
     };
     this.isMountedFlag = false;
   }
@@ -216,7 +216,7 @@ class Search extends Component {
     this.isMountedFlag = true;
     this.fetchAllFallbackImages();
     this.fetchArtworkDates();
-    this.fetchDatingFilters();
+    // this.fetchDatingFilters();
   }
 
   componentDidUpdate(prevProps) {
@@ -226,7 +226,7 @@ class Search extends Component {
     ) {
       this.fetchAllFallbackImages();
       this.fetchArtworkDates();
-      this.fetchDatingFilters();
+      // this.fetchDatingFilters();
     }
   }
 
@@ -270,23 +270,23 @@ class Search extends Component {
     }
   };
 
-  fetchDatingFilters = async () => {
-    const { history, intl } = this.props;
-    const queryParams = qs.parse(history.location.search);
-    try {
-      const response = await fetch(
-        `/++api++/${intl.locale}/@@search_facets?SearchableText=${queryParams.SearchableText}&Language=${intl.locale}`,
-      );
+  // fetchDatingFilters = async () => {
+  //   const { history, intl } = this.props;
+  //   const queryParams = qs.parse(history.location.search);
+  //   try {
+  //     const response = await fetch(
+  //       `/++api++/${intl.locale}/@@search_facets?SearchableText=${queryParams.SearchableText}&Language=${intl.locale}`,
+  //     );
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      this.setState({ datingFilters: data.centuries });
-    } catch (error) {
-      this.setState({ datingFilters: {} });
-    }
-  };
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     const data = await response.json();
+  //     this.setState({ datingFilters: data.centuries });
+  //   } catch (error) {
+  //     this.setState({ datingFilters: {} });
+  //   }
+  // };
 
   fetchAllFallbackImages = async () => {
     const { items } = this.props;
@@ -504,30 +504,30 @@ class Search extends Component {
     );
   };
 
-  renderPeriodButtons = () => {
-    const { intl } = this.props;
-    return (
-      <div className="filter-summary">
-        <div className="filter-summary-title side">
-          {' '}
-          <h5>{translations.periods[intl.locale]}</h5>
-        </div>
-        {Object.keys(this.state.datingFilters).map((period) => (
-          <label key={period}>
-            <input
-              type="checkbox"
-              className="artwork-checkbox"
-              onChange={() => this.handleCheckboxChange('Period', period)}
-            />
-            <span className="label">
-              {period}
-              {translations.century[intl.locale]}
-            </span>
-          </label>
-        ))}
-      </div>
-    );
-  };
+  // renderPeriodButtons = () => {
+  //   const { intl } = this.props;
+  //   return (
+  //     <div className="filter-summary">
+  //       <div className="filter-summary-title side">
+  //         {' '}
+  //         <h5>{translations.periods[intl.locale]}</h5>
+  //       </div>
+  //       {Object.keys(this.state.datingFilters).map((period) => (
+  //         <label key={period}>
+  //           <input
+  //             type="checkbox"
+  //             className="artwork-checkbox"
+  //             onChange={() => this.handleCheckboxChange('Period', period)}
+  //           />
+  //           <span className="label">
+  //             {period}
+  //             {translations.century[intl.locale]}
+  //           </span>
+  //         </label>
+  //       ))}
+  //     </div>
+  //   );
+  // };
 
   renderOnlyartworksbutton = () => {
     const { intl } = this.props;
@@ -670,7 +670,7 @@ class Search extends Component {
               <div className="artwork-search-check heading">
                 {this.renderFilterButtons()}
                 {/* this will be the next filters */}
-                {this.renderPeriodButtons()}
+                {/* {this.renderPeriodButtons()} */}
               </div>
               <div className="search-results-wrapper">
                 <div className="filter-summary">
