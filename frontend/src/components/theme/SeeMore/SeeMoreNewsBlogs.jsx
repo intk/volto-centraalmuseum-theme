@@ -27,7 +27,7 @@ const Search = (props) => {
         portal_type: 'News Item',
         path: currentPath,
         b_size: 3,
-        metadata_fields: ['effective', 'created'],
+        metadata_fields: ['effective', 'created', 'description'],
         sort_on: 'getObjPositionInParent',
         sort_order: 'ascending',
       };
@@ -42,10 +42,6 @@ const Search = (props) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.searchableText, content, searchContent, intl.locale]);
-
-  const sortedItems = props.items
-    .slice(0, 20)
-    .sort((a, b) => a.title.localeCompare(b.title));
 
   const [updatedItems, setUpdatedItems] = useState([]);
 
@@ -68,7 +64,7 @@ const Search = (props) => {
     };
 
     const fetchAllFallbackImages = async () => {
-      const promises = sortedItems.map((item) => fetchHasFallbackImage(item));
+      const promises = items.map((item) => fetchHasFallbackImage(item));
       const results = await Promise.all(promises);
       if (isMounted) {
         setUpdatedItems(results);
@@ -91,11 +87,13 @@ const Search = (props) => {
         <h1 style={{ fontFamily: 'BonnefantenBlock, Arial, sans-serif' }}>
           Nieuws & blogs
         </h1>
-        <Link to="/nl">Meer...</Link>
+        <div className="more-link">
+          <Link to="/nl">Meer...</Link>
+        </div>
       </div>
 
       <div className="search-items" style={{ display: 'flex' }}>
-        {updatedItems.slice(0, 20).map((item) => (
+        {updatedItems.slice(0, 3).map((item) => (
           <div className="SeeMoreItem" key={item['@id']} ref={listingRef}>
             {item.image_field ? (
               <UniversalLink item={item}>
@@ -120,9 +118,6 @@ const Search = (props) => {
                 />
               </UniversalLink>
             ) : null}
-            <UniversalLink item={item}>
-              <div className="item_title">{item.title}</div>
-            </UniversalLink>
             <div className={`listing-dates-wrapper`}>
               <When
                 start={item?.start}
@@ -137,8 +132,15 @@ const Search = (props) => {
                 }
               />
             </div>
+            <UniversalLink item={item}>
+              <div className="item_title">{item.title}</div>
+            </UniversalLink>
+            <div className="item_description">{item?.description}</div>
           </div>
         ))}
+      </div>
+      <div className="more-button">
+        <Link to="/">Meer...</Link>
       </div>
     </Container>
   );
