@@ -203,7 +203,7 @@ export class App extends Component {
             </main>
           </Segment>
         </MultilingualRedirector>
-        <Footer />
+        <Footer type={this.props.content?.['@type']} language={language} />
         <LockingToastsFactory
           content={this.props.content}
           user={this.props.userId}

@@ -17,7 +17,7 @@ import { Container, Segment, Grid, Label } from 'semantic-ui-react';
 import RenderBlocks from './RenderBlocks';
 import MailchimpSubscribe from 'react-mailchimp-subscribe';
 import { Link } from 'react-router-dom';
-
+import { SeeMoreNewsBlogs } from '@package/components/index';
 import { useSiteDataContent } from '@package/helpers';
 
 const messages = defineMessages({
@@ -120,7 +120,8 @@ const MailChimpForm = ({ status, message, onValidated }) => {
  * @returns {string} Markup of the component
  */
 
-const Footer = ({ intl }) => {
+const Footer = (props) => {
+  const { intl } = props;
   const siteDataContent = useSiteDataContent();
   const mailchimp_url =
     'https://centraalmuseum.us2.list-manage.com/subscribe/post?u=c04600e3ceefae8c502cbabec&id=f30ce644bb&group%5B15905%5D%5B16%5D=1';
@@ -189,6 +190,11 @@ const Footer = ({ intl }) => {
               )}
             </div>
           </div>
+        </div>
+      )}
+      {props.type === 'LRF' && props.language === 'nl' && (
+        <div className="news-blogs">
+          <SeeMoreNewsBlogs />
         </div>
       )}
       <div id="view">
