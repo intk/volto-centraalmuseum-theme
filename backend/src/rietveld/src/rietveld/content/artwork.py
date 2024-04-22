@@ -231,6 +231,16 @@ class IArtwork(model.Schema):
         required=False,
     )
 
+    freeofcopyright = TextLine(
+        title="Free of copyright",
+        required=False
+    )
+
+    rights = TextLine(
+        title="Rights",
+        required=False
+    )
+
     rawdata = Text(
         title="Rawdata",
         description="",

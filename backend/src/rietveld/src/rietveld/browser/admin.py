@@ -532,6 +532,13 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     physical_description = tree.findtext(".//physical_description")
     ######################
 
+    # freeofcopyright
+    freeofcopyright = tree.findtext(".//reproduction.freeofcopyright")
+    ######################
+
+    #reproduction rights
+    rights = tree.findtext(".//Reproduction/reproduction.reference/rights")
+
     # Techinuque #
     technique = tree.findall(".//techniek.vrije.tekst")
     technique_values = [name.text for name in technique if name.text is not None]
@@ -1157,6 +1164,8 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         "associatedPeople": associated_people,
         "motifs": motifs,
         "inscriptions": inscription_info,
+        "freeofcopyright": freeofcopyright,
+        "rights": rights,
     }
 
     for field, value in language_independent_fields.items():
