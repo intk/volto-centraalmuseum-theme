@@ -536,7 +536,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     freeofcopyright = tree.findtext(".//reproduction.freeofcopyright")
     ######################
 
-    #reproduction rights
+    # reproduction rights
     rights = tree.findtext(".//Reproduction/reproduction.reference/rights")
 
     # Techinuque #
