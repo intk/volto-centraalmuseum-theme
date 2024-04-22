@@ -1,10 +1,31 @@
 .contenttype-lrf{
   #footer-listing-newsandblogs{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    @media (min-width: 992px) {
+      flex-direction: row-reverse;
+    }
 
     .search-items{
-      flex-basis: 75%;
+      flex-direction: column;
+      @media (min-width: 768px){
+        flex-direction: row;
+        flex-basis: 50%;
+        flex-wrap: wrap;
+      }
+      @media (min-width: 992px){
+        flex-basis: 75%;
+      }
+      .SeeMoreItem{
+        flex-basis: 100%;
+
+        @media (min-width: 768px){
+          flex-basis: 50%;
+        }
+        @media (min-width: 992px){
+          flex-basis: 33.33%;
+        }
+      }
       img{
         height: 100%;
         object-fit: contain;
