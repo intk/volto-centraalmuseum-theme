@@ -118,14 +118,14 @@ class ImageViewFullscreen extends Component {
       .catch((error) => {});
   };
 
-  removeFirstWords = (fullString) => {
-    const parts = fullString.split('/');
-    const modifiedParts = parts.map((part) => {
-      const words = part.trim().split(' ');
-      return words.slice(1).join(' ');
-    });
-    return modifiedParts.join(' / ');
-  };
+  // removeFirstWords = (fullString) => {
+  //   const parts = fullString.split('/');
+  //   const modifiedParts = parts.map((part) => {
+  //     const words = part.trim().split(' ');
+  //     return words.slice(1).join(' ');
+  //   });
+  //   return modifiedParts.join(' / ');
+  // };
 
   /**
    * Render method.
@@ -136,7 +136,7 @@ class ImageViewFullscreen extends Component {
     const { intl } = this.props;
     const copyright = this.state.parentData?.items?.[0]?.freeofcopyright;
     const rights = this.state.parentData?.items?.[0]?.rights;
-    const modifiedRights = rights ? this.removeFirstWords(rights) : '';
+    // const modifiedRights = rights ? this.removeFirstWords(rights) : '';
 
     const imagepath = `${this.props?.pathname
       .split('/')
@@ -169,7 +169,7 @@ class ImageViewFullscreen extends Component {
         <p>
           {intl.formatMessage(messages.include)}{' '}
           {/* <i>{intl.formatMessage(messages.mercis)}</i> */}
-          <i>{modifiedRights && `© ${modifiedRights}`}</i>
+          <i>{rights && `${rights}`}</i>
         </p>
         <div className="image-section">
           <a
