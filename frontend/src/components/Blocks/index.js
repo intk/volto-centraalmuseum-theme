@@ -10,6 +10,7 @@ import installListingBlock from './Listing';
 import installAdvancedSearch from './AdvancedSearch';
 import installAdvancedSearchExhibition from './AdvancedSearchExhibition';
 import installSearchBlock from './Search';
+import installModelBlock from './Model';
 import { compose } from 'redux';
 
 const installBlocks = (config) => {
@@ -26,6 +27,7 @@ const installBlocks = (config) => {
     installAdvancedSearch,
     installSearchBlock,
     installAdvancedSearchExhibition,
+    installModelBlock,
   )(config);
 };
 
