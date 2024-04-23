@@ -153,6 +153,11 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
+#: components/Blocks/Model/schema
+# defaultMessage: Model
+msgid "Model"
+msgstr ""
+
 #: components/Blocks/AdvancedSearch/schema
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Multiple choices?
