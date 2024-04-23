@@ -11,6 +11,11 @@ import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
+const messages = {
+  nl: 'Meer...',
+  en: 'More...',
+};
+
 const SeeanddoTemplate = ({
   items,
   linkTitle,
@@ -73,7 +78,7 @@ const SeeanddoTemplate = ({
       <div id="page-listing">
         <div className="more-button">
           <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
-            Meer...
+            {messages[intl.locale]}
           </Link>
         </div>
         <section id="content-core">
@@ -164,7 +169,7 @@ const SeeanddoTemplate = ({
           </Link>
           <div className="more-link">
             <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
-              Meer...
+              {messages[intl.locale]}
             </Link>
           </div>
         </div>
