@@ -434,17 +434,17 @@ def import_one_record(self, record, collection_type, container, container_en, ca
 
     brains = catalog.searchResults(priref=priref, portal_type="artwork")
 
-    # for brain in brains:
-    #     obj = brain.getObject()
+    for brain in brains:
+        obj = brain.getObject()
 
-    #     if (
-    #         obj.last_successful_update is not None
-    #         and obj.last_successful_update >= last_modification_dt
-    #     ):
-    #         log_to_file(
-    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-    #         )
-    #         return
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -1291,8 +1291,8 @@ def import_one_record(self, record, collection_type, container, container_en, ca
             log_to_file(f"Object is updated: {priref} id and {title} title")
 
             # adding images
-            # import_images(container=obj, images=images)
-            # obj.hasImage = True
+            import_images(container=obj, images=images)
+            obj.hasImage = True
 
             # Reindex the updated object
             obj.reindexObject()
