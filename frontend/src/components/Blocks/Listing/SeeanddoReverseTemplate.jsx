@@ -71,6 +71,11 @@ const SeeanddoReverseTemplate = ({
   return (
     <>
       <div id="page-listing">
+        <div className="more-button">
+          <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
+            Meer...
+          </Link>
+        </div>
         <section id="content-core">
           {updatedItems.map((item) => (
             <div key={item.url} className="SeeMoreItem">

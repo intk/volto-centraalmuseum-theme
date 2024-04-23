@@ -1867,10 +1867,11 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 
     padding-right: 15px;
     padding-left: 15px;
-    margin-bottom: 72px;
+    margin-bottom: 0px;
 
     @media (min-width: 768px) {
       flex-basis: 50%;
+      margin-bottom: 72px;
       padding-right: 14.5px;
       padding-left: 15.5px;
     }
@@ -1963,6 +1964,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     padding-top: 13px;
     margin-bottom: 26px;
     padding-left: 11px !important;
+    min-width: 160px;
 
     h1 {
       font-size: 35px;
@@ -2033,12 +2035,13 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     display: block;
     // width: 135px;
     height: auto;
-    padding: 17px;
+    padding-top: 17px;
     padding-left: 55px;
     padding-right: 55px;
     padding-bottom: 12px;
     border: 1px solid #282931;
-    margin-top: 30px;
+    margin-top: 0px;
+    margin-bottom: 15px;
     background-color: #ffffff;
     border-radius: 0px;
     color: #282931 !important;
@@ -2055,6 +2058,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 
     a {
       color: #282931;
+      border-bottom: 0px !important;
     }
 
     &:hover {
@@ -2076,7 +2080,11 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
   }
   #page-search-title {
     flex-basis: auto !important;
-    flex-shrink: 1
+    flex-shrink: 1;
+    padding-left: 22px !important;
+    h1{
+      margin-top: 10px !important;
+    }
   }
 }
 
