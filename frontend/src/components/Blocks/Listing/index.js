@@ -8,6 +8,8 @@ import CollectionBrowseTemplate from './CollectionBrowseTemplate';
 import RecommendedTemplate from './RecommendedTemplate';
 import TeaserListingTemplate from './TeaserListingTemplate';
 import TeaserListingSecondTemplate from './TeaserListingSecondTemplate';
+import SeeanddoTemplate from './SeeanddoTemplate';
+import SeeanddoReverseTemplate from './SeeanddoReverseTemplate';
 // import MasonryTemplate from './MasonryTemplate';
 
 export default (config) => {
@@ -112,6 +114,18 @@ export default (config) => {
       isDefault: false,
       title: 'NewsItems Template ',
       template: NewsItemsTemplate,
+    },
+    {
+      id: 'SeeanddoTemplate',
+      isDefault: false,
+      title: 'SeeAndDo Template ',
+      template: SeeanddoTemplate,
+    },
+    {
+      id: 'SeeanddoReverseTemplate',
+      isDefault: false,
+      title: 'SeeAndDo Reverse Template ',
+      template: SeeanddoReverseTemplate,
     },
   ];
 
