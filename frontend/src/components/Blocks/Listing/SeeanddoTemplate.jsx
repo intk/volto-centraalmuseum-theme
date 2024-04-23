@@ -73,7 +73,7 @@ const SeeanddoTemplate = ({
       <div id="page-listing">
         <section id="content-core">
           {updatedItems.map((item) => (
-            <div key={item.url} className="listing-items">
+            <div key={item.url} className="SeeMoreItem">
               {item.image_field ? (
                 <UniversalLink item={item}>
                   <PreviewImage
@@ -119,7 +119,7 @@ const SeeanddoTemplate = ({
                   </div>
                 ) : null}
 
-                <div className="item_title">
+                <div id="item_title" className="item_title">
                   <UniversalLink item={item}>{item.title}</UniversalLink>
                 </div>
                 <div className="item_description">
@@ -150,19 +150,19 @@ const SeeanddoTemplate = ({
               </div>
             </div>
           ))}
-          <div id="page-search-title" className="page-search-title">
-            <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
-              <h1 style={{ fontFamily: 'BonnefantenBlock, Arial, sans-serif' }}>
-                {headline}
-              </h1>
-            </Link>
-            <div className="more-link">
-              <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
-                Meer...
-              </Link>
-            </div>
-          </div>
         </section>
+        <div id="page-search-title" className="page-search-title">
+          <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
+            <h1 style={{ fontFamily: 'BonnefantenBlock, Arial, sans-serif' }}>
+              {headline}
+            </h1>
+          </Link>
+          <div className="more-link">
+            <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
+              Meer...
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* {link && <div className="footer">{link}</div>} */}
