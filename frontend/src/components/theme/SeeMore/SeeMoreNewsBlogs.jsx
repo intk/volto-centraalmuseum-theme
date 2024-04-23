@@ -144,7 +144,9 @@ const Search = (props) => {
         ))}
       </div>
       <div className="more-button">
-        <Link to="/">Meer...</Link>
+        <Link to="/nl/over-het-museum/nieuws-en-pers/kort-nieuws-en-blogs">
+          Meer...
+        </Link>
       </div>
       <div className="social-buttons">
         <div className="button facebook">
