@@ -39,7 +39,9 @@
     "@eeacms/volto-hero-block",
     "@kitconcept/volto-button-block",
     "@eeacms/volto-listing-block",
-    "@mbarde/volto-image-crop-widget"
+    "@mbarde/volto-image-crop-widget",
+    "@codesyntax/volto-cookiebot"
+
   ],
   "jest": {
     "modulePathIgnorePatterns": [
@@ -157,10 +159,10 @@
     "@eeacms/volto-hero-block": "^1.0.0",
     "@eeacms/volto-listing-block": "4.2.1",
     "@fortawesome/fontawesome-free": "6.5.2",
-    "@kitconcept/volto-blocks-grid": "*",
-    "@kitconcept/volto-button-block": "*",
+    "@kitconcept/volto-blocks-grid": "7.0.2",
+    "@kitconcept/volto-button-block": "2.2.0",
     "@kitconcept/volto-carousel-block": "1.1.0",
-    "@kitconcept/volto-slider-block": "*",
+    "@kitconcept/volto-slider-block": "4.3.0",
     "@mbarde/volto-image-crop-widget": "0.5.1",
     "@mui/icons-material": "5.15.15",
     "@mui/material": "5.15.15",
@@ -176,7 +178,8 @@
     "volto-form-block": "3.1.0",
     "volto-multilingual-widget": "3.0.0",
     "volto-social-settings": "3.0.0",
-    "yarn": "1.22.19"
+    "yarn": "1.22.19",
+    "@codesyntax/volto-cookiebot": "0.4.0"
   },
   "devDependencies": {
     "@eeacms/volto-block-image-cards": "^1.0.0",

@@ -121,6 +121,9 @@ export default function applyConfig(config) {
     />
   );
 
+  config.settings.cookiebotDomainGroupId =
+    '40f8dd17-1467-4561-ac52-9b51ccb0a719';
+
   config.settings.asyncPropsExtenders = [
     ...config.settings.asyncPropsExtenders,
     {
