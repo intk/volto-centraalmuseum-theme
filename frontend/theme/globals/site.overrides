@@ -526,7 +526,11 @@ div#photo-credit {
   //   text-align: right !important;
   // }
 }
-
+.slate-table-block{
+    @media screen and (min-width: 1200px) {
+        width: 650px !important;
+      }
+}
 .slate-table-block * {
   border-right: 0px !important;
   border-left: 0px !important;
