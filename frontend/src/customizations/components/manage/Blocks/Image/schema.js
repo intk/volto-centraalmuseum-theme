@@ -13,9 +13,9 @@ const messages = defineMessages({
     id: 'Alt text',
     defaultMessage: 'Alt text',
   },
-  Copyright: {
-    id: 'Copyright',
-    defaultMessage: 'Copyright',
+  Caption: {
+    id: 'Caption',
+    defaultMessage: 'Caption',
   },
   Align: {
     id: 'Alignment',
@@ -50,7 +50,7 @@ export function ImageSchema({ formData, intl }) {
         id: 'default',
         title: 'Default',
         fields: [
-          ...(formData.url ? ['url', 'alt', 'copyright', 'align', 'size'] : []),
+          ...(formData.url ? ['url', 'alt', 'caption', 'align', 'size'] : []),
         ],
       },
       ...(formData.url
@@ -84,12 +84,14 @@ export function ImageSchema({ formData, intl }) {
           </>
         ),
       },
-      copyright: {
-        title: intl.formatMessage(messages.Copyright),
-        type: 'text',
+      caption: {
+        title: intl.formatMessage(messages.Caption),
+        type: 'richtext',
+        widget: 'richtext',
       },
       align: {
         title: intl.formatMessage(messages.Align),
+        type: 'richtext',
         widget: 'align',
       },
       size: {

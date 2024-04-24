@@ -77,10 +77,15 @@ export const View = ({ data, detached }) => {
                   >
                     {image}
                   </UniversalLink>
-                  <p id="photo-credit">{data.alt}</p>
-                  <p id="photo-credit" className="photo-credit-copytight">
-                    {data.copyright}
-                  </p>
+                  {data.caption?.data ? (
+                    <p
+                      id="photo-credit"
+                      className="photo-credit-copytight"
+                      dangerouslySetInnerHTML={{ __html: data.caption.data }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               );
             } else {
@@ -94,9 +99,15 @@ export const View = ({ data, detached }) => {
                   })}`}
                 >
                   {image}
-                  <p id="photo-credit">
-                    {data.alt} {data.copyright}
-                  </p>
+                  {data.caption?.data ? (
+                    <div
+                      id="photo-credit"
+                      className="photo-credit-copytight"
+                      dangerouslySetInnerHTML={{ __html: data.caption.data }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               );
             }

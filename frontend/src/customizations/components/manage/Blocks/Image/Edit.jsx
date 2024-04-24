@@ -277,23 +277,23 @@ class Edit extends Component {
             />
             <>
               {data.textalign === 'left' ? (
-                <p id="photo-credit" className="left">
-                  <br />
-                  {data.alt} <br />
-                  {data.copyright}
-                </p>
+                <div
+                  id="photo-credit"
+                  className="left"
+                  dangerouslySetInnerHTML={{ __html: data.caption?.data }}
+                />
               ) : data.textalign === 'right' ? (
-                <p id="photo-credit" className="right">
-                  <br />
-                  {data.alt} <br />
-                  {data.copyright}
-                </p>
+                <div
+                  id="photo-credit"
+                  className="right"
+                  dangerouslySetInnerHTML={{ __html: data.caption?.data }}
+                />
               ) : (
-                <p id="photo-credit">
-                  <br />
-                  {data.alt} <br />
-                  {data.copyright}
-                </p>
+                <div
+                  id="photo-credit"
+                  className="photo-credit-copytight"
+                  dangerouslySetInnerHTML={{ __html: data.caption?.data }}
+                />
               )}
             </>
           </>
