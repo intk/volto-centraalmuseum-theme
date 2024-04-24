@@ -44,7 +44,8 @@
     .column.grid-block-image, .column.grid-block-undefined{
       width: 100%;
       img{
-        display: none !important;
+        // display: none !important;
+        width: 100px;
       }
       div#photo-credit{
         // display: block;
@@ -54,6 +55,10 @@
         display: flex;
         span{
           width: auto;
+          color: white;
+          a{
+            color: white;
+          }
         }
       }
       div#photo-credit > :nth-child(2) {
@@ -99,6 +104,10 @@
 
       .column.grid-block-text:nth-child(3) {
         padding-bottom: 0px !important;
+        p::after,
+          .public-DraftStyleDefault-block span span::after {
+            content: "\00a0\00a0\00a0\00a0\00a0———";
+          }
 
         .public-DraftEditorPlaceholder-root:after {
           padding: 0% !important;
@@ -233,9 +242,6 @@
     .toolbar {
       display: none;
     }
-  }
-  p#photo-credit{
-    display: none;
   }
 }
 

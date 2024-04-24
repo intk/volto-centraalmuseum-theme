@@ -62,10 +62,23 @@
           width: 100%;
           height: auto;
         }
-        p#photo-credit{
+        #photo-credit{
           left: 0% !important;
           font-size: 12px !important;
           letter-spacing: 0.0 !important;
+
+          sub{
+            color: #282931;
+          }
+
+          a{
+            color: #282931;
+            border-bottom: 1px solid #282931 !important;
+          }
+          a:hover{
+            color: #282931;
+          }
+
           @media screen and (max-width: 786px) {
             position: static !important;
             padding-left: 36px !important;
@@ -222,6 +235,9 @@
             // margin-top: 66px !important;
           }
         }
+        p::after, .public-DraftStyleDefault-block span span::after{
+          content: "\00a0\00a0\00a0\00a0\00a0———";
+        }
       }
 
       //second-text-block
@@ -257,6 +273,9 @@
           margin-top: 8px !important;
           margin-bottom: 27px !important
         }
+      }
+      ::after {
+        content: "";
       }
     }
 
