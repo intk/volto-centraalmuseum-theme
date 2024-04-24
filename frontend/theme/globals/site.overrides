@@ -356,6 +356,20 @@ p {
   }
 }
 
+#view, #page-edit{
+  p.callout {
+    font-size: 15px;
+    color: #777777;
+    margin-top: 0px;
+    border: none;
+    box-shadow: none;
+    padding-left: 0px;
+    @media screen and (max-width: 1200px) {
+      font-size: 12px;
+    }
+  }
+}
+
 // image link section
 #view #page-document image-wrapper a {
   border-bottom: none;
@@ -675,6 +689,12 @@ p#photo-credit {
       padding-top: 8px !important;
       margin-bottom: 18px !important;
       text-align: center !important;
+    }
+  }
+  @media (max-width: 480px){
+    .documentFirstHeading, .documentDescription {
+      padding-left: 55px !important;
+      padding-right: 55px !important;
     }
   }
 }
