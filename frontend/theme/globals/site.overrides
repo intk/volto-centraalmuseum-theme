@@ -493,7 +493,7 @@ p {
 }
 
 //image credits alignment
-p#photo-credit {
+div#photo-credit {
   display: block;
   margin-top: 5px !important;
   margin-bottom: 10px;
