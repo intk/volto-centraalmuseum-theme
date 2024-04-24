@@ -36,6 +36,17 @@ const VimeoBlockView = (props) => {
           src={videoLink}
           title="video"
         ></iframe>
+        <div
+          className="shadow"
+          style={{
+            backgroundImage:
+              'linear-gradient(to bottom, rgba(46, 46, 46, 0) 0%, #242424 200%)',
+            zIndex: 2,
+            height: '100%',
+            width: '100vw',
+            position: 'absolute',
+          }}
+        ></div>
       </div>
       <UniversalLink className="logo-link" href="/">
         <img className="logo" src={CMLogo} alt="Centraal Museum logo" />
