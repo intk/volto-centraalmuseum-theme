@@ -9,6 +9,7 @@ import { PreviewImage } from '@plone/volto/components';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 import { Link } from 'react-router-dom';
 import './css/SeeMoreNewsBlogs.less';
+import FetchAuthor from './fetchAuthors';
 
 const Search = (props) => {
   const { content, searchContent, items } = props;
@@ -27,7 +28,7 @@ const Search = (props) => {
         portal_type: 'News Item',
         path: currentPath,
         b_size: 3,
-        metadata_fields: ['effective', 'created', 'description'],
+        metadata_fields: ['effective', 'created', 'description', 'Creator'],
         sort_on: 'getObjPositionInParent',
         sort_order: 'ascending',
       };
@@ -140,6 +141,7 @@ const Search = (props) => {
               <div className="item_title">{item.title}</div>
             </UniversalLink>
             <div className="item_description">{item?.description}</div>
+            {item?.['@type'] === 'News Item' && <FetchAuthor item={item} />}
           </div>
         ))}
       </div>
