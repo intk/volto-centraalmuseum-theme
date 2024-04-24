@@ -415,7 +415,7 @@ nav.navigation {
 }
 
 #main .mobile-menu .mobile-menu-nav .ui.container {
-  width: 100% !important;
+  width: 2000% !important;
 }
 
 .mobile-menu {
@@ -502,6 +502,7 @@ body.has-toolbar .mobile-menu {
 #Footer-wrapper {
   transform: translateX(0) !important;
   transition: transform 0.4s cubic-bezier(0.91, 0.01, 0.6, 0.99);
+  --webkit-overflow-scrolling: touch;
 }
 
 @keyframes slideIn {
@@ -759,4 +760,12 @@ body.has-toolbar.has-hero-image {
 .searchWrapper,
 .search {
   pointer-events: all;
+}
+
+.mobile-menu.mobile-menu-enter-done {
+  overflow-y: auto;
+}
+
+.right-section {
+  z-index: 10;
 }

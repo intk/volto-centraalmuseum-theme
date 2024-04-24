@@ -39,6 +39,12 @@ const Header = (props) => {
         <BodyClass className="has-hero-section" />
       )}
       {isSearch && <BodyClass className="has-hero-section" />}
+
+      {/* Added when applying the changes of the RSH */}
+      <div className="right-section">
+        <Navigation pathname={pathname} navigation={navigationItems} />
+      </div>
+      {/*  */}
       <div
         className={cx(
           'header-wrapper',
