@@ -1688,6 +1688,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codesyntax/volto-cookiebot@npm:0.4.0":
+  version: 0.4.0
+  resolution: "@codesyntax/volto-cookiebot@npm:0.4.0"
+  dependencies:
+    react-cookiebot: 1.0.10
+  checksum: 8476b4164492fb95880be3423925a0aeaf26c4d3758d9c66d0f7502c1746227e02e91881b82f3641dc05410f2475bb03a13ddbc8a67c7cb8af3a77defbfd5610
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -2624,7 +2633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kitconcept/volto-blocks-grid@npm:*":
+"@kitconcept/volto-blocks-grid@npm:7.0.2":
   version: 7.0.2
   resolution: "@kitconcept/volto-blocks-grid@npm:7.0.2"
   peerDependencies:
@@ -2633,7 +2642,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kitconcept/volto-button-block@npm:*":
+"@kitconcept/volto-button-block@npm:2.2.0":
   version: 2.2.0
   resolution: "@kitconcept/volto-button-block@npm:2.2.0"
   checksum: 4299209a94b3387e802aeac077e796314827bd740b74ef6dac1e8acb22b2b22848a993c87694ff341f4c4e01aee644a7a2715e362ca7f93814b0ebb2bed6a3aa
@@ -2650,7 +2659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kitconcept/volto-slider-block@npm:*":
+"@kitconcept/volto-slider-block@npm:4.3.0":
   version: 4.3.0
   resolution: "@kitconcept/volto-slider-block@npm:4.3.0"
   dependencies:
@@ -12243,6 +12252,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "frontend@workspace:."
   dependencies:
+    "@codesyntax/volto-cookiebot": 0.4.0
     "@eeacms/volto-accordion-block": "*"
     "@eeacms/volto-block-divider": ^2.0.0
     "@eeacms/volto-block-image-cards": ^1.0.0
@@ -12250,10 +12260,10 @@ __metadata:
     "@eeacms/volto-hero-block": ^1.0.0
     "@eeacms/volto-listing-block": 4.2.1
     "@fortawesome/fontawesome-free": 6.5.2
-    "@kitconcept/volto-blocks-grid": "*"
-    "@kitconcept/volto-button-block": "*"
+    "@kitconcept/volto-blocks-grid": 7.0.2
+    "@kitconcept/volto-button-block": 2.2.0
     "@kitconcept/volto-carousel-block": 1.1.0
-    "@kitconcept/volto-slider-block": "*"
+    "@kitconcept/volto-slider-block": 4.3.0
     "@mbarde/volto-image-crop-widget": 0.5.1
     "@mui/icons-material": 5.15.15
     "@mui/material": 5.15.15
@@ -20061,6 +20071,18 @@ __metadata:
   peerDependencies:
     react: ">= 16.3.0"
   checksum: b734dcad35d790ced8c8fc3b19e3eb1f546e0923c637bad888c7c0096dbe2c996668416a49b48827ec7ad2d81522f1b57567694c791e1a5fb89ca41b39158a74
+  languageName: node
+  linkType: hard
+
+"react-cookiebot@npm:1.0.10":
+  version: 1.0.10
+  resolution: "react-cookiebot@npm:1.0.10"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: "*"
+  checksum: 510903c60ae75c12beca48a19a58cbc5c39bf5070c5252faef6aeea5c4ae971053a6f5514778cb9ef43fbf8ba7d14171464a8724994c7b5bd6e91b625eca0009
   languageName: node
   linkType: hard
 
