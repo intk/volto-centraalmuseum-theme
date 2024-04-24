@@ -64,9 +64,9 @@ const tempTranslations = {
     de: 'Falsch',
   },
   stateSuccess: {
-    en: 'Sent!',
-    nl: 'Verzonden!',
-    de: 'Gesendet!',
+    en: 'Thank you very much for your request',
+    nl: 'Hartelijke dank voor uw aanvraag',
+    de: 'Vielen Dank für Ihre Anfrage',
   },
   reset: {
     en: 'Clear',
@@ -182,7 +182,10 @@ const FormView = ({
                   );
 
                   return (
-                    <Grid.Row key={'row' + index}>
+                    <Grid.Row
+                      key={'row' + index}
+                      id={`subblock-${subblock.field_type}`}
+                    >
                       <Grid.Column>
                         <Field
                           {...subblock}
@@ -200,6 +203,7 @@ const FormView = ({
                               ? subblock.value
                               : formData[name]?.value
                           }
+                          defaultValue={subblock?.default_values}
                           valid={isValidField(name)}
                           formHasErrors={formErrors?.length > 0}
                         />
