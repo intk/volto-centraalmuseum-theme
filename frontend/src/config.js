@@ -18,6 +18,8 @@ import '@plone/volto/config';
 import { getContent } from '@plone/volto/actions';
 import installFooter from './footer';
 import installBlocks from './components/Blocks';
+import { BlockButton } from '@plone/volto-slate/editor/ui';
+import tiny from '@plone/volto/icons/tiny.svg';
 import ArtworkView from './components/theme/View/ArtworkView';
 import AuthorView from './components/theme/View/AuthorView';
 import BlogWriterView from './components/theme/View/BlogWriterView';
@@ -87,6 +89,37 @@ export default function applyConfig(config) {
   config.settings.nonContentRoutes = [
     ...config.settings.nonContentRoutes.filter((p) => p !== '/search'),
   ];
+
+  config.settings.slate.toolbarButtons = [
+    'bold',
+    'italic',
+    'strikethrough',
+    'link',
+    'separator',
+    'heading-two',
+    'heading-three',
+    'separator',
+    'sub',
+    'sup',
+    'separator',
+    'numbered-list',
+    'bulleted-list',
+    'blockquote',
+    'styleMenu',
+    'callout',
+  ];
+
+  const { slate } = config.settings;
+
+  // Override the callout button
+  slate.buttons['callout'] = (props) => (
+    <BlockButton
+      format="callout"
+      icon={tiny}
+      title="Discreet" // Use the custom title
+      {...props}
+    />
+  );
 
   config.settings.asyncPropsExtenders = [
     ...config.settings.asyncPropsExtenders,
