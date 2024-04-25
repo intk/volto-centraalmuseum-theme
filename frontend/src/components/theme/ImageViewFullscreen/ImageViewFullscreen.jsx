@@ -55,9 +55,15 @@ const messages = defineMessages({
     id: 'terug',
     defaultMessage: 'Terug naar de website',
   },
-  niet: {
-    id: 'niet',
-    defaultMessage: 'Niet wat u zocht? ',
+  publicdomain1: {
+    id: 'publicdomain1',
+    defaultMessage:
+      'Dit werk bevindt zich in het Publiek Domein. Dat betekent dat u de afbeelding voor alle doeleinden mag gebruiken.',
+  },
+  publicdomain2: {
+    id: 'publicdomain2',
+    defaultMessage:
+      'We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.',
   },
 });
 
@@ -170,7 +176,7 @@ class ImageViewFullscreen extends Component {
         </div>
         <p>
           {copyright ? (
-            intl.formatMessage(messages.niet)
+            intl.formatMessage(messages.publicdomain1)
           ) : (
             <>
               {intl.formatMessage(messages.imagepurpose1)}
@@ -187,7 +193,10 @@ class ImageViewFullscreen extends Component {
         </p>
         <p>
           {copyright ? (
-            intl.formatMessage(messages.niet)
+            <>
+              {intl.formatMessage(messages.publicdomain2)}{' '}
+              <i>{rights && `${rights}`}</i>
+            </>
           ) : (
             <>
               {intl.formatMessage(messages.imagepurpose3)}
@@ -202,11 +211,12 @@ class ImageViewFullscreen extends Component {
             </>
           )}
         </p>
-        <p>
-          {intl.formatMessage(messages.include)}{' '}
-          {/* <i>{intl.formatMessage(messages.mercis)}</i> */}
-          <i>{rights && `${rights}`}</i>
-        </p>
+        {!copyright && rights && (
+          <p>
+            {intl.formatMessage(messages.include)}{' '}
+            <i>{rights && `${rights}`}</i>
+          </p>
+        )}
         <div className="image-section">
           <a
             className="button"
