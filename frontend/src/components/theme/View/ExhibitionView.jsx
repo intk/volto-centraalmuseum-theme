@@ -305,7 +305,7 @@ const ExhibitionView = (props) => {
         <div id="rawdata" className="rawdata-section">
           <table>
             <tbody>
-              {content.organisation && (
+              {/* {content.organisation && (
                 <tr>
                   <td className="columnone">
                     <p>{intl.formatMessage(messages.location)}</p>
@@ -314,7 +314,7 @@ const ExhibitionView = (props) => {
                     <p>{content.organisation}</p>
                   </td>
                 </tr>
-              )}
+              )} */}
               {content?.exhibition_designer &&
                 content?.exhibition_designer?.length > 0 && (
                   <tr>
