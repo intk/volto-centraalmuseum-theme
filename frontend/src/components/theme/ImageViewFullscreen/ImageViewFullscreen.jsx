@@ -126,7 +126,7 @@ class ImageViewFullscreen extends Component {
     const options = {
       portal_type: 'artwork',
       path: parentpath,
-      metadata_fields: ['freeofcopyright', 'rights'],
+      metadata_fields: ['freeofcopyright', 'rights', 'objectName'],
     };
 
     this.props
@@ -156,7 +156,11 @@ class ImageViewFullscreen extends Component {
     const { intl } = this.props;
     const copyright = this.state.parentData?.items?.[0]?.freeofcopyright;
     const rights = this.state.parentData?.items?.[0]?.rights;
-    // const modifiedRights = rights ? this.removeFirstWords(rights) : '';
+    const objectName = this.state.parentData?.items?.[0]?.objectName?.[0];
+    const copyrightWName =
+      objectName === 'schilderij' ||
+      objectName === 'tekening' ||
+      objectName === 'prent';
 
     const imagepath = `${this.props?.pathname
       .split('/')
@@ -175,7 +179,7 @@ class ImageViewFullscreen extends Component {
            )} */}
         </div>
         <p>
-          {copyright ? (
+          {copyright && copyrightWName ? (
             intl.formatMessage(messages.publicdomain1)
           ) : (
             <>
@@ -192,7 +196,7 @@ class ImageViewFullscreen extends Component {
           )}
         </p>
         <p>
-          {copyright ? (
+          {copyright && copyrightWName ? (
             <>
               {intl.formatMessage(messages.publicdomain2)}{' '}
               <i>{rights && `${rights}`}</i>
@@ -211,7 +215,7 @@ class ImageViewFullscreen extends Component {
             </>
           )}
         </p>
-        {!copyright && rights && (
+        {!copyright && copyrightWName && rights && (
           <p>
             {intl.formatMessage(messages.include)}{' '}
             <i>{rights && `${rights}`}</i>
