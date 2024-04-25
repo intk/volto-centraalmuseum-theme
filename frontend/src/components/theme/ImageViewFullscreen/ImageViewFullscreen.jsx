@@ -65,6 +65,21 @@ const messages = defineMessages({
     defaultMessage:
       'We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.',
   },
+  notcopyright1: {
+    id: 'notcopyright1',
+    defaultMessage:
+      'Dit werk is niet (meer) auteursrechtelijk beschermd. Dat betekent dat u de afbeelding voor alle, niet-commerciële, doeleinden mag gebruiken. Hierbij geldt de volgende licentie ',
+  },
+  notcopyright2: {
+    id: 'notcopyright2',
+    defaultMessage:
+      ' (dit betekent dat u minimaal indien van toepassing de naam van de fotograaf moet vermelden.)',
+  },
+  notcopyright3: {
+    id: 'notcopyright3',
+    defaultMessage:
+      'We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.',
+  },
 });
 
 // const test = withQuerystringResults(this.props);
@@ -179,8 +194,21 @@ class ImageViewFullscreen extends Component {
            )} */}
         </div>
         <p>
-          {copyright && copyrightWName ? (
-            intl.formatMessage(messages.publicdomain1)
+          {copyright ? (
+            copyrightWName ? (
+              intl.formatMessage(messages.publicdomain1)
+            ) : (
+              <>
+                {intl.formatMessage(messages.notcopyright1)}
+                <a
+                  href="
+                  https://creativecommons.org/licenses/by-nc/4.0/deed.nl"
+                >
+                  https://creativecommons.org/licenses/by-nc/4.0/deed.nl
+                </a>
+                {intl.formatMessage(messages.notcopyright2)}
+              </>
+            )
           ) : (
             <>
               {intl.formatMessage(messages.imagepurpose1)}
@@ -196,11 +224,15 @@ class ImageViewFullscreen extends Component {
           )}
         </p>
         <p>
-          {copyright && copyrightWName ? (
-            <>
-              {intl.formatMessage(messages.publicdomain2)}{' '}
-              <i>{rights && `${rights}`}</i>
-            </>
+          {copyright ? (
+            copyrightWName ? (
+              <>
+                {intl.formatMessage(messages.publicdomain2)}{' '}
+                <i>{rights && `${rights}`}</i>
+              </>
+            ) : (
+              intl.formatMessage(messages.notcopyright3)
+            )
           ) : (
             <>
               {intl.formatMessage(messages.imagepurpose3)}
@@ -215,7 +247,13 @@ class ImageViewFullscreen extends Component {
             </>
           )}
         </p>
-        {!copyright && copyrightWName && rights && (
+        {!copyright && rights && (
+          <p>
+            {intl.formatMessage(messages.include)}{' '}
+            <i>{rights && `${rights}`}</i>
+          </p>
+        )}
+        {copyright && rights && !copyrightWName && (
           <p>
             {intl.formatMessage(messages.include)}{' '}
             <i>{rights && `${rights}`}</i>

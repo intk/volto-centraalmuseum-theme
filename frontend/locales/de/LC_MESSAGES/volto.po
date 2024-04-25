@@ -477,6 +477,21 @@ msgstr ""
 msgid "noObjects"
 msgstr ""
 
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Dit werk is niet (meer) auteursrechtelijk beschermd. Dat betekent dat u de afbeelding voor alle, niet-commerciële, doeleinden mag gebruiken. Hierbij geldt de volgende licentie
+msgid "notcopyright1"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  (dit betekent dat u minimaal indien van toepassing de naam van de fotograaf moet vermelden.)
+msgid "notcopyright2"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.
+msgid "notcopyright3"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
 # defaultMessage: Dit object is nu niet in het museum te zien

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-04-25T12:20:24.148Z\n"
+"POT-Creation-Date: 2024-04-25T13:29:13.231Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -462,6 +462,21 @@ msgstr ""
 #: components/theme/View/ExhibitionView
 # defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
 msgid "noObjects"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Dit werk is niet (meer) auteursrechtelijk beschermd. Dat betekent dat u de afbeelding voor alle, niet-commerciële, doeleinden mag gebruiken. Hierbij geldt de volgende licentie 
+msgid "notcopyright1"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  (dit betekent dat u minimaal indien van toepassing de naam van de fotograaf moet vermelden.)
+msgid "notcopyright2"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.
+msgid "notcopyright3"
 msgstr ""
 
 #: components/theme/View/ArtworkView

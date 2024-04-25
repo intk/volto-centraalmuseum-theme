@@ -412,7 +412,7 @@ msgstr ", so we can update our information as needed."
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
 # defaultMessage: Bij gebruik deze gegevens vermelden:
 msgid "include"
-msgstr "When using this information please state:"
+msgstr "When using this data, please mention: "
 
 #: components/theme/View/ArtworkView
 # defaultMessage: Opschriften / merken
@@ -461,6 +461,21 @@ msgstr "More of the same motif"
 # defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
 msgid "noObjects"
 msgstr "No objects from the Centraal Museum collection were shown in this exhibition"
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Dit werk is niet (meer) auteursrechtelijk beschermd. Dat betekent dat u de afbeelding voor alle, niet-commerciële, doeleinden mag gebruiken. Hierbij geldt de volgende licentie
+msgid "notcopyright1"
+msgstr "This work is not (or no longer) protected by copyright. This means that you may use the image for all non-commercial purposes. The following license applies here "
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  (dit betekent dat u minimaal indien van toepassing de naam van de fotograaf moet vermelden.)
+msgid "notcopyright2"
+msgstr " (this means that you should at least mention the name of the photographer if applicable)."
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.
+msgid "notcopyright3"
+msgstr "We would appreciate it if - when applicable - you mention the maker and title of the work and refer to Centraal Museum."
 
 #: components/theme/View/ArtworkView
 #: components/theme/View/ExhibitionView
