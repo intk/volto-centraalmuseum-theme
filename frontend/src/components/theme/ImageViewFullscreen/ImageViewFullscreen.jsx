@@ -186,25 +186,21 @@ class ImageViewFullscreen extends Component {
           )}
         </p>
         <p>
-          <i>
-            {copyright ? (
-              intl.formatMessage(messages.niet)
-            ) : (
-              <>
-                {intl.formatMessage(messages.imagepurpose3)}
-                <Link
-                  to={
-                    intl.locale === 'nl'
-                      ? '/nl/beeldaanvraag'
-                      : '/en/orderimage'
-                  }
-                >
-                  {intl.formatMessage(messages.bestelformulier)}
-                </Link>
-                {intl.formatMessage(messages.imagepurpose4)}
-              </>
-            )}
-          </i>
+          {copyright ? (
+            intl.formatMessage(messages.niet)
+          ) : (
+            <>
+              {intl.formatMessage(messages.imagepurpose3)}
+              <Link
+                to={
+                  intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'
+                }
+              >
+                {intl.formatMessage(messages.bestelformulier)}
+              </Link>
+              {intl.formatMessage(messages.imagepurpose4)}
+            </>
+          )}
         </p>
         <p>
           {intl.formatMessage(messages.include)}{' '}
