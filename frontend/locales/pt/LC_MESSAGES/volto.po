@@ -465,11 +465,6 @@ msgstr ""
 msgid "motifs"
 msgstr ""
 
-#: components/theme/ImageViewFullscreen/ImageViewFullscreen
-# defaultMessage: Niet wat u zocht?
-msgid "niet"
-msgstr ""
-
 #: components/theme/View/ExhibitionView
 # defaultMessage: In deze tentoonstelling waren geen objecten uit de collectie van het Centraal Museum te zien
 msgid "noObjects"
@@ -525,6 +520,16 @@ msgstr ""
 #: components/Blocks/SiteData/schema
 # defaultMessage: Plan your visit link
 msgid "planYourVisitLink"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Dit werk bevindt zich in het Publiek Domein. Dat betekent dat u de afbeelding voor alle doeleinden mag gebruiken.
+msgid "publicdomain1"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: We stellen het op prijs als u - indien van toepassing - de vervaardiger en titel van het werk noemt en verwijst naar het Centraal Museum.
+msgid "publicdomain2"
 msgstr ""
 
 #: components/theme/View/ArtworkView
