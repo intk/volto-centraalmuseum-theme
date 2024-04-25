@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-04-23T14:48:42.822Z\n"
+"POT-Creation-Date: 2024-04-25T10:39:04.972Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -307,7 +307,7 @@ msgid "availableViews"
 msgstr ""
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
-# defaultMessage: Bestelformulier
+# defaultMessage: formulier
 msgid "bestelformulier"
 msgstr ""
 
@@ -392,8 +392,23 @@ msgid "exhibitions"
 msgstr ""
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
-# defaultMessage: Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie: 
-msgid "imagepurpose"
+# defaultMessage: U kunt deze afbeelding gebruiken voor studie of privédoeleinden. Omdat het werk auteursrechtelijk beschermd is (de maker leeft, of is minder dan 70 jaar geleden overleden), zijn er waarschijnlijk voorwaarden (en mogelijk kosten) verbonden aan ander gebruik. Vult u het 
+msgid "imagepurpose1"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  in, dan laten we u weten wat de mogelijkheden zijn.
+msgid "imagepurpose2"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Toch auteursrechtenvrij? Het kan zijn dat de informatie in onze database nog niet helemaal up-to-date is. Vul ook in dat geval onderstaand 
+msgid "imagepurpose3"
+msgstr ""
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  in, dan kunnen we onze informatie waar nodig actualiseren.
+msgid "imagepurpose4"
 msgstr ""
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen

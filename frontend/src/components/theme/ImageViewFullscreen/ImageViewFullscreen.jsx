@@ -20,10 +20,24 @@ import { asyncConnect } from '@plone/volto/helpers';
 import qs from 'query-string';
 
 const messages = defineMessages({
-  imagepurpose: {
-    id: 'imagepurpose',
+  imagepurpose1: {
+    id: 'imagepurpose1',
     defaultMessage:
-      'Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie: ',
+      'U kunt deze afbeelding gebruiken voor studie of privédoeleinden. Omdat het werk auteursrechtelijk beschermd is (de maker leeft, of is minder dan 70 jaar geleden overleden), zijn er waarschijnlijk voorwaarden (en mogelijk kosten) verbonden aan ander gebruik. Vult u het ',
+  },
+  imagepurpose2: {
+    id: 'imagepurpose2',
+    defaultMessage: ' in, dan laten we u weten wat de mogelijkheden zijn.',
+  },
+  imagepurpose3: {
+    id: 'imagepurpose3',
+    defaultMessage:
+      'Toch auteursrechtenvrij? Het kan zijn dat de informatie in onze database nog niet helemaal up-to-date is. Vul ook in dat geval onderstaand ',
+  },
+  imagepurpose4: {
+    id: 'imagepurpose4',
+    defaultMessage:
+      ' in, dan kunnen we onze informatie waar nodig actualiseren.',
   },
   include: {
     id: 'include',
@@ -35,7 +49,7 @@ const messages = defineMessages({
   },
   bestelformulier: {
     id: 'bestelformulier',
-    defaultMessage: 'Bestelformulier',
+    defaultMessage: 'formulier',
   },
   terug: {
     id: 'terug',
@@ -135,6 +149,7 @@ class ImageViewFullscreen extends Component {
   render() {
     const { intl } = this.props;
     const copyright = this.state.parentData?.items?.[0]?.freeofcopyright;
+    console.log(copyright);
     const rights = this.state.parentData?.items?.[0]?.rights;
     // const modifiedRights = rights ? this.removeFirstWords(rights) : '';
 
@@ -149,22 +164,44 @@ class ImageViewFullscreen extends Component {
     return (
       <Container id="page-search">
         <div className="home-link">
-          {copyright ? (
-            <Link to={parentpath}>{intl.formatMessage(messages.terug)}</Link>
-          ) : (
-            <Link to={`/${intl.locale}`}>Home</Link>
-          )}
+          {/* {copyright ? ( */}
+          <Link to={parentpath}>{intl.formatMessage(messages.terug)}</Link>
+          {/* ) : ( // <Link to={`/${intl.locale}`}>Home</Link>
+           )} */}
         </div>
         <p>
-          {copyright
-            ? intl.formatMessage(messages.niet)
-            : intl.formatMessage(messages.imagepurpose)}
-          {/* {intl.formatMessage(messages.imagepurpose)}{' '} */}
-          <Link
-            to={intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'}
-          >
-            {intl.formatMessage(messages.bestelformulier)}
-          </Link>
+          {copyright ? (
+            intl.formatMessage(messages.niet)
+          ) : (
+            <>
+              {intl.formatMessage(messages.imagepurpose1)}
+              <Link
+                to={
+                  intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'
+                }
+              >
+                {intl.formatMessage(messages.bestelformulier)}
+              </Link>
+              {intl.formatMessage(messages.imagepurpose2)}
+            </>
+          )}
+        </p>
+        <p>
+          {copyright ? (
+            intl.formatMessage(messages.niet)
+          ) : (
+            <>
+              {intl.formatMessage(messages.imagepurpose3)}
+              <Link
+                to={
+                  intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'
+                }
+              >
+                {intl.formatMessage(messages.bestelformulier)}
+              </Link>
+              {intl.formatMessage(messages.imagepurpose4)}
+            </>
+          )}
         </p>
         <p>
           {intl.formatMessage(messages.include)}{' '}

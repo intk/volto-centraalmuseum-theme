@@ -305,9 +305,9 @@ msgid "availableViews"
 msgstr ""
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
-# defaultMessage: Bestelformulier
+# defaultMessage: formulier
 msgid "bestelformulier"
-msgstr "Order form"
+msgstr "the form"
 
 #: components/Blocks/Listing/CollectionSliderTemplate
 # defaultMessage: Blader door de collectie
@@ -390,9 +390,24 @@ msgid "exhibitions"
 msgstr "Exhibitions"
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
-# defaultMessage: Gebruik voor studie of privédoeleinden. Beeldrecht is van toepassing. Aanvragen voorwaarden copyright en/of hogere resolutie:
-msgid "imagepurpose"
-msgstr "Use for study or private purposes. Image copyright applies. Request conditions for copyright and / or higher resolution:"
+# defaultMessage: U kunt deze afbeelding gebruiken voor studie of privédoeleinden. Omdat het werk auteursrechtelijk beschermd is (de maker leeft, of is minder dan 70 jaar geleden overleden), zijn er waarschijnlijk voorwaarden (en mogelijk kosten) verbonden aan ander gebruik. Vult u het
+msgid "imagepurpose1"
+msgstr "You can use this image for study or private purposes. However, since the work is protected by copyright (the creator is alive, or passed away less than 70 years ago), there are likely to be conditions (and possibly costs) associated with other uses. Please fill in "
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  in, dan laten we u weten wat de mogelijkheden zijn.
+msgid "imagepurpose2"
+msgstr ", and we will inform you of the possibilities."
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage: Toch auteursrechtenvrij? Het kan zijn dat de informatie in onze database nog niet helemaal up-to-date is. Vul ook in dat geval onderstaand
+msgid "imagepurpose3"
+msgstr "Should it be copyright-free? It may be that the information in our database is not completely up-to-date. In that case, please also fill in "
+
+#: components/theme/ImageViewFullscreen/ImageViewFullscreen
+# defaultMessage:  in, dan kunnen we onze informatie waar nodig actualiseren.
+msgid "imagepurpose4"
+msgstr ", so we can update our information as needed."
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
 # defaultMessage: Bij gebruik deze gegevens vermelden:
