@@ -149,7 +149,6 @@ class ImageViewFullscreen extends Component {
   render() {
     const { intl } = this.props;
     const copyright = this.state.parentData?.items?.[0]?.freeofcopyright;
-    console.log(copyright);
     const rights = this.state.parentData?.items?.[0]?.rights;
     // const modifiedRights = rights ? this.removeFirstWords(rights) : '';
 
@@ -187,21 +186,25 @@ class ImageViewFullscreen extends Component {
           )}
         </p>
         <p>
-          {copyright ? (
-            intl.formatMessage(messages.niet)
-          ) : (
-            <>
-              {intl.formatMessage(messages.imagepurpose3)}
-              <Link
-                to={
-                  intl.locale === 'nl' ? '/nl/beeldaanvraag' : '/en/orderimage'
-                }
-              >
-                {intl.formatMessage(messages.bestelformulier)}
-              </Link>
-              {intl.formatMessage(messages.imagepurpose4)}
-            </>
-          )}
+          <i>
+            {copyright ? (
+              intl.formatMessage(messages.niet)
+            ) : (
+              <>
+                {intl.formatMessage(messages.imagepurpose3)}
+                <Link
+                  to={
+                    intl.locale === 'nl'
+                      ? '/nl/beeldaanvraag'
+                      : '/en/orderimage'
+                  }
+                >
+                  {intl.formatMessage(messages.bestelformulier)}
+                </Link>
+                {intl.formatMessage(messages.imagepurpose4)}
+              </>
+            )}
+          </i>
         </p>
         <p>
           {intl.formatMessage(messages.include)}{' '}
