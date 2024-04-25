@@ -193,14 +193,13 @@ class Search extends Component {
       updatedItems: [],
       onlyArtworks: false,
       excludeArtworks: false,
-      // ObjOnDisplay: false,
       hasPreviewImage: false,
       ObjOnDisplay: false,
       filtersDisplay: false,
       showFilters: true,
       artworkDates: [],
-      // datingFilters: [],
-      // choosenPeriodFilters: [],
+      datingFilters: [],
+      choosenPeriodFilters: [],
     };
     this.isMountedFlag = false;
   }
@@ -384,7 +383,7 @@ class Search extends Component {
         currentUrlParams.set('ObjOnDisplay', 'true');
       }
 
-      if (this.state.choosenPeriodFilters.length > 0) {
+      if (this.state.choosenPeriodFilters?.length > 0) {
         this.state.choosenPeriodFilters.forEach((period) => {
           currentUrlParams.set('dating', period);
         });
