@@ -781,12 +781,10 @@ div#photo-credit {
 
   @media (min-width: 992px) {
     .ticket-button {
-      color: #000000 !important;
-      border: 1px solid #282931 !important;
+      color: #000000;
     }
 
     .ticket-button:hover {
-      color: #ffffff !important;
       border: 1px solid #282931 !important;
       background-color: #282931 !important;
     }
@@ -2317,5 +2315,34 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 .contenttype-event.event-recurrences-shown{
   .documentDescription{
     margin-top: 10px !important;
+  }
+}
+
+.contenttype-event.top-image-align-right{
+  .herosection{
+    .content-description{
+      @media (max-width: 992px){
+        display: none;
+      }
+    }
+  }
+  .herosection-content-wrapper {
+    .description-container{
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    @media (min-width: 992px) {
+      .ticket-button {
+        color: #000000 !important;
+        border: 1px solid #282931 !important;
+      }
+
+      .ticket-button:hover {
+        color: #ffffff !important;
+        border: 1px solid #282931 !important;
+        background-color: #282931 !important;
+      }
+    }
   }
 }
