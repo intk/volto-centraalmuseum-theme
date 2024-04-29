@@ -250,7 +250,7 @@ function HeroSection(props) {
               )}
             </div>
             <Container>
-              {description && !isEvent && !isPermanent && (
+              {description && !isPermanent && (
                 <p className="content-description">{description}</p>
               )}
             </Container>

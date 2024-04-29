@@ -2302,3 +2302,11 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     margin-bottom: 0px;
   }
 }
+
+.contenttype-event:not(.top-image-align-right){
+  .herosection{
+    .content-description{
+      display: none;
+    }
+  }
+}
