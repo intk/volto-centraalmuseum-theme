@@ -1,6 +1,7 @@
 default_context:
   initial_user_name: "admin"
   initial_user_password: "admin"
+  dos_protection_available: false
 
   load_zcml:
     package_includes: ["rietveld", "kitconcept.seo", "collective.volto.formsupport", "collective.volto.socialsettings", "collective.exportimport"]

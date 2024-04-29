@@ -7,7 +7,8 @@ kitconcept.seo
 git+https://github.com/intk/collective.volto.formsupport.git
 # collective.volto.formsupport
 collective.volto.socialsettings
-collective.exportimport
+collective.exportimport>=1.12
+
 
 # Add required add-ons
 # (Ideally add them in setup.py for rietveld)
