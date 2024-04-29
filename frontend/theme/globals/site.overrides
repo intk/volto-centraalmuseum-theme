@@ -2329,6 +2329,9 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
       }
     }
   }
+  #page-document .documentDescription{
+    display: none;
+  }
   .herosection-content-wrapper {
     .description-container{
       display: flex;
@@ -2336,6 +2339,8 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     }
 
     @media (min-width: 992px) {
+
+
       .description-container {
         margin-top: 15px;
         font-size: 19.52px !important;
