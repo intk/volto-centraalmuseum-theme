@@ -25,6 +25,7 @@ import {
 import { isEqual } from 'lodash';
 import { getWidget } from '@plone/volto/helpers/Widget/utils';
 import { rrulestr } from 'rrule';
+import { BodyClass } from '@plone/volto/helpers';
 
 // const translations = {
 //   expired: {
@@ -188,9 +189,10 @@ const EventView = (props) => {
         )} */}
         {recurrenceDates && (
           <div className="event-recurrence-dates">
+            <BodyClass className="event-recurrences-shown" />
             <h4>WANNEER</h4>
             <div>
-              {recurrenceDates.map((date) => {
+              {recurrenceDates.slice(0, 6).map((date) => {
                 return <p>{date}</p>;
               })}
             </div>

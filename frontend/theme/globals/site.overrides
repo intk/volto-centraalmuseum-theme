@@ -2283,6 +2283,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 }
 
 .event-recurrence-dates{
+  margin-top: 78px;
   p{
     margin-bottom: 5px !important;
     margin-top: 0px !important;
@@ -2308,5 +2309,11 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     .content-description{
       display: none;
     }
+  }
+}
+
+.contenttype-event.event-recurrences-shown{
+  .documentDescription{
+    margin-top: 10px !important;
   }
 }
