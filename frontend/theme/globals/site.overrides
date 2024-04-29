@@ -2332,6 +2332,9 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
   #page-document .documentDescription{
     display: none;
   }
+  #page-document{
+    margin-top: 76px !important;
+  }
   .herosection-content-wrapper {
     .description-container{
       display: flex;
