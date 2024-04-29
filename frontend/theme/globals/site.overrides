@@ -2364,3 +2364,6 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     }
   }
 }
+.tags {
+  display: none;
+}
