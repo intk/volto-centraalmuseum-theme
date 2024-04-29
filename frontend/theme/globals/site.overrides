@@ -2283,14 +2283,16 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 }
 
 .event-recurrence-dates{
-  margin-top: 78px;
+  margin-top: 76px;
   p{
     margin-bottom: 5px !important;
     margin-top: 0px !important;
     font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif !important;
     font-size: 16px !important;
     text-decoration: underline !important;
+    text-underline-offset: 5px;
     line-height: 22.85px !important;
+    letter-spacing: 0.8px !important;
   }
   h4{
     font-weight: bold !important;
@@ -2314,7 +2316,8 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 
 .contenttype-event.event-recurrences-shown{
   .documentDescription{
-    margin-top: 10px !important;
+    margin-top: 12px !important;
+    margin-bottom: 18px !important;
   }
 }
 
