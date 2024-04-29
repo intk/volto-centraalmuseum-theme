@@ -87,6 +87,7 @@ function HeroSection(props) {
 
   const end = new Date(content?.end);
   const isPermanent = end?.getFullYear() === 2100;
+  const recurrence = props.content?.recurrence;
   const pathname = useSelector((state) => state.router.location.pathname);
   const slideshowPath = `${pathname}/slideshow`;
   const id = `full-items@${slideshowPath}`;
@@ -198,7 +199,7 @@ function HeroSection(props) {
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
             <div className="buttons">
-              {isPermanent && (
+              {(isPermanent || recurrence) && (
                 <UniversalLink
                   href={`https://tickets.centraalmuseum.nl/${intl.locale}/tickets`}
                 >
