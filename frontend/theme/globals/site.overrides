@@ -68,7 +68,11 @@ body {
   .view-viewview.contenttype-exhibition
     .ui.basic.segment.content-area
     #page-document
-    > .block.__button {
+    > .block.__button,
+  .view-viewview
+    .ui.basic.segment.content-area
+    #page-document
+    > .event-recurrence-dates {
     box-sizing: border-box !important;
     margin-left: 101px;
   }
@@ -2278,3 +2282,23 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
   }
 }
 
+.event-recurrence-dates{
+  p{
+    margin-bottom: 5px !important;
+    margin-top: 0px !important;
+    font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif !important;
+    font-size: 16px !important;
+    text-decoration: underline !important;
+    line-height: 22.85px !important;
+  }
+  h4{
+    font-weight: bold !important;
+    color: #282931 !important;
+    font-size: 17px !important;
+    line-height: 35px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    font-family: 'FranklinMed', Arial, sans-serif !important;
+    margin-bottom: 0px;
+  }
+}
