@@ -233,13 +233,20 @@ function HeroSection(props) {
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
             <div className="buttons">
-              {(isPermanent || recurrence) && (
+              {props?.content?.event_url ? (
+                <UniversalLink href={props?.content?.event_url}>
+                  <button className={`ticket-button`}>TICKETS</button>
+                </UniversalLink>
+              ) : isPermanent || recurrence ? (
                 <UniversalLink
                   href={`https://tickets.centraalmuseum.nl/${intl.locale}/tickets`}
                 >
                   <button className={`ticket-button`}>TICKETS</button>
                 </UniversalLink>
+              ) : (
+                ''
               )}
+
               {albumItems.length > 1 && (
                 <ImageAlbum
                   items={albumItems}
