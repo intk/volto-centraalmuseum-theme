@@ -345,6 +345,11 @@ msgstr ""
 msgid "credit"
 msgstr "Remarks"
 
+#: components/theme/Header/HeroSection
+# defaultMessage: dagelijks
+msgid "daily"
+msgstr "DAILY"
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Datering
 msgid "date"
@@ -444,6 +449,11 @@ msgstr "Material and technique"
 # defaultMessage: Mercis Publishing/Centraal Museum, Utrecht
 msgid "mercis"
 msgstr "Mercis Publishing/Centraal Museum, Utrecht"
+
+#: components/theme/Header/HeroSection
+# defaultMessage: maandelijks
+msgid "monthly"
+msgstr "MONTHLY"
 
 #: components/Blocks/Listing/RecommendedTemplate
 #: components/Blocks/Listing/TeaserListingSecondTemplate
@@ -637,6 +647,11 @@ msgstr "VIEW"
 # defaultMessage: Views
 msgid "views"
 msgstr ""
+
+#: components/theme/Header/HeroSection
+# defaultMessage: wekelijks
+msgid "weekly"
+msgstr "WEEKLY"
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView
 #: components/Blocks/AdvancedSearchExhibition/AdvancedSearchView

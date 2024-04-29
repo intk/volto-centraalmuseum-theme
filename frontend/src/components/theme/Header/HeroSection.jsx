@@ -19,6 +19,21 @@ import { UniversalLink } from '@plone/volto/components';
 //   },
 // });
 
+const messages = defineMessages({
+  daily: {
+    id: 'daily',
+    defaultMessage: 'dagelijks',
+  },
+  weekly: {
+    id: 'weekly',
+    defaultMessage: 'wekelijks',
+  },
+  monthly: {
+    id: 'monthly',
+    defaultMessage: 'maandelijks',
+  },
+});
+
 // const getDateRangeDescription = (intl, start, end) => {
 //   const format = (date, options) =>
 //     new Intl.DateTimeFormat(intl.locale, options).format(date);
@@ -84,6 +99,21 @@ function HeroSection(props) {
       },
     };
   };
+
+  let recurrenceText;
+  const hasDailyFrequency = props.content?.recurrence?.includes('FREQ=DAILY');
+  const hasWeeklyFrequency = props.content?.recurrence?.includes('FREQ=WEEKLY');
+  const hasMonthlyFrequency = props.content?.recurrence?.includes(
+    'FREQ=MONTHLY',
+  );
+
+  if (hasDailyFrequency) {
+    recurrenceText = intl.formatMessage(messages.daily);
+  } else if (hasWeeklyFrequency) {
+    recurrenceText = intl.formatMessage(messages.weekly);
+  } else if (hasMonthlyFrequency) {
+    recurrenceText = intl.formatMessage(messages.monthly);
+  }
 
   const end = new Date(content?.end);
   const isPermanent = end?.getFullYear() === 2100;
@@ -183,14 +213,18 @@ function HeroSection(props) {
           <div className="hero-dates-wrapper">
             {content && isEvent ? (
               <div className="hero-dates">
-                <When
-                  start={content.start}
-                  end={content.end}
-                  whole_day={content.whole_day}
-                  open_end={content.open_end}
-                  type={content?.['@type']}
-                  published={content?.effective || content?.created}
-                />
+                {props?.content?.recurrence == null ? (
+                  <When
+                    start={content.start}
+                    end={content.end}
+                    whole_day={content.whole_day}
+                    open_end={content.open_end}
+                    type={content?.['@type']}
+                    published={content?.effective || content?.created}
+                  />
+                ) : (
+                  recurrenceText
+                )}
               </div>
             ) : (
               ''

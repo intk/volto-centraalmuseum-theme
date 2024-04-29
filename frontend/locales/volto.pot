@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-04-25T13:29:13.231Z\n"
+"POT-Creation-Date: 2024-04-29T13:22:26.962Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -347,6 +347,11 @@ msgstr ""
 msgid "credit"
 msgstr ""
 
+#: components/theme/Header/HeroSection
+# defaultMessage: dagelijks
+msgid "daily"
+msgstr ""
+
 #: components/theme/View/ArtworkView
 # defaultMessage: Datering
 msgid "date"
@@ -445,6 +450,11 @@ msgstr ""
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
 # defaultMessage: Mercis Publishing/Centraal Museum, Utrecht
 msgid "mercis"
+msgstr ""
+
+#: components/theme/Header/HeroSection
+# defaultMessage: maandelijks
+msgid "monthly"
 msgstr ""
 
 #: components/Blocks/Listing/RecommendedTemplate
@@ -638,6 +648,11 @@ msgstr ""
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Views
 msgid "views"
+msgstr ""
+
+#: components/theme/Header/HeroSection
+# defaultMessage: wekelijks
+msgid "weekly"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/AdvancedSearchView

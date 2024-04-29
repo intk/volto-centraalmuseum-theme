@@ -12288,6 +12288,7 @@ __metadata:
     react-slick: 0.30.2
     react-swipe: 6.0.0
     react-zoom-pan-pinch: 3.1.0
+    rrule: 2.8.1
     stylelint: 14.0.1
     stylelint-config-idiomatic-order: 8.1.0
     stylelint-config-prettier: 8.0.1
@@ -21851,6 +21852,15 @@ __metadata:
   dependencies:
     tslib: ^2.4.0
   checksum: 80b81c5b1c1d12539a2af6de6fc8ebff8d763d8006cd9a418a1de7adbd634ae84ea853f1590d73ea72737422b8775cd53ca64c59e7c4625eda09a2746596f1d9
+  languageName: node
+  linkType: hard
+
+"rrule@npm:2.8.1":
+  version: 2.8.1
+  resolution: "rrule@npm:2.8.1"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 77f3750d90f7ec76f2435d4e0b5f860e20b94d8b0cedf2e94803f8050f8f7e3898153db9790cd4e3aaaf0c2db99b0a912e955fbd0200368ffd4318ec3bc0c88f
   languageName: node
   linkType: hard
 
