@@ -999,7 +999,7 @@ div#photo-credit {
     }
 
     .header-title-dates {
-      bottom: 32%;
+      bottom: 21.5%;
       width: 50%;
       padding-right: 100px;
       padding-left: 100px;
@@ -2333,6 +2333,13 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     }
 
     @media (min-width: 992px) {
+      .description-container {
+        margin-top: 15px;
+        font-size: 19.52px !important;
+      }
+      .buttons{
+        margin-top: 35px;
+      }
       .ticket-button {
         color: #000000 !important;
         border: 1px solid #282931 !important;
