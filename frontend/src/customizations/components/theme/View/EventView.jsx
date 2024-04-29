@@ -148,6 +148,7 @@ const EventView = (props) => {
   const getRecurrenceDates = (recurrenceString, start) => {
     const rule = rrulestr(recurrenceString, { dtstart: new Date(start) });
 
+    const now = new Date();
     // Subtract 1 second from the start date to ensure inclusion
     const adjustedStartDate = new Date(new Date(start).getTime() - 1000);
 
@@ -156,7 +157,9 @@ const EventView = (props) => {
       new Date(new Date().getFullYear() + 1, 11, 31),
     );
 
-    return dates.map((date) => formatDate(date));
+    const futureDates = dates.filter((date) => date >= now);
+
+    return futureDates.map((date) => formatDate(date));
   };
 
   let recurrenceDates;
