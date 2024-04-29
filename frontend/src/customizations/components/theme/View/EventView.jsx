@@ -24,6 +24,7 @@ import {
 } from 'semantic-ui-react';
 import { isEqual } from 'lodash';
 import { getWidget } from '@plone/volto/helpers/Widget/utils';
+import { rrulestr } from 'rrule';
 
 // const translations = {
 //   expired: {
@@ -109,6 +110,61 @@ const EventView = (props) => {
   // });
   // const startHour = format.format(startDate);
   // const endHour = format.format(endDate);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const startDate = new Date(props?.content?.start);
+    const endDate = new Date(props?.content?.end);
+
+    // Extracting start and end times
+    const startTimeFormatted = startDate.toLocaleTimeString('nl-NL', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+    const endTimeFormatted = endDate.toLocaleTimeString('nl-NL', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+
+    const wholeDay = props?.content?.whole_day;
+
+    return !wholeDay
+      ? `${date.getDate().toString().padStart(2, '0')} ${date.toLocaleString(
+          'nl-NL',
+          {
+            month: 'short',
+          },
+        )} ${date.getFullYear()}, ${startTimeFormatted} - ${endTimeFormatted}`
+      : `${date.getDate().toString().padStart(2, '0')} ${date.toLocaleString(
+          'nl-NL',
+          {
+            month: 'short',
+          },
+        )} ${date.getFullYear()}`;
+  };
+
+  const getRecurrenceDates = (recurrenceString, start) => {
+    const rule = rrulestr(recurrenceString, { dtstart: new Date(start) });
+
+    // Subtract 1 second from the start date to ensure inclusion
+    const adjustedStartDate = new Date(new Date(start).getTime() - 1000);
+
+    const dates = rule.between(
+      adjustedStartDate,
+      new Date(new Date().getFullYear() + 1, 11, 31),
+    );
+
+    return dates.map((date) => formatDate(date));
+  };
+
+  let recurrenceDates;
+  if (props?.content?.recurrence) {
+    recurrenceDates = getRecurrenceDates(
+      props.content.recurrence,
+      props.content.start,
+    );
+  }
 
   return contentLoaded ? (
     hasBlocksData(content) ? (
@@ -130,6 +186,16 @@ const EventView = (props) => {
         ) : (
           ''
         )} */}
+        {recurrenceDates && (
+          <div className="event-recurrence-dates">
+            <h4>WANNEER</h4>
+            <div>
+              {recurrenceDates.map((date) => {
+                return <p>{date}</p>;
+              })}
+            </div>
+          </div>
+        )}
         <RenderBlocks {...props} path={path} content={filteredContent} />
       </Container>
     ) : (
