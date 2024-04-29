@@ -109,32 +109,17 @@ const When_ = ({
 
   const startDate = new Date(datesInfo.startDate);
   const endDate = new Date(datesInfo.endDate);
-  const format = new Intl.DateTimeFormat(lang, {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-  const startHour = format.format(startDate);
-  const endHour = format.format(endDate);
+  // const format = new Intl.DateTimeFormat(lang, {
+  //   hour: '2-digit',
+  //   minute: '2-digit',
+  //   hour12: false,
+  // });
+  // const startHour = format.format(startDate);
+  // const endHour = format.format(endDate);
 
   // TODO I18N INTL
   return (
-    <div
-      className={`${
-        (!(startHour === '00:00' || endHour === '23:59') &&
-          startDate.getDate() === endDate?.getDate() &&
-          startDate.getMonth() === endDate?.getMonth() &&
-          startDate.getFullYear() === endDate?.getFullYear()) ||
-        (!(
-          startDate.getDate() === endDate?.getDate() &&
-          startDate.getMonth() === endDate?.getMonth() &&
-          startDate.getFullYear() === endDate?.getFullYear()
-        ) &&
-          new Date(end) < new Date())
-          ? 'expired'
-          : ''
-      }`}
-    >
+    <div className={new Date(end) < new Date() ? 'expired' : ''}>
       {start && !open_end ? (
         <span className="hero-dates">
           {getDateRangeDescription(intl, startDate, endDate)}
