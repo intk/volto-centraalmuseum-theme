@@ -576,7 +576,7 @@ div#photo-credit {
     td {
       padding-bottom: 0px !important;
     }
-    td, td > p{
+    td, td > p, td > div{
       font-family: 'FranklinBook', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 17px !important;
