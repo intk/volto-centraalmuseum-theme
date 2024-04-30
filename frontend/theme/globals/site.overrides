@@ -542,6 +542,13 @@ div#photo-credit {
   background-color: #fff !important;
   font-size: 17px !important;
 
+  td > div {
+    color: #494a51;
+    font-family: 'FranklinBook', Arial, sans-serif;
+    letter-spacing: 1.275px !important;
+    line-height: 32px !important;
+  }
+
   p {
     letter-spacing: 1.275px !important;
   }
@@ -559,20 +566,20 @@ div#photo-credit {
       padding-right: 20px !important;
     }
     td > p {
-      line-height: 22px !important;
+      line-height: 32px !important;
     }
     td:nth-child(1){
       width: 161.180px;
     }
   }
   tr:first-child{
-    td{
+    td, td > p{
       font-family: 'FranklinBook', Arial, sans-serif;
       text-transform: uppercase;
-      font-size: 17px;
+      font-size: 17px !important;
       line-height: 22px !important;
-      letter-spacing: 0.05em;
-      color: #666666;
+      letter-spacing: 0.85px !important;
+      color: #666666 !important;
       vertical-align: middle;
       padding-left: 0px;
       padding-right: 20px;
