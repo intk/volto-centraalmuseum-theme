@@ -114,7 +114,7 @@ const SeeanddoReverseTemplate = ({
                 }`}
               >
                 {item['@type'] === 'Event' ||
-                item['@type'] === 'Exhibition' ||
+                item['@type'] === 'exhibition' ||
                 item['@type'] === 'News Item' ? (
                   <div className="listing-dates">
                     <div className={`listing-dates-wrapper`}>
