@@ -206,9 +206,9 @@ p {
   .documentDescription:not(:empty) {
     display: block;
     max-width: 100%;
-    margin-top: 78px;
+    margin-top: 78.4px;
     margin-right: auto;
-    margin-bottom: 55px;
+    margin-bottom: 18px;
     margin-left: auto;
     color: #282931;
     font-family: 'FranklinBook', Arial, sans-serif;
