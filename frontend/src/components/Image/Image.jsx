@@ -120,7 +120,8 @@ const Image = ({
     }
   }, [imageRef, applySrcSet, imageHasLoaded, srcSet, srcset]);
 
-  const [orientationClass, setOrientationClass] = useState('');
+  const [orientationClass, setOrientationClass] = useState('hidden');
+
   useEffect(() => {
     const determineOrientation = () => {
       if (imageRef.current) {
@@ -149,15 +150,17 @@ const Image = ({
         imgEl.removeEventListener('load', handleLoad);
       };
     }
-  }, [src]); // Dependency array, re-run if src changes
+  }, [src]);
 
   return (
     <>
       <BodyClass
         className={
-          orientationClass === 'portrait'
+          orientationClass === 'hidden'
+            ? 'hidden'
+            : orientationClass === 'portrait'
             ? 'top-image-align-right'
-            : 'vertical-image'
+            : 'horizontal-image'
         }
       />
       <picture className={pictureClassName}>

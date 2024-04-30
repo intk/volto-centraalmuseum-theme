@@ -976,6 +976,14 @@ div#photo-credit {
   pointer-events: none;
 }
 
+.view-viewview.hidden {
+  @media (min-width: 992px){
+    .herosection-content-wrapper{
+      visibility: hidden !important;
+    }
+  }
+}
+
 .view-viewview.top-image-align-right:not(.contenttype-exhibition) {
   @media (min-width: 992px) {
     .header-container {
@@ -1740,7 +1748,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
   }
 }
 
-.view-viewview.contenttype-news-item.vertical-image{
+.view-viewview.contenttype-news-item.horizontal-image{
   .header-title-dates {
     // @media screen and (min-width: 1200px){
     // }
