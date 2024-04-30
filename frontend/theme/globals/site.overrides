@@ -573,6 +573,9 @@ div#photo-credit {
     }
   }
   tr:first-child{
+    td {
+      padding-bottom: 0px !important;
+    }
     td, td > p{
       font-family: 'FranklinBook', Arial, sans-serif;
       text-transform: uppercase;
