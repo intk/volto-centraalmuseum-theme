@@ -552,6 +552,21 @@ div#photo-credit {
   border-bottom: 0.625px rgb(234, 234, 234) solid;
 }
 
+.slate-table-block{
+  tr{
+    td{
+      padding-left: 0px !important;
+      padding-right: 20px !important;
+    }
+    td > p {
+      line-height: 22px !important;
+    }
+    td:nth-child(1){
+      width: 161.180px;
+    }
+  }
+}
+
 // ******************
 .ui.styled.accordion .title {
   background-color: #fbfbfb !important;
