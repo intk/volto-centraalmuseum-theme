@@ -565,6 +565,21 @@ div#photo-credit {
       width: 161.180px;
     }
   }
+  tr:first-child{
+    td{
+      font-family: 'FranklinBook', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 17px;
+      line-height: 22px;
+      letter-spacing: 0.05em;
+      color: #666666;
+      vertical-align: middle;
+      padding-left: 0px;
+      padding-right: 20px;
+      padding-top: 15px;
+      padding-bottom: 10px;
+    }
+  }
 }
 
 // ******************
