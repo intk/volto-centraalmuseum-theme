@@ -740,6 +740,10 @@ div#photo-credit {
       margin-bottom: 18px !important;
       text-align: center !important;
     }
+    #view .documentDescription:not(:empty){
+      margin-top: 10px !important;
+      margin-bottom: 0px !important;
+    }
   }
   @media (max-width: 480px){
     .documentFirstHeading, .documentDescription {
