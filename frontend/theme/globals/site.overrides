@@ -743,6 +743,7 @@ div#photo-credit {
     #view .documentDescription:not(:empty){
       margin-top: 10px !important;
       margin-bottom: 0px !important;
+      line-break: anywhere;
     }
   }
   @media (max-width: 480px){
