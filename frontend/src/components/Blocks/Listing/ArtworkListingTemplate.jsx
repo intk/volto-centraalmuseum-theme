@@ -8,10 +8,27 @@ import { When } from '@package/customizations/components/theme/View/EventDatesIn
 import { BodyClass } from '@plone/volto/helpers';
 import Masonry from 'react-masonry-css';
 import { useSelector } from 'react-redux';
+import { defineMessages, useIntl } from 'react-intl';
+
+const messages = defineMessages({
+  daily: {
+    id: 'daily',
+    defaultMessage: 'dagelijks',
+  },
+  weekly: {
+    id: 'weekly',
+    defaultMessage: 'wekelijks',
+  },
+  monthly: {
+    id: 'monthly',
+    defaultMessage: 'maandelijks',
+  },
+});
 
 const ArtworkListingTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   let link = null;
   let href = linkHref?.[0]?.['@id'] || '';
+  const intl = useIntl();
 
   if (isInternalURL(href)) {
     link = (
@@ -118,14 +135,54 @@ const ArtworkListingTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                       item['@type'] === 'News Item' ? (
                         <div className="listing-dates">
                           <div className={`listing-dates-wrapper`}>
-                            <When
-                              start={item?.start}
-                              end={item?.end}
-                              whole_day={item?.whole_day}
-                              open_end={item?.open_end}
-                              type={item?.['@type']}
-                              published={item?.effective || item?.created}
-                            />
+                            {item?.recurrence == null ? (
+                              <When
+                                start={item?.start}
+                                end={item?.end}
+                                whole_day={item?.whole_day}
+                                open_end={item?.open_end}
+                                type={item?.['@type']}
+                                published={
+                                  item?.effective !==
+                                  '1969-12-30T22:00:00+00:00'
+                                    ? item?.effective
+                                    : item?.Date
+                                }
+                              />
+                            ) : (
+                              (() => {
+                                let recurrenceText;
+                                const hasDailyFrequency = item?.recurrence?.includes(
+                                  'FREQ=DAILY',
+                                );
+                                const hasWeeklyFrequency = item?.recurrence?.includes(
+                                  'FREQ=WEEKLY',
+                                );
+                                const hasMonthlyFrequency = item?.recurrence?.includes(
+                                  'FREQ=MONTHLY',
+                                );
+
+                                if (hasDailyFrequency) {
+                                  recurrenceText = intl.formatMessage(
+                                    messages.daily,
+                                  );
+                                } else if (hasWeeklyFrequency) {
+                                  recurrenceText = intl.formatMessage(
+                                    messages.weekly,
+                                  );
+                                } else if (hasMonthlyFrequency) {
+                                  recurrenceText = intl.formatMessage(
+                                    messages.monthly,
+                                  );
+                                }
+
+                                return (
+                                  <span className="hero-dates">
+                                    {recurrenceText}
+                                  </span>
+                                );
+                              })()
+                            )}
                           </div>
                         </div>
                       ) : null}

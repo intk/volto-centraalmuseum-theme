@@ -10,6 +10,22 @@ import { searchContent } from '@plone/volto/actions';
 import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  daily: {
+    id: 'daily',
+    defaultMessage: 'dagelijks',
+  },
+  weekly: {
+    id: 'weekly',
+    defaultMessage: 'wekelijks',
+  },
+  monthly: {
+    id: 'monthly',
+    defaultMessage: 'maandelijks',
+  },
+});
 
 const NewsItemsTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   const [updatedItems, setUpdatedItems] = useState([]);
@@ -102,14 +118,49 @@ const NewsItemsTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                 item['@type'] === 'News Item' ? (
                   <div className="listing-dates">
                     <div className={`listing-dates-wrapper`}>
-                      <When
-                        start={item?.start}
-                        end={item?.end}
-                        whole_day={item?.whole_day}
-                        open_end={item?.open_end}
-                        type={item?.['@type']}
-                        published={item?.effective || item?.created}
-                      />
+                      {item?.recurrence == null ? (
+                        <When
+                          start={item?.start}
+                          end={item?.end}
+                          whole_day={item?.whole_day}
+                          open_end={item?.open_end}
+                          type={item?.['@type']}
+                          published={
+                            item?.effective !== '1969-12-30T22:00:00+00:00'
+                              ? item?.effective
+                              : item?.Date
+                          }
+                        />
+                      ) : (
+                        (() => {
+                          let recurrenceText;
+                          const hasDailyFrequency = item?.recurrence?.includes(
+                            'FREQ=DAILY',
+                          );
+                          const hasWeeklyFrequency = item?.recurrence?.includes(
+                            'FREQ=WEEKLY',
+                          );
+                          const hasMonthlyFrequency = item?.recurrence?.includes(
+                            'FREQ=MONTHLY',
+                          );
+
+                          if (hasDailyFrequency) {
+                            recurrenceText = intl.formatMessage(messages.daily);
+                          } else if (hasWeeklyFrequency) {
+                            recurrenceText = intl.formatMessage(
+                              messages.weekly,
+                            );
+                          } else if (hasMonthlyFrequency) {
+                            recurrenceText = intl.formatMessage(
+                              messages.monthly,
+                            );
+                          }
+
+                          return (
+                            <span className="hero-dates">{recurrenceText}</span>
+                          );
+                        })()
+                      )}
                     </div>
                   </div>
                 ) : null}

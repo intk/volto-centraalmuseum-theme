@@ -352,6 +352,10 @@ msgstr ""
 msgid "credit"
 msgstr ""
 
+#: components/Blocks/Listing/ArtworkListingTemplate
+#: components/Blocks/Listing/ArtworkTemplate
+#: components/Blocks/Listing/DefaultTemplate
+#: components/Blocks/Listing/NewsItemsTemplate
 #: components/theme/Header/HeroSection
 # defaultMessage: dagelijks
 msgid "daily"
@@ -457,6 +461,10 @@ msgstr ""
 msgid "mercis"
 msgstr ""
 
+#: components/Blocks/Listing/ArtworkListingTemplate
+#: components/Blocks/Listing/ArtworkTemplate
+#: components/Blocks/Listing/DefaultTemplate
+#: components/Blocks/Listing/NewsItemsTemplate
 #: components/theme/Header/HeroSection
 # defaultMessage: maandelijks
 msgid "monthly"
@@ -655,6 +663,10 @@ msgstr ""
 msgid "views"
 msgstr ""
 
+#: components/Blocks/Listing/ArtworkListingTemplate
+#: components/Blocks/Listing/ArtworkTemplate
+#: components/Blocks/Listing/DefaultTemplate
+#: components/Blocks/Listing/NewsItemsTemplate
 #: components/theme/Header/HeroSection
 # defaultMessage: wekelijks
 msgid "weekly"
