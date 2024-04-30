@@ -107,8 +107,6 @@ const ArtworkTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                     item.review_state === 'private' ? 'private' : ''
                   }`}
                 >
-                  {console.log(items)}
-
                   {item['@type'] === 'Event' ||
                   item['@type'] === 'exhibition' ||
                   item['@type'] === 'News Item' ? (
