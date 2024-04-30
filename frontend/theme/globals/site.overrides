@@ -739,11 +739,11 @@ div#photo-credit {
       padding-top: 8px !important;
       margin-bottom: 18px !important;
       text-align: center !important;
+      line-break: anywhere !important;
     }
     #view .documentDescription:not(:empty){
       margin-top: 10px !important;
       margin-bottom: 0px !important;
-      line-break: anywhere;
     }
   }
   @media (max-width: 480px){
