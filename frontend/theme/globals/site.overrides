@@ -686,10 +686,11 @@ div#photo-credit {
   }
 
   .documentFirstHeading {
-    padding-top: 20px;
     font-size: 60px !important;
-    padding-top: 43px !important;
-    margin-bottom: 10px !important;
+    // padding-top: 43px !important;
+    // margin-bottom: 10px !important;
+    padding-top: 48px !important;
+    margin-bottom: 17px !important;
     margin-top: 10px !important;
   }
 
