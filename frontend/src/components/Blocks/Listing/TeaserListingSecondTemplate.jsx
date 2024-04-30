@@ -109,7 +109,7 @@ const Card = ({ item, index, showDescription = true }) => {
                 item['@type'] === 'News Item') &&
               item.hasFallbackImage === true ? (
               <div className="image-link">
-                {albumItems.length > 1 && (
+                {albumItems.length > 0 && (
                   <ImageAlbum
                     items={albumItems}
                     image="false"
