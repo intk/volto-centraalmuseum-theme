@@ -183,4 +183,5 @@
   <column value="associatedPeriods" />
   <column value="associatedPeople" />
   <column value="hasImage" />
+  <column value="recurrence" />
 </object>
