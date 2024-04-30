@@ -570,7 +570,7 @@ div#photo-credit {
       font-family: 'FranklinBook', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 17px;
-      line-height: 22px;
+      line-height: 22px !important;
       letter-spacing: 0.05em;
       color: #666666;
       vertical-align: middle;
