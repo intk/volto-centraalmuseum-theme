@@ -268,7 +268,7 @@ class ImageViewFullscreen extends Component {
             aria-label="download button"
             download
           >
-            <img src={imagepath} alt="artwork"></img>
+            <img src={`${imagepath}/large`} alt="artwork"></img>
           </a>
         </div>
       </Container>
