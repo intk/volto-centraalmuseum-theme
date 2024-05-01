@@ -497,6 +497,23 @@ p {
   }
 }
 
+.block.image.align.left,
+.block.image.align.right {
+  img {
+    &.large {
+      max-width: 100% !important;
+    }
+
+    &.medium {
+      max-width: 50% !important;
+    }
+
+    &.small {
+      max-width: 25% !important;
+    }
+  }
+}
+
 //image credits alignment
 div#photo-credit {
   display: block;
