@@ -180,11 +180,12 @@ class ImageViewFullscreen extends Component {
     const imagepath = `${this.props?.pathname
       .split('/')
       .slice(0, -1)
-      .join('/')}/@@images/preview_image/`;
+      .join('/')}/@@images/image/`;
     const parentpath = `${this.props?.pathname
       .split('/')
       .slice(0, -2)
       .join('/')}`;
+
     return (
       <Container id="page-search">
         <div className="home-link">
