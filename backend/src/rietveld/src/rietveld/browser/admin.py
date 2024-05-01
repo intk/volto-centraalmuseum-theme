@@ -1190,7 +1190,8 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     ###############################
 
     # Fething the images
-    images = tree.findall(".//Reproduction/reproduction.reference/reference_number")
+    images = tree.findall(
+        ".//Reproduction/reproduction.reference")
 
     # CREATING OR UPDATING THE OBJECTS #
     ####################################
@@ -1796,33 +1797,42 @@ def import_images(container, images):
 
     for image in images:
         # primaryDisplay = image.get("PrimaryDisplay")
+        # right = image.findtext(".//Reproduction/reproduction.reference/rights")
+        reference_number = image.findtext("./reference_number")
+        rights = image.findtext("./rights")
         retries = 0
         success = False
-
+        # log_to_file(f"image.text: {image.text}")
         # Tries MAX_RETRIES times and then raise exception
+
+        if reference_number is None:
+            continue
+
         while retries < MAX_RETRIES:
             try:
-                image_url = f"{IMAGE_BASE_URL}?database=collect&command=getcontent&server=images&value={image.text}&imageformat=jpg"
+                image_url = f"{IMAGE_BASE_URL}?database=collect&command=getcontent&server=images&value={reference_number}&imageformat=jpg"
                 with requests.get(url=image_url, stream=True, headers=HEADERS) as req:
                     req.raise_for_status()
                     data = req.content
 
                     if is_error_response(req.content):
-                        log_to_file(f"Skipping {image.text} due to API error response.")
+                        log_to_file(
+                            f"Skipping {reference_number} due to API error response.")
                         break  # Skip this image
 
-                    log_to_file(f"{image.text} image is created")
+                    log_to_file(f"{reference_number} image is created")
 
                     imagefield = NamedBlobImage(
                         data=data,
                         contentType="image/jpeg",  # Update if different
-                        filename=image.text,
+                        filename=reference_number,
                     )
                     new_image = api.content.create(
                         type="Image",
-                        title=image.text,
+                        title=reference_number,
                         image=imagefield,
                         container=container,
+                        description=rights,
                     )
                     image_index += 1
                     if image_index == 1:
@@ -1843,7 +1853,8 @@ def import_images(container, images):
                     log_to_file(f"Failed to create {image['text']} image: {e}")
 
         if not success:
-            log_to_file(f"Skipped image {image.text} due to repeated fetch failures.")
+            log_to_file(
+                f"Skipped image {reference_number} due to repeated fetch failures.")
 
     return f"Images {images} created successfully"
 
