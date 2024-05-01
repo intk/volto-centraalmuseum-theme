@@ -125,42 +125,60 @@ class ImageViewFullscreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      parentData: null,
+      grandparentData: null,
+      parentdata: null,
     };
   }
 
   componentDidMount() {
-    this.doSearch();
+    this.fetchGrandparentData();
+    this.fetchParentData();
   }
-  // componentDidUpdate(prevProps) {
-  //   this.doSearch();
-  // }
 
-  doSearch = () => {
-    const parentpath = this.props?.pathname.split('/').slice(0, -2).join('/');
+  fetchGrandparentData = () => {
+    const grandparentPath = this.props.pathname
+      .split('/')
+      .slice(0, -2)
+      .join('/');
     const options = {
       portal_type: 'artwork',
-      path: parentpath,
+      path: grandparentPath,
       metadata_fields: ['freeofcopyright', 'rights', 'objectName'],
     };
 
     this.props
       .searchContent('', options)
       .then((response) => {
-        // Assuming the action is correctly configured to return a promise
-        this.setState({ parentData: response }); // Update the state with the search results
+        if (response?.items?.length) {
+          const data = response.items[0];
+          this.setState({
+            grandparentData: data,
+          });
+        }
       })
-      .catch((error) => {});
+      .catch((error) => '');
   };
 
-  // removeFirstWords = (fullString) => {
-  //   const parts = fullString.split('/');
-  //   const modifiedParts = parts.map((part) => {
-  //     const words = part.trim().split(' ');
-  //     return words.slice(1).join(' ');
-  //   });
-  //   return modifiedParts.join(' / ');
-  // };
+  fetchParentData = () => {
+    const parentPath = this.props.pathname.split('/').slice(0, -1).join('/');
+    const options = {
+      portal_type: 'Image',
+      path: parentPath,
+      metadata_fields: ['title', 'description'],
+    };
+
+    this.props
+      .searchContent('', options)
+      .then((response) => {
+        if (response?.items?.length) {
+          const data = response.items[0];
+          this.setState({
+            parentdata: data,
+          });
+        }
+      })
+      .catch((error) => '');
+  };
 
   /**
    * Render method.
@@ -169,9 +187,9 @@ class ImageViewFullscreen extends Component {
    */
   render() {
     const { intl } = this.props;
-    const copyright = this.state.parentData?.items?.[0]?.freeofcopyright;
-    const rights = this.state.parentData?.items?.[0]?.rights;
-    const objectName = this.state.parentData?.items?.[0]?.objectName?.[0];
+    const copyright = this.state.grandparentData?.freeofcopyright;
+    const rights = this.state.parentdata?.description;
+    const objectName = this.state.grandparentData?.objectName?.[0];
     const copyrightWName =
       objectName === 'schilderij' ||
       objectName === 'tekening' ||
@@ -189,10 +207,7 @@ class ImageViewFullscreen extends Component {
     return (
       <Container id="page-search">
         <div className="home-link">
-          {/* {copyright ? ( */}
           <Link to={parentpath}>{intl.formatMessage(messages.terug)}</Link>
-          {/* ) : ( // <Link to={`/${intl.locale}`}>Home</Link>
-           )} */}
         </div>
         <p>
           {copyright ? (
@@ -268,7 +283,7 @@ class ImageViewFullscreen extends Component {
             aria-label="download button"
             download
           >
-            <img src={`${imagepath}/large`} alt="artwork"></img>
+            <img src={`${imagepath}`} alt="artwork"></img>
           </a>
         </div>
       </Container>
