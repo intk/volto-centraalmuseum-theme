@@ -1190,8 +1190,7 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     ###############################
 
     # Fething the images
-    images = tree.findall(
-        ".//Reproduction/reproduction.reference")
+    images = tree.findall(".//Reproduction/reproduction.reference")
 
     # CREATING OR UPDATING THE OBJECTS #
     ####################################
@@ -1817,7 +1816,8 @@ def import_images(container, images):
 
                     if is_error_response(req.content):
                         log_to_file(
-                            f"Skipping {reference_number} due to API error response.")
+                            f"Skipping {reference_number} due to API error response."
+                        )
                         break  # Skip this image
 
                     log_to_file(f"{reference_number} image is created")
@@ -1854,7 +1854,8 @@ def import_images(container, images):
 
         if not success:
             log_to_file(
-                f"Skipped image {reference_number} due to repeated fetch failures.")
+                f"Skipped image {reference_number} due to repeated fetch failures."
+            )
 
     return f"Images {images} created successfully"
 
