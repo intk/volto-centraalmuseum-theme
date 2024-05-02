@@ -2451,3 +2451,7 @@ body h4{
   line-height: 30px;
   text-transform: none;
 }
+
+#view .block.image.align a, #view .block.image.align a:hover {
+  border-bottom: 0px !important;
+}
