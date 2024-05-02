@@ -2440,3 +2440,14 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 .tags {
   display: none !important;
 }
+
+body h4{
+  font-family: 'FranklinMed', Arial, sans-serif !important;
+  font-size: 20px;
+  color: #494A51 !important;
+  letter-spacing: 0.0em;
+  font-weight: 400;
+  margin-top: 45px;
+  line-height: 30px;
+  text-transform: none;
+}
