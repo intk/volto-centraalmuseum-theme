@@ -162,6 +162,8 @@ function HeroSection(props) {
     }
   }, [dispatch, id, slideshowPath, pathname, content, cmsView, isEvent]);
 
+  let expired = new Date(props?.content?.end) < new Date();
+
   return (
     <div className="herosection">
       {multiple_content_view && <BodyClass className="multiple-content-view" />}
@@ -233,7 +235,9 @@ function HeroSection(props) {
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
             <div className="buttons">
-              {props?.content?.event_url ? (
+              {props?.content?.event_url &&
+              props?.content?.event_url !== 'http://' &&
+              !expired ? (
                 <UniversalLink href={props?.content?.event_url}>
                   <button className={`ticket-button`}>TICKETS</button>
                 </UniversalLink>
