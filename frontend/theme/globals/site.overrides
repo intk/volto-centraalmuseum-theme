@@ -1627,7 +1627,7 @@ body.artwork-listing-page{
 }
 
 #view, #page-edit{
-  p.callout {
+  p.callout, .callout p {
     font-size: 15px;
     color: #777777;
     margin-top: 0px;
