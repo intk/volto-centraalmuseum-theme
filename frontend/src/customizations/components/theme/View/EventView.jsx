@@ -26,6 +26,8 @@ import { isEqual } from 'lodash';
 import { getWidget } from '@plone/volto/helpers/Widget/utils';
 import { rrulestr } from 'rrule';
 import { BodyClass } from '@plone/volto/helpers';
+import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
+import { useIntl } from 'react-intl';
 
 // const translations = {
 //   expired: {
@@ -34,6 +36,24 @@ import { BodyClass } from '@plone/volto/helpers';
 //     de: 'VERLEDEN TENTOONSTELLING',
 //   },
 // };
+
+const translations = {
+  daily: {
+    en: 'daily',
+    nl: 'dagelijks',
+    de: 'täglich',
+  },
+  weekly: {
+    en: 'weekly',
+    nl: 'wekelijks',
+    de: 'wöchentlich',
+  },
+  monthly: {
+    en: 'monthly',
+    nl: 'maandelijks',
+    de: 'monatlich',
+  },
+};
 
 function filterBlocks(content, types) {
   if (!(content.blocks && content.blocks_layout?.items)) return content;
@@ -170,6 +190,26 @@ const EventView = (props) => {
     );
   }
 
+  const isEvent =
+    content?.['@type'] === 'Event' ||
+    content?.['@type'] === 'exhibition' ||
+    content?.['@type'] === 'News Item';
+
+  let recurrenceText;
+  const hasDailyFrequency = props.content?.recurrence?.includes('FREQ=DAILY');
+  const hasWeeklyFrequency = props.content?.recurrence?.includes('FREQ=WEEKLY');
+  const hasMonthlyFrequency = props.content?.recurrence?.includes(
+    'FREQ=MONTHLY',
+  );
+  const intl = useIntl();
+  if (hasDailyFrequency) {
+    recurrenceText = translations.daily[intl.locale];
+  } else if (hasWeeklyFrequency) {
+    recurrenceText = translations.weekly[intl.locale];
+  } else if (hasMonthlyFrequency) {
+    recurrenceText = translations.monthly[intl.locale];
+  }
+
   return contentLoaded ? (
     hasBlocksData(content) ? (
       <Container id="page-document">
@@ -190,6 +230,26 @@ const EventView = (props) => {
         ) : (
           ''
         )} */}
+        <div className="hero-dates-wrapper" style={{ display: 'None' }}>
+          {content && isEvent ? (
+            <div className="hero-dates">
+              {props?.content?.recurrence == null ? (
+                <When
+                  start={content.start}
+                  end={content.end}
+                  whole_day={content.whole_day}
+                  open_end={content.open_end}
+                  type={content?.['@type']}
+                  published={content?.effective || content?.created}
+                />
+              ) : (
+                recurrenceText
+              )}
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
         {recurrenceDates && (
           <div className="event-recurrence-dates">
             <BodyClass className="event-recurrences-shown" />

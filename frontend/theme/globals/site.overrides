@@ -803,7 +803,7 @@ div#photo-credit {
     .hero-dates-wrapper{
       display: none;
       @media (min-width: 992px) {
-        display: block;
+        display: block !important;
         margin-top: 18px !important;
       }
       @media (min-width: 1200px){
