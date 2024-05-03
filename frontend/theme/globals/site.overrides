@@ -2455,3 +2455,9 @@ body h4{
 #view .block.image.align a, #view .block.image.align a:hover {
   border-bottom: 0px !important;
 }
+
+#view .block.image.align.center{
+  .image-wrapper-medium, .image-wrapper-small{
+    text-align: left !important;
+  }
+}
