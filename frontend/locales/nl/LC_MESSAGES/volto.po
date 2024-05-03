@@ -107,6 +107,11 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
+#: components/Blocks/DiscreetBlock/schema
+# defaultMessage: Discreet
+msgid "Discreet"
+msgstr ""
+
 #: components/Blocks/AdvancedSearch/schema
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Facet
