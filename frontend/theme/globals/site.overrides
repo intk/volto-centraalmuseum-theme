@@ -2482,6 +2482,67 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     }
   }
 }
+
+.contenttype-news-item.top-image-align-right{
+  .herosection{
+    .content-description{
+      @media (max-width: 992px){
+        display: none;
+      }
+    }
+  }
+  #page-document .documentDescription{
+    display: none;
+  }
+  #page-document{
+    margin-top: 76px !important;
+  }
+  .herosection-content-wrapper {
+    .description-container{
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    @media (min-width: 992px) {
+      .description-container {
+        margin-top: 15px;
+        font-size: 19.52px !important;
+      }
+      .buttons{
+        margin-top: 35px;
+        padding-bottom: 0px !important;
+      }
+      .ticket-button {
+        color: #000000 !important;
+        border: 1px solid #282931 !important;
+      }
+
+      .ticket-button:hover {
+        color: #ffffff !important;
+        border: 1px solid #282931 !important;
+        background-color: #282931 !important;
+      }
+      .hero-title-floating{
+        margin-top: 0px !important;
+      }
+      .description-container{
+        padding-bottom: 0px;
+      }
+      .hero-dates{
+        padding-top: 5px;
+      }
+      .header-title-dates{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        bottom: unset;
+        top: 0%;
+      }
+    }
+  }
+}
+
 .tags {
   display: none !important;
 }
