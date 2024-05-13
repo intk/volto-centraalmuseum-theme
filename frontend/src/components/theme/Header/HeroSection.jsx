@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 import { isCmsUi } from '@plone/volto/helpers';
 import { UniversalLink } from '@plone/volto/components';
-
 // const messages = defineMessages({
 //   permanent: {
 //     id: 'permanent',
@@ -236,8 +235,7 @@ function HeroSection(props) {
           <div className="description-container">
             <div className="buttons">
               {props?.content?.event_url &&
-              props?.content?.event_url !== 'http://' &&
-              !expired ? (
+              props?.content?.event_url !== 'http://' ? (
                 <UniversalLink href={props?.content?.event_url}>
                   <button className={`ticket-button`}>TICKETS</button>
                 </UniversalLink>
