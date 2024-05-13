@@ -116,7 +116,7 @@ function HeroSection(props) {
 
   const end = new Date(content?.end);
   const isPermanent = end?.getFullYear() === 2100;
-  const recurrence = props.content?.recurrence;
+  // const recurrence = props.content?.recurrence;
   const pathname = useSelector((state) => state.router.location.pathname);
   const slideshowPath = `${pathname}/slideshow`;
   const id = `full-items@${slideshowPath}`;
