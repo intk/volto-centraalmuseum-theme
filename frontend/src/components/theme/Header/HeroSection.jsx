@@ -161,7 +161,7 @@ function HeroSection(props) {
     }
   }, [dispatch, id, slideshowPath, pathname, content, cmsView, isEvent]);
 
-  let expired = new Date(props?.content?.end) < new Date();
+  // let expired = new Date(props?.content?.end) < new Date();
 
   return (
     <div className="herosection">
