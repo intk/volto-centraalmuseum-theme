@@ -239,12 +239,6 @@ function HeroSection(props) {
                 <UniversalLink href={props?.content?.event_url}>
                   <button className={`ticket-button`}>TICKETS</button>
                 </UniversalLink>
-              ) : isPermanent || recurrence ? (
-                <UniversalLink
-                  href={`https://tickets.centraalmuseum.nl/${intl.locale}/tickets`}
-                >
-                  <button className={`ticket-button`}>TICKETS</button>
-                </UniversalLink>
               ) : (
                 ''
               )}
