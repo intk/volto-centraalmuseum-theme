@@ -29,6 +29,11 @@ msgstr ""
 msgid "Base search query"
 msgstr ""
 
+#: components/Blocks/CalloutBlock/schema
+# defaultMessage: Callout
+msgid "Callout"
+msgstr ""
+
 #: components/Blocks/Search/FilterList
 # defaultMessage: Clear filters
 msgid "Clear filters"
