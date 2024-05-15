@@ -2567,3 +2567,25 @@ body h4{
     text-align: left !important;
   }
 }
+
+.view-viewview.contenttype-news-item .content-area #page-document > div#blockquote {
+  @media (min-width: 1200px) {
+    width: 830px !important;
+  }
+}
+div#blockquote > p{
+  font-size: 48px !important;
+  line-height: 49px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 18px !important;
+  padding-top: 15px !important;
+  text-align: left !important;
+  color: #282931 !important;
+  font-family: 'FranklinDmCp', Arial, sans-serif !important;
+
+  @media (max-width: 768px) {
+    font-size: 30px !important;
+  }
+}

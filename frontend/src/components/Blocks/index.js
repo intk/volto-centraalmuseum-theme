@@ -12,6 +12,7 @@ import installAdvancedSearchExhibition from './AdvancedSearchExhibition';
 import installSearchBlock from './Search';
 import installModelBlock from './Model';
 import installDiscreetBlock from './DiscreetBlock';
+import installCalloutBlock from './CalloutBlock';
 import { compose } from 'redux';
 
 const installBlocks = (config) => {
@@ -30,6 +31,7 @@ const installBlocks = (config) => {
     installAdvancedSearchExhibition,
     installModelBlock,
     installDiscreetBlock,
+    installCalloutBlock,
   )(config);
 };
 
