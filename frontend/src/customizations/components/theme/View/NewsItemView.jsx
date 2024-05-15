@@ -59,7 +59,7 @@ const NewsItemView = ({ content }) => {
   return hasBlocksData(content) ? (
     <Container id="page-document" className="view-wrapper newsitem-view">
       {/* {console.log(blogWriter?.length)} */}
-      {blogWriter?.length > 0 && (
+      {blogWriter && (
         <div className="blog-writer" key={blogWriter['@id']}>
           {blogWriter.image_field && (
             <div className="writer-image-wrapper">
