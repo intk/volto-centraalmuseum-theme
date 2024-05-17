@@ -177,6 +177,23 @@ function HeroSection(props) {
                 height="90vh"
                 alt={preview_caption || title}
               />
+              {preview_caption && (
+                <figcaption className="content-image-caption">
+                  {preview_caption}
+                </figcaption>
+              )}
+            </figure>
+          </>
+        ) : content?.image ? (
+          <>
+            <BodyClass className="has-hero-image" />
+            <figure className="herosection-content-image document-image">
+              <Image
+                image={content.image}
+                width="100vw"
+                height="90vh"
+                alt={preview_caption || title}
+              />
 
               {preview_caption && (
                 <figcaption className="content-image-caption">
