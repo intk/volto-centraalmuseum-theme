@@ -9,15 +9,23 @@ import { PreviewImage } from '@plone/volto/components';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 import { Link } from 'react-router-dom';
 import './css/SeeMoreNewsBlogs.less';
+import { useSelector } from 'react-redux';
 import FetchAuthor from './fetchAuthors';
 
 const Search = (props) => {
   const { content, searchContent, items } = props;
   const intl = useIntl();
   // const [totalItems, setTotalItems] = useState(0);
+  const pathname = useSelector((state) => state.router.location.pathname);
+  const pathnameArray = pathname.split('/');
+  const currPath = pathnameArray[pathnameArray.length - 1];
 
   useEffect(() => {
     let isMounted = true;
+
+    if (currPath === 'contents') {
+      return;
+    }
 
     const doSearch = () => {
       const currentPath =

@@ -1489,7 +1489,6 @@ def import_one_exhibition(
     ######################################################
     ###DESIGNER START #######################
     exhibition_designers_xml = tree.findall("./creator")
-    log_to_file(f"exhibition_designers_xml: {exhibition_designers_xml}")
 
     exhibition_designers = []
 
@@ -1499,10 +1498,6 @@ def import_one_exhibition(
         artwork_vermelding = designer.findtext(".//Vermelding")
 
         designer = artwork_creator
-
-        log_to_file(f"artwork_creator: {artwork_creator}")
-        log_to_file(f"artwork_crator_role: {artwork_creator_role}")
-        log_to_file(f"artwork_vermelding: {artwork_vermelding}")
 
         if artwork_creator_role:
             if "vormgever" in artwork_creator_role.lower():
