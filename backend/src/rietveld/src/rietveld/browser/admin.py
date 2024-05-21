@@ -1178,7 +1178,10 @@ def import_one_record(self, record, collection_type, container, container_en, ca
     ###############################
     creator_for_title = get_creator(xml_record=tree)
 
-    title_stripped = title.replace(":", "")
+    if title:
+        title_stripped = title.replace(":", "")
+    else:
+        title_stripped = ""
     if creator_for_title is not None:
         creator_stripped = creator_for_title.replace("_", "")
     else:
