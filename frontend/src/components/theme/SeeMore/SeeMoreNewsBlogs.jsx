@@ -37,8 +37,8 @@ const Search = (props) => {
         path: currentPath,
         b_size: 3,
         metadata_fields: ['effective', 'created', 'description', 'Creator'],
-        sort_on: 'getObjPositionInParent',
-        sort_order: 'ascending',
+        sort_on: 'effective',
+        sort_order: 'descending',
       };
       searchContent('', options);
     };
