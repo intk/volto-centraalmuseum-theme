@@ -596,7 +596,7 @@ div#photo-credit {
     }
     td, td > p, td > div{
       font-family: 'FranklinBook', Arial, sans-serif;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       font-size: 17px !important;
       line-height: 22px !important;
       letter-spacing: 0.85px !important;
