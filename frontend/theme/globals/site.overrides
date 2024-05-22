@@ -2609,3 +2609,13 @@ div#blockquote > p{
     margin-top: -70px;
   }
 }
+
+.block.__grid.centered{
+  .ui.stackable.stretched.column.grid{
+    .grid-block-image{
+      .image-wrapper-{
+        margin-bottom: 0px !important;
+      }
+    }
+  }
+}
