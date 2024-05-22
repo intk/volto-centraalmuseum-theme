@@ -2588,3 +2588,24 @@ div#blockquote > p{
     font-size: 30px !important;
   }
 }
+
+.block.image.align.center:has(.image-wrapper-large) + .callout {
+  .discreet{
+    margin-top: -70px;
+    @media (min-width: 1200px){
+      max-width: 130%;
+      margin-right: auto;
+      margin-left: 50%;
+      transform: translateX(-61.5%);
+      position: absolute;
+      left: 0;
+      width: 750px;
+    }
+  }
+}
+.block.image.align.center+.callout {
+  .discreet {
+    position: absolute;
+    margin-top: -70px;
+  }
+}
