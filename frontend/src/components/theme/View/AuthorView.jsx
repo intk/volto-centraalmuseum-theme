@@ -14,6 +14,8 @@ const messages = defineMessages({
 
 export default function AuthorView(props) {
   const intl = useIntl();
+  const authorName = props?.content?.title || 'Unknown Author'; // Provide a fallback in case title is not available
+
   return (
     <div id="object-block">
       {props?.content?.title && (
@@ -22,7 +24,7 @@ export default function AuthorView(props) {
 
           {props?.content?.authorURL && (
             <p className="author_url">
-              {intl.formatMessage(messages.authorUrl)}{' '}
+              {intl.formatMessage(messages.authorUrl, { authorName })}{' '}
               <a href={props.content.authorURL}>{props.content.authorURL}</a>{' '}
               {intl.locale === 'en' && '(in Dutch).'}
             </p>
