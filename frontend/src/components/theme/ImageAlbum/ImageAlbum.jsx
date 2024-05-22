@@ -410,6 +410,8 @@ const ImageAlbum = (props) => {
           </Slider>
           <div className="slide-image-count">
             {activeSlideIndex + 1}/{props.items.length}
+            {props?.items[activeSlideIndex]?.description !== '' ? ' - ' : ''}
+            {props?.items[activeSlideIndex]?.description}
           </div>
         </Modal.Content>
       </Modal>
