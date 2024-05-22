@@ -363,7 +363,7 @@ p {
 
 #view, #page-edit{
   p.callout {
-    font-size: 15px;
+    font-size: 12px;
     color: #777777;
     margin-top: 0px;
     border: none;
@@ -1628,7 +1628,7 @@ body.artwork-listing-page{
 
 #view, #page-edit{
   p.callout, .callout p {
-    font-size: 15px;
+    font-size: 12px;
     color: #777777;
     margin-top: 0px;
     border: none;
