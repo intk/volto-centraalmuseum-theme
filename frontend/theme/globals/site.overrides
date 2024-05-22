@@ -715,7 +715,6 @@ div#photo-credit {
     max-width: 660px;
     padding-top: 0px;
     margin: 0 auto !important;
-    color: #494a51;
     color: #494a51 !important;
     font-size: 1.5em;
     font-size: 24px !important;
