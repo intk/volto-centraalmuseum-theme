@@ -2619,3 +2619,11 @@ div#blockquote > p{
     }
   }
 }
+
+.section-de{
+  .herosection{
+    .content-description{
+      display: none;
+    }
+  }
+}
