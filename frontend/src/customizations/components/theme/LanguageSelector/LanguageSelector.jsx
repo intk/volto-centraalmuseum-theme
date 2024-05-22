@@ -40,32 +40,27 @@ const LanguageSelector = (props) => {
 
   return settings.isMultilingual ? (
     <div className="language-selector">
-      {map(
-        settings.supportedLanguages.filter((l) => l !== currentLang),
-        (lang) => {
-          const translation = find(translations, { language: lang });
-          return (
-            <Link
-              aria-label={`${intl.formatMessage(
-                messages.switchLanguageTo,
-              )} ${langmap[lang].nativeName.toLowerCase()}`}
-              className={cx({
-                selected: toReactIntlLang(lang) === currentLang,
-              })}
-              to={
-                translation ? flattenToAppURL(translation['@id']) : `/${lang}`
-              }
-              title={langmap[lang].nativeName}
-              onClick={() => {
-                props.onClickAction();
-              }}
-              key={`language-selector-${lang}`}
-            >
-              {langmap[lang].nativeName}
-            </Link>
-          );
-        },
-      )}
+      {map(settings.supportedLanguages, (lang) => {
+        const translation = find(translations, { language: lang });
+        return (
+          <Link
+            aria-label={`${intl.formatMessage(
+              messages.switchLanguageTo,
+            )} ${langmap[lang].nativeName.toLowerCase()}`}
+            className={cx({
+              selected: toReactIntlLang(lang) === currentLang,
+            })}
+            to={translation ? flattenToAppURL(translation['@id']) : `/${lang}`}
+            title={langmap[lang].nativeName}
+            onClick={() => {
+              props.onClickAction();
+            }}
+            key={`language-selector-${lang}`}
+          >
+            {langmap[lang].nativeName}
+          </Link>
+        );
+      })}
     </div>
   ) : (
     <Helmet>
