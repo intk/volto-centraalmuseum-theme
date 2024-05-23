@@ -2332,6 +2332,11 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
       margin-top: 10px !important;
     }
   }
+  .listing-dates-wrapper {
+    @media (min-width: 992px) {
+      margin-top: 15px !important;
+    }
+  }
 }
 
 
