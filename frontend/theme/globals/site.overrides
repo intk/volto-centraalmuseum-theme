@@ -2137,7 +2137,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
   .listing-dates-wrapper{
     margin-top: 18px;
     @media (min-width: 992px){
-      margin-top: 12px;
+      margin-top: 15px;
     }
   }
 
@@ -2321,7 +2321,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     @media (min-width: 992px) {
       flex-direction: row-reverse;
       justify-content: flex-end !important;
-      padding-bottom: 60px !important;
+      padding-bottom: 55px !important;
     }
   }
   #page-search-title {
