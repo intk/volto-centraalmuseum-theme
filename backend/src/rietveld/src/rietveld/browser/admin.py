@@ -1590,6 +1590,8 @@ def import_one_exhibition(
     # CREATING OR UPDATING THE OBJECTS #
     ####################################
     # brains = catalog.searchResults(priref=priref, portal_type="artwork")
+    start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+    end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
     if len(brains) == 1:
         lang = brains[0].getObject().language
         missing_lang = "en" if lang == "nl" else "nl"
@@ -1597,10 +1599,10 @@ def import_one_exhibition(
             obj = create_and_setup_object(
                 whole_title, container, info, intl, "exhibition", title_url, priref
             )  # Dutch version
-            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
-            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+
             obj.start = start_date_obj
             obj.end = end_date_obj
+            obj.whole_day = True
 
             manager = ITranslationManager(obj)
             if not manager.has_translation("en"):
@@ -1616,10 +1618,10 @@ def import_one_exhibition(
             obj_en = create_and_setup_object(
                 whole_title, container_en, info, intl, "exhibition", title_url, priref
             )  # English version
-            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
-            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+
             obj_en.start = start_date_obj
             obj_en.end = end_date_obj
+            obj_en.whole_day = True
 
             manager = ITranslationManager(obj_en)
             if not manager.has_translation("nl"):
@@ -1666,10 +1668,9 @@ def import_one_exhibition(
 
             log_to_file(f"Object is updated: {priref} id and {title} title")
 
-            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
-            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
             obj.start = start_date_obj
             obj.end = end_date_obj
+            obj.whole_day = True
             obj.show_notes = show_notes
 
             # adding images
@@ -1710,12 +1711,12 @@ def import_one_exhibition(
         obj.reindexObject()
         obj_en.reindexObject()
 
-        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
-        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
         obj.start = start_date_obj
         obj.end = end_date_obj
+        obj.whole_day = True
         obj_en.start = start_date_obj
         obj_en.end = end_date_obj
+        obj_en.whole_day = True
 
 
 def create_and_setup_object(title, container, info, intl, object_type, obj_id, priref):
