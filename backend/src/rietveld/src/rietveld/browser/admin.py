@@ -1616,8 +1616,8 @@ def import_one_exhibition(
             obj_en = create_and_setup_object(
                 whole_title, container_en, info, intl, "exhibition", title_url, priref
             )  # English version
-            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
-            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
             obj_en.start = start_date_obj
             obj_en.end = end_date_obj
 
@@ -1666,8 +1666,8 @@ def import_one_exhibition(
 
             log_to_file(f"Object is updated: {priref} id and {title} title")
 
-            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
-            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
             obj.start = start_date_obj
             obj.end = end_date_obj
             obj.show_notes = show_notes
@@ -1710,8 +1710,8 @@ def import_one_exhibition(
         obj.reindexObject()
         obj_en.reindexObject()
 
-        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
-        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+        start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
         obj.start = start_date_obj
         obj.end = end_date_obj
         obj_en.start = start_date_obj
