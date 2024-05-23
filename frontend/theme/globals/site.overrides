@@ -2321,7 +2321,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
     @media (min-width: 992px) {
       flex-direction: row-reverse;
       justify-content: flex-end !important;
-      padding-top: 60px !important;
+      padding-bottom: 60px !important;
     }
   }
   #page-search-title {
