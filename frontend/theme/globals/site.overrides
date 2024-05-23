@@ -2096,7 +2096,7 @@ body.contenttype-lrf.has-sidebar #page-edit .ui.container .invisible > div > div
 
     @media (min-width: 992px) {
       padding: 0px 18px;
-      padding-left: 21px;
+      padding-left: 22px;
     }
   }
 
