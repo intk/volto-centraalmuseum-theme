@@ -5,9 +5,12 @@ zope.testrunner
 
 kitconcept.seo
 git+https://github.com/intk/collective.volto.formsupport.git
+# -e src/contentimport
+git+https://github.com/cihanandac/collective.exportimport.git
+git+https://github.com/cihanandac/contentimport.git
 # collective.volto.formsupport
 collective.volto.socialsettings
-collective.exportimport>=1.12
+# collective.exportimport>=1.12
 
 
 # Add required add-ons
