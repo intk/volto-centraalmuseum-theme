@@ -1650,7 +1650,16 @@ def import_one_exhibition(
             fields = getFields(schema)
 
             # Exclude these fields from clearing
-            exclude_fields = ["id", "UID", "title", "description", "authors"]
+            exclude_fields = [
+                "id",
+                "UID",
+                "title",
+                "description",
+                "authors",
+                "blocks",
+                "start",
+                "end",
+            ]
 
             for field_name, field in fields.items():
                 if field_name not in exclude_fields:
@@ -1890,8 +1899,8 @@ def import_images_on_slideshow(container, images):
             slideshow_page.reindexObject(idxs=["exclude_from_nav"])
 
     # Delete the existing images inside the slideshow_page
-    for obj in api.content.find(context=slideshow_page, portal_type="Image"):
-        api.content.delete(obj=obj.getObject())
+    # for obj in api.content.find(context=slideshow_page, portal_type="Image"):
+    #     api.content.delete(obj=obj.getObject())
 
     for image in images:
         retries = 0
