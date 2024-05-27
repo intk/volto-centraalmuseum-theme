@@ -161,7 +161,7 @@ function HeroSection(props) {
     }
   }, [dispatch, id, slideshowPath, pathname, content, cmsView, isEvent]);
 
-  // let expired = new Date(props?.content?.end) < new Date();
+  let expired = new Date(props?.content?.end) < new Date();
 
   return (
     <div className="herosection">
@@ -254,6 +254,10 @@ function HeroSection(props) {
               {props?.content?.event_url &&
               props?.content?.event_url !== 'http://' ? (
                 <UniversalLink href={props?.content?.event_url}>
+                  <button className={`ticket-button`}>TICKETS</button>
+                </UniversalLink>
+              ) : !expired ? (
+                <UniversalLink href="https://tickets.centraalmuseum.nl/nl/tickets">
                   <button className={`ticket-button`}>TICKETS</button>
                 </UniversalLink>
               ) : (
