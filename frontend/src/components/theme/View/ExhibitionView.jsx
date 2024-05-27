@@ -191,6 +191,7 @@ const ExhibitionView = (props) => {
 
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
   const [showAllObjects, setShowAllObjects] = useState(false);
+  const [eventExpired, setEventExpired] = useState(false);
   const intl = useIntl();
 
   const contentLoaded = content && !isEqual(Object.keys(content), ['lock']);
@@ -201,6 +202,13 @@ const ExhibitionView = (props) => {
       dispatch(getSchema(content['@type'], location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  React.useEffect(() => {
+    if (new Date(props?.content?.end) < new Date()) {
+      setEventExpired(true);
+    } else {
+      setEventExpired(false);
+    }
+  }, [props.content.end]);
 
   const [artworkURL, setArtworkUrl] = useState([]);
   const cmsView = isCmsUi(location.pathname);
@@ -295,77 +303,43 @@ const ExhibitionView = (props) => {
             <h1 className="documentFirstHeading">{content.title}</h1>
           </>
         )}
-        {content?.show_notes && content?.notes?.data !== '' && (
+        {content?.show_notes && content?.notes?.data !== '' && eventExpired && (
           <p
             dangerouslySetInnerHTML={{
               __html: content?.notes?.data,
             }}
           />
         )}
-        <div id="rawdata" className="rawdata-section">
-          <table>
-            <tbody>
-              {/* {content.organisation && (
-                <tr>
-                  <td className="columnone">
-                    <p>{intl.formatMessage(messages.location)}</p>
-                  </td>
-                  <td className="columntwo">
-                    <p>{content.organisation}</p>
-                  </td>
-                </tr>
-              )} */}
-              {content?.exhibition_designer &&
-                content?.exhibition_designer?.length > 0 && (
+        {eventExpired && (
+          <div id="rawdata" className="rawdata-section">
+            <table>
+              <tbody>
+                {content?.exhibition_designer &&
+                  content?.exhibition_designer?.length > 0 && (
+                    <tr>
+                      <td className="columnone">
+                        <p>{intl.formatMessage(messages.designer)}</p>
+                      </td>
+                      <td className="columntwo">
+                        {content.exhibition_designer.map((designer, index) => (
+                          <p key={index}>
+                            {designer.designer}{' '}
+                            {designer.role && `(${designer.role})`}
+                          </p>
+                        ))}
+                      </td>
+                    </tr>
+                  )}
+
+                {content.documentation && content.documentation?.length !== 0 && (
                   <tr>
                     <td className="columnone">
-                      <p>{intl.formatMessage(messages.designer)}</p>
+                      <p>{intl.formatMessage(messages.documentation)}</p>
                     </td>
                     <td className="columntwo">
-                      {content.exhibition_designer.map((designer, index) => (
-                        <p key={index}>
-                          {designer.designer}{' '}
-                          {designer.role && `(${designer.role})`}
-                        </p>
-                      ))}
-                    </td>
-                  </tr>
-                )}
-
-              {content.documentation && content.documentation?.length !== 0 && (
-                <tr>
-                  <td className="columnone">
-                    <p>{intl.formatMessage(messages.documentation)}</p>
-                  </td>
-                  <td className="columntwo">
-                    <ul>
-                      {showAllDocumentation
-                        ? content?.documentation?.map((doc, index) => (
-                            <li key={`li-${index}`}>
-                              <p key={index}>
-                                {doc}
-                                {index === 2 &&
-                                  content.documentation.length > 3 && (
-                                    <button
-                                      className={`expand-data-button ${showAllDocumentation}`}
-                                      onClick={() =>
-                                        setShowAllDocumentation(
-                                          !showAllDocumentation,
-                                        )
-                                      }
-                                    >
-                                      {`${intl.formatMessage(
-                                        messages.showless,
-                                      )} -`}
-                                    </button>
-                                  )}
-                              </p>
-                            </li>
-                          ))
-                        : content.documentation
-                            ?.slice(0, 3)
-                            ?.filter((el) => el.trim() !== '')
-                            .map((doc, index) => (
+                      <ul>
+                        {showAllDocumentation
+                          ? content?.documentation?.map((doc, index) => (
                               <li key={`li-${index}`}>
                                 <p key={index}>
                                   {doc}
@@ -379,140 +353,172 @@ const ExhibitionView = (props) => {
                                           )
                                         }
                                       >
-                                        {/* Toon alles + */}
-                                        {`${intl.formatMessage(
-                                          messages.showmore,
-                                        )} +`}
-                                      </button>
-                                    )}
-                                </p>
-                              </li>
-                            ))}
-                    </ul>
-                  </td>
-                </tr>
-              )}
-              {content.objects && content.objects?.length !== 0 ? (
-                <tr>
-                  <td className="columnone">
-                    <p>{intl.formatMessage(messages.objects)}</p>
-                  </td>
-                  <td className="columntwo">
-                    <ul>
-                      {showAllObjects
-                        ? content?.objects?.map(({ priref, title }, index) => {
-                            const artworkUrl = artworkURL[priref];
-                            return (
-                              title && (
-                                <li key={`li-${index}`}>
-                                  <p key={index}>
-                                    {artworkUrl ? (
-                                      <a href={artworkUrl}>{title}</a>
-                                    ) : (
-                                      title
-                                    )}
-
-                                    {index === 2 && content.objects.length > 3 && (
-                                      <button
-                                        className={`expand-data-button ${showAllObjects}`}
-                                        onClick={() =>
-                                          setShowAllObjects(!showAllObjects)
-                                        }
-                                      >
                                         {`${intl.formatMessage(
                                           messages.showless,
                                         )} -`}
                                       </button>
                                     )}
-                                  </p>
-                                </li>
-                              )
-                            );
-                          })
-                        : content?.objects
-                            ?.slice(0, 3)
-                            .map(({ priref, title }, index) => {
-                              const artworkUrl = artworkURL[priref];
-                              return (
+                                </p>
+                              </li>
+                            ))
+                          : content.documentation
+                              ?.slice(0, 3)
+                              ?.filter((el) => el.trim() !== '')
+                              .map((doc, index) => (
                                 <li key={`li-${index}`}>
                                   <p key={index}>
-                                    {artworkUrl ? (
-                                      <a href={artworkUrl}>{title}</a>
-                                    ) : (
-                                      title
-                                    )}
-                                    {index === 2 && content.objects.length > 3 && (
-                                      <button
-                                        className="expand-data-button"
-                                        onClick={() =>
-                                          setShowAllObjects(!showAllObjects)
-                                        }
-                                      >
-                                        {/* Toon alles + */}
-                                        {`${intl.formatMessage(
-                                          messages.showmore,
-                                        )} +`}
-                                      </button>
-                                    )}
+                                    {doc}
+                                    {index === 2 &&
+                                      content.documentation.length > 3 && (
+                                        <button
+                                          className={`expand-data-button ${showAllDocumentation}`}
+                                          onClick={() =>
+                                            setShowAllDocumentation(
+                                              !showAllDocumentation,
+                                            )
+                                          }
+                                        >
+                                          {/* Toon alles + */}
+                                          {`${intl.formatMessage(
+                                            messages.showmore,
+                                          )} +`}
+                                        </button>
+                                      )}
                                   </p>
                                 </li>
-                              );
-                            })}
-                    </ul>
-                  </td>
-                </tr>
-              ) : (
+                              ))}
+                      </ul>
+                    </td>
+                  </tr>
+                )}
+                {content.objects && content.objects?.length !== 0 ? (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.objects)}</p>
+                    </td>
+                    <td className="columntwo">
+                      <ul>
+                        {showAllObjects
+                          ? content?.objects?.map(
+                              ({ priref, title }, index) => {
+                                const artworkUrl = artworkURL[priref];
+                                return (
+                                  title && (
+                                    <li key={`li-${index}`}>
+                                      <p key={index}>
+                                        {artworkUrl ? (
+                                          <a href={artworkUrl}>{title}</a>
+                                        ) : (
+                                          title
+                                        )}
+
+                                        {index === 2 &&
+                                          content.objects.length > 3 && (
+                                            <button
+                                              className={`expand-data-button ${showAllObjects}`}
+                                              onClick={() =>
+                                                setShowAllObjects(
+                                                  !showAllObjects,
+                                                )
+                                              }
+                                            >
+                                              {`${intl.formatMessage(
+                                                messages.showless,
+                                              )} -`}
+                                            </button>
+                                          )}
+                                      </p>
+                                    </li>
+                                  )
+                                );
+                              },
+                            )
+                          : content?.objects
+                              ?.slice(0, 3)
+                              .map(({ priref, title }, index) => {
+                                const artworkUrl = artworkURL[priref];
+                                return (
+                                  <li key={`li-${index}`}>
+                                    <p key={index}>
+                                      {artworkUrl ? (
+                                        <a href={artworkUrl}>{title}</a>
+                                      ) : (
+                                        title
+                                      )}
+                                      {index === 2 &&
+                                        content.objects.length > 3 && (
+                                          <button
+                                            className="expand-data-button"
+                                            onClick={() =>
+                                              setShowAllObjects(!showAllObjects)
+                                            }
+                                          >
+                                            {/* Toon alles + */}
+                                            {`${intl.formatMessage(
+                                              messages.showmore,
+                                            )} +`}
+                                          </button>
+                                        )}
+                                    </p>
+                                  </li>
+                                );
+                              })}
+                      </ul>
+                    </td>
+                  </tr>
+                ) : (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.objects)}</p>
+                    </td>
+                    <td className="columntwo">
+                      <ul>
+                        <li>
+                          <p>{intl.formatMessage(messages.noObjects)}</p>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                )}
+                {content.persistent_url && (
+                  <tr>
+                    <td className="columnone">
+                      <p>{intl.formatMessage(messages.duurzameurl)}</p>
+                    </td>
+                    <td className="columntwo">
+                      <p>
+                        <p>{intl.formatMessage(messages.duurzameurltext)}</p>
+                        <a href={content.persistent_url}>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: content.persistent_url,
+                            }}
+                          />
+                        </a>
+                      </p>
+                    </td>
+                  </tr>
+                )}
                 <tr>
                   <td className="columnone">
-                    <p>{intl.formatMessage(messages.objects)}</p>
-                  </td>
-                  <td className="columntwo">
-                    <ul>
-                      <li>
-                        <p>{intl.formatMessage(messages.noObjects)}</p>
-                      </li>
-                    </ul>
-                  </td>
-                </tr>
-              )}
-              {content.persistent_url && (
-                <tr>
-                  <td className="columnone">
-                    <p>{intl.formatMessage(messages.duurzameurl)}</p>
+                    <p>{intl.formatMessage(messages.question)}</p>{' '}
                   </td>
                   <td className="columntwo">
                     <p>
-                      <p>{intl.formatMessage(messages.duurzameurltext)}</p>
-                      <a href={content.persistent_url}>
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: content.persistent_url,
-                          }}
-                        />
+                      {intl.formatMessage(messages.questionText)}
+                      <span> </span>
+                      <a
+                        href={`mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20tentoonstelling:%20${content.title}`}
+                      >
+                        {intl.formatMessage(messages.letusknow)}
                       </a>
                     </p>
                   </td>
                 </tr>
-              )}
-              <tr>
-                <td className="columnone">
-                  <p>{intl.formatMessage(messages.question)}</p>{' '}
-                </td>
-                <td className="columntwo">
-                  <p>
-                    {intl.formatMessage(messages.questionText)}
-                    <span> </span>
-                    <a
-                      href={`mailto:documentatie@centraalmuseum.nl?subject=opmerking%20over%20tentoonstelling:%20${content.title}`}
-                    >
-                      {intl.formatMessage(messages.letusknow)}
-                    </a>
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+              </tbody>
+            </table>
+          </div>
+        )}
       </Container>
     ) : (
       <Container id="page-document"></Container>
