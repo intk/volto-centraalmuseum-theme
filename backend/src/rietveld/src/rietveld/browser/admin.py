@@ -1,5 +1,6 @@
 from collections import defaultdict
 from datetime import datetime
+from datetime import time
 from datetime import timedelta
 from DateTime import DateTime
 from dateutil import parser
@@ -80,18 +81,25 @@ class AdminFixes(BrowserView):
 
         for brain in brains:
             obj = brain.getObject()
-            start_date = getattr(obj, "start_date", None)
-            end_date = getattr(obj, "end_date", None)
 
-            print(start_date)
-            print(end_date)
+            start_date = getattr(obj, "start", None)
+            end_date = getattr(obj, "end", None)
+
+            print(f"start_date1: {start_date}")
+            print(f"end_date1: {end_date}")
 
             if start_date:
-                start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
-                obj.start = start_date_obj
+                # Adjust start time to 02:00 while keeping the same date
+                new_start_time = end_date + timedelta(hours=1)
+                obj.start = new_start_time
+
             if end_date:
-                end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
-                obj.end = end_date_obj
+                # Adjust end time to 02:00 while keeping the same date
+                new_end_time = start_date + timedelta(hours=1)
+                obj.end = new_end_time
+
+            print(f"start_date2: {new_start_time}")
+            print(f"end_date2: {new_end_time}")
 
             obj.reindexObject()
 
