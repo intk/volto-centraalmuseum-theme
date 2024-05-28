@@ -63,6 +63,17 @@ class AdminFixes(BrowserView):
 
         return getattr(self, op)()
 
+    def log_presentation_folders(self):
+        """Log all folders named 'Presentation' across the entire Plone site."""
+        catalog = api.portal.get_tool(name="portal_catalog")
+        brains = catalog(portal_type="Folder", Title="Presentation")
+
+        for brain in brains:
+            folder_path = brain.getPath()
+            log_to_file(f"Found 'Storytelling' at: {folder_path}")
+
+        return "Logged all 'Presentation' folders"
+
     def delete_collection(self):
         range = self.request.form.get("range", 0)
         lang = self.request.form.get("lang", "nl")
