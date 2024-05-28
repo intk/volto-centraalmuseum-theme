@@ -74,6 +74,31 @@ class AdminFixes(BrowserView):
 
         return "Logged all 'Presentation' folders"
 
+    def fix_exhibition_hours(self):
+        catalog = api.portal.get_tool(name="portal_catalog")
+        brains = catalog(portal_type="exhibition")
+
+        for brain in brains:
+            obj = brain.getObject()
+            start_time = getattr(obj, "start", None)
+            end_time = getattr(obj, "end", None)
+
+            if start_time:
+                new_start_time = start_time.replace(
+                    hour=1, minute=0, second=0, microsecond=0
+                )
+
+            if end_time:
+                new_end_time = end_time.replace(
+                    hour=1, minute=0, second=0, microsecond=0
+                )
+            obj.start = new_start_time
+            obj.end = new_end_time
+
+            obj.reindexObject()  # Reindex the object to update the catalog
+
+        return "All the exhibition times converted to 02:00"
+
     def delete_collection(self):
         range = self.request.form.get("range", 0)
         lang = self.request.form.get("lang", "nl")
