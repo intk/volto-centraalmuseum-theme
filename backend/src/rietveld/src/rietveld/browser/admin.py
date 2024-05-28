@@ -128,7 +128,7 @@ class AdminFixes(BrowserView):
 
             obj.reindexObject()
 
-        return "All the exhibition times converted to 02:00"
+        return "fixed all the exhibition times that are 00:00"
 
     def delete_collection(self):
         range = self.request.form.get("range", 0)
