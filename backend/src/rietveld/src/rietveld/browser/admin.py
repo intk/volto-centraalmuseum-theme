@@ -74,7 +74,6 @@ class AdminFixes(BrowserView):
 
         return "Logged all 'Presentation' folders"
 
-
     def fix_exhibition_hours(self):
         catalog = api.portal.get_tool(name="portal_catalog")
         brains = catalog(portal_type="exhibition")
