@@ -115,12 +115,12 @@ class AdminFixes(BrowserView):
             if end_date:
                 print(f"end_date1time: {end_date.time()}")
 
-            if start_date and str(start_date.time()) == "00:00:00":
+            if start_date:
                 # Adjust start time to 02:00 while keeping the same date
                 new_start_time = start_date + timedelta(hours=1)
                 obj.start = new_start_time
                 print(f"start_date2: {new_start_time}")
-            if end_date and str(end_date.time()) == "00:00:00":
+            if end_date:
                 # Adjust end time to 02:00 while keeping the same date
                 new_end_time = end_date + timedelta(hours=1)
                 obj.end = new_end_time
