@@ -38,6 +38,8 @@ const Search = (props) => {
         metadata_fields: ['effective', 'created'],
         b_size: 20,
         b_start: (currentPage - 1) * 20,
+        sort_on: 'effective',
+        sort_order: 'descending',
       };
       searchContent('', options);
     };
