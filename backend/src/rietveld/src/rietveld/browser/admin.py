@@ -67,7 +67,7 @@ class AdminFixes(BrowserView):
     def log_presentation_folders(self):
         """Log all folders named 'Presentation' across the entire Plone site."""
         catalog = api.portal.get_tool(name="portal_catalog")
-        brains = catalog(portal_type="Folder", Title="Presentation")
+        brains = catalog(Title="Presentation")
 
         for brain in brains:
             folder_path = brain.getPath()
