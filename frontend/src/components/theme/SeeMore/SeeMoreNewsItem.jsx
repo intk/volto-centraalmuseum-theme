@@ -197,25 +197,6 @@ const Search = (props) => {
               ),
           )}
       </Masonry>
-      {/* <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
-      >
-        <Button
-          onClick={() => changePage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span style={{ margin: '0 10px' }}>
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button
-          onClick={() => changePage(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-        >
-          Next
-        </Button>
-      </div> */}
       {totalPages > 1 && (
         <div className="pagination-wrapper">
           <Pagination
