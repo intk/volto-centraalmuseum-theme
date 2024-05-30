@@ -1,16 +1,28 @@
+import base64
+import gc
+import io
+import json
+import logging
+import os
+import re
+import time
+import uuid
+import xml.etree.ElementTree as ET
 from collections import defaultdict
-from datetime import datetime
-from datetime import time
-from datetime import timedelta
+from datetime import datetime, time, timedelta
+from xml.dom import minidom
+from xml.etree.ElementTree import Element, SubElement, tostring
+
+import lxml.etree
+import plone.api
+import requests
+import transaction
 from DateTime import DateTime
 from dateutil import parser
 from lxml import etree
 from plone import api
-from plone.api import content
-from plone.api import portal
-from plone.api import relation
-from plone.app.multilingual.api import get_translation_manager
-from plone.app.multilingual.api import translate
+from plone.api import content, portal, relation
+from plone.app.multilingual.api import get_translation_manager, translate
 from plone.app.multilingual.interfaces import ITranslationManager
 from plone.app.textfield.interfaces import IRichText
 from plone.app.textfield.value import RichTextValue
@@ -22,39 +34,16 @@ from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
 from pytz import timezone
-from rietveld.config import IMAGE_BASE_URL
-from rietveld.config import IMPORT_LOCATIONS
+from rietveld.config import IMAGE_BASE_URL, IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
 from rietveld.content.exhibition import IExhibition
-from xml.dom import minidom
-from xml.etree.ElementTree import Element
-from xml.etree.ElementTree import SubElement
-from xml.etree.ElementTree import tostring
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
-from zope.schema import getFields
-from zope.schema import getFieldsInOrder
-from zope.schema.interfaces import IList
-from zope.schema.interfaces import IText
-from zope.schema.interfaces import ITextLine
-
-import base64
-import gc
-import io
-import json
-import logging
-import lxml.etree
-import os
-import plone.api
-import re
-import requests
-import time
-import transaction
-import uuid
-import xml.etree.ElementTree as ET
+from zope.schema import getFields, getFieldsInOrder
+from zope.schema.interfaces import IList, IText, ITextLine
 
 
 class AdminFixes(BrowserView):
@@ -64,10 +53,18 @@ class AdminFixes(BrowserView):
 
         return getattr(self, op)()
 
+    def reindex_newsitems(self):
+        catalog = api.portal.get_tool(name="portal_catalog")
+        brains = catalog(portal_type="News Item")
+
+        for brain in brains:
+            news_item = brain.getObject()
+            news_item.reindexObject()
+        return "Reindexing complete"
+
     def log_presentation_folders(self):
         """Log all folders named 'Presentation' across the entire Plone site."""
         catalog = api.portal.get_tool(name="portal_catalog")
-        brains = catalog(Title="Presentation")
 
         for brain in brains:
             folder_path = brain.getPath()
@@ -274,39 +271,39 @@ class AdminFixes(BrowserView):
             retries = 0
             success = False
 
-            while retries < MAX_RETRIES and success == False:
-                try:
-                    if collection_type == "exhibit":
-                        import_one_exhibition(
-                            self,
-                            record=record,
-                            collection_type=collection_type,
-                            container=container,
-                            container_en=container_en,
-                            catalog=catalog,
-                        )
-                    else:
-                        import_one_record(
-                            self,
-                            record=record,
-                            collection_type=collection_type,
-                            container=container,
-                            container_en=container_en,
-                            catalog=catalog,
-                        )
-                    success = True
-                    transaction.commit()
-                except Exception as e:
-                    retries += 1
-                    if retries < MAX_RETRIES:
-                        time.sleep(DELAY_SECONDS)
-                        log_to_file(
-                            f"Temprary failure, will try again. Retries {retries}"
-                        )
-                    else:
-                        log_to_file(f"Failure to import the record. Error: {e}")
-                        transaction.abort()
-                        break
+            # while retries < MAX_RETRIES and success == False:
+            #     try:
+            if collection_type == "exhibit":
+                import_one_exhibition(
+                    self,
+                    record=record,
+                    collection_type=collection_type,
+                    container=container,
+                    container_en=container_en,
+                    catalog=catalog,
+                )
+            else:
+                import_one_record(
+                    self,
+                    record=record,
+                    collection_type=collection_type,
+                    container=container,
+                    container_en=container_en,
+                    catalog=catalog,
+                )
+            success = True
+            transaction.commit()
+            # except Exception as e:
+            #     retries += 1
+            #     if retries < MAX_RETRIES:
+            #         time.sleep(DELAY_SECONDS)
+            #         log_to_file(
+            #             f"Temprary failure, will try again. Retries {retries}"
+            #         )
+            #     else:
+            #         log_to_file(f"Failure to import the record. Error: {e}")
+            #         transaction.abort()
+            #         break
 
             if not success:
                 log_to_file(
@@ -915,9 +912,11 @@ def import_one_record(self, record, collection_type, container, container_en, ca
             statement_of_responsibility,
             source_details,
             source_pagination,
-            f"({place_of_publication}, {year_of_publication})"
-            if place_of_publication and year_of_publication
-            else place_of_publication or year_of_publication,
+            (
+                f"({place_of_publication}, {year_of_publication})"
+                if place_of_publication and year_of_publication
+                else place_of_publication or year_of_publication
+            ),
             page_reference,
         ]
         documentation_str = ", ".join(filter(None, documentation_components)).strip()
@@ -997,13 +996,13 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                     if new_exhibition["to"]:
                         end_year = new_exhibition["to"].split("-")[0]
                         if start_year == end_year:
-                            new_exhibition[
-                                "date"
-                            ] = start_year  # Use only start year if the same
+                            new_exhibition["date"] = (
+                                start_year  # Use only start year if the same
+                            )
                         else:
-                            new_exhibition[
-                                "date"
-                            ] = f"{start_year} - {end_year}"  # Format as 'start - end'
+                            new_exhibition["date"] = (
+                                f"{start_year} - {end_year}"  # Format as 'start - end'
+                            )
 
                 elif new_exhibition["to"]:  # If 'date' does not exist but 'to' does
                     end_year = new_exhibition["to"].split("-")[0]
@@ -1402,17 +1401,17 @@ def import_one_exhibition(
 
     brains = catalog.searchResults(priref=priref, portal_type="exhibition")
 
-    for brain in brains:
-        obj = brain.getObject()
+    # for brain in brains:
+    #     obj = brain.getObject()
 
-        if (
-            obj.last_successful_update is not None
-            and obj.last_successful_update >= last_modification_dt
-        ):
-            log_to_file(
-                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-            )
-            return
+    #     if (
+    #         obj.last_successful_update is not None
+    #         and obj.last_successful_update >= last_modification_dt
+    #     ):
+    #         log_to_file(
+    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+    #         )
+    #         return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -2057,25 +2056,37 @@ def import_authors(self, record):
 
             author_info = {
                 "title": formatted_name,
-                "authorName": creator.find("name").text
-                if creator.find("name") is not None
-                else "Unknown",
+                "authorName": (
+                    creator.find("name").text
+                    if creator.find("name") is not None
+                    else "Unknown"
+                ),
                 "authorID": priref,
-                "authorBirthDate": creator.find("birth.date.start").text
-                if creator.find("birth.date.start") is not None
-                else "",
-                "authorDeathDate": creator.find("death.date.start").text
-                if creator.find("death.date.start") is not None
-                else "",
-                "authorBirthPlace": creator.find("birth.place").text
-                if creator.find("birth.place") is not None
-                else "",
-                "authorDeathPlace": creator.find("death.place").text
-                if creator.find("death.place") is not None
-                else "",
-                "authorURL": creator.find(".//Internet_address/url").text
-                if creator.find(".//Internet_address/url") is not None
-                else "",
+                "authorBirthDate": (
+                    creator.find("birth.date.start").text
+                    if creator.find("birth.date.start") is not None
+                    else ""
+                ),
+                "authorDeathDate": (
+                    creator.find("death.date.start").text
+                    if creator.find("death.date.start") is not None
+                    else ""
+                ),
+                "authorBirthPlace": (
+                    creator.find("birth.place").text
+                    if creator.find("birth.place") is not None
+                    else ""
+                ),
+                "authorDeathPlace": (
+                    creator.find("death.place").text
+                    if creator.find("death.place") is not None
+                    else ""
+                ),
+                "authorURL": (
+                    creator.find(".//Internet_address/url").text
+                    if creator.find(".//Internet_address/url") is not None
+                    else ""
+                ),
             }
 
             # Create or append NL author
@@ -2099,9 +2110,9 @@ def import_authors(self, record):
 
             # Create or append EN author
             if not found_en:
-                author_info[
-                    "container"
-                ] = container_en  # Update container for EN version
+                author_info["container"] = (
+                    container_en  # Update container for EN version
+                )
                 author_en = content.create(type="author", **author_info)
                 authors_en.append(author_en)
                 content.transition(obj=author_en, transition="publish")
@@ -2213,10 +2224,10 @@ def get_creator(xml_record):
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:
