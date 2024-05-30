@@ -1,28 +1,16 @@
-import base64
-import gc
-import io
-import json
-import logging
-import os
-import re
-import time
-import uuid
-import xml.etree.ElementTree as ET
 from collections import defaultdict
-from datetime import datetime, time, timedelta
-from xml.dom import minidom
-from xml.etree.ElementTree import Element, SubElement, tostring
-
-import lxml.etree
-import plone.api
-import requests
-import transaction
+from datetime import datetime
+from datetime import time
+from datetime import timedelta
 from DateTime import DateTime
 from dateutil import parser
 from lxml import etree
 from plone import api
-from plone.api import content, portal, relation
-from plone.app.multilingual.api import get_translation_manager, translate
+from plone.api import content
+from plone.api import portal
+from plone.api import relation
+from plone.app.multilingual.api import get_translation_manager
+from plone.app.multilingual.api import translate
 from plone.app.multilingual.interfaces import ITranslationManager
 from plone.app.textfield.interfaces import IRichText
 from plone.app.textfield.value import RichTextValue
@@ -34,16 +22,39 @@ from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
 from pytz import timezone
-from rietveld.config import IMAGE_BASE_URL, IMPORT_LOCATIONS
+from rietveld.config import IMAGE_BASE_URL
+from rietveld.config import IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
 from rietveld.content.exhibition import IExhibition
+from xml.dom import minidom
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import SubElement
+from xml.etree.ElementTree import tostring
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
-from zope.schema import getFields, getFieldsInOrder
-from zope.schema.interfaces import IList, IText, ITextLine
+from zope.schema import getFields
+from zope.schema import getFieldsInOrder
+from zope.schema.interfaces import IList
+from zope.schema.interfaces import IText
+from zope.schema.interfaces import ITextLine
+
+import base64
+import gc
+import io
+import json
+import logging
+import lxml.etree
+import os
+import plone.api
+import re
+import requests
+import time
+import transaction
+import uuid
+import xml.etree.ElementTree as ET
 
 
 class AdminFixes(BrowserView):
