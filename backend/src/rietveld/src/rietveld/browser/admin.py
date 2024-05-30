@@ -34,16 +34,39 @@ from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
 from pytz import timezone
-from rietveld.config import IMAGE_BASE_URL, IMPORT_LOCATIONS
+from rietveld.config import IMAGE_BASE_URL
+from rietveld.config import IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
 from rietveld.content.exhibition import IExhibition
+from xml.dom import minidom
+from xml.etree.ElementTree import Element
+from xml.etree.ElementTree import SubElement
+from xml.etree.ElementTree import tostring
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
-from zope.schema import getFields, getFieldsInOrder
-from zope.schema.interfaces import IList, IText, ITextLine
+from zope.schema import getFields
+from zope.schema import getFieldsInOrder
+from zope.schema.interfaces import IList
+from zope.schema.interfaces import IText
+from zope.schema.interfaces import ITextLine
+
+import base64
+import gc
+import io
+import json
+import logging
+import lxml.etree
+import os
+import plone.api
+import re
+import requests
+import time
+import transaction
+import uuid
+import xml.etree.ElementTree as ET
 
 
 class AdminFixes(BrowserView):
