@@ -41,7 +41,7 @@ const Search = (props) => {
         sort_on: 'effective',
         sort_order: 'descending',
       };
-      console.log(options);
+      // console.log(options);
       searchContent('', options);
     };
 
@@ -181,7 +181,7 @@ const Search = (props) => {
                     </p>
                   </div> */}
                   <div className={`listing-dates-wrapper`}>
-                    {console.log(item?.effective)}
+                    {/* {console.log(item?.effective)} */}
                     <When
                       start={item?.start}
                       end={item?.end}
