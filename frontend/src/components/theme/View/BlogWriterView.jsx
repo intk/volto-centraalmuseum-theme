@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import './css/blogwriterview.less';
 import { BodyClass } from '@plone/volto/helpers';
 import { flattenToAppURL } from '@plone/volto/helpers';
-// import { SeeMoreNewsItem } from '../../index';
+import { SeeMoreNewsItem } from '../../index';
 import {
   hasBlocksData,
   // flattenHTMLToAppURL,
@@ -61,7 +61,7 @@ export default function BlogWriterView(props) {
       )}
       {/* </div> */}
       <Container id="seemorenews">
-        {/* <SeeMoreNewsItem {...props} /> */}
+        <SeeMoreNewsItem {...props} />
       </Container>
     </div>
   );
