@@ -85,7 +85,6 @@ class AdminFixes(BrowserView):
         return "Reindexing complete"
 
     def reset_exhibition_hours(self):
-        """ reseting the exhibition hours """
         catalog = api.portal.get_tool(name="portal_catalog")
         brains = catalog(portal_type="exhibition")
 
