@@ -2633,3 +2633,7 @@ div#blockquote > p{
     }
   }
 }
+
+.view-controlpanelview .herosection {
+    display: none;
+}
