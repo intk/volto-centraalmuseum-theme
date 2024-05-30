@@ -283,39 +283,39 @@ class AdminFixes(BrowserView):
             retries = 0
             success = False
 
-            # while retries < MAX_RETRIES and success == False:
-            #     try:
-            if collection_type == "exhibit":
-                import_one_exhibition(
-                    self,
-                    record=record,
-                    collection_type=collection_type,
-                    container=container,
-                    container_en=container_en,
-                    catalog=catalog,
-                )
-            else:
-                import_one_record(
-                    self,
-                    record=record,
-                    collection_type=collection_type,
-                    container=container,
-                    container_en=container_en,
-                    catalog=catalog,
-                )
-            success = True
-            transaction.commit()
-            # except Exception as e:
-            #     retries += 1
-            #     if retries < MAX_RETRIES:
-            #         time.sleep(DELAY_SECONDS)
-            #         log_to_file(
-            #             f"Temprary failure, will try again. Retries {retries}"
-            #         )
-            #     else:
-            #         log_to_file(f"Failure to import the record. Error: {e}")
-            #         transaction.abort()
-            #         break
+            while retries < MAX_RETRIES and success == False:
+                try:
+                    if collection_type == "exhibit":
+                        import_one_exhibition(
+                            self,
+                            record=record,
+                            collection_type=collection_type,
+                            container=container,
+                            container_en=container_en,
+                            catalog=catalog,
+                        )
+                    else:
+                        import_one_record(
+                            self,
+                            record=record,
+                            collection_type=collection_type,
+                            container=container,
+                            container_en=container_en,
+                            catalog=catalog,
+                        )
+                    success = True
+                    transaction.commit()
+                except Exception as e:
+                    retries += 1
+                    if retries < MAX_RETRIES:
+                        time.sleep(DELAY_SECONDS)
+                        log_to_file(
+                            f"Temprary failure, will try again. Retries {retries}"
+                        )
+                    else:
+                        log_to_file(f"Failure to import the record. Error: {e}")
+                        transaction.abort()
+                        break
 
             if not success:
                 log_to_file(
