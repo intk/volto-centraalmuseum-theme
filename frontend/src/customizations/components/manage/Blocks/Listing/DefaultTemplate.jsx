@@ -42,7 +42,7 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                   item.review_state === 'private' ? 'private' : ''
                 }`}
               >
-                {item['@type'] === 'Event' || item['@type'] === 'Exhibition' ? (
+                {item['@type'] === 'Event' || item['@type'] === 'exhibition' ? (
                   <div className="listing-dates">
                     <div className={`listing-dates-wrapper`}>
                       <When
