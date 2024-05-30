@@ -532,6 +532,9 @@ div#photo-credit {
 
 // Table block
 .slate-table-block {
+  thead th {
+    padding-left: 0px !important; 
+  }
   thead p {
     letter-spacing: 0.05em !important;
   }
