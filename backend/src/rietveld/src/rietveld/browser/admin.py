@@ -1008,13 +1008,13 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                     if new_exhibition["to"]:
                         end_year = new_exhibition["to"].split("-")[0]
                         if start_year == end_year:
-                            new_exhibition["date"] = (
-                                start_year  # Use only start year if the same
-                            )
+                            new_exhibition[
+                                "date"
+                            ] = start_year  # Use only start year if the same
                         else:
-                            new_exhibition["date"] = (
-                                f"{start_year} - {end_year}"  # Format as 'start - end'
-                            )
+                            new_exhibition[
+                                "date"
+                            ] = f"{start_year} - {end_year}"  # Format as 'start - end'
 
                 elif new_exhibition["to"]:  # If 'date' does not exist but 'to' does
                     end_year = new_exhibition["to"].split("-")[0]
@@ -2122,9 +2122,9 @@ def import_authors(self, record):
 
             # Create or append EN author
             if not found_en:
-                author_info["container"] = (
-                    container_en  # Update container for EN version
-                )
+                author_info[
+                    "container"
+                ] = container_en  # Update container for EN version
                 author_en = content.create(type="author", **author_info)
                 authors_en.append(author_en)
                 content.transition(obj=author_en, transition="publish")
