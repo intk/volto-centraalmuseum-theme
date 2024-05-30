@@ -41,6 +41,7 @@ const Search = (props) => {
         sort_on: 'effective',
         sort_order: 'descending',
       };
+      console.log(options);
       searchContent('', options);
     };
 
