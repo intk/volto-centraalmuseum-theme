@@ -1,16 +1,28 @@
+import base64
+import gc
+import io
+import json
+import logging
+import os
+import re
+import time
+import uuid
+import xml.etree.ElementTree as ET
 from collections import defaultdict
-from datetime import datetime
-from datetime import time
-from datetime import timedelta
+from datetime import datetime, time, timedelta
+from xml.dom import minidom
+from xml.etree.ElementTree import Element, SubElement, tostring
+
+import lxml.etree
+import plone.api
+import requests
+import transaction
 from DateTime import DateTime
 from dateutil import parser
 from lxml import etree
 from plone import api
-from plone.api import content
-from plone.api import portal
-from plone.api import relation
-from plone.app.multilingual.api import get_translation_manager
-from plone.app.multilingual.api import translate
+from plone.api import content, portal, relation
+from plone.app.multilingual.api import get_translation_manager, translate
 from plone.app.multilingual.interfaces import ITranslationManager
 from plone.app.textfield.interfaces import IRichText
 from plone.app.textfield.value import RichTextValue
@@ -22,39 +34,16 @@ from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
 from pytz import timezone
-from rietveld.config import IMAGE_BASE_URL
-from rietveld.config import IMPORT_LOCATIONS
+from rietveld.config import IMAGE_BASE_URL, IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
 from rietveld.content.exhibition import IExhibition
-from xml.dom import minidom
-from xml.etree.ElementTree import Element
-from xml.etree.ElementTree import SubElement
-from xml.etree.ElementTree import tostring
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
-from zope.schema import getFields
-from zope.schema import getFieldsInOrder
-from zope.schema.interfaces import IList
-from zope.schema.interfaces import IText
-from zope.schema.interfaces import ITextLine
-
-import base64
-import gc
-import io
-import json
-import logging
-import lxml.etree
-import os
-import plone.api
-import re
-import requests
-import time
-import transaction
-import uuid
-import xml.etree.ElementTree as ET
+from zope.schema import getFields, getFieldsInOrder
+from zope.schema.interfaces import IList, IText, ITextLine
 
 
 class AdminFixes(BrowserView):
@@ -64,6 +53,17 @@ class AdminFixes(BrowserView):
 
         return getattr(self, op)()
 
+    def log_presentation_folders(self):
+        """Log all folders named 'Presentation' across the entire Plone site."""
+        catalog = api.portal.get_tool(name="portal_catalog")
+        brains = catalog(Title="Presentation")
+
+        for brain in brains:
+            folder_path = brain.getPath()
+            log_to_file(f"Found 'Storytelling' at: {folder_path}")
+
+        return "Logged all 'Presentation' folders"
+
     def reindex_newsitems(self):
         catalog = api.portal.get_tool(name="portal_catalog")
         brains = catalog(portal_type="News Item")
@@ -72,16 +72,6 @@ class AdminFixes(BrowserView):
             news_item = brain.getObject()
             news_item.reindexObject()
         return "Reindexing complete"
-
-    def log_presentation_folders(self):
-        """Log all folders named 'Presentation' across the entire Plone site."""
-        catalog = api.portal.get_tool(name="portal_catalog")
-
-        for brain in brains:
-            folder_path = brain.getPath()
-            log_to_file(f"Found 'Storytelling' at: {folder_path}")
-
-        return "Logged all 'Presentation' folders"
 
     def reset_exhibition_hours(self):
         catalog = api.portal.get_tool(name="portal_catalog")
@@ -1412,17 +1402,17 @@ def import_one_exhibition(
 
     brains = catalog.searchResults(priref=priref, portal_type="exhibition")
 
-    # for brain in brains:
-    #     obj = brain.getObject()
+    for brain in brains:
+        obj = brain.getObject()
 
-    #     if (
-    #         obj.last_successful_update is not None
-    #         and obj.last_successful_update >= last_modification_dt
-    #     ):
-    #         log_to_file(
-    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-    #         )
-    #         return
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -2235,10 +2225,10 @@ def get_creator(xml_record):
 
 
 def log_to_file(message):
-    # log_file_path = "/app/logs/collectionLogs.txt"
-    log_file_path = (
-        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    )
+    log_file_path = "/app/logs/collectionLogs.txt"
+    # log_file_path = (
+    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    # )
 
     # Attempt to create the file if it doesn't exist
     try:
