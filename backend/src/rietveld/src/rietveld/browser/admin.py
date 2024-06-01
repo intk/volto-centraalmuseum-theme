@@ -1609,10 +1609,18 @@ def import_one_exhibition(
     ###DESIGNER END #######################
 
     # Notes field start
-    notes = tree.findtext("./notes") or ""
+    notes_all = tree.findall("./notes") or []
 
-    html_notes = notes.replace("\n", "<br/>")
+    notes = []
 
+    for note in notes_all:
+        print(note.text)
+        notes.append(note.text)
+
+    notes_text = "\n\n".join(notes)
+    html_notes = notes_text.replace("\n", "<br/>")
+
+    # Create RichTextValue objects
     notes_richtext_nl = RichTextValue(
         raw=html_notes,
         mimeType="text/html",
