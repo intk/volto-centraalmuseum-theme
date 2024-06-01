@@ -93,8 +93,8 @@ class AdminFixes(BrowserView):
             start_date = getattr(obj, "start_date", None)
             end_date = getattr(obj, "end_date", None)
 
-            # print(start_date)
-            # print(end_date)
+            print(start_date)
+            print(end_date)
 
             if start_date:
                 start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
