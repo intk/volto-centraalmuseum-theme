@@ -1431,17 +1431,17 @@ def import_one_exhibition(
 
     brains = catalog.searchResults(priref=priref, portal_type="exhibition")
 
-    # for brain in brains:
-    #     obj = brain.getObject()
+    for brain in brains:
+        obj = brain.getObject()
 
-    #     if (
-    #         obj.last_successful_update is not None
-    #         and obj.last_successful_update >= last_modification_dt
-    #     ):
-    #         log_to_file(
-    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-    #         )
-    #         return
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -1763,21 +1763,6 @@ def import_one_exhibition(
                 "blocks",
                 "start",
                 "end",
-                "cm_nummer",
-                "whole_day",
-                "open_end",
-                "alternative_text",
-                "start_date",
-                "end_date",
-                "organisation",
-                "documentation",
-                "exhibition_designer",
-                "hasImage",
-                "show_notes",
-                "persistent_url",
-                "objects",
-                "last_successful_update",
-                "rawdata",
             ]
 
             for field_name, field in fields.items():
@@ -1802,9 +1787,9 @@ def import_one_exhibition(
             obj.show_notes = show_notes
 
             # adding images
-            # if images:
-            #     import_images_on_slideshow(container=obj, images=images)
-            #     obj.hasImage = True
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj.hasImage = True
 
             # Reindex the updated object
             obj.reindexObject()
