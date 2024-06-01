@@ -84,6 +84,24 @@ class AdminFixes(BrowserView):
             news_item.reindexObject()
         return "Reindexing complete"
 
+    def make_slideshow_public(self):
+        """For making all of the slideshow folders public and out of navigation within the specified path."""
+        catalog = api.portal.get_tool(name="portal_catalog")
+        path = self.request.form.get("path", "/")
+        query = {
+            "path": {"query": path, "depth": -1},
+            "Title": ["slideshow", "Slideshow"],
+        }
+
+        brains = catalog(**query)
+
+        for brain in brains:
+            slideshow_folder = brain.getObject()
+            if api.content.get_state(slideshow_folder) == "private":
+                api.content.transition(obj=slideshow_folder, transition="publish")
+            slideshow_folder.exclude_from_nav = True
+            slideshow_folder.reindexObject(idxs=["exclude_from_nav"])
+
     def reset_exhibition_hours(self):
         catalog = api.portal.get_tool(name="portal_catalog")
         brains = catalog(portal_type="exhibition")
