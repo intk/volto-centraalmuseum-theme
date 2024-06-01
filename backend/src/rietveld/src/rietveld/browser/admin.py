@@ -1763,6 +1763,21 @@ def import_one_exhibition(
                 "blocks",
                 "start",
                 "end",
+                "cm_nummer",
+                "whole_day",
+                "open_end",
+                "alternative_text",
+                "start_date",
+                "end_date",
+                "organisation",
+                "documentation",
+                "exhibition_designer",
+                "hasImage",
+                "show_notes",
+                "persistent_url",
+                "objects",
+                "last_successful_update",
+                "rawdata",
             ]
 
             for field_name, field in fields.items():
@@ -1787,9 +1802,9 @@ def import_one_exhibition(
             obj.show_notes = show_notes
 
             # adding images
-            if images:
-                import_images_on_slideshow(container=obj, images=images)
-                obj.hasImage = True
+            # if images:
+            #     import_images_on_slideshow(container=obj, images=images)
+            #     obj.hasImage = True
 
             # Reindex the updated object
             obj.reindexObject()
