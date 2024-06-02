@@ -181,7 +181,7 @@ const Search = (props) => {
                     </p>
                   </div> */}
                   <div className={`listing-dates-wrapper`}>
-                    {/* {console.log(item?.effective)} */}
+                    {console.log(item)}
                     <When
                       start={item?.start}
                       end={item?.end}
