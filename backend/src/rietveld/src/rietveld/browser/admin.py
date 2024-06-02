@@ -1431,17 +1431,17 @@ def import_one_exhibition(
 
     brains = catalog.searchResults(priref=priref, portal_type="exhibition")
 
-    # for brain in brains:
-    #     obj = brain.getObject()
+    for brain in brains:
+        obj = brain.getObject()
 
-    #     if (
-    #         obj.last_successful_update is not None
-    #         and obj.last_successful_update >= last_modification_dt
-    #     ):
-    #         log_to_file(
-    #             f"the last successful update is bigger than the last modification {obj.last_successful_update}"
-    #         )
-    #         return
+        if (
+            obj.last_successful_update is not None
+            and obj.last_successful_update >= last_modification_dt
+        ):
+            log_to_file(
+                f"the last successful update is bigger than the last modification {obj.last_successful_update}"
+            )
+            return
 
     api_url = f"http://cmu.adlibhosting.com/webapiimages/wwwopac.ashx?database={collection_type}&search=priref={priref}"
 
@@ -1696,142 +1696,140 @@ def import_one_exhibition(
     # brains = catalog.searchResults(priref=priref, portal_type="artwork")
     start_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
     end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
-    # if len(brains) == 1:
-    #     lang = brains[0].getObject().language
-    #     missing_lang = "en" if lang == "nl" else "nl"
-    #     if missing_lang == "nl":
-    #         obj = create_and_setup_object(
-    #             whole_title, container, info, intl, "exhibition", title_url, priref
-    #         )  # Dutch version
+    if len(brains) == 1:
+        lang = brains[0].getObject().language
+        missing_lang = "en" if lang == "nl" else "nl"
+        if missing_lang == "nl":
+            obj = create_and_setup_object(
+                whole_title, container, info, intl, "exhibition", title_url, priref
+            )  # Dutch version
 
-    #         obj.start = start_date_obj
-    #         obj.end = end_date_obj
-    #         obj.whole_day = True
+            obj.start = start_date_obj
+            obj.end = end_date_obj
+            obj.whole_day = True
 
-    #         manager = ITranslationManager(obj)
-    #         if not manager.has_translation("en"):
-    #             manager.register_translation("en", brains[0].getObject())
+            manager = ITranslationManager(obj)
+            if not manager.has_translation("en"):
+                manager.register_translation("en", brains[0].getObject())
 
-    #         # adding images
-    #         if images:
-    #             import_images_on_slideshow(container=obj, images=images)
-    #             obj.hasImage = True
-    #         obj.reindexObject()
+            # adding images
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj.hasImage = True
+            obj.reindexObject()
 
-    #     else:
-    #         obj_en = create_and_setup_object(
-    #             whole_title, container_en, info, intl, "exhibition", title_url, priref
-    #         )  # English version
+        else:
+            obj_en = create_and_setup_object(
+                whole_title, container_en, info, intl, "exhibition", title_url, priref
+            )  # English version
 
-    #         obj_en.start = start_date_obj
-    #         obj_en.end = end_date_obj
-    #         obj_en.whole_day = True
+            obj_en.start = start_date_obj
+            obj_en.end = end_date_obj
+            obj_en.whole_day = True
 
-    #         manager = ITranslationManager(obj_en)
-    #         if not manager.has_translation("nl"):
-    #             manager.register_translation("nl", brains[0].getObject())
+            manager = ITranslationManager(obj_en)
+            if not manager.has_translation("nl"):
+                manager.register_translation("nl", brains[0].getObject())
 
-    #         # adding images
-    #         if images:
-    #             import_images_on_slideshow(container=obj, images=images)
-    #             obj_en.hasImage = True
+            # adding images
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj_en.hasImage = True
 
-    #         obj_en.reindexObject()
+            obj_en.reindexObject()
 
     # Check if object with ObjectNumber already exists in the container
-    if brains:
+    elif brains:
         for brain in brains:
             # Object exists, so we fetch it and update it
             obj = brain.getObject()
-            # show_notes = obj.show_notes
-            # reset_exhibition_fields(obj)
-            # if title_url != obj.id:
-            #     log_to_file("the url has been changed")
-            #     plone.api.content.rename(obj=obj, new_id=title_url)
+            show_notes = obj.show_notes
+            reset_exhibition_fields(obj)
+            if title_url != obj.id:
+                log_to_file("the url has been changed")
+                plone.api.content.rename(obj=obj, new_id=title_url)
 
             # First clear all of the fields
-            # schema = obj.getTypeInfo().lookupSchema()
-            # fields = getFields(schema)
+            schema = obj.getTypeInfo().lookupSchema()
+            fields = getFields(schema)
 
             # Exclude these fields from clearing
-            # exclude_fields = [
-            #     "id",
-            #     "UID",
-            #     "title",
-            #     "description",
-            #     "authors",
-            #     "blocks",
-            #     "start",
-            #     "end",
-            # ]
+            exclude_fields = [
+                "id",
+                "UID",
+                "title",
+                "description",
+                "authors",
+                "blocks",
+                "start",
+                "end",
+            ]
 
-            # for field_name, field in fields.items():
-            #     if field_name == 'notes':
-            #         # Clear the field by setting it to its missing_value
-            #         setattr(obj, field_name, field.missing_value)
+            for field_name, field in fields.items():
+                if field_name not in exclude_fields:
+                    # Clear the field by setting it to its missing_value
+                    setattr(obj, field_name, field.missing_value)
 
             # Update the object's fields with new data
-            # lang = obj.language
-            # for k, v in info[lang].items():
-            #     if v:
-            #         setattr(obj, k, v)
-            # for k, v in intl[lang].items():
-            #     if v:
-            #         setattr(obj, k, json.dumps(v))
-
-            setattr(obj, 'notes', info["nl"]["notes"])
+            lang = obj.language
+            for k, v in info[lang].items():
+                if v:
+                    setattr(obj, k, v)
+            for k, v in intl[lang].items():
+                if v:
+                    setattr(obj, k, json.dumps(v))
 
             log_to_file(f"Object is updated: {priref} id and {title} title")
 
-            # obj.start = start_date_obj
-            # obj.end = end_date_obj
-            # obj.whole_day = True
-            # obj.show_notes = show_notes
+            obj.start = start_date_obj
+            obj.end = end_date_obj
+            obj.whole_day = True
+            obj.show_notes = show_notes
 
             # adding images
-            # if images:
-            #     import_images_on_slideshow(container=obj, images=images)
-            #     obj.hasImage = True
+            if images:
+                import_images_on_slideshow(container=obj, images=images)
+                obj.hasImage = True
 
             # Reindex the updated object
-            # obj.reindexObject()
-            # obj.last_successful_update = last_modification_dt
+            obj.reindexObject()
+            obj.last_successful_update = last_modification_dt
 
     # Object doesn't exist, so we create a new one
-    # if not brains:
-    #     if not whole_title:
-    #         whole_title = "Untitled Object"  # default value for untitled objects
+    if not brains:
+        if not whole_title:
+            whole_title = "Untitled Object"  # default value for untitled objects
 
-    #     obj = create_and_setup_object(
-    #         whole_title, container, info, intl, "exhibition", title_url, priref
-    #     )  # Dutch version
+        obj = create_and_setup_object(
+            whole_title, container, info, intl, "exhibition", title_url, priref
+        )  # Dutch version
 
-    #     log_to_file(f"{priref} object is created")
+        log_to_file(f"{priref} object is created")
 
-    #     # adding images
-    #     if images:
-    #         import_images_on_slideshow(container=obj, images=images)
-    #         obj.hasImage = True
+        # adding images
+        if images:
+            import_images_on_slideshow(container=obj, images=images)
+            obj.hasImage = True
 
-    #     obj.last_successful_update = last_modification_dt
-    #     obj_en = self.translate(obj, info["en"])
-    #     obj_en.hasImage = obj.hasImage
+        obj.last_successful_update = last_modification_dt
+        obj_en = self.translate(obj, info["en"])
+        obj_en.hasImage = obj.hasImage
 
-    #     slideshow_translation = api.content.find(context=obj_en, id="slideshow")
-    #     if len(slideshow_translation) > 0:
-    #         slideshow_page = slideshow_translation[0].getObject()
-    #         if api.content.get_state(slideshow_page) == "private":
-    #             content.transition(obj=slideshow_page, transition="publish")
+        slideshow_translation = api.content.find(context=obj_en, id="slideshow")
+        if len(slideshow_translation) > 0:
+            slideshow_page = slideshow_translation[0].getObject()
+            if api.content.get_state(slideshow_page) == "private":
+                content.transition(obj=slideshow_page, transition="publish")
 
-    #     obj.reindexObject()
-    #     obj_en.reindexObject()
+        obj.reindexObject()
+        obj_en.reindexObject()
 
-    #     obj.start = start_date_obj
-    #     obj.end = end_date_obj
-    #     obj.whole_day = True
-    #     obj_en.start = start_date_obj
-    #     obj_en.end = end_date_obj
-    #     obj_en.whole_day = True
+        obj.start = start_date_obj
+        obj.end = end_date_obj
+        obj.whole_day = True
+        obj_en.start = start_date_obj
+        obj_en.end = end_date_obj
+        obj_en.whole_day = True
 
 
 def create_and_setup_object(title, container, info, intl, object_type, obj_id, priref):
