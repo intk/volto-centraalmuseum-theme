@@ -519,6 +519,7 @@ const ExhibitionView = (props) => {
             </table>
           </div>
         )}
+        {intl.locale === 'nl' ? <SeeMoreExhibition></SeeMoreExhibition> : ''}
       </Container>
     ) : (
       <Container id="page-document"></Container>
