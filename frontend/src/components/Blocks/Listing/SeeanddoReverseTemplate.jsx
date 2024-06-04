@@ -16,6 +16,15 @@ const messages = {
   en: 'More...',
 };
 
+function truncate(str, num) {
+  if (str.length <= num) {
+    return str;
+  }
+
+  const subString = str.substr(0, num);
+  return subString.substr(0, subString.lastIndexOf(' ')) + ' ...';
+}
+
 const SeeanddoReverseTemplate = ({
   items,
   linkTitle,
@@ -121,7 +130,8 @@ const SeeanddoReverseTemplate = ({
                     <div className={`listing-dates-wrapper`}>
                       {showPlace ? (
                         <span className="hero-dates">
-                          {item?.place?.toUpperCase()}
+                          {item?.place?.toUpperCase() ||
+                            item?.location?.toUpperCase()}
                         </span>
                       ) : (
                         <When
@@ -142,7 +152,9 @@ const SeeanddoReverseTemplate = ({
                 </div>
                 <div className="item_description">
                   {item['@type'] !== 'artwork'
-                    ? item.description && <p>{item.description}</p>
+                    ? item.description && (
+                        <p>{truncate(item.description, 100)}</p>
+                      )
                     : ''}
                 </div>
                 <div className="description">
