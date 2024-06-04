@@ -158,7 +158,7 @@ const Search = (props) => {
   const filteredEvents = updatedItems.filter((event) => {
     let today = new Date();
     const endDate = new Date(event.end);
-    return endDate <= today;
+    return endDate >= today;
   });
 
   return (
@@ -174,7 +174,6 @@ const Search = (props) => {
           <Link to="/nl/plan-je-bezoek/nu-te-zien/activiteiten">Meer…</Link>
         </div>
       </div>
-      {console.log(updatedItems)}
       <div className="search-items" style={{ display: 'flex' }}>
         {filteredEvents.slice(0, 3).map((item) => (
           <div className="SeeMoreItem" key={item['@id']} ref={listingRef}>
