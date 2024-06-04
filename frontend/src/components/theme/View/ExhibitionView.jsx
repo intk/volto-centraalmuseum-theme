@@ -23,6 +23,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import './css/exhibitionview.less';
 import { BodyClass } from '@plone/volto/helpers';
 import { isCmsUi } from '@plone/volto/helpers';
+import SeeMoreExhibition from '../SeeMore/SeeMoreExhibition';
 
 const messages = defineMessages({
   artist: {
