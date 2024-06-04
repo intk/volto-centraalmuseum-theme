@@ -41,7 +41,6 @@ const Search = (props) => {
         sort_on: 'effective',
         sort_order: 'descending',
       };
-      // console.log(options);
       searchContent('', options);
     };
 
@@ -54,9 +53,7 @@ const Search = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.searchableText, currentPage, content, searchContent, intl.locale]);
 
-  const sortedItems = props.items
-    .slice(0, 20)
-    .sort((a, b) => a.title.localeCompare(b.title));
+  const sortedItems = props.items.slice(0, 20);
 
   let authors = [];
   if (content['@type'] === 'blogwriter') {
