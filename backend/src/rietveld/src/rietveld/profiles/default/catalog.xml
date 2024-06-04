@@ -166,6 +166,11 @@
   >
     <indexed_attr value="place" />
   </index>
+  <index meta_type="KeywordIndex"
+         name="location"
+  >
+    <indexed_attr value="location" />
+  </index>
 
   <column value="artwork_date" />
   <column value="dating" />
@@ -190,4 +195,5 @@
   <column value="hasImage" />
   <column value="recurrence" />
   <column value="place" />
+  <column value="location" />
 </object>
