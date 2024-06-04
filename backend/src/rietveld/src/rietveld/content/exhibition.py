@@ -45,6 +45,11 @@ class IExhibition(model.Schema):
         required=False,
     )
 
+    place = TextLine(
+        title="Place",
+        required=False,
+    )
+
     priref = TextLine(title="Priref", required=False)
 
     cm_nummer = TextLine(title="cm_nummer", required=False)

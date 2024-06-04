@@ -22,6 +22,7 @@ const SeeanddoReverseTemplate = ({
   linkHref,
   isEditMode,
   headline,
+  showPlace,
 }) => {
   const [updatedItems, setUpdatedItems] = useState([]);
   const dispatch = useDispatch();
@@ -118,14 +119,20 @@ const SeeanddoReverseTemplate = ({
                 item['@type'] === 'News Item' ? (
                   <div className="listing-dates">
                     <div className={`listing-dates-wrapper`}>
-                      <When
-                        start={item?.start}
-                        end={item?.end}
-                        whole_day={item?.whole_day}
-                        open_end={item?.open_end}
-                        type={item?.['@type']}
-                        published={item?.effective || item?.created}
-                      />
+                      {showPlace ? (
+                        <span className="hero-dates">
+                          {item?.place?.toUpperCase()}
+                        </span>
+                      ) : (
+                        <When
+                          start={item?.start}
+                          end={item?.end}
+                          whole_day={item?.whole_day}
+                          open_end={item?.open_end}
+                          type={item?.['@type']}
+                          published={item?.effective || item?.created}
+                        />
+                      )}
                     </div>
                   </div>
                 ) : null}

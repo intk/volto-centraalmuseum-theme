@@ -161,6 +161,11 @@
     <indexed_attr value="hasPreviewImage" />
   </index>
 
+  <index meta_type="KeywordIndex"
+         name="place"
+  >
+    <indexed_attr value="place" />
+  </index>
 
   <column value="artwork_date" />
   <column value="dating" />
@@ -184,4 +189,5 @@
   <column value="associatedPeople" />
   <column value="hasImage" />
   <column value="recurrence" />
+  <column value="place" />
 </object>

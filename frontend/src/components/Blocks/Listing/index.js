@@ -41,6 +41,11 @@ export default (config) => {
         type: 'boolean',
         default: false,
       },
+      showPlace: {
+        title: 'Show place info',
+        type: 'boolean',
+        default: false,
+      },
     };
 
     schema.fieldsets[0].fields.splice(
@@ -49,6 +54,7 @@ export default (config) => {
       'linkHref',
       'linkTitle',
       'showDescription',
+      'showPlace',
     );
 
     return schema;
