@@ -250,33 +250,38 @@ function HeroSection(props) {
           </div>
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
-            <div className="buttons">
-              {isEvent ? (
-                props?.content?.event_url &&
-                props?.content?.event_url !== 'http://' ? (
-                  <UniversalLink href={props?.content?.event_url}>
-                    <button className={`ticket-button`}>TICKETS</button>
-                  </UniversalLink>
-                ) : !expired ? (
-                  <UniversalLink href="https://tickets.centraalmuseum.nl/nl/tickets">
-                    <button className={`ticket-button`}>TICKETS</button>
-                  </UniversalLink>
+            {isEvent ? (
+              <div className="buttons">
+                {isEvent ? (
+                  props?.content?.event_url &&
+                  props?.content?.event_url !== 'http://' ? (
+                    <UniversalLink href={props?.content?.event_url}>
+                      <button className={`ticket-button`}>TICKETS</button>
+                    </UniversalLink>
+                  ) : !expired ? (
+                    <UniversalLink href="https://tickets.centraalmuseum.nl/nl/tickets">
+                      <button className={`ticket-button`}>TICKETS</button>
+                    </UniversalLink>
+                  ) : (
+                    ''
+                  )
                 ) : (
                   ''
-                )
-              ) : (
-                ''
-              )}
+                )}
 
-              {albumItems.length > 1 && (
-                <ImageAlbum
-                  items={albumItems}
-                  itemTitle={props.content?.objectTitle}
-                  image="false"
-                  item-type={content?.['@type']}
-                />
-              )}
-            </div>
+                {albumItems.length > 1 && (
+                  <ImageAlbum
+                    items={albumItems}
+                    itemTitle={props.content?.objectTitle}
+                    image="false"
+                    item-type={content?.['@type']}
+                  />
+                )}
+              </div>
+            ) : (
+              ''
+            )}
+
             <Container>
               {description && !isPermanent && (
                 <p className="content-description">{description}</p>
