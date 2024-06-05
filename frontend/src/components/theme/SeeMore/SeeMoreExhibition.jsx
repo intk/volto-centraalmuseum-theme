@@ -12,6 +12,15 @@ import './css/SeeMoreExhibition.less';
 import { useSelector } from 'react-redux';
 // import FetchAuthor from './fetchAuthors';
 
+function truncate(str, num) {
+  if (str.length <= num) {
+    return str;
+  }
+
+  const subString = str.substr(0, num);
+  return subString.substr(0, subString.lastIndexOf(' ')) + ' ...';
+}
+
 const SocialButtons = () => {
   return (
     <div className="social-buttons">
@@ -216,7 +225,9 @@ const Search = (props) => {
             <UniversalLink item={item}>
               <div className="item_title">{item.title}</div>
             </UniversalLink>
-            <div className="item_description">{item?.description}</div>
+            <div className="item_description">
+              {truncate(item?.description, 100)}
+            </div>
           </div>
         ))}
       </div>
