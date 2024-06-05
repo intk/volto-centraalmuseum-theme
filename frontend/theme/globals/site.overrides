@@ -989,7 +989,17 @@ div#photo-credit {
     line-height: 58px !important;
   }
 }
-
+.contenttype-document {
+  .header-title-dates {
+    bottom: 20px !important;
+  }
+  .hero-title-floating {
+    @media (max-width: 768px) {
+      font-size: 50px !important;
+      letter-spacing: 2.5px !important
+    }
+  }
+}
 .hero-dates-wrapper {
   width: 100%;
   margin-right: auto;
