@@ -1203,6 +1203,33 @@ div#photo-credit {
   }
 }
 
+.view-viewview.contenttype-document.top-image-align-right {
+  @media (min-width: 992px) {
+    .header-title-dates {
+      bottom: 0px !important;
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-content: center !important;
+      justify-content: center !important;
+    }
+
+    .hero-title-floating {
+      line-height: 80px !important;
+    }
+    .content-description{
+      margin-top: 10px !important;
+      margin-bottom: 5px !important;
+      font-size: 19.52px !important;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1300px) {
+    .hero-title-floating {
+      font-size: 76px !important;
+    }
+  }
+}
+
 // listing default
 #view #page-document .block.listing.Default #page-listing,
 #view #page-document .block.listing.NewsItemsTemplate #page-listing,
