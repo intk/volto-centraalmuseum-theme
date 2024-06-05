@@ -10,7 +10,6 @@ import { When } from '@package/customizations/components/theme/View/EventDatesIn
 import { Link } from 'react-router-dom';
 import './css/SeeMoreExhibition.less';
 import { useSelector } from 'react-redux';
-import { format } from 'date-fns';
 // import FetchAuthor from './fetchAuthors';
 
 const SocialButtons = () => {
@@ -91,7 +90,7 @@ const Search = (props) => {
       const options = {
         portal_type: 'Event',
         path: currentPath,
-        b_size: 3,
+        b_size: 10,
         metadata_fields: [
           'start',
           'end',
@@ -102,8 +101,8 @@ const Search = (props) => {
           'description',
           '@type',
         ],
-        sort_on: 'start',
-        sort_order: 'descending',
+        sort_on: 'getObjPositionInParent',
+        // sort_order: 'descending',
       };
       searchContent('', options);
     };
