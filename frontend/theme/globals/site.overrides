@@ -304,6 +304,16 @@ p {
   }
 }
 
+.contenttype-document{
+  #view, #page-edit, #page-search{
+    .documentDescription:not(:empty) {
+      padding-bottom: 5px !important;
+      margin-top: 51px !important;
+      font-size: 26.5px !important;
+    }
+  }
+}
+
 // Logo
 .logo-nav-wrapper {
   position: relative;
