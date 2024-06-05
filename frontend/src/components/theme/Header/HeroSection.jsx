@@ -251,15 +251,19 @@ function HeroSection(props) {
           <h1 className="hero-title-floating">{title}</h1>
           <div className="description-container">
             <div className="buttons">
-              {props?.content?.event_url &&
-              props?.content?.event_url !== 'http://' ? (
-                <UniversalLink href={props?.content?.event_url}>
-                  <button className={`ticket-button`}>TICKETS</button>
-                </UniversalLink>
-              ) : !expired ? (
-                <UniversalLink href="https://tickets.centraalmuseum.nl/nl/tickets">
-                  <button className={`ticket-button`}>TICKETS</button>
-                </UniversalLink>
+              {isEvent ? (
+                props?.content?.event_url &&
+                props?.content?.event_url !== 'http://' ? (
+                  <UniversalLink href={props?.content?.event_url}>
+                    <button className={`ticket-button`}>TICKETS</button>
+                  </UniversalLink>
+                ) : !expired ? (
+                  <UniversalLink href="https://tickets.centraalmuseum.nl/nl/tickets">
+                    <button className={`ticket-button`}>TICKETS</button>
+                  </UniversalLink>
+                ) : (
+                  ''
+                )
               ) : (
                 ''
               )}

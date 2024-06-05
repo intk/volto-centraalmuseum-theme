@@ -312,6 +312,25 @@ p {
       font-size: 26.5px !important;
     }
   }
+  &.horizontal-image {
+    .herosection .content-description {
+      display: none !important;
+    }
+  }
+
+  &.top-image-align-right {
+    @media (min-width: 992px) {
+      #page-document .documentDescription {
+        display: none !important;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .herosection .content-description {
+      display: none !important;
+    }
+  }
 }
 
 // Logo
