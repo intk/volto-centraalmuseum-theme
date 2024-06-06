@@ -103,7 +103,9 @@ html {
   }
 
   #page-document.ui.container > *:not(.block.image.align, .block.video.align),
-  #page-edit.ui.container > *:not(.block.image.align, .block.video.align) {
+  #page-edit.ui.container > *:not(.block.image.align, .block.video.align),
+  #page-document.ui.container > .block.image.align.center:has(.image-wrapper-medium, .image-wrapper-small),
+  #page-edit.ui.container > .block.image.align.center:has(.image-wrapper-medium, .image-wrapper-small) {
     padding-right: 30px;
     padding-left: 30px;
   }
