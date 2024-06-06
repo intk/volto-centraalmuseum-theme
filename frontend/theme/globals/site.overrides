@@ -371,7 +371,19 @@ p {
 
 // ************************
 // About the size of the Images and the Videos on wide screens
-.view-viewview .block.align.center{
+.block.image.align.center:has(.image-wrapper-large) {
+   img {
+    width: 100% !important;
+  }
+}
+.view-editview .block.image.align.center:has(.image-wrapper-medium, .image-wrapper-small){
+  img{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+.block.image.align.right:has(.image-wrapper-large){
+  height: auto !important;
   img {
     width: 100% !important;
   }
