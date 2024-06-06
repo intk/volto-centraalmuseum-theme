@@ -374,8 +374,7 @@ p {
     text-align: center;
 
     iframe,
-    img:not(.placeholder, .medium, .small),
-    .video-inner {
+    img:not(.placeholder, .medium, .small){
       max-width: 130%;
       margin-right: auto;
       margin-left: 50%;
@@ -388,6 +387,16 @@ p {
       // &.small {
       //   max-width: 25%;
       // }
+    }
+    .video-inner {
+      max-width: 130%;
+      margin-right: auto;
+
+      iframe{
+        width: 100% !important;
+        margin-left: 0px !important;
+        transform: none !important;
+      }
     }
 
     iframe {
