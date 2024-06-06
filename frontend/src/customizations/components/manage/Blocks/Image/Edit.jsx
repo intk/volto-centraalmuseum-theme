@@ -247,7 +247,14 @@ class Edit extends Component {
         )}
       >
         {data.url ? (
-          <>
+          <div
+            className={`image-wrapper-${cx({
+              'full-width': data.align === 'full',
+              large: data.size === 'l',
+              medium: data.size === 'm',
+              small: data.size === 's',
+            })}`}
+          >
             <img
               className={cx({
                 'full-width': data.align === 'full',
@@ -296,7 +303,7 @@ class Edit extends Component {
                 />
               )}
             </>
-          </>
+          </div>
         ) : (
           <div>
             {this.props.editable && (
