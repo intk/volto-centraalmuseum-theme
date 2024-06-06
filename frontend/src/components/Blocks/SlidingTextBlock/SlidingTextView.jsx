@@ -76,8 +76,16 @@ const ViewGrid = (props) => {
             >
               {column['@type'] === 'image' ? (
                 <div id="photo-credit">
-                  <span>{column?.alt || ''}</span>
-                  <span>{column?.copyright || ''}</span>
+                  {/* <span>{column?.alt || ''}</span> */}
+                  {column?.caption?.data ? (
+                    <div
+                      id="slidingtext-caption"
+                      className=""
+                      dangerouslySetInnerHTML={{ __html: column.caption.data }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               ) : (
                 <BlockRenderer
