@@ -309,7 +309,8 @@ const ImageAlbum = (props) => {
       >
         {props.image === 'false' ? (
           <button onClick={() => setOpen(true)} className={`button button1`}>
-            {props?.['item-type'] === 'News Item'
+            {props?.['item-type'] === 'News Item' ||
+            props?.['item-type'] === 'Document'
               ? `FOTO'S`
               : intl.formatMessage(messages.view)}
           </button>

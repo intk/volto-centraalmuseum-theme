@@ -77,7 +77,8 @@ function HeroSection(props) {
   const isEvent =
     content?.['@type'] === 'Event' ||
     content?.['@type'] === 'exhibition' ||
-    content?.['@type'] === 'News Item';
+    content?.['@type'] === 'News Item' ||
+    content?.['@type'] === 'Document';
   // const endDate = new Date(end || Date.now());
   // const startDate = new Date(start || Date.now());
   const fallback_image =
@@ -252,7 +253,7 @@ function HeroSection(props) {
           <div className="description-container">
             {isEvent ? (
               <div className="buttons">
-                {isEvent ? (
+                {isEvent && content?.['@type'] !== 'Document' ? (
                   props?.content?.event_url &&
                   props?.content?.event_url !== 'http://' ? (
                     <UniversalLink href={props?.content?.event_url}>
