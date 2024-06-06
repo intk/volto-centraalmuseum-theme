@@ -369,6 +369,11 @@ p {
 
 // ************************
 // About the size of the Images and the Videos on wide screens
+.view-viewview .block.align.center{
+  img {
+    width: 100% !important;
+  }
+}
 @media screen and (min-width: 1200px) {
   .view-viewview .block.align.center {
     text-align: center;
@@ -379,6 +384,7 @@ p {
       margin-right: auto;
       margin-left: 50%;
       transform: translateX(-61.5%);
+      width: 130% !important;
 
       // &.medium {
       //   max-width: 50%;
