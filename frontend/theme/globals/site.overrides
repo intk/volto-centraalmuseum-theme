@@ -483,14 +483,14 @@ p {
     .image-wrapper-medium {
       #photo-credit {
         position: absolute;
-        // left: 25%;
+        left: 25%;
       }
     }
 
     .image-wrapper-small {
       #photo-credit {
         position: absolute;
-        // left: 38%;
+        left: 38%;
       }
     }
   }
@@ -529,6 +529,13 @@ p {
         #photo-credit {
           position: absolute;
           left: 5%;
+        }
+      }
+    }
+    .block.image.align.right {
+      .image-wrapper-large {
+        #photo-credit {
+          margin-left: 5%;
         }
       }
     }
