@@ -923,6 +923,9 @@ div#photo-credit {
 }
 
 .view-viewview.hide-top-image.contenttype-document{
+  .header-bg {
+    display: none !important;
+  }
   #main{
     & > .content-area{
       @media (max-width: 768px){
