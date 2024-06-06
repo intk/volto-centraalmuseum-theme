@@ -968,15 +968,20 @@ div#photo-credit {
     }
 
     .documentFirstHeading {
+      padding-top: 140px;
+      @media (max-width: 1200px) {
+          margin-top: 23px;
+        }
+      @media (max-width: 992px) {
+          margin-top: 25px;
+        }
       @media (max-width: 768px){
         margin-top: 0px;
       }
-      @media (max-width: 992px){
-        margin-top: 25px;
-      }
+
       @media (min-width: 1200px) {
         font-size: 80px !important;
-        padding-top: 8px !important;
+        margin-top: 23px !important;
       }
     }
     .hero-dates-wrapper{
