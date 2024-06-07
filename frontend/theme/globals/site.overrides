@@ -2877,3 +2877,19 @@ div#blockquote > p{
     border: 0px;
   }
 }
+
+.contenttype-document.section-form #main #page-document{
+  .documentFirstHeading {
+    font-size: 35px !important;
+    padding-top: 0px !important;
+    text-align: left !important;
+    margin-top: 25px !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    letter-spacing: 0.05em !important;
+    padding-bottom: 0px !important;
+    @media (min-width: 1200px){
+      font-size: 60px !important;
+    }
+  }
+}
