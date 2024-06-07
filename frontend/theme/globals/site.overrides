@@ -2980,5 +2980,6 @@ div#blockquote > p{
     @media (max-width: 768px){
       padding-top: 0px !important;
     }
+    margin-bottom: 100px !important;
   }
 }
