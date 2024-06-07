@@ -934,7 +934,7 @@ div#photo-credit {
   }
 }
 
-.view-viewview.hide-top-image.contenttype-document:not(.section-form, .listing-page){
+.view-viewview.hide-top-image.contenttype-document:not(.section-form){
   .header-bg {
     display: none !important;
   }
