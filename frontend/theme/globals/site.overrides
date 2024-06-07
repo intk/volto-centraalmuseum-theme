@@ -922,7 +922,7 @@ div#photo-credit {
   }
 }
 
-.view-viewview.hide-top-image.contenttype-document:not(.section-form){
+.view-viewview.hide-top-image.contenttype-document:not(.section-form, .listing-page){
   .header-bg {
     display: none !important;
   }
