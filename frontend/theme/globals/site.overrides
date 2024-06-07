@@ -29,6 +29,10 @@ body {
     .ui.basic.segment.content-area
     #page-document
     > .block.__button,
+  .view-viewview.contenttype-document
+    .ui.basic.segment.content-area
+    #page-document
+    > .block.__grid,
   .view-viewview.contenttype-event
     .ui.basic.segment.content-area
     #page-document
@@ -49,6 +53,10 @@ body {
     .ui.basic.segment.content-area
     #page-document
     > .block.__button,
+  .view-viewview.contenttype-event
+    .ui.basic.segment.content-area
+    #page-document
+    > .block.__grid,
   .view-viewview.contenttype-exhibition
     .ui.basic.segment.content-area
     #page-document
@@ -69,6 +77,10 @@ body {
     .ui.basic.segment.content-area
     #page-document
     > .block.__button,
+  .view-viewview.contenttype-exhibition
+    .ui.basic.segment.content-area
+    #page-document
+    >.block.__grid,
   .view-viewview
     .ui.basic.segment.content-area
     #page-document
@@ -2901,5 +2913,24 @@ div#blockquote > p{
       margin-top: 32px !important;
       padding-top: 10px !important;
     }
+  }
+}
+#view,
+#page-edit,
+#page-search{
+  .block.__grid{
+    .image-wrapper-,
+    .image-wrapper-large,
+    .image-wrapper-medium,
+    .image-wrapper-small,
+    .block.video.align {
+      padding-top: 0px !important;
+      margin-bottom: 0px !important;
+    }
+  }
+  .block.__grid .block.image.align.center{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
   }
 }
