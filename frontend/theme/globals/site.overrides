@@ -922,7 +922,7 @@ div#photo-credit {
   }
 }
 
-.view-viewview.hide-top-image.contenttype-document{
+.view-viewview.hide-top-image.contenttype-document:not(.section-form){
   .header-bg {
     display: none !important;
   }
@@ -1775,7 +1775,6 @@ body.artwork-listing-page{
   }
 }
 
-.section-groepsrondleiding, .section-beeldaanvraag, .section-orderimage,
 .section-form {
   h1.documentFirstHeading {
     padding-bottom: 0px;
@@ -1841,8 +1840,8 @@ body.artwork-listing-page{
   @media screen and (min-width: 768px) {
     .ui.content-area main > #view > #page-document > * {
       width: 80% !important;
-      margin-right: auto;
-      margin-left: auto;
+      margin-right: auto !important;
+      margin-left: auto !important;
     }
   }
   @media screen and (max-width: 768px) {
@@ -2880,10 +2879,6 @@ div#blockquote > p{
 
 .contenttype-document.section-form #main #page-document{
   padding-bottom: 170px !important;
-  margin-top: 120px !important;
-  @media (min-width: 768px){
-    margin-top: 140px !important;
-  }
 
   .block.form {
     margin-top: 55px;
