@@ -2879,6 +2879,8 @@ div#blockquote > p{
 }
 
 .contenttype-document.section-form #main #page-document{
+  padding-bottom: 170px !important;
+
   .documentFirstHeading {
     font-size: 35px !important;
     padding-top: 10px !important;
