@@ -2934,3 +2934,48 @@ div#blockquote > p{
     justify-content: center !important;
   }
 }
+
+.view-viewview.contenttype-document.hide-top-image.listing-page{
+  #page-document{
+    .documentFirstHeading{
+      font-size: 60px !important;
+      margin-left: 0px !important;
+      margin-top: 39px !important;
+      margin-bottom: 13px !important;
+
+      @media (max-width: 992px){
+        margin-top: 25px !important;
+        margin-bottom: 0px !important;
+        font-size: 45px !important;
+      }
+      @media (max-width: 768px){
+        text-align: center !important;
+        margin-top: 15px !important;
+        line-height: 42px !important;
+        padding-right:100px !important;
+        padding-left: 100px !important;
+      }
+    }
+    .documentDescription{
+      font-size: 24px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      text-align: center !important;
+      margin-top: 0px !important;
+      margin-bottom: 0px !important;
+
+      @media (max-width: 992px){
+        font-size: 18.879999px !important;
+      }
+      @media (max-width: 768px){
+        margin-top: 20px !important;
+        line-height: 28.319998px !important;
+        padding-right:100px !important;
+        padding-left: 100px !important;
+      }
+    }
+  }
+  #page-listing{
+    padding-top:52px !important;
+  }
+}
