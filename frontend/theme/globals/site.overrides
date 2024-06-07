@@ -1840,7 +1840,7 @@ body.artwork-listing-page{
 
   @media screen and (min-width: 768px) {
     .ui.content-area main > #view > #page-document > * {
-      width: 80% !important;
+      width: 88% !important;
       margin-right: auto;
       margin-left: auto;
     }
@@ -2881,14 +2881,17 @@ div#blockquote > p{
 .contenttype-document.section-form #main #page-document{
   .documentFirstHeading {
     font-size: 35px !important;
-    padding-top: 0px !important;
+    padding-top: 10px !important;
     text-align: left !important;
-    margin-top: 25px !important;
+    margin-top: 32px !important;
     font-weight: 400 !important;
     text-transform: none !important;
     letter-spacing: 0.05em !important;
     padding-bottom: 0px !important;
-    @media (min-width: 1200px){
+    @media (min-width: 768px){
+      width: 88% !important;
+      margin-right: auto !important;
+      margin-left: auto !important;
       font-size: 60px !important;
     }
   }
