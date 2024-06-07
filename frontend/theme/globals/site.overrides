@@ -2871,3 +2871,9 @@ div#blockquote > p{
 .view-controlpanelview .herosection {
     display: none;
 }
+
+.block.html {
+  iframe {
+    border: 0px;
+  }
+}
