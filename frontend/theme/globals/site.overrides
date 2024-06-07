@@ -2977,5 +2977,8 @@ div#blockquote > p{
   }
   #page-listing{
     padding-top:52px !important;
+    @media (max-width: 768px){
+      padding-top: 0px !important;
+    }
   }
 }
