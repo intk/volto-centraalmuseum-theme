@@ -25,12 +25,6 @@ import AuthorView from './components/theme/View/AuthorView';
 import BlogWriterView from './components/theme/View/BlogWriterView';
 import ExhibitionView from './components/theme/View/ExhibitionView';
 import installExpressMiddleware from './express-middleware';
-import TagManager from 'react-gtm-module';
-
-const tagManagerArgs = {
-  gtmId: 'GTM-KXMRGR9',
-};
-__CLIENT__ && !__DEVELOPMENT__ && TagManager.initialize(tagManagerArgs);
 
 export default function applyConfig(config) {
   const DEFAULT_LANG = 'nl';
