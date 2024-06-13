@@ -1595,7 +1595,7 @@ div#photo-credit {
   }
 }
 
-.section-tentoonstellingsarchief, .section-exhibitions-archive{
+.section-tentoonstellingsarchief, .section-exhibitions-archive, #search-page{
   #page-document #page-listing .expired .hero-dates {
     text-decoration: none !important;
   }
