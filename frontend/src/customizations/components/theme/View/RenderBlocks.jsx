@@ -31,7 +31,7 @@ const RenderBlocks = (props) => {
 
   return hasBlocksData(content) ? (
     <CustomTag>
-      {map(content[blocksLayoutFieldname].items, (block) => {
+      {map(content[blocksLayoutFieldname]?.items, (block) => {
         const Block =
           blocksConfig[content[blocksFieldname]?.[block]?.['@type']]?.view ||
           ViewDefaultBlock;
