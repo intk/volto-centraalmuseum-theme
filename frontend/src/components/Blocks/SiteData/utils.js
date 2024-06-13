@@ -7,6 +7,8 @@ export const getPath = (url = '') =>
 export const getScaleUrl = (url, size) =>
   (url || '').includes(config.settings.apiPath)
     ? `${flattenToAppURL(
-        url.replace('/api', '').replace('/Plone', ''),
+        url?.replace('/api', '').replace('/Plone', ''),
       )}/@@images/image/${size}`
-    : `${url.replace('/api', '').replace('/Plone', '')}/@@images/image/${size}`;
+    : `${url
+        ?.replace('/api', '')
+        .replace('/Plone', '')}/@@images/image/${size}`;
