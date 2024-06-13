@@ -648,7 +648,7 @@ div#photo-credit {
 // Table block
 .slate-table-block {
   thead th {
-    padding-left: 0px !important; 
+    padding-left: 0px !important;
   }
   thead p {
     letter-spacing: 0.05em !important;
@@ -2915,6 +2915,7 @@ div#blockquote > p{
     }
   }
 }
+
 #view,
 #page-edit,
 #page-search{
