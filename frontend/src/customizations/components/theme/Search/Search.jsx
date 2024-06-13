@@ -371,6 +371,7 @@ class Search extends Component {
           'News Item',
           'author',
           'Link',
+          'exhibition',
         ];
         includeTypes.forEach((type) =>
           currentUrlParams.append('portal_type:list', type),
@@ -940,7 +941,8 @@ class Search extends Component {
                           {item.title}
                         </UniversalLink>
                       </h2>
-                      {item['@type'] === 'Event' ? (
+                      {item['@type'] === 'Event' ||
+                      item['@type'] === 'exhibition' ? (
                         <div className="listing-dates">
                           <div className={`listing-dates-wrapper`}>
                             <When
