@@ -420,7 +420,14 @@ class Search extends Component {
     }
     this.setState({ currentPage: 1 });
     options['use_site_search_settings'] = 1;
-    options['metadata_fields'] = ['start', 'end', 'whole_day', 'open_end'];
+    options['metadata_fields'] = [
+      'start',
+      'end',
+      'whole_day',
+      'open_end',
+      'artwork_author',
+      'dating',
+    ];
     this.props.searchContent('', options);
   };
 
@@ -909,8 +916,7 @@ class Search extends Component {
                         }
                         className="ui image"
                       />
-                    ) : item['@type'] === 'exhibition' &&
-                      item.hasFallbackImage === true ? (
+                    ) : item.hasFallbackImage === true ? (
                       <PreviewImage
                         item={item}
                         size="large"
@@ -948,24 +954,50 @@ class Search extends Component {
                       ) : (
                         ''
                       )}
-                      {item?.['@type'] !== 'artwork'
-                        ? item.description && (
-                            <div className="tileBody">
-                              <span className="description">
-                                {truncate(item.description, 155)}
-                              </span>
-                            </div>
-                          )
-                        : item.description && (
-                            <div className="tileBody">
-                              <span
-                                className={`description`}
-                                dangerouslySetInnerHTML={{
-                                  __html: truncate(item.description, 155),
-                                }}
-                              />
-                            </div>
+
+                      {item?.['@type'] === 'artwork' && (
+                        <div>
+                          {item.artwork_author && (
+                            <span className="item-description">
+                              {item?.artwork_author[0]}
+                            </span>
                           )}
+                          {item?.artwork_author &&
+                            item?.artwork_author.length > 0 &&
+                            item?.dating &&
+                            item?.dating.split('(')[0] !== '' && (
+                              <span className="item-description">, </span>
+                            )}
+                          {item?.dating && (
+                            <span className="item-description">
+                              {String(item?.dating)}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      {
+                        item?.['@type'] !== 'artwork'
+                          ? item.description && (
+                              <div className="tileBody">
+                                <span className="description">
+                                  {truncate(item.description, 155)}
+                                </span>
+                              </div>
+                            )
+                          : ''
+                        // item.description && (
+                        //     <div className="tileBody">
+                        //       <span
+                        //         className={`description`}
+                        //         dangerouslySetInnerHTML={{
+                        //           __html: truncate(item.description, 155),
+                        //         }}
+                        //       />
+                        //     </div>
+                        //   )
+                      }
+
                       <div className="visualClear" />
                     </div>
                   </article>
