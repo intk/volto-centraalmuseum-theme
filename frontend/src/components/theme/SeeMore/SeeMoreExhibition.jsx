@@ -25,14 +25,15 @@ function truncate(str, num) {
 const SocialButtons = () => {
   let location = useLocation();
   let currentPath = location.pathname;
+  // const currentUrl = `${window.location.origin}${location.pathname}${location.search}`;
 
   return (
     <div className="social-buttons">
       <div className="button facebook">
         <a
-          onclick="return !window.open(this.href, 'Facebook', 'width=500,height=500')"
-          className="share-btn-social"
-          href={`https://www.facebook.com/sharer/sharer.php?u=${window?.location.href}`}
+          href={`https://www.facebook.com/sharer/sharer.php?u=https://www.centraalmuseum.nl${currentPath}`}
+          target="blank"
+          rel="noopener noreferrer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,11 +56,9 @@ const SocialButtons = () => {
       </div>
       <div className="button twitter">
         <a
-          onclick="return !window.open(this.href, 'Twitter', 'width=500,height=500')"
-          className="share-btn-social"
-          href={`http://twitter.com/share?text=${''}&url=${
-            window?.location.href
-          }`}
+          href={`https://twitter.com/intent/tweet?text=Centraal Museum Utrecht: https://www.centraalmuseum.nl${currentPath}`}
+          target="blank"
+          rel="noopener noreferrer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +72,7 @@ const SocialButtons = () => {
       </div>
       <div className="button mail">
         <a
-          href={`mailto:?subject=Centraal Museum Utrecht&body=https://www.centraalmuseum.nl${currentPath}`}
+          href={`mailto:?subject=Centraal Museum Utrecht&body=https://www.centraalmuseum.nl{currentPath}`}
           target="blank"
           rel="noopener noreferrer"
         >
