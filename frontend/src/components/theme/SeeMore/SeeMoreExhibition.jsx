@@ -10,6 +10,7 @@ import { When } from '@package/customizations/components/theme/View/EventDatesIn
 import { Link } from 'react-router-dom';
 import './css/SeeMoreExhibition.less';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 // import FetchAuthor from './fetchAuthors';
 
 function truncate(str, num) {
@@ -22,10 +23,17 @@ function truncate(str, num) {
 }
 
 const SocialButtons = () => {
+  let location = useLocation();
+  let currentPath = location.pathname;
+
   return (
     <div className="social-buttons">
       <div className="button facebook">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.centraalmuseum.nl/nl/frontpage">
+        <a
+          onclick="return !window.open(this.href, 'Facebook', 'width=500,height=500')"
+          className="share-btn-social"
+          href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
@@ -46,7 +54,13 @@ const SocialButtons = () => {
         </a>
       </div>
       <div className="button twitter">
-        <a href="https://twitter.com/intent/tweet?text=Centraal Museum Utrecht: https://www.centraalmuseum.nl/nl/frontpage">
+        <a
+          onclick="return !window.open(this.href, 'Twitter', 'width=500,height=500')"
+          className="share-btn-social"
+          href={`http://twitter.com/share?text=${''}&url=${
+            window.location.href
+          }`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -58,7 +72,11 @@ const SocialButtons = () => {
         </a>
       </div>
       <div className="button mail">
-        <a href="mailto:?subject=Centraal Museum Utrecht&body=https://www.centraalmuseum.nl/nl/frontpage">
+        <a
+          href={`mailto:?subject=Centraal Museum Utrecht&body=https://www.centraalmuseum.nl${currentPath}`}
+          target="blank"
+          rel="noopener noreferrer"
+        >
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
