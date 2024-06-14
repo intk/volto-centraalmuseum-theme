@@ -32,7 +32,7 @@ const SocialButtons = () => {
         <a
           onclick="return !window.open(this.href, 'Facebook', 'width=500,height=500')"
           className="share-btn-social"
-          href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+          href={`https://www.facebook.com/sharer/sharer.php?u=${window?.location.href}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const SocialButtons = () => {
           onclick="return !window.open(this.href, 'Twitter', 'width=500,height=500')"
           className="share-btn-social"
           href={`http://twitter.com/share?text=${''}&url=${
-            window.location.href
+            window?.location.href
           }`}
         >
           <svg
