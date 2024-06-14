@@ -87,7 +87,7 @@ export default (formData) => {
           ...(formData?.store &&
           Array.isArray(formData.store) &&
           formData.store.includes('newsletter')
-            ? ['newsletterFields']
+            ? ['newsletterFields', 'newsletterEmailFields']
             : ''),
         ],
       },
@@ -151,11 +151,21 @@ export default (formData) => {
         // TODO: i18n
         title: 'Newsletter field',
         decription:
-          'Select which fields will be used for signing up for the newsletter',
+          'Select which fields will be used for checking the signing up for the newsletter',
         isMulti: false,
         noValueOption: false,
         choices: formData?.subblocks ? checkboxFields : [],
         ...(checkboxFields.length === 1 && { default: checkboxFields[0][0] }),
+      },
+      newsletterEmailFields: {
+        // TODO: i18n
+        title: 'Newsletter email field',
+        decription:
+          'Select which fields will be used as an email for signing up for the newsletter',
+        isMulti: false,
+        noValueOption: false,
+        choices: formData?.subblocks ? emailFields : [],
+        ...(checkboxFields.length === 1 && { default: emailFields[0][0] }),
       },
       send: {
         type: 'boolean',

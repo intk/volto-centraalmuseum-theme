@@ -230,6 +230,10 @@ const View = ({ data, id, path }) => {
           const newsletterField = Object.values(formattedFormData).find(
             (field) => field.field_id === newsletterFieldId,
           );
+          const newsletterEmailFieldId = data.newsletterEmailFields;
+          const newsletterEmailField = Object.values(formattedFormData).find(
+            (field) => field.field_id === newsletterEmailFieldId,
+          );
 
           if (newsletterField && newsletterField.value) {
             // Find the email field for the Mailchimp subscription
@@ -238,10 +242,10 @@ const View = ({ data, id, path }) => {
               (field) => field.field_id === emailFieldId,
             );
 
-            if (emailField && emailField.value) {
-              // console.log('emailField:', emailField.value); // Debugging line
+            if (newsletterEmailField && newsletterEmailField.value) {
+              // console.log('emailField:', newsletterEmailField.value); // Debugging line
               subscribeToMailchimp(
-                emailField.value,
+                newsletterEmailField.value,
                 data.list_id || 'f30ce644bb',
               );
             }
