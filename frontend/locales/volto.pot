@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-05-15T09:12:13.995Z\n"
+"POT-Creation-Date: 2024-06-14T14:02:05.578Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -122,6 +122,11 @@ msgstr ""
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Field
 msgid "Field"
+msgstr ""
+
+#: components/Blocks/Search/TopFiltersLayout
+# defaultMessage: Filters
+msgid "Filters"
 msgstr ""
 
 #: components/Blocks/AdvancedSearch/schema
@@ -337,6 +342,7 @@ msgid "collectie_online"
 msgstr ""
 
 #: components/Blocks/ImageAndTextBlock/templates
+#: components/Blocks/PreviewCollection/templates
 #: components/Blocks/Quoteblock/templates
 #: components/Blocks/SlidingTextBlock/templates
 #: components/Blocks/VideoPageBlock/templates
@@ -345,6 +351,7 @@ msgid "column"
 msgstr ""
 
 #: components/Blocks/ImageAndTextBlock/templates
+#: components/Blocks/PreviewCollection/templates
 #: components/Blocks/Quoteblock/templates
 #: components/Blocks/SlidingTextBlock/templates
 #: components/Blocks/VideoPageBlock/templates
@@ -557,6 +564,11 @@ msgstr ""
 #: components/Blocks/SiteData/schema
 # defaultMessage: Plan your visit link
 msgid "planYourVisitLink"
+msgstr ""
+
+#: components/Blocks/PreviewCollection/PreviewCollectionView
+# defaultMessage: ONTDEK DE COLLECTIE
+msgid "previewcollection"
 msgstr ""
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen

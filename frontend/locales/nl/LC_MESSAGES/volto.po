@@ -141,6 +141,11 @@ msgstr ""
 msgid "Field"
 msgstr ""
 
+#: components/Blocks/Search/TopFiltersLayout
+# defaultMessage: Filters
+msgid "Filters"
+msgstr ""
+
 #: components/Blocks/AdvancedSearch/schema
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Headline
@@ -354,6 +359,7 @@ msgid "collectie_online"
 msgstr ""
 
 #: components/Blocks/ImageAndTextBlock/templates
+#: components/Blocks/PreviewCollection/templates
 #: components/Blocks/Quoteblock/templates
 #: components/Blocks/SlidingTextBlock/templates
 #: components/Blocks/VideoPageBlock/templates
@@ -362,6 +368,7 @@ msgid "column"
 msgstr ""
 
 #: components/Blocks/ImageAndTextBlock/templates
+#: components/Blocks/PreviewCollection/templates
 #: components/Blocks/Quoteblock/templates
 #: components/Blocks/SlidingTextBlock/templates
 #: components/Blocks/VideoPageBlock/templates
@@ -574,6 +581,11 @@ msgstr ""
 #: components/Blocks/SiteData/schema
 # defaultMessage: Plan your visit link
 msgid "planYourVisitLink"
+msgstr ""
+
+#: components/Blocks/PreviewCollection/PreviewCollectionView
+# defaultMessage: ONTDEK DE COLLECTIE
+msgid "previewcollection"
 msgstr ""
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
