@@ -1,12 +1,12 @@
 import React from 'react';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { flushSync } from 'react-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import { Button, Grid } from 'semantic-ui-react';
-// import { Icon } from '@plone/volto/components';
-// import downSVG from '@plone/volto/icons/down-key.svg';
-// import upSVG from '@plone/volto/icons/up-key.svg';
-// import cx from 'classnames';
+import { Icon } from '@plone/volto/components';
+import downSVG from '@plone/volto/icons/down-key.svg';
+import upSVG from '@plone/volto/icons/up-key.svg';
+import cx from 'classnames';
 import { isEqual } from 'lodash';
 import { useDeepCompareMemoize } from 'use-deep-compare-effect';
 
@@ -68,12 +68,13 @@ const TopSideFacets = (props) => {
   const isLive = !showSearchButton;
   const intl = useIntl();
 
+  // eslint-disable-next-line no-unused-vars
   const defaultOpened = isDirty(
     searchData.query || [],
     data.query?.query || [],
   );
   // eslint-disable-next-line no-unused-vars
-  const [showFilters, setShowFilters] = React.useState(defaultOpened);
+  const [showFilters, setShowFilters] = React.useState(false);
 
   React.useState(() => {
     if (isEditMode) {
@@ -121,26 +122,46 @@ const TopSideFacets = (props) => {
                     intl.formatMessage(messages.searchButtonText)}
                 </Button>
               )}
+              {data.facets?.length > 0 && data?.facets[0]?.field && (
+                <Button
+                  className={cx('secondary filters-btn', {
+                    open: showFilters,
+                  })}
+                  onClick={() => setShowFilters(!showFilters)}
+                  style={{
+                    'margin-top': '15px',
+                    background: '#FFEC00',
+                    color: '#494a51',
+                  }}
+                >
+                  <FormattedMessage id="Filters" defaultMessage="Filters" />
+                  {showFilters ? (
+                    <Icon
+                      name={upSVG}
+                      size="20px"
+                      style={{
+                        'margin-bottom': '-5px',
+                        'margin-left': '5px',
+                        'margin-right': '0px',
+                      }}
+                    />
+                  ) : (
+                    <Icon
+                      name={downSVG}
+                      size="20px"
+                      style={{
+                        'margin-bottom': '-5px',
+                        'margin-left': '5px',
+                        'margin-right': '0px',
+                      }}
+                    />
+                  )}
+                </Button>
+              )}
             </div>
           )}
 
           <div className="search-filters-sort">
-            {/* {data.facets?.length > 0 && data?.facets[0]?.field && (
-              <Button
-                className={cx('secondary filters-btn', {
-                  open: showFilters,
-                })}
-                onClick={() => setShowFilters(!showFilters)}
-              >
-                <FormattedMessage id="Filters" defaultMessage="Filters" />
-                {showFilters ? (
-                  <Icon name={upSVG} size="30px" />
-                ) : (
-                  <Icon name={downSVG} size="30px" />
-                )}
-              </Button>
-            )} */}
-
             {data.showSortOn && (
               <SortOn
                 data={data}
@@ -171,7 +192,7 @@ const TopSideFacets = (props) => {
               <ViewSwitcher {...props} />
             )}
           </div>
-          {data.facets?.length > 0 && (
+          {showFilters && data.facets?.length > 0 && (
             <div className="facets">
               {data.facetsTitle && <h3>{data.facetsTitle}</h3>}
 
