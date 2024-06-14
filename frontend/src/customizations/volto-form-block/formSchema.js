@@ -78,7 +78,6 @@ export default (formData) => {
           'captcha',
           'store',
           'send',
-          'list_id',
           ...(formData?.store &&
           Array.isArray(formData.store) &&
           formData.store.includes('acknowledgement')
@@ -87,7 +86,7 @@ export default (formData) => {
           ...(formData?.store &&
           Array.isArray(formData.store) &&
           formData.store.includes('newsletter')
-            ? ['newsletterFields', 'newsletterEmailFields']
+            ? ['list_id', 'newsletterFields', 'newsletterEmailFields']
             : ''),
         ],
       },

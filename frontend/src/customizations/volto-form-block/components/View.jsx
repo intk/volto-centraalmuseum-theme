@@ -235,19 +235,22 @@ const View = ({ data, id, path }) => {
             (field) => field.field_id === newsletterEmailFieldId,
           );
 
-          if (newsletterField && newsletterField.value) {
-            // Find the email field for the Mailchimp subscription
-            const emailFieldId = data.acknowledgementFields;
-            const emailField = Object.values(formattedFormData).find(
-              (field) => field.field_id === emailFieldId,
-            );
-
-            if (newsletterEmailField && newsletterEmailField.value) {
-              // console.log('emailField:', newsletterEmailField.value); // Debugging line
-              subscribeToMailchimp(
-                newsletterEmailField.value,
-                data.list_id || 'f30ce644bb',
+          if (data.store.includes('newsletter')) {
+            if (newsletterField && newsletterField.value) {
+              // Find the email field for the Mailchimp subscription
+              const emailFieldId = data.acknowledgementFields;
+              const emailField = Object.values(formattedFormData).find(
+                (field) => field.field_id === emailFieldId,
               );
+
+              if (newsletterEmailField && newsletterEmailField.value) {
+                // console.log('emailField:', newsletterEmailField.value); // Debugging line
+                // console.log('list_id:', data.list_id);
+                subscribeToMailchimp(
+                  newsletterEmailField.value,
+                  data.list_id || 'f30ce644bb',
+                );
+              }
             }
           }
         } else {
