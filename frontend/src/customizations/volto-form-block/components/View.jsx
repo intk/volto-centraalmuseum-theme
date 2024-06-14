@@ -85,9 +85,9 @@ const View = ({ data, id, path }) => {
   const mailchimp_url =
     'https://centraalmuseum.us2.list-manage.com/subscribe/post?u=c04600e3ceefae8c502cbabec&id=f30ce644bb&group%5B15905%5D%5B16%5D=1';
 
-  function subscribeToMailchimp(email) {
+  function subscribeToMailchimp(email, list_id) {
     const script = document.createElement('script');
-    const url = `https://centraalmuseum.us2.list-manage.com/subscribe/post-json?u=c04600e3ceefae8c502cbabec&id=f30ce644bb&EMAIL=${encodeURIComponent(
+    const url = `https://centraalmuseum.us2.list-manage.com/subscribe/post-json?u=c04600e3ceefae8c502cbabec&id=${list_id}&EMAIL=${encodeURIComponent(
       email,
     )}&c=callback`;
     script.src = url;
@@ -240,7 +240,10 @@ const View = ({ data, id, path }) => {
 
             if (emailField && emailField.value) {
               // console.log('emailField:', emailField.value); // Debugging line
-              subscribeToMailchimp(emailField.value);
+              subscribeToMailchimp(
+                emailField.value,
+                data.list_id || 'f30ce644bb',
+              );
             }
           }
         } else {
