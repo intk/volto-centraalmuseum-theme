@@ -55,6 +55,12 @@ export default (formData) => {
         ? [...acc, [field.id, field.label]]
         : acc;
     }, []) ?? [];
+  const checkboxFields =
+    formData?.subblocks?.reduce((acc, field) => {
+      return ['checkbox'].includes(field.field_type)
+        ? [...acc, [field.id, field.label]]
+        : acc;
+    }, []) ?? [];
 
   return {
     title: intl.formatMessage(messages.form),
@@ -72,11 +78,17 @@ export default (formData) => {
           'captcha',
           'store',
           'send',
+          'list_id',
           ...(formData?.store &&
           Array.isArray(formData.store) &&
           formData.store.includes('acknowledgement')
             ? ['acknowledgementFields', 'acknowledgementMessage']
             : []),
+          ...(formData?.store &&
+          Array.isArray(formData.store) &&
+          formData.store.includes('newsletter')
+            ? ['newsletterFields']
+            : ''),
         ],
       },
     ],
@@ -107,6 +119,9 @@ export default (formData) => {
           '@id': 'collective.volto.formsupport.captcha.providers',
         },
       },
+      list_id: {
+        title: 'List ID for newsletter',
+      },
       store: {
         title: intl.formatMessage(messages.store),
         isMulti: 'true',
@@ -114,6 +129,7 @@ export default (formData) => {
         choices: [
           ['recipient', 'Recipient'],
           ['acknowledgement', 'Acknowledgement'],
+          ['newsletter', 'Newsletter'],
         ],
       },
       acknowledgementMessage: {
@@ -130,6 +146,16 @@ export default (formData) => {
         noValueOption: false,
         choices: formData?.subblocks ? emailFields : [],
         ...(emailFields.length === 1 && { default: emailFields[0][0] }),
+      },
+      newsletterFields: {
+        // TODO: i18n
+        title: 'Newsletter field',
+        decription:
+          'Select which fields will be used for signing up for the newsletter',
+        isMulti: false,
+        noValueOption: false,
+        choices: formData?.subblocks ? checkboxFields : [],
+        ...(checkboxFields.length === 1 && { default: checkboxFields[0][0] }),
       },
       send: {
         type: 'boolean',

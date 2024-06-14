@@ -9,6 +9,7 @@ import FormView from 'volto-form-block/components/FormView';
 import { formatDate } from '@plone/volto/helpers/Utils/Date';
 import config from '@plone/volto/registry';
 import { Captcha } from 'volto-form-block/components/Widget';
+// import MailchimpSubscribe from 'react-mailchimp-subscribe';
 import './View.less';
 
 const messages = defineMessages({
@@ -81,6 +82,25 @@ const View = ({ data, id, path }) => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const { static_fields = [] } = data;
+  const mailchimp_url =
+    'https://centraalmuseum.us2.list-manage.com/subscribe/post?u=c04600e3ceefae8c502cbabec&id=f30ce644bb&group%5B15905%5D%5B16%5D=1';
+
+  function subscribeToMailchimp(email) {
+    const script = document.createElement('script');
+    const url = `https://centraalmuseum.us2.list-manage.com/subscribe/post-json?u=c04600e3ceefae8c502cbabec&id=f30ce644bb&EMAIL=${encodeURIComponent(
+      email,
+    )}&c=callback`;
+    script.src = url;
+    window.callback = function (data) {
+      if (data.result === 'success') {
+        console.log('Subscribed successfully!');
+      } else {
+        console.error('Subscription failed:', data.msg);
+      }
+    };
+    document.body.appendChild(script);
+    document.body.removeChild(script);
+  }
 
   const [formData, setFormData] = useReducer((state, action) => {
     if (action.reset) {
@@ -204,6 +224,25 @@ const View = ({ data, id, path }) => {
             ),
           );
           setFormState({ type: FORM_STATES.loading });
+
+          // Check if the newsletterFields checkbox is checked
+          const newsletterFieldId = data.newsletterFields;
+          const newsletterField = Object.values(formattedFormData).find(
+            (field) => field.field_id === newsletterFieldId,
+          );
+
+          if (newsletterField && newsletterField.value) {
+            // Find the email field for the Mailchimp subscription
+            const emailFieldId = data.acknowledgementFields;
+            const emailField = Object.values(formattedFormData).find(
+              (field) => field.field_id === emailFieldId,
+            );
+
+            if (emailField && emailField.value) {
+              // console.log('emailField:', emailField.value); // Debugging line
+              subscribeToMailchimp(emailField.value);
+            }
+          }
         } else {
           setFormState({ type: FORM_STATES.error });
         }
