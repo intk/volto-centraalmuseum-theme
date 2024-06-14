@@ -130,8 +130,8 @@ const TopSideFacets = (props) => {
                   onClick={() => setShowFilters(!showFilters)}
                   style={{
                     'margin-top': '15px',
-                    background: '#FFEC00',
-                    color: '#494a51',
+                    background: '#494a51',
+                    color: '#fff',
                   }}
                 >
                   <FormattedMessage id="Filters" defaultMessage="Filters" />
