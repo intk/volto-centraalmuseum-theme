@@ -253,7 +253,9 @@ function HeroSection(props) {
           <div className="description-container">
             {isEvent ? (
               <div className="buttons">
-                {isEvent && content?.['@type'] !== 'Document' ? (
+                {isEvent &&
+                content?.['@type'] !== 'Document' &&
+                content?.['@type'] !== 'News Item' ? (
                   props?.content?.event_url &&
                   props?.content?.event_url !== 'http://' ? (
                     <UniversalLink href={props?.content?.event_url}>
