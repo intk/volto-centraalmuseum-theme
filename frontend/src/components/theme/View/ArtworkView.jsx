@@ -28,6 +28,8 @@ import { BodyClass } from '@plone/volto/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { isCmsUi } from '@plone/volto/helpers';
 import { Link } from 'react-router-dom';
+import shareSocial from './ShareOnSocialMedia';
+import { useLocation } from 'react-router-dom';
 // import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 const messages = defineMessages({
@@ -184,6 +186,8 @@ export default function ArtworkView(props) {
   const [descriptionOpen, setDescriptionOpen] = useState(false);
   const [showAllDocumentation, setShowAllDocumentation] = useState(false);
   const [showAllExhibition, setShowAllExhibition] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const HandleClick = () => {
     setDescriptionOpen(!descriptionOpen);
@@ -298,9 +302,15 @@ export default function ArtworkView(props) {
             <div className="popover-content">
               <div className="row facebook-row">
                 <a
-                  onclick="return !window.open(this.href, 'Facebook', 'width=500,height=500')"
+                  onClick={(event) =>
+                    shareSocial(
+                      event,
+                      'facebook',
+                      `https://new.centraalmuseum.nl/${currentPath}`,
+                    )
+                  }
                   className="share-btn-social"
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                  href="/#"
                 >
                   <img
                     className="share-button"
@@ -309,14 +319,17 @@ export default function ArtworkView(props) {
                   />
                 </a>
               </div>
-
               <div className="row twitter-row">
                 <a
-                  onclick="return !window.open(this.href, 'Twitter', 'width=500,height=500')"
+                  onClick={(event) =>
+                    shareSocial(
+                      event,
+                      'twitter',
+                      `https://new.centraalmuseum.nl/${currentPath}`,
+                    )
+                  }
                   className="share-btn-social"
-                  href={`http://twitter.com/share?text=${''}&url=${
-                    window.location.href
-                  }`}
+                  href="/#"
                 >
                   <img
                     className="share-button"
@@ -325,11 +338,17 @@ export default function ArtworkView(props) {
                   />
                 </a>
               </div>
-
               <div className="row pinterest-row">
                 <a
+                  onClick={(event) =>
+                    shareSocial(
+                      event,
+                      'pinterest',
+                      `https://new.centraalmuseum.nl/${currentPath}`,
+                    )
+                  }
                   id="pinterest-btn"
-                  href={`http://www.pinterest.com/pin/create/button/?url=${window.location.href}`}
+                  href="/#"
                   data-pin-do="buttonPin"
                   data-pin-config="none"
                 >
