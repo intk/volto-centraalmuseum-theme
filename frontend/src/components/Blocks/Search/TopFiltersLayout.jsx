@@ -25,6 +25,14 @@ const messages = defineMessages({
     id: 'Search',
     defaultMessage: 'Search',
   },
+  showMore: {
+    id: 'ShowMore',
+    defaultMessage: 'Meer filters',
+  },
+  showLess: {
+    id: 'ShowLess',
+    defaultMessage: 'Minder filters',
+  },
 });
 
 const FacetWrapper = ({ children }) => (
@@ -122,42 +130,6 @@ const TopSideFacets = (props) => {
                     intl.formatMessage(messages.searchButtonText)}
                 </Button>
               )}
-              {data.facets?.length > 0 && data?.facets[0]?.field && (
-                <Button
-                  className={cx('secondary filters-btn', {
-                    open: showFilters,
-                  })}
-                  onClick={() => setShowFilters(!showFilters)}
-                  style={{
-                    'margin-top': '15px',
-                    background: '#494a51',
-                    color: '#fff',
-                  }}
-                >
-                  <FormattedMessage id="Filters" defaultMessage="Filters" />
-                  {showFilters ? (
-                    <Icon
-                      name={upSVG}
-                      size="20px"
-                      style={{
-                        'margin-bottom': '-5px',
-                        'margin-left': '5px',
-                        'margin-right': '0px',
-                      }}
-                    />
-                  ) : (
-                    <Icon
-                      name={downSVG}
-                      size="20px"
-                      style={{
-                        'margin-bottom': '-5px',
-                        'margin-left': '5px',
-                        'margin-right': '0px',
-                      }}
-                    />
-                  )}
-                </Button>
-              )}
             </div>
           )}
 
@@ -192,6 +164,7 @@ const TopSideFacets = (props) => {
               <ViewSwitcher {...props} />
             )}
           </div>
+
           {showFilters && data.facets?.length > 0 && (
             <div className="facets">
               {data.facetsTitle && <h3>{data.facetsTitle}</h3>}
@@ -221,6 +194,23 @@ const TopSideFacets = (props) => {
                 }}
                 facetWrapper={FacetWrapper}
               />
+            </div>
+          )}
+          {data.facets?.length > 0 && data?.facets[0]?.field && (
+            <div className="advanced-search-filter-button">
+              <Button
+                className={cx('secondary filters-btn', {
+                  open: showFilters,
+                })}
+                onClick={() => setShowFilters(!showFilters)}
+                style={{
+
+                }}
+              >
+                {showFilters
+                  ? intl.formatMessage(messages.showLess)
+                  : intl.formatMessage(messages.showMore)}
+              </Button>
             </div>
           )}
         </Grid.Column>

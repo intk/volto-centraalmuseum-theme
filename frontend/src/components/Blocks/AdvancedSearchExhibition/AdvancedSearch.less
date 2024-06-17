@@ -1,56 +1,121 @@
 #advancedsearchblock {
   position: relative;
 
+  .advanced-search-filter-button{
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-right: auto;
+    margin-left: auto;
+
+    .filters-btn{
+      margin-top: 15px;
+      background: transparent;
+      color: #494a51;
+      border: 0px;
+      font-family: 'FranklinBook', 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: 0.8px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 0.8px;
+      padding-left: 5px;
+
+      @media(min-width: 600px) {
+        padding-left: 15px;
+      }
+
+      @media(min-width: 992px){
+        padding-left: 0%;
+      }
+
+      &:hover{
+        text-decoration: none;
+      }
+    }
+    @media (min-width: 500px) {
+        padding-right: 1%;
+        padding-left: 1%;
+      }
+
+      @media (min-width: 768px) {
+        padding-right: 0px;
+        padding-left: 0px;
+      }
+
+      @media (min-width: 992px) {
+        padding-right: 1%;
+        padding-left: 1%;
+        width: 86% !important;
+      }
+
+      @media (min-width: 1200px) {
+        padding-right: calc(1% - 7px);
+        padding-left: calc(1% - 7px);
+      }
+
+      @media (min-width: 1400px) {
+        padding-right: calc(1% - 12px);
+        padding-left: calc(1% - 12px);
+      }
+  }
+
   #search-page {
     position: relative;
     right: 50%;
     left: 50%;
     width: 100vw;
     padding: 62px 92px 60px 106px;
-    margin-right: -50vw !important;
-    margin-left: -50vw !important;
+    padding-right: 27px !important;
+    padding-left: 27px !important;
     // width: auto !important;
     margin-top: -30px;
-    padding-right: 107px !important;
-    padding-left: 107px !important;
+    margin-right: -50vw !important;
+    margin-left: -50vw !important;
+
+    @media (min-width: 768px){
+      padding-right: 107px !important;
+      padding-left: 107px !important;
+    }
+
     .block.listing::before {
       display: none;
     }
 
-    .searchbar{
+    .searchbar {
       width: 86%;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 8px;
       padding-right: 8px;
-      @media (min-width: 500px){
-        padding-left: 1%;
+      padding-left: 8px;
+      margin-right: auto;
+      margin-left: auto;
+      @media (min-width: 500px) {
         padding-right: 1%;
+        padding-left: 1%;
       }
-      @media (min-width: 768px){
+      @media (min-width: 768px) {
+        padding-right: 0px;
         padding-left: 0px;
-          padding-right: 0px;
       }
-      @media (min-width: 992px ){
-        padding-left: 1%;
+      @media (min-width: 992px) {
         padding-right: 1%;
+        padding-left: 1%;
       }
-      @media (min-width: 1200px){
-        padding-left: calc(1% - 7px);
+      @media (min-width: 1200px) {
         padding-right: calc(1% - 7px);
+        padding-left: calc(1% - 7px);
       }
       @media (min-width: 1400px) {
-        padding-left: calc(1% - 12px);
         padding-right: calc(1% - 12px);
+        padding-left: calc(1% - 12px);
       }
     }
 
     @media screen and (min-width: 768px) {
-      margin-top: 57px;
       padding-top: 10px;
+      margin-top: 57px;
       margin-right: 13.5px;
-      margin-left: 13.5px;
       margin-bottom: 32px;
+      margin-left: 13.5px;
     }
 
     @media screen and (min-width: 992px) {
@@ -59,8 +124,8 @@
       padding-left: 12px;
       margin-top: 5px;
       margin-right: 5%;
-      margin-left: 5%;
       margin-bottom: 60px;
+      margin-left: 5%;
     }
   }
 
@@ -90,16 +155,16 @@
     // height: 58px;
     width: 100% !important;
     padding: 19px 18px 15px;
-    font-family: 'FranklinBook', Arial, sans-serif;
-    font-size: 16px;
     border: 1px solid #c3c3c3 !important;
     border-radius: 0%;
+    font-family: 'FranklinBook', Arial, sans-serif;
+    font-size: 16px;
     letter-spacing: 0.05em;
   }
 
   .text-input-facet input::placeholder {
-    font-size: 16px;
     color: #282931;
+    font-size: 16px;
     opacity: 0.7;
   }
 
@@ -111,11 +176,13 @@
     color: var(--bonnefanten-bg) !important;
     font-family: 'FranklinMed', Arial, sans-serif;
     font-size: 17px;
-    line-height: 1.4;
     letter-spacing: 0.05em;
+    line-height: 1.4;
+    margin-left: 0px !important;
     @media screen and (min-width: 992px) {
       width: 20%;
       padding: 14px 28px 10px;
+      margin-top: 15px !important;
     }
     @media screen and (min-width: 1300px) {
       // margin-left: 13px;
@@ -123,10 +190,10 @@
   }
 
   .Search-main-button:hover {
-    cursor: pointer;
     background-color: #282931 !important;
     // clip-path: none;
     color: white !important;
+    cursor: pointer;
   }
 
   .react-select__indicator .icon path {

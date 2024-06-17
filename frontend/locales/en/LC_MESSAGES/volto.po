@@ -122,11 +122,6 @@ msgstr ""
 msgid "Field"
 msgstr ""
 
-#: components/Blocks/Search/TopFiltersLayout
-# defaultMessage: Filters
-msgid "Filters"
-msgstr ""
-
 #: components/Blocks/AdvancedSearch/schema
 #: components/Blocks/AdvancedSearchExhibition/schema
 # defaultMessage: Headline
@@ -248,6 +243,16 @@ msgstr ""
 # defaultMessage: Show total results
 msgid "Show total results"
 msgstr ""
+
+#: components/Blocks/Search/TopFiltersLayout
+# defaultMessage: Minder filters
+msgid "ShowLess"
+msgstr "Less filters"
+
+#: components/Blocks/Search/TopFiltersLayout
+# defaultMessage: Meer filters
+msgid "ShowMore"
+msgstr "More filters"
 
 #: components/Blocks/SiteData/schema
 # defaultMessage: Footer Data
