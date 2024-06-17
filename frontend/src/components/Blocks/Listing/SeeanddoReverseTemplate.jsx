@@ -7,7 +7,7 @@ import { UniversalLink } from '@plone/volto/components';
 import { When } from '@package/customizations/components/theme/View/EventDatesInfo';
 // import { useSelector } from 'react-redux';
 // import { searchContent } from '@plone/volto/actions';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
@@ -33,55 +33,55 @@ const SeeanddoReverseTemplate = ({
   headline,
   showPlace,
 }) => {
-  // const [updatedItems, setUpdatedItems] = useState([]);
-  // const dispatch = useDispatch();
+  const [updatedItems, setUpdatedItems] = useState([]);
+  const dispatch = useDispatch();
   const intl = useIntl();
 
-  // useEffect(() => {
-  //   const fetchAllData = async () => {
-  //     const promises = items.map(async (item) => {
-  //       const fallbackImageResult = await fetchHasFallbackImage(item);
-  //       // const blogWriterData = await fetchBlogWriterData(item);
-  //       return {
-  //         ...item,
-  //         ...fallbackImageResult,
-  //         // blogWriter: blogWriterData,
-  //       };
-  //     });
+  useEffect(() => {
+    const fetchAllData = async () => {
+      const promises = items.map(async (item) => {
+        const fallbackImageResult = await fetchHasFallbackImage(item);
+        // const blogWriterData = await fetchBlogWriterData(item);
+        return {
+          ...item,
+          ...fallbackImageResult,
+          // blogWriter: blogWriterData,
+        };
+      });
 
-  //     const results = await Promise.all(promises);
-  //     setUpdatedItems(results);
-  //   };
+      const results = await Promise.all(promises);
+      setUpdatedItems(results);
+    };
 
-  //   const fetchHasFallbackImage = async (item) => {
-  //     try {
-  //       const response = await fetch(
-  //         `/++api++/${item['@id']}/@@has_fallback_image`,
-  //       );
-  //       const data = await response.json();
-  //       return { hasFallbackImage: data.hasFallbackImage };
-  //     } catch (error) {
-  //       return { hasFallbackImage: false };
-  //     }
-  //   };
+    const fetchHasFallbackImage = async (item) => {
+      try {
+        const response = await fetch(
+          `/++api++/${item['@id']}/@@has_fallback_image`,
+        );
+        const data = await response.json();
+        return { hasFallbackImage: data.hasFallbackImage };
+      } catch (error) {
+        return { hasFallbackImage: false };
+      }
+    };
 
-  //   // const fetchBlogWriterData = async (item) => {
-  //   //   const options = {
-  //   //     portal_type: 'blogwriter',
-  //   //     blogWriterID: item?.Creator?.toLowerCase(),
-  //   //     metadata_fields: ['title', 'description'],
-  //   //   };
+    // const fetchBlogWriterData = async (item) => {
+    //   const options = {
+    //     portal_type: 'blogwriter',
+    //     blogWriterID: item?.Creator?.toLowerCase(),
+    //     metadata_fields: ['title', 'description'],
+    //   };
 
-  //   //   try {
-  //   //     const response = await dispatch(searchContent('', options));
-  //   //     return response.items || [];
-  //   //   } catch (error) {
-  //   //     return [];
-  //   //   }
-  //   // };
+    //   try {
+    //     const response = await dispatch(searchContent('', options));
+    //     return response.items || [];
+    //   } catch (error) {
+    //     return [];
+    //   }
+    // };
 
-  //   fetchAllData();
-  // }, [items, dispatch, intl]);
+    fetchAllData();
+  }, [items, dispatch, intl]);
 
   return (
     <>
@@ -93,7 +93,7 @@ const SeeanddoReverseTemplate = ({
           </Link>
         </div>
         <section id="content-core">
-          {items.map((item) => (
+          {updatedItems.map((item) => (
             <div key={item.url} className="SeeMoreItem">
               {item.image_field ? (
                 <UniversalLink item={item}>
