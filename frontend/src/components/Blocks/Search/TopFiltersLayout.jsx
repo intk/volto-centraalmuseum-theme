@@ -124,7 +124,10 @@ const TopSideFacets = (props) => {
                 <Button
                   className="Search-main-button"
                   primary
-                  onClick={() => onTriggerSearch(searchText)}
+                  onClick={() => {
+                    onTriggerSearch(searchText);
+                    setShowFilters(false);
+                  }}
                 >
                   {data.searchButtonLabel ||
                     intl.formatMessage(messages.searchButtonText)}
