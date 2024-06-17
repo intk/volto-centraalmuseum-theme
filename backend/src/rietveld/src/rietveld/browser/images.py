@@ -111,14 +111,14 @@ class HasFallbackImageView(BrowserView):
                 obj.portal_type == "Image" for obj in slideshow_page.contentValues()
             )
 
-        if not use_fallback_image:
-            # Check for a site-wide fallback image
-            try:
-                site = api.portal.get()
-                obj = site.restrictedTraverse("fallback-preview-image")
-                use_fallback_image = obj is not None
-            except Exception:
-                use_fallback_image = False
+        # if not use_fallback_image:
+        #     # Check for a site-wide fallback image
+        #     try:
+        #         site = api.portal.get()
+        #         obj = site.restrictedTraverse("fallback-preview-image")
+        #         use_fallback_image = obj is not None
+        #     except Exception:
+        #         use_fallback_image = False
 
         request.response.setHeader("Content-Type", "application/json")
         return json.dumps({"hasFallbackImage": use_fallback_image})
