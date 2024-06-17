@@ -183,9 +183,7 @@ const SeeanddoReverseTemplate = ({
         </section>
         <div id="page-search-title" className="page-search-title">
           <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
-            <h1 style={{ fontFamily: 'BonnefantenBlock, Arial, sans-serif' }}>
-              {headline}
-            </h1>
+            <h1>{headline}</h1>
           </Link>
           <div className="more-link">
             <Link to={linkHref?.[0] && flattenToAppURL(linkHref[0]['@id'])}>
