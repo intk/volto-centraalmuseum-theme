@@ -41,11 +41,11 @@ const SeeanddoTemplate = ({
     const fetchAllData = async () => {
       const promises = items.map(async (item) => {
         const fallbackImageResult = await fetchHasFallbackImage(item);
-        const blogWriterData = await fetchBlogWriterData(item);
+        // const blogWriterData = await fetchBlogWriterData(item);
         return {
           ...item,
           ...fallbackImageResult,
-          blogWriter: blogWriterData,
+          // blogWriter: blogWriterData,
         };
       });
 
@@ -65,20 +65,20 @@ const SeeanddoTemplate = ({
       }
     };
 
-    const fetchBlogWriterData = async (item) => {
-      const options = {
-        portal_type: 'blogwriter',
-        blogWriterID: item?.Creator?.toLowerCase(),
-        metadata_fields: ['title', 'description'],
-      };
+    // const fetchBlogWriterData = async (item) => {
+    //   const options = {
+    //     portal_type: 'blogwriter',
+    //     blogWriterID: item?.Creator?.toLowerCase(),
+    //     metadata_fields: ['title', 'description'],
+    //   };
 
-      try {
-        const response = await dispatch(searchContent('', options));
-        return response.items || [];
-      } catch (error) {
-        return [];
-      }
-    };
+    //   try {
+    //     const response = await dispatch(searchContent('', options));
+    //     return response.items || [];
+    //   } catch (error) {
+    //     return [];
+    //   }
+    // };
 
     fetchAllData();
   }, [items, dispatch, intl]);
