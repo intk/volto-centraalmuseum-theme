@@ -394,6 +394,11 @@ p {
 
   a {
     pointer-events: auto;
+
+    @media (min-width: 992px){
+      display: block;
+      width: 354px;
+    }
   }
 }
 
