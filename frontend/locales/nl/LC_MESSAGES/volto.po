@@ -269,7 +269,7 @@ msgid "ShowLess"
 msgstr ""
 
 #: components/Blocks/Search/TopFiltersLayout
-# defaultMessage: Meer filters
+# defaultMessage: Geavanceerd zoeken in de collectie
 msgid "ShowMore"
 msgstr ""
 

@@ -250,9 +250,9 @@ msgid "ShowLess"
 msgstr "Less filters"
 
 #: components/Blocks/Search/TopFiltersLayout
-# defaultMessage: Meer filters
+# defaultMessage: Geavanceerd zoeken in de collectie
 msgid "ShowMore"
-msgstr "More filters"
+msgstr "Advanced search in the collection"
 
 #: components/Blocks/SiteData/schema
 # defaultMessage: Footer Data
