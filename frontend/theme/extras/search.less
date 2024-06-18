@@ -769,7 +769,7 @@ body.has-toolbar {
   }
 }
 
-.section-search{
+.section-search, .section-advancedsearch{
   .filter-summary-title{
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 27px;
@@ -877,3 +877,46 @@ body.has-toolbar {
 
 }
 ////Filter Menu ENDS
+
+#extra-filters-wrapper{
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 992px){
+    flex-direction: row;
+  }
+
+  .filter-summary{
+    flex-basis: 100%;
+    display: block !important;
+
+    @media (min-width: 992px) {
+      flex-basis: 60%;
+    }
+  }
+
+  .artwork-search-check{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    @media (min-width: 992px) {
+      margin-top: 80px;
+      flex-basis: 200px !important;
+    }
+
+    .label{
+      color: #404040;
+      font-size: 15px;
+      margin-top: 5.5px;
+      letter-spacing: 0.8px;
+    }
+
+    .artwork-checkbox{
+      width: 16px !important;
+      padding: 7px 2px !important;
+      margin: 0px !important;
+      margin-right: 5px !important;
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+  }
+}
