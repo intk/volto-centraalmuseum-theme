@@ -196,4 +196,5 @@
   <column value="recurrence" />
   <column value="place" />
   <column value="location" />
+  <column value="ObjOnDisplay"/>
 </object>
