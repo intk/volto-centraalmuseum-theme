@@ -328,7 +328,7 @@
 //   }
 // }
 
-.section-advancedsearch {
+.section-advancedsearch, .section-search {
   #main {
     #page-document.ui.container {
       // width: 100% !important;
@@ -612,9 +612,10 @@
 }
 
 #advancedsearchblock {
-  .search-input-clear-icon-button{
+  .search-input-clear-icon-button {
     display: none;
   }
+
   .search-details {
     display: none;
   }
@@ -627,48 +628,50 @@
     left: 50%;
     width: 100vw;
     padding: 62px 92px 60px 106px;
-    margin-right: -50vw !important;
-    margin-left: -50vw !important;
-    // width: auto !important;
-    margin-top: -30px;
     padding-right: 107px !important;
     padding-left: 107px !important;
+    // width: auto !important;
+    margin-top: -30px;
+    margin-right: -50vw !important;
+    margin-left: -50vw !important;
 
-    .searchbar{
+    .searchbar {
       width: 95% !important;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 8px;
       padding-right: 8px;
-      @media (min-width: 500px){
-        padding-left: 1%;
+      padding-left: 8px;
+      margin-right: auto;
+      margin-left: auto;
+      position: relative;
+      z-index: 2;
+      @media (min-width: 500px) {
         padding-right: 1%;
-      }
-      @media (min-width: 768px){
-        padding-left: 0px;
-          padding-right: 0px;
-      }
-      @media (min-width: 992px ){
-        width: 86% !important;
         padding-left: 1%;
-        padding-right: 4%;
       }
-      @media (min-width: 1200px){
-        padding-left: calc(1% - 7px);
+      @media (min-width: 768px) {
+        padding-right: 0px;
+        padding-left: 0px;
+      }
+      @media (min-width: 992px) {
+        width: 86% !important;
+        padding-right: 4%;
+        padding-left: 1%;
+      }
+      @media (min-width: 1200px) {
         padding-right: calc(1% - 7px);
+        padding-left: calc(1% - 7px);
       }
       @media (min-width: 1400px) {
-        padding-left: calc(1% - 12px);
         padding-right: calc(1% - 12px);
+        padding-left: calc(1% - 12px);
       }
     }
 
     @media screen and (min-width: 768px) {
-      margin-top: 25px !important;
       padding-top: 10px;
+      margin-top: 25px !important;
       margin-right: 13.5px;
-      margin-left: 13.5px;
       margin-bottom: 32px;
+      margin-left: 13.5px;
     }
 
     @media screen and (min-width: 992px) {
@@ -677,8 +680,8 @@
       padding-left: 12px !important;
       margin-top: 5px !important;
       margin-right: 5%;
-      margin-left: 5%;
       margin-bottom: 60px;
+      margin-left: 5%;
     }
   }
 
@@ -708,16 +711,16 @@
     // height: 58px;
     width: 100% !important;
     padding: 19px 18px 15px;
-    font-family: 'FranklinBook', Arial, sans-serif;
-    font-size: 16px;
     border: 1px solid #c3c3c3 !important;
     border-radius: 0%;
+    font-family: 'FranklinBook', Arial, sans-serif;
+    font-size: 16px;
     letter-spacing: 0.05em;
   }
 
   .text-input-facet input::placeholder {
-    font-size: 16px;
     color: #282931;
+    font-size: 16px;
     opacity: 0.7;
   }
 
@@ -729,10 +732,10 @@
     color: var(--bonnefanten-bg) !important;
     font-family: 'FranklinMed', Arial, sans-serif;
     font-size: 17px;
-    line-height: 1.4;
-    letter-spacing: 0.05em;
     font-weight: 400 !important;
-    @media screen and (max-width: 992px){
+    letter-spacing: 0.05em;
+    line-height: 1.4;
+    @media screen and (max-width: 992px) {
       margin: 0px !important;
     }
     @media screen and (min-width: 992px) {
@@ -746,10 +749,10 @@
   }
 
   .Search-main-button:hover {
-    cursor: pointer;
     background-color: #282931 !important;
     // clip-path: none;
     color: white !important;
+    cursor: pointer;
   }
 
   .react-select__indicator .icon path {
@@ -777,14 +780,15 @@
       text-decoration: none !important;
     }
   }
-  #page-listing{
+
+  #page-listing {
     margin-top: 35px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .hide-top-image .documentDescription {
-    padding-left: 70px !important;
     padding-right: 70px !important;
+    padding-left: 70px !important;
   }
 }
