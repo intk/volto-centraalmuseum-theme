@@ -212,7 +212,7 @@ const TopSideFacets = (props) => {
             onChange={() => {
               setOnlyArtworks(!onlyArtworks);
               setExcludeArtworks(false);
-              handleFacetChange('portal_type', 'artwork');
+              handleFacetChange('portal_type', ['artwork']);
             }}
             className="artwork-checkbox"
           />
