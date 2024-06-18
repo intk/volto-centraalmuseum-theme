@@ -44,77 +44,62 @@ const translations = {
   searchresults: {
     en: 'Search results',
     nl: 'Zoekresultaten',
-    de: 'Suchergebnisse',
   },
   results: {
     en: 'items matching your search terms.',
     nl: 'resultaten voor de zoekopdracht.',
-    de: 'Artikel gefunden.',
   },
   for: {
     en: 'for',
     nl: 'voor',
-    de: 'für',
   },
   advancedsearch: {
     en: 'Advanced search',
     nl: 'Geavanceerd zoeken',
-    de: 'Erweiterte Suche',
   },
   filterArtworks: {
     en: 'Only in the collection',
     nl: 'Alleen in de collectie',
-    de: 'Nur in der Sammlung',
   },
   excludeArtworks: {
     en: 'Only in the website',
     nl: 'Alleen in de website',
-    de: 'Nur auf der Website',
   },
   hasImage: {
     nl: 'Met beeld',
     en: 'With image',
-    de: 'Mit Bild',
   },
   onDisplay: {
     en: 'Collection now on view',
     nl: 'Collectie nu te zien',
-    de: 'Sammlung jetzt zu sehen',
   },
   filterheading: {
     nl: 'Filter »',
     en: 'Filter »',
-    de: 'Filter »',
   },
   filter: {
     nl: 'Filter de resultaten',
     en: 'Filter the results',
-    de: 'Filtern Sie die Ergebnisse',
   },
   showFilters: {
-    nl: 'showFilters',
-    en: 'showFilters',
-    de: 'showFilters',
+    nl: 'Toon filters',
+    en: 'Show Filters',
   },
   hideFilters: {
     nl: 'Verberg filters',
     en: 'Hide Filters',
-    de: 'Filter ausblenden',
   },
   deleteEverything: {
     nl: 'Verwijder alles',
     en: 'Clear all',
-    de: 'Alles löschen',
   },
   total: {
     nl: 'Totaal',
     en: 'Total',
-    de: 'Gesamt',
   },
   currentSearch: {
     nl: 'Huidige zoekopdracht',
     en: 'Current search',
-    de: 'Aktuelle Suche',
   },
   description: {
     nl:
