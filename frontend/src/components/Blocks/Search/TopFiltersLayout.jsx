@@ -32,7 +32,7 @@ const messages = defineMessages({
   },
   showMore: {
     id: 'ShowMore',
-    defaultMessage: 'Meer filters',
+    defaultMessage: 'Geavanceerd zoeken in de collectie',
   },
   showLess: {
     id: 'ShowLess',
