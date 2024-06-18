@@ -77,6 +77,12 @@ const AdvancedSearch = () => {
     setSearchParams({ ...searchParams, [name]: value });
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   const intl = useIntl();
   const locale = intl.locale;
   const searchLink = `${locale}/advancedsearch`;
@@ -128,6 +134,7 @@ const AdvancedSearch = () => {
               name="SearchableText"
               value={searchParams.SearchableText}
               onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
               placeholder={intl.formatMessage(messages.zoekindetentoonstelling)}
             />
           </div>
