@@ -104,6 +104,10 @@ const messages = defineMessages({
     id: 'Show total results',
     defaultMessage: 'Show total results',
   },
+  showExtraFilters: {
+    id: 'Show extra filters',
+    defaultMessage: 'Show extra filters',
+  },
 });
 
 const enhanceSchema = (originalSchema, formData) => {
@@ -216,6 +220,7 @@ const SearchSchema = ({ data = {}, intl }) => {
           // ...(data.showSearchInput ? ['searchInputPrompt'] : []),
           // ...(data.showSearchButton ? ['searchButtonLabel'] : []),
           'showTotalResults',
+          'showExtraFilters',
         ],
       },
       {
@@ -248,6 +253,11 @@ const SearchSchema = ({ data = {}, intl }) => {
         type: 'boolean',
         title: intl.formatMessage(messages.showTotalResults),
         default: true,
+      },
+      showExtraFilters: {
+        type: 'boolean',
+        title: intl.formatMessage(messages.showExtraFilters),
+        default: false,
       },
       searchButtonLabel: {
         title: intl.formatMessage(messages.searchButtonLabel),

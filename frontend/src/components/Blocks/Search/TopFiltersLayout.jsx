@@ -1,14 +1,19 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from 'react';
+// import { FormattedMessage } from 'react-intl';
 import { flushSync } from 'react-dom';
 import { defineMessages, useIntl } from 'react-intl';
 import { Button, Grid } from 'semantic-ui-react';
-import { Icon } from '@plone/volto/components';
-import downSVG from '@plone/volto/icons/down-key.svg';
-import upSVG from '@plone/volto/icons/up-key.svg';
+// import { Icon } from '@plone/volto/components';
+// import downSVG from '@plone/volto/icons/down-key.svg';
+// import upSVG from '@plone/volto/icons/up-key.svg';
 import cx from 'classnames';
 import { isEqual } from 'lodash';
 import { useDeepCompareMemoize } from 'use-deep-compare-effect';
+// import FilterMenu from '@package/components/theme/Search/FilterMenu';
+// import { Link } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import FilterSummary from './FilterSummary';
 
 import {
   SearchInput,
@@ -35,6 +40,101 @@ const messages = defineMessages({
   },
 });
 
+const translations = {
+  searchresults: {
+    en: 'Search results',
+    nl: 'Zoekresultaten',
+    de: 'Suchergebnisse',
+  },
+  results: {
+    en: 'items matching your search terms.',
+    nl: 'resultaten voor de zoekopdracht.',
+    de: 'Artikel gefunden.',
+  },
+  for: {
+    en: 'for',
+    nl: 'voor',
+    de: 'für',
+  },
+  advancedsearch: {
+    en: 'Advanced search',
+    nl: 'Geavanceerd zoeken',
+    de: 'Erweiterte Suche',
+  },
+  filterArtworks: {
+    en: 'Only in the collection',
+    nl: 'Alleen in de collectie',
+    de: 'Nur in der Sammlung',
+  },
+  excludeArtworks: {
+    en: 'Only in the website',
+    nl: 'Alleen in de website',
+    de: 'Nur auf der Website',
+  },
+  hasImage: {
+    nl: 'Met beeld',
+    en: 'With image',
+    de: 'Mit Bild',
+  },
+  onDisplay: {
+    en: 'Collection now on view',
+    nl: 'Collectie nu te zien',
+    de: 'Sammlung jetzt zu sehen',
+  },
+  filterheading: {
+    nl: 'Filter »',
+    en: 'Filter »',
+    de: 'Filter »',
+  },
+  filter: {
+    nl: 'Filter de resultaten',
+    en: 'Filter the results',
+    de: 'Filtern Sie die Ergebnisse',
+  },
+  showFilters: {
+    nl: 'showFilters',
+    en: 'showFilters',
+    de: 'showFilters',
+  },
+  hideFilters: {
+    nl: 'Verberg filters',
+    en: 'Hide Filters',
+    de: 'Filter ausblenden',
+  },
+  deleteEverything: {
+    nl: 'Verwijder alles',
+    en: 'Clear all',
+    de: 'Alles löschen',
+  },
+  total: {
+    nl: 'Totaal',
+    en: 'Total',
+    de: 'Gesamt',
+  },
+  currentSearch: {
+    nl: 'Huidige zoekopdracht',
+    en: 'Current search',
+    de: 'Aktuelle Suche',
+  },
+  description: {
+    nl:
+      'Wegens werkzaamheden aan de website is de collectie online momenteel beperkt raadpleegbaar.',
+    en:
+      'Due to maintenance work the online collection is only accessible to a limited extent.',
+    de:
+      'Vanwege onderhoudswerkzaamheden is de online collectie slechts beperkt toegankelijk.',
+  },
+  periods: {
+    nl: 'Periode',
+    en: 'Period',
+    de: 'Zeitraum',
+  },
+  century: {
+    nl: 'e Eeuw',
+    en: '. century',
+    de: '. Jahrhundert',
+  },
+};
 const FacetWrapper = ({ children }) => (
   <Grid.Column mobile={12} tablet={4} computer={3}>
     {children}
@@ -103,6 +203,94 @@ const TopSideFacets = (props) => {
   };
   const hiddenData = useDeepCompareMemoize(_hiddenData);
 
+  const [onlyArtworks, setOnlyArtworks] = useState(false);
+  const [excludeArtworks, setExcludeArtworks] = useState(false);
+  const [hasPreviewImage, setHasPreviewImage] = useState(false);
+  const [objOnDisplay, setObjOnDisplay] = useState(false);
+  const [showBottomFilters, setShowBottomFilters] = React.useState(false);
+
+  const handleFacetChange = (id, value) => {
+    flushSync(() => {
+      const newFacets = { ...facets, [id]: value };
+      setFacets(newFacets);
+      onTriggerSearch(searchedText || '', newFacets);
+    });
+  };
+
+  const renderFilterButtons = () => {
+    return (
+      <>
+        <label>
+          <input
+            type="radio"
+            checked={onlyArtworks}
+            onChange={() => {
+              setOnlyArtworks(!onlyArtworks);
+              setExcludeArtworks(false);
+              handleFacetChange('portal_type', 'artwork');
+            }}
+            className="artwork-checkbox"
+          />
+          <span className="label">
+            {translations.filterArtworks[intl.locale]}
+          </span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            checked={excludeArtworks}
+            onChange={() => {
+              setExcludeArtworks(!excludeArtworks);
+              setOnlyArtworks(false);
+              handleFacetChange('portal_type', [
+                'Documents',
+                'Event',
+                'News Item',
+                'author',
+                'Link',
+                'exhibition',
+              ]);
+            }}
+            className="artwork-checkbox"
+          />
+          <span className="label">
+            {translations.excludeArtworks[intl.locale]}
+          </span>
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={hasPreviewImage}
+            onChange={() => {
+              handleFacetChange(
+                'hasImage',
+                hasPreviewImage === true ? '' : 'true',
+              );
+              setHasPreviewImage(!hasPreviewImage);
+            }}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.hasImage[intl.locale]}</span>
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={objOnDisplay}
+            onChange={() => {
+              handleFacetChange(
+                'ObjOnDisplay',
+                objOnDisplay === true ? '' : 'true',
+              );
+              setObjOnDisplay(!objOnDisplay);
+            }}
+            className="artwork-checkbox"
+          />
+          <span className="label">{translations.onDisplay[intl.locale]}</span>
+        </label>
+      </>
+    );
+  };
+
   return (
     <Grid className="searchBlock-facets" stackable>
       {data.headline && (
@@ -135,7 +323,6 @@ const TopSideFacets = (props) => {
               )}
             </div>
           )}
-
           <div className="search-filters-sort">
             {data.showSortOn && (
               <SortOn
@@ -167,7 +354,6 @@ const TopSideFacets = (props) => {
               <ViewSwitcher {...props} />
             )}
           </div>
-
           {showFilters && data.facets?.length > 0 && (
             <div className="facets">
               {data.facetsTitle && <h3>{data.facetsTitle}</h3>}
@@ -206,14 +392,35 @@ const TopSideFacets = (props) => {
                   open: showFilters,
                 })}
                 onClick={() => setShowFilters(!showFilters)}
-                style={{
-
-                }}
               >
                 {showFilters
                   ? intl.formatMessage(messages.showLess)
                   : intl.formatMessage(messages.showMore)}
               </Button>
+            </div>
+          )}
+
+          {data?.showExtraFilters && (
+            <div id="extra-filters-wrapper">
+              <div className="filter-summary">
+                <FilterSummary
+                  translations={translations}
+                  showBottomFilters={showBottomFilters}
+                  setShowBottomFilters={setShowBottomFilters}
+                  onlyArtworks={onlyArtworks}
+                  setOnlyArtworks={setOnlyArtworks}
+                  excludeArtworks={excludeArtworks}
+                  setExcludeArtworks={setExcludeArtworks}
+                  hasPreviewImage={hasPreviewImage}
+                  setHasPreviewImage={setHasPreviewImage}
+                  objOnDisplay={objOnDisplay}
+                  setObjOnDisplay={setObjOnDisplay}
+                  handleFacetChange={handleFacetChange}
+                />
+              </div>
+              <div className="artwork-search-check heading">
+                {renderFilterButtons()}
+              </div>
             </div>
           )}
         </Grid.Column>
