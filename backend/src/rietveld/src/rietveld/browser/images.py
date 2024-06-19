@@ -42,6 +42,7 @@ class FallbackImageScale(ImageScaling):
                     "depth": 1,
                 },
                 "portal_type": "Image",
+                "sort_on": "getObjPositionInParent",
             }
         )
 
@@ -49,7 +50,6 @@ class FallbackImageScale(ImageScaling):
             self.context = results[0].getObject()
             self.fieldname = "image"
             self.use_fallback_image = True
-
 
     def scale(
         self,
