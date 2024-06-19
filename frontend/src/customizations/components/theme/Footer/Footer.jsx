@@ -171,7 +171,10 @@ const Footer = (props) => {
             )}
           />
           <div className="privacy-statement">
-            <Link to="/nl/over-het-museum/voorwaarden/privacy/privacyreglement_stichting_centraal_museum.pdf/@@display-file/file">
+            <Link
+              to="/nl/over-het-museum/voorwaarden/privacy/privacyreglement_stichting_centraal_museum.pdf/@@display-file/file"
+              target="_blank"
+            >
               Privacy statement
             </Link>
           </div>
