@@ -578,7 +578,7 @@ msgid "planYourVisitLink"
 msgstr ""
 
 #: components/Blocks/PreviewCollection/PreviewCollectionView
-# defaultMessage: ONTDEK DE COLLECTIE
+# defaultMessage: PRAKTISCHE INFORMATIE
 msgid "previewcollection"
 msgstr ""
 

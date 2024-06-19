@@ -570,9 +570,9 @@ msgid "planYourVisitLink"
 msgstr ""
 
 #: components/Blocks/PreviewCollection/PreviewCollectionView
-# defaultMessage: ONTDEK DE COLLECTIE
+# defaultMessage: PRAKTISCHE INFORMATIE
 msgid "previewcollection"
-msgstr ""
+msgstr "PRACTICAL INFORMATION"
 
 #: components/theme/ImageViewFullscreen/ImageViewFullscreen
 # defaultMessage: Dit werk bevindt zich in het Publiek Domein. Dat betekent dat u de afbeelding voor alle doeleinden mag gebruiken.
