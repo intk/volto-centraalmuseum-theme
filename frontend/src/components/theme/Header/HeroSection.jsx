@@ -31,6 +31,10 @@ const messages = defineMessages({
     id: 'monthly',
     defaultMessage: 'maandelijks',
   },
+  practical: {
+    id: 'practical',
+    defaultMessage: 'Praktisch',
+  },
 });
 
 // const getDateRangeDescription = (intl, start, end) => {
@@ -60,6 +64,15 @@ const messages = defineMessages({
 
 //   return `${format(start, defaultOptions)} — ${format(end, defaultOptions)}`;
 // };
+
+const ScrollToPreviewCollectionBlock = () => {
+  const element = document.querySelector('.previewCollectionBlock');
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  return null; // This component does not render anything
+};
 
 function HeroSection(props) {
   const intl = useIntl();
@@ -271,15 +284,35 @@ function HeroSection(props) {
                 ) : (
                   ''
                 )}
-
-                {albumItems.length > 1 && (
+                {props?.content?.has_presentation ? (
+                  <div className="preview-image-wrapper">
+                    <button
+                      onClick={() => {
+                        ScrollToPreviewCollectionBlock();
+                      }}
+                      className={`button button1`}
+                    >
+                      {intl.formatMessage(messages.practical)}
+                    </button>
+                  </div>
+                ) : (
+                  albumItems.length > 1 && (
+                    <ImageAlbum
+                      items={albumItems}
+                      itemTitle={props.content?.objectTitle}
+                      image="false"
+                      item-type={content?.['@type']}
+                    />
+                  )
+                )}
+                {/* {albumItems.length > 1 && (
                   <ImageAlbum
                     items={albumItems}
                     itemTitle={props.content?.objectTitle}
                     image="false"
                     item-type={content?.['@type']}
                   />
-                )}
+                )} */}
               </div>
             ) : (
               ''
