@@ -50,9 +50,9 @@ class IExhibition(model.Schema):
         required=False,
     )
 
-    has_presentation = schema.Bool(
-        title= "Has presentation",
-        description= "Check this box if the page has Praktisch info block",
+    praktisch = schema.Bool(
+        title="Praktisch",
+        description="Check this box if the page has Praktisch info block",
         required=False,
         default=False,
     )

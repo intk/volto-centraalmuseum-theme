@@ -284,7 +284,7 @@ function HeroSection(props) {
                 ) : (
                   ''
                 )}
-                {props?.content?.has_presentation ? (
+                {props?.content?.praktisch ? (
                   <div className="preview-image-wrapper">
                     <button
                       onClick={() => {
