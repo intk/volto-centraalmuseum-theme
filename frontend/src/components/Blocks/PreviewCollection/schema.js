@@ -17,6 +17,8 @@ export const GridSchema = (props) => {
     properties: {
       sliderelementslink: {
         title: 'Folder of the images',
+        description:
+          'By default it is showing the images in the slideshow folder, change it if you want to show images of any other folder/page',
         widget: 'object_browser',
         mode: 'link',
         selectedItemAttrs: ['Title', 'Description'],
