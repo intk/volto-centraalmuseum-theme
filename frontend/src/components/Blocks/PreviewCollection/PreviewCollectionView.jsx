@@ -11,11 +11,12 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { GET_CONTENT } from '@plone/volto/constants/ActionTypes';
 import { useDispatch } from 'react-redux';
 import { defineMessages, useIntl } from 'react-intl';
+import { useLocation } from 'react-router-dom';
 
 const messages = defineMessages({
   previewcollection: {
     id: 'previewcollection',
-    defaultMessage: 'ONTDEK DE COLLECTIE',
+    defaultMessage: 'PRAKTISCHE INFORMATIE',
   },
 });
 
@@ -39,11 +40,12 @@ const ViewGrid = (props) => {
   const { data, path, className } = props;
   const [albumItems, setAlbumItems] = useState([]);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   let slideshowPath =
     data?.sliderelementslink?.[0] !== undefined
       ? flattenToAppURL(data.sliderelementslink[0]['@id'])
-      : '';
+      : `${location.pathname}/slideshow`;
 
   const id = `full-items@${slideshowPath}`;
 
@@ -111,9 +113,13 @@ const ViewGrid = (props) => {
             {column['@type'] === 'text' && (
               <div className="preview-collection-block-button">
                 <ImageAlbum
-                  items={props.content?.items}
+                  // items={props.content?.items}
+                  items={
+                    slideshowPath !== '' ? albumItems : props.content?.items
+                  }
                   itemTitle={props.content?.objectTitle}
                   image="false"
+                  buttonname="Preview"
                   // sliderelementlink={albumItems}
                 />
               </div>

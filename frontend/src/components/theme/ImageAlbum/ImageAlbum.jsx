@@ -312,6 +312,8 @@ const ImageAlbum = (props) => {
             {props?.['item-type'] === 'News Item' ||
             props?.['item-type'] === 'Document'
               ? `FOTO'S`
+              : props?.buttonname
+              ? props.buttonname
               : intl.formatMessage(messages.view)}
           </button>
         ) : (
