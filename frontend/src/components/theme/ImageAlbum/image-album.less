@@ -3,26 +3,30 @@
 
 @import (multiple, reference, optional) '../../theme.config';
 
-.ui.modal.slider-modal{
+.ui.modal.slider-modal {
   width: 95vw;
   height: 100vh;
   margin: 0% !important;
 
-  .content{
-    height: 100vh;
+  .content {
     display: flex;
+    height: 100vh;
     flex-direction: column;
     justify-content: center;
   }
-  .slick-arrow{
+
+  .slick-arrow {
     opacity: 0.8;
-    &.slick-next{
+
+    &.slick-next {
       right: 30px !important;
     }
-    &::before{
+
+    &::before {
       display: none;
     }
-    &.slick-prev{
+
+    &.slick-prev {
       left: -25px !important;
     }
     @media screen and (max-width: 992px) {
@@ -39,17 +43,47 @@
       }
     }
   }
-  .modal-slide-img{
+
+  .modal-slide-img {
     max-height: 100%;
   }
-
 }
-.slick-slider{
-  padding-bottom:10px;
+
+.slick-slider {
+  padding-bottom: 10px;
 }
 
 .expandbutton {
   visibility: hidden;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  width: 47.5px;
+  height: 47.5px;
+  background-color: rgba(51, 51, 51, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  vertical-align: middle;
+
+
+
+
+
+}
+#expand-svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: visible;
+  margin: auto;
+  color: #dcdcdc;
+  fill: #ffffff;
+}
+
+.imagethumb {
+  cursor: pointer;
 }
 
 .imagethumb:hover {
@@ -57,9 +91,11 @@
     visibility: visible;
   }
 }
-.ui.dimmer{
+
+.ui.dimmer {
   background-color: #f6f6f6 !important;
 }
+
 .ui.modal > .close {
   top: 20px !important;
   right: -10px !important;
@@ -186,25 +222,25 @@
   }
 }
 
-.preview-image-wrapper{
+.preview-image-wrapper {
   // padding-bottom: 10px;
   .button {
     width: auto;
     padding-top: 19px;
-    padding-bottom: 15px;
     padding-right: 28px;
+    padding-bottom: 15px;
     padding-left: 28px;
     border: 1px solid #ffffff !important;
     // margin: 10px 20px !important;
     margin-right: 2.5px !important;
     margin-left: 2.5px !important;
+    background-color: transparent !important;
     color: #ffffff;
     font-family: 'FranklinMed', Arial, sans-serif;
     font-size: 17px;
     letter-spacing: 0.05em;
     text-align: center;
     text-transform: uppercase;
-    background-color: transparent !important;
   }
 
   .button:hover {
@@ -230,10 +266,12 @@
   //   }
   // }
 }
-.ui.dimmer{
+
+.ui.dimmer {
   padding-top: 0px !important;
 }
-.ui.modal>.content{
+
+.ui.modal > .content {
   font-size: 16px !important;
 }
 
@@ -242,20 +280,20 @@
   .button {
     width: auto;
     padding-top: 19px;
-    padding-bottom: 15px;
     padding-right: 28px;
+    padding-bottom: 15px;
     padding-left: 28px;
     border: 1px solid #ffffff !important;
     // margin: 10px 20px !important;
     margin-right: 38px !important;
     margin-left: 38px !important;
+    background-color: transparent !important;
     color: #ffffff;
     font-family: 'FranklinMed', Arial, sans-serif;
     font-size: 17px;
     letter-spacing: 0.05em;
     text-align: center;
     text-transform: uppercase;
-    background-color: transparent !important;
   }
 
   .button:hover {
@@ -286,6 +324,6 @@
   padding-top: 0px !important;
 }
 
-.ui.modal>.content {
+.ui.modal > .content {
   font-size: 16px !important;
 }
