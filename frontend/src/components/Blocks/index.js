@@ -13,6 +13,7 @@ import installSearchBlock from './Search';
 import installModelBlock from './Model';
 import installDiscreetBlock from './DiscreetBlock';
 import installCalloutBlock from './CalloutBlock';
+import installPreviewCollectionBlock from './PreviewCollection';
 import { compose } from 'redux';
 
 const installBlocks = (config) => {
@@ -32,6 +33,7 @@ const installBlocks = (config) => {
     installModelBlock,
     installDiscreetBlock,
     installCalloutBlock,
+    installPreviewCollectionBlock,
   )(config);
 };
 
