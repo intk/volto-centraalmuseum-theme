@@ -1600,11 +1600,22 @@ div#photo-credit {
   }
 }
 
-.section-tentoonstellingsarchief, .section-exhibitions-archive{
-  #page-document #page-listing .expired .hero-dates {
+// .section-tentoonstellingsarchief, .section-exhibitions-archive{
+//   #page-document #page-listing .expired .hero-dates {
+//     text-decoration: none !important;
+//   }
+// }
+
+#advancedsearchblock .block.listing.Artwork{
+  .expired .hero-dates {
     text-decoration: none !important;
   }
 }
+// #advancedsearchblock .block.listing.AdvancedSearch{
+//   .expired .hero-dates {
+//     text-decoration: line-through !important;
+//   }
+// }
 
 body.artwork-listing-page.listing #view #page-document .block.listing.Artwork #page-listing{
   #content-core .listing-items #jaarverslag-title{
