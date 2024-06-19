@@ -1600,23 +1600,6 @@ div#photo-credit {
   }
 }
 
-// .section-tentoonstellingsarchief, .section-exhibitions-archive{
-//   #page-document #page-listing .expired .hero-dates {
-//     text-decoration: none !important;
-//   }
-// }
-
-#advancedsearchblock .block.listing.Artwork{
-  .expired .hero-dates {
-    text-decoration: none !important;
-  }
-}
-// #advancedsearchblock .block.listing.AdvancedSearch{
-//   .expired .hero-dates {
-//     text-decoration: line-through !important;
-//   }
-// }
-
 body.artwork-listing-page.listing #view #page-document .block.listing.Artwork #page-listing{
   #content-core .listing-items #jaarverslag-title{
     a,h2 {
@@ -2998,5 +2981,49 @@ div#blockquote > p{
       padding-top: 0px !important;
     }
     margin-bottom: 100px !important;
+  }
+}
+
+#advancedsearchblock .block.listing.Artwork {
+  .expired .hero-dates {
+    text-decoration: none !important;
+  }
+}
+
+#advancedsearchblock .block.listing.AdvancedSearch {
+  #jaarverslag-title{
+    @media (min-width: 992px){
+      // margin-top: 20px;
+    }
+    .listing-dates {
+      .hero-dates {
+        font-size: 17px;
+        line-height: 35px;
+        color: rgba(0, 0, 0, 0.6);
+        letter-spacing: 0.05em;
+        margin-bottom: 20px;
+        margin-top: 0px;
+        font-family: 'FranklinBook', Arial, sans-serif;
+        text-transform: none !important;
+      }
+    }
+    h3 {
+      margin-top: 0px !important;
+      margin-bottom: 0px !important;
+    }
+    h3 a:hover{
+      color: #000000 !important;
+    }
+    p {
+      font-size: 17.007999px;
+    }
+  }
+  .image-placeholder {
+    width: 25%;
+    margin-right: 50px;
+    flex-shrink: 0;
+  }
+  .listing-items a{
+    width: 25%;
   }
 }

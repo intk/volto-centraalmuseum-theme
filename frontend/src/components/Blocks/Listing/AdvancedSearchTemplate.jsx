@@ -8,6 +8,15 @@ import { When } from '@package/customizations/components/theme/View/EventDatesIn
 import { BodyClass } from '@plone/volto/helpers';
 import { useSelector } from 'react-redux';
 
+function truncate(str, num) {
+  if (str.length <= num) {
+    return str;
+  }
+
+  const subString = str.substr(0, num);
+  return subString.substr(0, subString.lastIndexOf(' ')) + ' ...';
+}
+
 const AdvancedSearchTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
   let link = null;
   let href = linkHref?.[0]?.['@id'] || '';
@@ -87,14 +96,22 @@ const AdvancedSearchTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                     isFallback={true}
                   />
                 </UniversalLink>
-              ) : null}
+              ) : (
+                <div className="image-placeholder"></div>
+              )}
               <div
                 id="jaarverslag-title"
                 className={`item-title ${
                   item.review_state === 'private' ? 'private' : ''
                 }`}
               >
-                {item['@type'] === 'Event' ? (
+                <h3>
+                  <UniversalLink item={item}>{item.title}</UniversalLink>
+                </h3>
+
+                {item['@type'] === 'exhibition' ||
+                item['@type'] === 'Event' ||
+                item['@type'] === 'News Item' ? (
                   <div className="listing-dates">
                     <div className={`listing-dates-wrapper`}>
                       <When
@@ -108,11 +125,9 @@ const AdvancedSearchTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
                 ) : (
                   ''
                 )}
-                <h2>
-                  <UniversalLink item={item}>{item.title}</UniversalLink>
-                </h2>
+
                 {item['@type'] !== 'artwork'
-                  ? item.description && <p>{item.description}</p>
+                  ? item.description && <p>{truncate(item.description, 150)}</p>
                   : ''}
                 <div className="description">
                   <p>
