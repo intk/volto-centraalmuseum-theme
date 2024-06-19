@@ -4,7 +4,8 @@
 zope.testrunner
 
 kitconcept.seo
-git+https://github.com/intk/collective.volto.formsupport.git
+git+https://github.com/intk/collective.volto.formsupport.git@main
+# -e src/collective.volto.formsupport
 # -e src/contentimport
 git+https://github.com/cihanandac/collective.exportimport.git@main
 git+https://github.com/cihanandac/contentimport.git@main

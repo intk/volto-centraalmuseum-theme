@@ -146,9 +146,18 @@ all: ## Create new box, run ansible, deploy stack
 remove-backend:
 	${DOCKER_CONTEXT} service rm plone_backend
 
+.PHONY: remove-sync
+remove-sync:
+	${DOCKER_CONTEXT} service rm plone_backend-sync
+
+.PHONY: remove-stage
+remove-stage:
+	${DOCKER_CONTEXT} service rm plone_stage-frontend
+
 .PHONY: remove-all
 remove-all:
 	${DOCKER_CONTEXT} service rm plone_backend
 	${DOCKER_CONTEXT} service rm plone_backend-sync
 	${DOCKER_CONTEXT} service rm plone_frontend
+	${DOCKER_CONTEXT} service rm plone_stage-frontend
 	${DOCKER_CONTEXT} service rm plone_zeo

@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   frontend:
-    image: intkbv/centraalmuseum-frontend:sha-6937497
+    image: intkbv/centraalmuseum-frontend:sha-ad212d5
     environment:
       RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
     depends_on:
@@ -15,13 +15,28 @@ services:
     deploy:
       replicas: 2
 
+  # stage-frontend:
+  #   image: intkbv/centraalmuseum-frontend:sha-c76e4b3
+  #   environment:
+  #     RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - nw-webserver
+  #     - backend
+  #   ports:
+  #     - 3001:3000
+  #   deploy:
+  #     replicas: 1
+
   backend:
-    image: intkbv/centraalmuseum-backend:sha-164de1b
+    image: intkbv/centraalmuseum-backend:sha-7b09c1c
     environment:
       SITE: Plone
       ZEO_ADDRESS: zeo:8100
     volumes:
       - /var/local/centraalmuseum:/app/logs
+      - /var/local/centraalmuseum/import/:/app/import
     networks:
       - nw-webserver
       - backend
@@ -31,12 +46,13 @@ services:
       replicas: 2
 
   backend-sync:
-    image: intkbv/centraalmuseum-backend:sha-164de1b
+    image: intkbv/centraalmuseum-backend:sha-7b09c1c
     environment:
       SITE: Plone
       ZEO_ADDRESS: zeo:8100
     volumes:
       - /var/local/centraalmuseum:/app/logs
+      - /var/local/centraalmuseum/import/:/app/import
     networks:
       - nw-webserver
       - backend
