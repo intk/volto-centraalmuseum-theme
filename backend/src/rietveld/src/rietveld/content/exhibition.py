@@ -50,6 +50,13 @@ class IExhibition(model.Schema):
         required=False,
     )
 
+    has_presentation = schema.Bool(
+        title= "Has presentation",
+        description= "Check this box if the page has Praktisch info block",
+        required=False,
+        default=False,
+    )
+
     priref = TextLine(title="Priref", required=False)
 
     cm_nummer = TextLine(title="cm_nummer", required=False)
