@@ -574,6 +574,11 @@ msgstr ""
 msgid "planYourVisitLink"
 msgstr ""
 
+#: components/theme/Header/HeroSection
+# defaultMessage: Praktisch
+msgid "practical"
+msgstr ""
+
 #: components/Blocks/PreviewCollection/PreviewCollectionView
 # defaultMessage: PRAKTISCHE INFORMATIE
 msgid "previewcollection"
