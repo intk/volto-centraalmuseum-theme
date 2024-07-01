@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createRef } from 'react';
 import { connect } from 'react-redux';
 import { UniversalLink } from '@plone/volto/components';
 // eslint-disable-next-line no-unused-vars
@@ -9,6 +9,9 @@ import qs from 'query-string';
 import { defineMessages, useIntl } from 'react-intl';
 import ArtworkPreview from '../ArtworkPreview/ArtworkPreview';
 import Masonry from 'react-masonry-css';
+import { Pagination } from 'semantic-ui-react';
+import { HiMiniArrowLongLeft } from 'react-icons/hi2';
+import { HiMiniArrowLongRight } from 'react-icons/hi2';
 
 const messages = defineMessages({
   seemore: {
@@ -19,10 +22,11 @@ const messages = defineMessages({
 
 const Search = (props) => {
   // eslint-disable-next-line no-unused-vars
-  const { content, searchContent, items } = props;
+  const { content, searchContent, items, items_total } = props;
   const intl = useIntl();
-  // const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   // const [totalItems, setTotalItems] = useState(0);
+
   let authors = [];
 
   if (content['@type'] === 'author') {
@@ -47,8 +51,8 @@ const Search = (props) => {
         artwork_author: authorQueryString,
         path: currentPath,
         metadata_fields: ['dating'],
-        b_size: 20,
-        // b_start: (currentPage - 1) * 20,
+        b_size: 10,
+        b_start: (currentPage - 1) * 10,
       };
       searchContent('', options);
     };
@@ -62,18 +66,12 @@ const Search = (props) => {
     };
   }, [
     props.searchableText,
-    // currentPage,
+    currentPage,
     content,
     authorQueryString,
     intl,
     searchContent,
   ]);
-
-  // useEffect(() => {
-  //   if (items && items.length > 0) {
-  //     setTotalItems(items[0].total);
-  //   }
-  // }, [items]);
 
   const sortedItems = props.items
     .slice(0, 20)
@@ -89,9 +87,8 @@ const Search = (props) => {
     768: 1,
   };
 
-  // const changePage = (page) => {
-  //   setCurrentPage(page);
-  // };
+  const totalPages = Math.ceil(items_total / 10);
+  const listingRef = createRef();
 
   return (
     <Container id="page-search-artwork">
@@ -100,7 +97,6 @@ const Search = (props) => {
           {intl.formatMessage(messages.seemore)}
         </h1>
       </div>
-
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="search-items"
@@ -111,7 +107,7 @@ const Search = (props) => {
           sortedItems.slice(0, 20).map(
             (item) =>
               props.location.pathname !== item['@id'] && (
-                <div className="SeeMoreItem" key={item['@id']}>
+                <div className="SeeMoreItem" key={item['@id']} ref={listingRef}>
                   <ArtworkPreview {...item} />
                   <UniversalLink item={item}>
                     <div className="item_title">{item.title}</div>
@@ -135,25 +131,32 @@ const Search = (props) => {
               ),
           )}
       </Masonry>
-      <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
-      >
-        {/* <Button
-          onClick={() => changePage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-        <span style={{ margin: '0 10px' }}>
-          Page {currentPage} of {totalPages}
-        </span>
-        <Button
-          onClick={() => changePage(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-        >
-          Next
-        </Button> */}
-      </div>
+      {totalPages > 1 && (
+        <div className="pagination-wrapper">
+          <Pagination
+            activePage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(e, { activePage }) => {
+              listingRef.current.scrollIntoView({ behavior: 'smooth' });
+              setCurrentPage(activePage);
+            }}
+            firstItem={null}
+            lastItem={null}
+            prevItem={{
+              content: <HiMiniArrowLongLeft />,
+              icon: true,
+              'aria-disabled': currentPage === 1,
+              className: currentPage === 1 ? 'disabled' : null,
+            }}
+            nextItem={{
+              content: <HiMiniArrowLongRight />,
+              icon: true,
+              'aria-disabled': currentPage === totalPages,
+              className: currentPage === totalPages ? 'disabled' : null,
+            }}
+          />
+        </div>
+      )}
     </Container>
   );
 };
@@ -162,6 +165,7 @@ const mapStateToProps = (state, ownProps) => {
   const locationSearch = ownProps.location?.search || '';
   return {
     items: state.search.items,
+    items_total: state.search.total,
     searchableText: qs.parse(locationSearch).SearchableText,
   };
 };
