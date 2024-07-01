@@ -5,7 +5,7 @@ import { UniversalLink } from '@plone/volto/components';
 // eslint-disable-next-line no-unused-vars
 import { Container, Button } from 'semantic-ui-react';
 import { searchContent } from '@plone/volto/actions';
-import qs from 'query-string';
+// import qs from 'query-string';
 import { defineMessages, useIntl } from 'react-intl';
 import ArtworkPreview from '../ArtworkPreview/ArtworkPreview';
 import Masonry from 'react-masonry-css';
@@ -65,12 +65,12 @@ const Search = (props) => {
       isMounted = false;
     };
   }, [
-    props.searchableText,
+    // props.searchableText,
     currentPage,
-    content,
-    authorQueryString,
-    intl,
-    searchContent,
+    // content,
+    // authorQueryString,
+    // intl,
+    // searchContent,
   ]);
 
   const sortedItems = items
@@ -162,11 +162,11 @@ const Search = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const locationSearch = ownProps.location?.search || '';
+  // const locationSearch = ownProps.location?.search || '';
   return {
     items: state.search.items,
     items_total: state.search.total,
-    searchableText: qs.parse(locationSearch).SearchableText,
+    // searchableText: qs.parse(locationSearch).SearchableText,
   };
 };
 
