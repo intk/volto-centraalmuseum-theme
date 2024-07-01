@@ -49,7 +49,7 @@ const Search = (props) => {
       const options = {
         portal_type: 'artwork',
         artwork_author: authorQueryString,
-        path: currentPath,
+        path: currentPath === 'nl' ? '/nl/collectie' : '/en/collection',
         metadata_fields: ['dating'],
         b_size: 10,
         b_start: (currentPage - 1) * 10,
@@ -73,7 +73,7 @@ const Search = (props) => {
     searchContent,
   ]);
 
-  const sortedItems = props.items
+  const sortedItems = items
     .slice(0, 20)
     .sort((a, b) => a.title.localeCompare(b.title));
 
