@@ -69,10 +69,10 @@ export default function applyConfig(config) {
     ...config.views.layoutViewsNamesMapping,
     artwork_view: 'Artwork',
   };
-  // config.views.contentTypesViews = {
-  //   ...config.views.contentTypesViews,
-  //   author: AuthorView,
-  // };
+  config.views.contentTypesViews = {
+    ...config.views.contentTypesViews,
+    author: AuthorView,
+  };
   config.views.contentTypesViews = {
     ...config.views.contentTypesViews,
     blogwriter: BlogWriterView,
