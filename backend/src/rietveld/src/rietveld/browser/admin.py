@@ -65,6 +65,7 @@ class AdminFixes(BrowserView):
             obj = brain.getObject()
             obj_id = get_intid(obj)
             print(obj.id)
+            log_to_file(f"object id {obj.id}")
             relations = relation_catalog.findRelations(
                 {"from_id": obj_id, "from_attribute": "authors"}
             )
@@ -79,6 +80,7 @@ class AdminFixes(BrowserView):
             obj = brain.getObject()
             obj_id = get_intid(obj)
             print(obj.id)
+            log_to_file(f"object id {obj.id}")
             relations = relation_catalog.findRelations(
                 {"from_id": obj_id, "from_attribute": "authors"}
             )
