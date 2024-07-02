@@ -1,16 +1,28 @@
+import base64
+import gc
+import io
+import json
+import logging
+import os
+import re
+import time
+import uuid
+import xml.etree.ElementTree as ET
 from collections import defaultdict
-from datetime import datetime
-from datetime import time
-from datetime import timedelta
+from datetime import datetime, timedelta
+from xml.dom import minidom
+from xml.etree.ElementTree import Element, SubElement, tostring
+
+import lxml.etree
+import plone.api
+import requests
+import transaction
 from DateTime import DateTime
 from dateutil import parser
 from lxml import etree
 from plone import api
-from plone.api import content
-from plone.api import portal
-from plone.api import relation
-from plone.app.multilingual.api import get_translation_manager
-from plone.app.multilingual.api import translate
+from plone.api import content, portal, relation
+from plone.app.multilingual.api import get_translation_manager, translate
 from plone.app.multilingual.interfaces import ITranslationManager
 from plone.app.textfield.interfaces import IRichText
 from plone.app.textfield.value import RichTextValue
@@ -22,39 +34,16 @@ from plone.namedfile.file import NamedBlobImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser import BrowserView
 from pytz import timezone
-from rietveld.config import IMAGE_BASE_URL
-from rietveld.config import IMPORT_LOCATIONS
+from rietveld.config import IMAGE_BASE_URL, IMPORT_LOCATIONS
 from rietveld.content.artwork import IArtwork
 from rietveld.content.exhibition import IExhibition
-from xml.dom import minidom
-from xml.etree.ElementTree import Element
-from xml.etree.ElementTree import SubElement
-from xml.etree.ElementTree import tostring
 from zc.relation.interfaces import ICatalog
 from zope import component
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.intid.interfaces import IIntIds
-from zope.schema import getFields
-from zope.schema import getFieldsInOrder
-from zope.schema.interfaces import IList
-from zope.schema.interfaces import IText
-from zope.schema.interfaces import ITextLine
-
-import base64
-import gc
-import io
-import json
-import logging
-import lxml.etree
-import os
-import plone.api
-import re
-import requests
-import time
-import transaction
-import uuid
-import xml.etree.ElementTree as ET
+from zope.schema import getFields, getFieldsInOrder
+from zope.schema.interfaces import IList, IText, ITextLine
 
 
 class AdminFixes(BrowserView):
@@ -63,6 +52,26 @@ class AdminFixes(BrowserView):
         op = self.request.form.get("op")
 
         return getattr(self, op)()
+
+    def remove_author_relations(self):
+        brains = api.content.find(portal_type="artwork")
+        catalog = api.portal.get_tool(name="portal_catalog")
+        relation_catalog = getUtility(ICatalog)
+        for brain in brains:
+            obj = brain.getObject()
+            obj_id = get_intid(obj)
+            relations = relation_catalog.findRelations(
+                {"from_id": obj_id, "from_attribute": "authors"}
+            )
+            for relation in relations:
+                relation_catalog.unindex(relation)
+                print(
+                    f"Removed relation from {obj.title}"
+                )
+
+        print("finished")
+        # Commit the transaction to save changes
+        transaction.commit()
 
     def log_presentation_folders(self):
         """Log all folders named 'Presentation' across the entire Plone site."""
@@ -101,6 +110,8 @@ class AdminFixes(BrowserView):
                 api.content.transition(obj=slideshow_folder, transition="publish")
             slideshow_folder.exclude_from_nav = True
             slideshow_folder.reindexObject(idxs=["exclude_from_nav"])
+
+        return "slideshows folders turned to public"
 
     def reset_exhibition_hours(self):
         catalog = api.portal.get_tool(name="portal_catalog")
@@ -2397,3 +2408,16 @@ def fix_author_name(value):
             return value
 
     return author
+
+
+def get_intid(obj):
+    """Return the intid of an object from the intid-catalog"""
+    intids = component.queryUtility(IIntIds)
+    if intids is None:
+        return
+    # check that the object has an intid, otherwise there's nothing to be done
+    try:
+        return intids.getId(obj)
+    except KeyError:
+        # The object has not been added to the ZODB yet
+        return
