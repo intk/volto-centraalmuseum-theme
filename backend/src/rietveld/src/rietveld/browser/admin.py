@@ -71,6 +71,7 @@ class AdminFixes(BrowserView):
             for relation in relations:
                 relation_catalog.unindex(relation)
                 print(f"Removed relation from {obj.title}")
+                log_to_file(f"Removed relation from {obj.title}")
             transaction.commit()
 
         brains = api.content.find(portal_type="artwork", context=container_en)
@@ -84,6 +85,7 @@ class AdminFixes(BrowserView):
             for relation in relations:
                 relation_catalog.unindex(relation)
                 print(f"Removed relation from {obj.title}")
+                log_to_file(f"Removed relation from {obj.title}")
             transaction.commit()
 
         print("finished")
@@ -1054,13 +1056,13 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                     if new_exhibition["to"]:
                         end_year = new_exhibition["to"].split("-")[0]
                         if start_year == end_year:
-                            new_exhibition[
-                                "date"
-                            ] = start_year  # Use only start year if the same
+                            new_exhibition["date"] = (
+                                start_year  # Use only start year if the same
+                            )
                         else:
-                            new_exhibition[
-                                "date"
-                            ] = f"{start_year} - {end_year}"  # Format as 'start - end'
+                            new_exhibition["date"] = (
+                                f"{start_year} - {end_year}"  # Format as 'start - end'
+                            )
 
                 elif new_exhibition["to"]:  # If 'date' does not exist but 'to' does
                     end_year = new_exhibition["to"].split("-")[0]
@@ -1642,7 +1644,6 @@ def import_one_exhibition(
     notes = []
 
     for note in notes_all:
-        print(note.text)
         notes.append(note.text)
 
     notes_text = "\n\n".join(notes)
@@ -2176,9 +2177,9 @@ def import_authors(self, record):
 
             # Create or append EN author
             if not found_en:
-                author_info[
-                    "container"
-                ] = container_en  # Update container for EN version
+                author_info["container"] = (
+                    container_en  # Update container for EN version
+                )
                 author_en = content.create(type="author", **author_info)
                 authors_en.append(author_en)
                 content.transition(obj=author_en, transition="publish")
@@ -2290,10 +2291,10 @@ def get_creator(xml_record):
 
 
 def log_to_file(message):
-    log_file_path = "/app/logs/collectionLogs.txt"
-    # log_file_path = (
-    #     "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
-    # )
+    # log_file_path = "/app/logs/collectionLogs.txt"
+    log_file_path = (
+        "/Users/cihanandac/Documents/volto-centraalmuseum-theme/collectionsLogs.txt"
+    )
 
     # Attempt to create the file if it doesn't exist
     try:
