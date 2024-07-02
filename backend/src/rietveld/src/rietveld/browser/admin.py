@@ -1318,9 +1318,9 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 title, container, info, intl, "artwork", title_url, priref
             )  # Dutch version
 
-            if authors != "null":
-                for author in authors:
-                    relation.create(source=obj, target=author, relationship="authors")
+            # if authors != "null":
+            #     for author in authors:
+            #         relation.create(source=obj, target=author, relationship="authors")
 
             manager = ITranslationManager(obj)
             if not manager.has_translation("en"):
@@ -1336,11 +1336,11 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 title, container_en, info, intl, "artwork", title_url, priref
             )  # English version
             # log_to_file(f"{ObjectNumber} English version of object is created")
-            if authors_en != "null":
-                for author in authors_en:
-                    relation.create(
-                        source=obj_en, target=author, relationship="authors"
-                    )
+            # if authors_en != "null":
+            #     for author in authors_en:
+            #         relation.create(
+            #             source=obj_en, target=author, relationship="authors"
+            #         )
 
             manager = ITranslationManager(obj_en)
             if not manager.has_translation("nl"):
@@ -1383,25 +1383,25 @@ def import_one_record(self, record, collection_type, container, container_en, ca
                 if v:
                     setattr(obj, k, json.dumps(v))
 
-            if lang == "nl":
-                if authors != "null":
-                    for author in authors:
-                        relation.delete(
-                            source=obj, target=author, relationship="authors"
-                        )
-                        relation.create(
-                            source=obj, target=author, relationship="authors"
-                        )
+            # if lang == "nl":
+            #     if authors != "null":
+            #         for author in authors:
+            #             relation.delete(
+            #                 source=obj, target=author, relationship="authors"
+            #             )
+            #             relation.create(
+            #                 source=obj, target=author, relationship="authors"
+            #             )
 
-            else:
-                if authors != "null":
-                    for author_en in authors_en:
-                        relation.delete(
-                            source=obj, target=author_en, relationship="authors"
-                        )
-                        relation.create(
-                            source=obj, target=author_en, relationship="authors"
-                        )
+            # else:
+            #     if authors != "null":
+            #         for author_en in authors_en:
+            #             relation.delete(
+            #                 source=obj, target=author_en, relationship="authors"
+            #             )
+            #             relation.create(
+            #                 source=obj, target=author_en, relationship="authors"
+            #             )
 
             log_to_file(f"Object is updated: {priref} id and {title} title")
 
@@ -1431,11 +1431,11 @@ def import_one_record(self, record, collection_type, container, container_en, ca
         obj.last_successful_update = last_modification_dt
         obj_en = self.translate(obj, info["en"])
 
-        if authors != "null":
-            for author in authors:
-                relation.create(source=obj, target=author, relationship="authors")
-            for author_en in authors_en:
-                relation.create(source=obj_en, target=author_en, relationship="authors")
+        # if authors != "null":
+        #     for author in authors:
+        #         relation.create(source=obj, target=author, relationship="authors")
+        #     for author_en in authors_en:
+        #         relation.create(source=obj_en, target=author_en, relationship="authors")
 
 
 def import_one_exhibition(
