@@ -54,21 +54,21 @@ class AdminFixes(BrowserView):
         return getattr(self, op)()
 
     def remove_author_relations(self):
-        brains = api.content.find(portal_type="artwork")
+        paths = ["/en/collection/bruna", "/nl/collectie/bruna"]
         catalog = api.portal.get_tool(name="portal_catalog")
         relation_catalog = getUtility(ICatalog)
-        for brain in brains:
-            obj = brain.getObject()
-            obj_id = get_intid(obj)
-            relations = relation_catalog.findRelations(
-                {"from_id": obj_id, "from_attribute": "authors"}
-            )
-            for relation in relations:
-                relation_catalog.unindex(relation)
-                print(
-                    f"Removed relation from {obj.title}"
+
+        for path in paths:
+            brains = api.content.find(portal_type="artwork", path=path)
+            for brain in brains:
+                obj = brain.getObject()
+                obj_id = get_intid(obj)
+                relations = relation_catalog.findRelations(
+                    {"from_id": obj_id, "from_attribute": "authors"}
                 )
-            transaction.commit()
+                for relation in relations:
+                    relation_catalog.unindex(relation)
+                    print(f"Removed relation from {obj.title}")
 
         print("finished")
         # Commit the transaction to save changes
