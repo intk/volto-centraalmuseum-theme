@@ -31,10 +31,9 @@ export default function AuthorView(props) {
           )}
         </div>
       )}
-      {console.log(props)}
-      {/* <Container> */}
-      {/* <SeeMoreAuthor {...props} /> */}
-      {/* </Container> */}
+      <Container>
+        <SeeMoreAuthor {...props} />
+      </Container>
     </div>
   );
 }
