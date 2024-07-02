@@ -54,21 +54,35 @@ class AdminFixes(BrowserView):
         return getattr(self, op)()
 
     def remove_author_relations(self):
-        paths = ["/en/collection/bruna", "/nl/collectie/bruna"]
         catalog = api.portal.get_tool(name="portal_catalog")
         relation_catalog = getUtility(ICatalog)
 
-        for path in paths:
-            brains = api.content.find(portal_type="artwork", path=path)
-            for brain in brains:
-                obj = brain.getObject()
-                obj_id = get_intid(obj)
-                relations = relation_catalog.findRelations(
-                    {"from_id": obj_id, "from_attribute": "authors"}
-                )
-                for relation in relations:
-                    relation_catalog.unindex(relation)
-                    print(f"Removed relation from {obj.title}")
+        container = get_base_folder(self.context, "bruna")
+        container_en = get_base_folder(self.context, "bruna_en")
+
+        brains = api.content.find(portal_type="artwork", context=container)
+        for brain in brains:
+            obj = brain.getObject()
+            obj_id = get_intid(obj)
+            print(obj.id)
+            relations = relation_catalog.findRelations(
+                {"from_id": obj_id, "from_attribute": "authors"}
+            )
+            for relation in relations:
+                relation_catalog.unindex(relation)
+                print(f"Removed relation from {obj.title}")
+
+        brains = api.content.find(portal_type="artwork", context=container_en)
+        for brain in brains:
+            obj = brain.getObject()
+            obj_id = get_intid(obj)
+            print(obj.id)
+            relations = relation_catalog.findRelations(
+                {"from_id": obj_id, "from_attribute": "authors"}
+            )
+            for relation in relations:
+                relation_catalog.unindex(relation)
+                print(f"Removed relation from {obj.title}")
 
         print("finished")
         # Commit the transaction to save changes
