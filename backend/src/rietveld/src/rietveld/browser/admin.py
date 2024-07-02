@@ -71,6 +71,7 @@ class AdminFixes(BrowserView):
             for relation in relations:
                 relation_catalog.unindex(relation)
                 print(f"Removed relation from {obj.title}")
+            transaction.commit()
 
         brains = api.content.find(portal_type="artwork", context=container_en)
         for brain in brains:
@@ -83,6 +84,7 @@ class AdminFixes(BrowserView):
             for relation in relations:
                 relation_catalog.unindex(relation)
                 print(f"Removed relation from {obj.title}")
+            transaction.commit()
 
         print("finished")
         # Commit the transaction to save changes
