@@ -68,6 +68,7 @@ class AdminFixes(BrowserView):
                 print(
                     f"Removed relation from {obj.title}"
                 )
+            transaction.commit()
 
         print("finished")
         # Commit the transaction to save changes
