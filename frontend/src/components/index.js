@@ -15,6 +15,7 @@ import SeeMoreAuthor from './theme/SeeMore/SeeMoreAuthor';
 import SeeMoreNewsItem from './theme/SeeMore/SeeMoreNewsItem';
 import ImageAlbum from './theme/ImageAlbum/ImageAlbum';
 import SeeMoreNewsBlogs from './theme/SeeMore/SeeMoreNewsBlogs';
+import SeeMoreExhibition from './theme/SeeMore/SeeMoreExhibition';
 
 export {
   SeeMore,
@@ -23,4 +24,5 @@ export {
   SeeMoreNewsItem,
   ImageAlbum,
   SeeMoreNewsBlogs,
+  SeeMoreExhibition,
 };
