@@ -57,25 +57,7 @@ class AdminFixes(BrowserView):
         catalog = api.portal.get_tool(name="portal_catalog")
         relation_catalog = getUtility(ICatalog)
 
-        container = get_base_folder(self.context, "bruna")
-        container_en = get_base_folder(self.context, "bruna_en")
-
-        brains = api.content.find(portal_type="artwork", context=container)
-        for brain in brains:
-            obj = brain.getObject()
-            obj_id = get_intid(obj)
-            print(obj.id)
-            log_to_file(f"object id {obj.id}")
-            relations = relation_catalog.findRelations(
-                {"from_id": obj_id, "from_attribute": "authors"}
-            )
-            for relation in relations:
-                relation_catalog.unindex(relation)
-                print(f"Removed relation from {obj.title}")
-                log_to_file(f"Removed relation from {obj.title}")
-            transaction.commit()
-
-        brains = api.content.find(portal_type="artwork", context=container_en)
+        brains = api.content.find(portal_type="artwork")
         for brain in brains:
             obj = brain.getObject()
             obj_id = get_intid(obj)
