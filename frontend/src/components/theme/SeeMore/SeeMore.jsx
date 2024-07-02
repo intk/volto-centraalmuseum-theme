@@ -47,6 +47,7 @@ const Search = (props) => {
       artwork_author: authorQueryString,
       path: currentPath,
       metadata_fields: ['dating'],
+      b_size: 20,
     };
     searchContent('', options);
   };
