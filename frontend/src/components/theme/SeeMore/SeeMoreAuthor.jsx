@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, createRef } from 'react';
 import { connect } from 'react-redux';
@@ -74,7 +75,7 @@ const Search = (props) => {
   ]);
 
   const sortedItems = items
-    .slice(0, 20)
+    .slice(0, 10)
     .sort((a, b) => a.title.localeCompare(b.title));
 
   const authors_text = authors.join(', ');
