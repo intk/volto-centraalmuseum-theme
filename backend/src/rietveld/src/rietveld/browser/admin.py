@@ -91,6 +91,8 @@ class AdminFixes(BrowserView):
             transaction.commit()
 
         print("finished")
+        log_to_file("Removed all relations")
+
         # Commit the transaction to save changes
         transaction.commit()
 
