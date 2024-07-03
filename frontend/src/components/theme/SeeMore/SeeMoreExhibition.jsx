@@ -116,65 +116,71 @@ const Search = (props) => {
   return (
     <Container id="footer-listing-newsandblogs">
       <SocialButtons />
-      <div id="page-search-title" className="page-search-title">
-        <Link to="/nl/plan-je-bezoek/nu-te-zien/activiteiten">
-          <h1 style={{ fontFamily: 'BonnefantenBlock, Arial, sans-serif' }}>
-            Doe mee
-          </h1>
-        </Link>
-        <div className="more-link">
-          <Link to="/nl/plan-je-bezoek/nu-te-zien/activiteiten">Meer…</Link>
-        </div>
-      </div>
-      <div className="search-items" style={{ display: 'flex' }}>
-        {filteredEvents.slice(0, 3).map((item) => (
-          <div className="SeeMoreItem" key={item['@id']} ref={listingRef}>
-            {item.image_field ? (
-              <UniversalLink item={item}>
-                <PreviewImage
-                  item={item}
-                  size="large"
-                  alt={item.image_caption ? item.image_caption : item.title}
-                  className="ui image"
-                />
-              </UniversalLink>
-            ) : (item['@type'] === 'exhibition' ||
-                item['@type'] === 'Event' ||
-                item['@type'] === 'News Item') &&
-              item.hasFallbackImage === true ? (
-              <UniversalLink item={item}>
-                <PreviewImage
-                  item={item}
-                  size="large"
-                  alt={item.image_caption ? item.image_caption : item.title}
-                  className="ui image"
-                  isFallback={true}
-                />
-              </UniversalLink>
-            ) : null}
-            <div className={`listing-dates-wrapper`}>
-              <When
-                start={item?.start}
-                end={item?.end}
-                whole_day={item?.whole_day}
-                open_end={item?.open_end}
-                type={item?.['@type']}
-                published={
-                  item?.effective !== '1969-12-30T22:00:00+00:00'
-                    ? item?.effective
-                    : item?.created
-                }
-              />
-            </div>
-            <UniversalLink item={item}>
-              <div className="item_title">{item.title}</div>
-            </UniversalLink>
-            <div className="item_description">
-              {truncate(item?.description, 100)}
+      {filteredEvents.length > 0 ? (
+        <>
+          <div id="page-search-title" className="page-search-title">
+            <Link to="/nl/plan-je-bezoek/nu-te-zien/activiteiten">
+              <h1 style={{ fontFamily: 'BonnefantenBlock, Arial, sans-serif' }}>
+                Doe mee
+              </h1>
+            </Link>
+            <div className="more-link">
+              <Link to="/nl/plan-je-bezoek/nu-te-zien/activiteiten">Meer…</Link>
             </div>
           </div>
-        ))}
-      </div>
+          <div className="search-items" style={{ display: 'flex' }}>
+            {filteredEvents.slice(0, 3).map((item) => (
+              <div className="SeeMoreItem" key={item['@id']} ref={listingRef}>
+                {item.image_field ? (
+                  <UniversalLink item={item}>
+                    <PreviewImage
+                      item={item}
+                      size="large"
+                      alt={item.image_caption ? item.image_caption : item.title}
+                      className="ui image"
+                    />
+                  </UniversalLink>
+                ) : (item['@type'] === 'exhibition' ||
+                    item['@type'] === 'Event' ||
+                    item['@type'] === 'News Item') &&
+                  item.hasFallbackImage === true ? (
+                  <UniversalLink item={item}>
+                    <PreviewImage
+                      item={item}
+                      size="large"
+                      alt={item.image_caption ? item.image_caption : item.title}
+                      className="ui image"
+                      isFallback={true}
+                    />
+                  </UniversalLink>
+                ) : null}
+                <div className={`listing-dates-wrapper`}>
+                  <When
+                    start={item?.start}
+                    end={item?.end}
+                    whole_day={item?.whole_day}
+                    open_end={item?.open_end}
+                    type={item?.['@type']}
+                    published={
+                      item?.effective !== '1969-12-30T22:00:00+00:00'
+                        ? item?.effective
+                        : item?.created
+                    }
+                  />
+                </div>
+                <UniversalLink item={item}>
+                  <div className="item_title">{item.title}</div>
+                </UniversalLink>
+                <div className="item_description">
+                  {truncate(item?.description, 100)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        ''
+      )}
     </Container>
   );
 };
