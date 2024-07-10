@@ -243,7 +243,6 @@ const EventView = (props) => {
               letterSpacing: '0.85px',
               marginBottom: '22px',
               marginTop: '36px',
-              textAlign: 'center',
             }}
             className="date-indicator"
           >
