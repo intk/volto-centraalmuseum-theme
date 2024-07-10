@@ -893,14 +893,8 @@ export default function ArtworkView(props) {
                       <td className="columntwo">
                         <ul>
                           {showAllExhibition
-                            ? content.exhibitions_list
-                                .filter((exhibition) => {
-                                  return (
-                                    exhibition.name &&
-                                    exhibition.name.trim() !== ''
-                                  );
-                                })
-                                .map((exhibition, index) => {
+                            ? content.exhibitions_list.map(
+                                (exhibition, index) => {
                                   const formattedDate = formatExhibitionDate(
                                     exhibition.venue_start,
                                     exhibition.venue_end,
@@ -953,15 +947,10 @@ export default function ArtworkView(props) {
                                       </p>
                                     </li>
                                   );
-                                })
+                                },
+                              )
                             : content.exhibitions_list
                                 .slice(0, 3)
-                                .filter((exhibition) => {
-                                  return (
-                                    exhibition.name &&
-                                    exhibition.name.trim() !== ''
-                                  );
-                                })
                                 .map((exhibition, index) => {
                                   const formattedDate = formatExhibitionDate(
                                     exhibition.venue_start,
