@@ -53,6 +53,11 @@ const translations = {
     nl: 'maandelijks',
     de: 'monatlich',
   },
+  expired: {
+    en: 'PAST EVENT',
+    nl: 'EVENEMENT IS AFGELOPEN',
+    de: 'VERLEDEN EVENEMENT',
+  },
 };
 
 function filterBlocks(content, types) {
@@ -209,7 +214,7 @@ const EventView = (props) => {
   } else if (hasMonthlyFrequency) {
     recurrenceText = translations.monthly[intl.locale];
   }
-
+  let expired = new Date(props?.content?.end) < new Date();
   return contentLoaded ? (
     hasBlocksData(content) ? (
       <Container id="page-document">
@@ -230,6 +235,22 @@ const EventView = (props) => {
         ) : (
           ''
         )} */}
+        {expired && (
+          <p
+            style={{
+              fontFamily: "'FranklinMed', Arial, sans-serif",
+              fontSize: '17px',
+              letterSpacing: '0.85px',
+              marginBottom: '22px',
+              marginTop: '36px',
+              textAlign: 'center',
+            }}
+            className="date-indicator"
+          >
+            <strong>{translations.expired[intl.locale]}</strong>
+            <BodyClass className="expired-exhibition" />
+          </p>
+        )}
         <div className="hero-dates-wrapper" style={{ display: 'None' }}>
           {content && isEvent ? (
             <div className="hero-dates">
@@ -242,6 +263,11 @@ const EventView = (props) => {
                   type={content?.['@type']}
                   published={content?.effective || content?.created}
                 />
+              ) : expired ? (
+                <div className="expired">
+                  {' '}
+                  <span className="hero-dates">{recurrenceText}</span>
+                </div>
               ) : (
                 recurrenceText
               )}
@@ -250,7 +276,7 @@ const EventView = (props) => {
             ''
           )}
         </div>
-        {recurrenceDates && (
+        {recurrenceDates && recurrenceDates.length > 0 && (
           <div className="event-recurrence-dates">
             <BodyClass className="event-recurrences-shown" />
             <h4>WANNEER</h4>
@@ -261,6 +287,7 @@ const EventView = (props) => {
             </div>
           </div>
         )}
+
         <RenderBlocks {...props} path={path} content={filteredContent} />
       </Container>
     ) : (

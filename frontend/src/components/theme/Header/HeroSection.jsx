@@ -254,6 +254,11 @@ function HeroSection(props) {
                     type={content?.['@type']}
                     published={content?.effective || content?.created}
                   />
+                ) : expired ? (
+                  <div className="expired">
+                    {' '}
+                    <span className="hero-dates">{recurrenceText}</span>
+                  </div>
                 ) : (
                   recurrenceText
                 )}
