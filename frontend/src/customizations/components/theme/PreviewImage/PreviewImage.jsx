@@ -15,7 +15,7 @@ export default function PreviewImage({
   const url = flattenToAppURL(
     `${item?.['@id']}/@@${isFallback ? 'fallback-image' : 'images'}/${
       item?.image_field || 'preview_image'
-    }/${size}`,
+    }`,
   );
 
   return showPlaceholder ? (
