@@ -410,7 +410,7 @@ const TopSideFacets = (props) => {
           )}
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row></Grid.Row>
+      {/* <Grid.Row></Grid.Row> */}
       <Grid.Row>
         <SearchDetails
           text={searchedText}
