@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   frontend:
-    image: intkbv/centraalmuseum-frontend:sha-ad212d5
+    image: intkbv/centraalmuseum-frontend:sha-d9ddf61
     environment:
       RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
     depends_on:
@@ -13,24 +13,10 @@ services:
     ports:
       - 3000:3000
     deploy:
-      replicas: 2
-
-  # stage-frontend:
-  #   image: intkbv/centraalmuseum-frontend:sha-c76e4b3
-  #   environment:
-  #     RAZZLE_INTERNAL_API_PATH: http://backend:8080/Plone
-  #   depends_on:
-  #     - backend
-  #   networks:
-  #     - nw-webserver
-  #     - backend
-  #   ports:
-  #     - 3001:3000
-  #   deploy:
-  #     replicas: 1
+      replicas: 4
 
   backend:
-    image: intkbv/centraalmuseum-backend:sha-7b09c1c
+    image: intkbv/centraalmuseum-backend:sha-de4c000
     environment:
       SITE: Plone
       ZEO_ADDRESS: zeo:8100
@@ -43,10 +29,10 @@ services:
     ports:
       - 8080:8080
     deploy:
-      replicas: 2
+      replicas: 4
 
   backend-sync:
-    image: intkbv/centraalmuseum-backend:sha-7b09c1c
+    image: intkbv/centraalmuseum-backend:sha-de4c000
     environment:
       SITE: Plone
       ZEO_ADDRESS: zeo:8100
@@ -80,11 +66,6 @@ volumes:
       type: none
       device: /data/traefik/config
       o: bind
-  # site-data:
-  #   driver_opts:
-  #     type: none
-  #     device: /srv/rietveld/data
-  #     o: bind
 
 networks:
   nw-webserver:
