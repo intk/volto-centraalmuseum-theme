@@ -306,7 +306,7 @@ export default function ArtworkView(props) {
                     shareSocial(
                       event,
                       'facebook',
-                      `https://new.centraalmuseum.nl/${currentPath}`,
+                      `https://new.centraalmuseum.nl${currentPath}`,
                     )
                   }
                   className="share-btn-social"
@@ -325,7 +325,7 @@ export default function ArtworkView(props) {
                     shareSocial(
                       event,
                       'twitter',
-                      `https://new.centraalmuseum.nl/${currentPath}`,
+                      `https://new.centraalmuseum.nl${currentPath}`,
                     )
                   }
                   className="share-btn-social"
@@ -344,7 +344,7 @@ export default function ArtworkView(props) {
                     shareSocial(
                       event,
                       'pinterest',
-                      `https://new.centraalmuseum.nl/${currentPath}`,
+                      `https://new.centraalmuseum.nl${currentPath}`,
                     )
                   }
                   id="pinterest-btn"
@@ -608,7 +608,7 @@ export default function ArtworkView(props) {
                             <>
                               <span>
                                 <a
-                                  href={`/search?artwork_material=${technique}&Language=${intl.locale}`}
+                                  href={`/${intl.locale}/search?artwork_material=${technique}&Language=${intl.locale}`}
                                 >
                                   {technique}
                                 </a>
@@ -646,7 +646,7 @@ export default function ArtworkView(props) {
                           .map((material, index) => (
                             <span>
                               <a
-                                href={`/search?artwork_type=${material}&Language=${intl.locale}`}
+                                href={`/${intl.locale}/search?artwork_type=${material}&Language=${intl.locale}`}
                               >
                                 {material}
                               </a>
@@ -723,7 +723,7 @@ export default function ArtworkView(props) {
                         .map((subject, index) => (
                           <p>
                             <a
-                              href={`/search?artwork_associated_subjects=${content?.associatedSubjects[index]}&Language=${intl.locale}`}
+                              href={`/${intl.locale}/search?artwork_associated_subjects=${content?.associatedSubjects[index]}&Language=${intl.locale}`}
                             >
                               {subject}
                             </a>
@@ -746,7 +746,7 @@ export default function ArtworkView(props) {
                             .map((period, index) => (
                               <span>
                                 <a
-                                  href={`/search?associatedPeriods=${period}&Language=${intl.locale}`}
+                                  href={`/${intl.locale}/search?associatedPeriods=${period}&Language=${intl.locale}`}
                                 >
                                   {period}
                                 </a>
@@ -771,7 +771,7 @@ export default function ArtworkView(props) {
                           .map((person, index) => (
                             <p>
                               <a
-                                href={`/search?associatedPeople=${person}&Language=${intl.locale}`}
+                                href={`/${intl.locale}/search?associatedPeople=${person}&Language=${intl.locale}`}
                               >
                                 {person}
                               </a>
@@ -793,7 +793,7 @@ export default function ArtworkView(props) {
                           .map((motif, index) => (
                             <span>
                               <a
-                                href={`/search?artwork_motif=${motif}&Language=${intl.locale}`}
+                                href={`/${intl.locale}/search?artwork_motif=${motif}&Language=${intl.locale}`}
                               >
                                 {motif}
                               </a>
