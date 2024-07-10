@@ -12,6 +12,7 @@ from plone.autoform import directives as form_directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from z3c.form.browser.checkbox import SingleCheckBoxFieldWidget
+from z3c.form.browser.text import TextFieldWidget
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
@@ -116,6 +117,18 @@ class IExhibition(model.Schema):
     start_date = TextLine(title="Start date", required=False)
 
     end_date = TextLine(title="End Date", required=False)
+
+    event_url = schema.URI(
+        title=_("label_event_url", default="Event URL"),
+        description=_(
+            "help_event_url",
+            default="Web address with more info about the event. "
+            "Add http:// for external links.",
+        ),
+        required=False,
+        default=None,
+    )
+    directives.widget("event_url", TextFieldWidget, klass="event_url")
 
     organisation = TextLine(title="Organisation", required=False)
 
