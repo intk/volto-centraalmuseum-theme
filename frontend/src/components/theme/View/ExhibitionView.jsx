@@ -437,10 +437,10 @@ const ExhibitionView = (props) => {
                                 );
                               })
                           : content?.objects
-                              ?.slice(0, 3)
                               .filter(
                                 ({ title }) => title && title.trim() !== '',
                               )
+                              ?.slice(0, 3)
                               .map(({ priref, title }, index) => {
                                 const artworkUrl = artworkURL[priref];
                                 return (
