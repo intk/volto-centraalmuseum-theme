@@ -400,8 +400,11 @@ const ExhibitionView = (props) => {
                     <td className="columntwo">
                       <ul>
                         {showAllObjects
-                          ? content?.objects?.map(
-                              ({ priref, title }, index) => {
+                          ? content?.objects
+                              ?.filter(
+                                ({ title }) => title && title.trim() !== '',
+                              )
+                              .map(({ priref, title }, index) => {
                                 const artworkUrl = artworkURL[priref];
                                 return (
                                   title && (
@@ -432,10 +435,12 @@ const ExhibitionView = (props) => {
                                     </li>
                                   )
                                 );
-                              },
-                            )
+                              })
                           : content?.objects
                               ?.slice(0, 3)
+                              .filter(
+                                ({ title }) => title && title.trim() !== '',
+                              )
                               .map(({ priref, title }, index) => {
                                 const artworkUrl = artworkURL[priref];
                                 return (
