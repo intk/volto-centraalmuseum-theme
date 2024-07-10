@@ -3029,3 +3029,9 @@ div#blockquote > p{
     }
   }
 }
+
+.view-viewview.hide-top-image.contenttype-event{
+  .date-indicator{
+    text-align: center !important;
+  }
+}
