@@ -2893,6 +2893,10 @@ div#blockquote > p{
 
   .block.form {
     margin-top: 55px;
+
+    .react-select__control .react-select__indicator.react-select__clear-indicator{
+      display: none;
+    }
   }
 
   .documentFirstHeading {
