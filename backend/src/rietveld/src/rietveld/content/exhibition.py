@@ -130,6 +130,8 @@ class IExhibition(model.Schema):
     )
     directives.widget("event_url", TextFieldWidget, klass="event_url")
 
+    showTicketButton = Bool(title="Show Ticket Button?", default=True, required=False)
+
     organisation = TextLine(title="Organisation", required=False)
 
     documentation = List(

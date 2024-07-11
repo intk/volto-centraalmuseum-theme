@@ -275,11 +275,12 @@ function HeroSection(props) {
                 content?.['@type'] !== 'Document' &&
                 content?.['@type'] !== 'News Item' ? (
                   props?.content?.event_url &&
-                  props?.content?.event_url !== 'http://' ? (
+                  props?.content?.event_url !== 'http://' &&
+                  props?.content?.showTicketButton ? (
                     <UniversalLink href={props?.content?.event_url}>
                       <button className={`ticket-button`}>TICKETS</button>
                     </UniversalLink>
-                  ) : !expired ? (
+                  ) : !expired && props?.content?.showTicketButton ? (
                     <UniversalLink href="https://tickets.centraalmuseum.nl/nl/tickets">
                       <button className={`ticket-button`}>TICKETS</button>
                     </UniversalLink>
